@@ -30,3 +30,39 @@ Introduction to EquiSync project
 -   [Deployment](#deployment)
 -   [Credits](#credits)
 -   [Contact](#contact)
+
+
+## User Experience
+
+### User Stories
+
+1. As a developer, I want to organize my project with milestones and a Kanban board of issues, so that I can track progress and maintain a structured workflow
+2. As a developer, I want to create user stories for different user roles, so that the project requirements are clear and development aligns with user needs
+3. As a developer, I want to design a database schema for my project, so that the data structure supports the application’s functionality and scalability
+4. As a developer, I want to create wireframes for the application, so that the user interface is intuitive and consistent across all devices
+
+### Site Goals
+
+1. 
+2. 
+3. 
+4. 
+
+### Scope
+
+
+## Agile Methodology
+
+### Overview
+### Epics
+### User Story Issues
+### MoSCoW
+### GitHub Projects
+
+
+## Design
+
+### Database Schema
+### Wireframes
+### Color Scheme
+### Typography
