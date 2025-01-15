@@ -29,3 +29,4 @@ Introduction to EquiSync project
 -   [Technologies And Languages](#technologies-and-languages)
 -   [Deployment](#deployment)
 -   [Credits](#credits)
+-   [Contact](#contact)
