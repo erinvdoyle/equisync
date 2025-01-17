@@ -52,8 +52,8 @@ Introduction to EquiSync project
 14. As a site visitor I want a responsive site design that functions across all of my devices
 15. As the barn manager I want an admin dashboard that allows me to view, edit, and approve all owner, rider, and staff updates to their horses' data
 16. As the barn manager I want a simple data collection system that enambles me to collate each horse's feed, exercise, appointment, and show routines
-17. As the barn manager I want the ability to view each horse's area of interest from the micro (daily) level as well as the macro (weekly and/or monthly) level
-18. As the barn manager I want the ability to quickly and conveniently share a horse's data with its owner or relevant care personell via email or text
+17. As the barn manager I want the ability to view each horse's exercise schedule from the micro (daily) level as well as the macro (weekly and archives of past weeks) level
+18. As the barn manager I want the ability to quickly and conveniently share a horse's data with its owner or relevant care personnel via email or text
 19. As the barn manager I want the right of approval over all community page posts
 
 
