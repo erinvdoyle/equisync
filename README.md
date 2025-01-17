@@ -44,6 +44,24 @@ Introduction to EquiSync project
 6. As a developer, I want to set up a Django project so that the application has a structured foundation for development
 7. As a developer, I want to create and configure a database so that user data is properly stored
 8. As a developer, I want to deploy the app early and often to verify a successful setup and ensure testing throughout development
+9. As a site visitor I want to to learn about the stable, its owner, and its horses
+10. As a site visitor I want to be able to contact the manager with a simple contact form and offline details as well
+11. As a site visitor I want to view the calendar of upcoming horseshows the stable will attend
+12. As a site visitor, I want to be able to view the stable's previously attended events and search for events by name or date
+13. As a site visitor I want to view the stable community page of announcements and sales ads
+14. As a site visitor I want a responsive site design that functions across all of my devices
+15. As the barn manager I want an admin dashboard that allows me to view, edit, and approve all owner, rider, and staff updates to their horses' data
+16. As the barn manager I want a simple data collection system that enambles me to collate each horse's feed, exercise, appointment, and show routines
+17. As the barn manager I want the ability to view each horse's area of interest from the micro (daily) level as well as the macro (weekly and/or monthly) level
+18. As the barn manager I want the ability to quickly and conveniently share a horse's data with its owner or relevant care personell via email or text
+19. As the barn manager I want the right of approval over all community page posts
+
+
+
+
+xx. As an owner
+xx. As a rider
+xx. As a staff member
 
 
 ### Site Goals
