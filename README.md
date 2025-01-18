@@ -51,11 +51,17 @@ Introduction to EquiSync project
 13. As a site visitor I want to view the stable community page of announcements and sales ads
 14. As a site visitor I want a responsive site design that functions across all of my devices
 15. As the barn manager I want an admin dashboard that allows me to view, edit, and approve all owner, rider, and staff updates to their horses' data
-16. As the barn manager I want a simple data collection system that enambles me to collate each horse's feed, exercise, appointment, and show routines
+16. As the barn manager I want a simple data collection system that enambles me to collate each horse's feed, exercise, appointment, and show schedules
 17. As the barn manager I want the ability to view each horse's exercise schedule from the micro (daily) level as well as the macro (weekly and archives of past weeks) level
-18. As the barn manager I want the ability to quickly and conveniently share a horse's data with its owner or relevant care personnel via email or text
+18. As the barn manager I want the ability to quickly and conveniently share a horse's data with its owner or other care personnel via email or text
 19. As the barn manager I want the right of approval over all community page posts
-20. As the barn manager I want 
+20. As the barn manager I want each horse to have a stored profile so that I have easy access to its relevant details (age, breeding, owner, vet, etc)
+21. As the barn manager I want a show schedule for all horses and each individual horse
+22. As the barn manager I want a show schedule that displays show details and can be viewed in calendar form by both myself, and my staff and clients
+23. As the barn manager I want the management of each horse's daily exercise and appointment schedule to be easily updated, viewed, and shared by myself and my staff and clients
+24. As the barn manager I want to be able to see the daily management of all horses displayed together for the entire week
+25. As the barn manager I want all aspects of each horse's feeding schedule to be stored and easily viewed by myself and all staff and clients
+26. As the barn manager I want to be able to update the horse feeding schedule as needed and view the feeding requirements for all horses displayed together and grouped by the day's time and type of feed
 
 
 
@@ -152,7 +158,6 @@ The UI for this project was planned with Balsamiq Wireframes
     ![Individual Feed](./assets/readme-images/wireframes/horse-feed.png)
 
 </details>
-
 
 ### Color Scheme
 
