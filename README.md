@@ -55,6 +55,7 @@ Introduction to EquiSync project
 17. As the barn manager I want the ability to view each horse's exercise schedule from the micro (daily) level as well as the macro (weekly and archives of past weeks) level
 18. As the barn manager I want the ability to quickly and conveniently share a horse's data with its owner or relevant care personnel via email or text
 19. As the barn manager I want the right of approval over all community page posts
+20. As the barn manager I want 
 
 
 
@@ -92,6 +93,66 @@ xx. As a staff member
 ### Database Schema
 
 ### Wireframes
+The UI for this project was planned with Balsamiq Wireframes
+
+<details>
+  <summary>Sunny Side Stable Website (click)</summary>
+  
+  - **Home**  
+    ![Home](./assets/readme-images/wireframes/home.png)
+  - **Our Horses**  
+    ![Our Horses](./assets/readme-images/wireframes/our-horses.png)
+  - **Our Community**  
+    ![Our Community](./assets/readme-images/wireframes/our-community.png)
+  - **Error 404**  
+    ![404](./assets/readme-images/wireframes/404.png)
+
+</details>
+
+<details>
+  <summary>Login, Dashboard, and Profiles (click)</summary>
+  
+  - **Login**  
+    ![Login](./assets/readme-images/wireframes/login.png)
+  - **Admin**  
+    ![Admin](./assets/readme-images/wireframes/admin.png)
+  - **User**  
+    ![User](./assets/readme-images/wireframes/user.png)
+  - **Horse Profile**  
+    ![Horse](./assets/readme-images/wireframes/horse.png)
+  
+</details>
+
+<details>
+  <summary>Show Schedule Calendar (click)</summary>
+  
+  - **Show Schedule**  
+    ![Show](./assets/readme-images/wireframes/show.png)
+  - **Individual Horse Show Schedule**  
+    ![Horse Show](./assets/readme-images/wireframes/horse-show.png)
+  
+</details>
+
+<details>
+  <summary>Horse Management (click)</summary>
+  
+  - **Stable Management**  
+    ![Stable Management](./assets/readme-images/wireframes/stable.png)
+  - **Individual Management**  
+    ![Individual Management](./assets/readme-images/wireframes/management.png)
+
+</details>
+
+<details>
+  <summary>Feeding Guidelines (click)</summary>
+  
+  - **Stable Feeding Guidelines**  
+    ![Stable Feed](./assets/readme-images/wireframes/feed.png)
+  - **Individual Feeding Guidelines**  
+    ![Individual Feed](./assets/readme-images/wireframes/horse-feed.png)
+
+</details>
+
 
 ### Color Scheme
 
