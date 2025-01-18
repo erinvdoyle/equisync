@@ -62,14 +62,15 @@ Introduction to EquiSync project
 24. As the barn manager I want to be able to see the daily management of all horses displayed together for the entire week
 25. As the barn manager I want all aspects of each horse's feeding schedule to be stored and easily viewed by myself and all staff and clients
 26. As the barn manager I want to be able to update the horse feeding schedule as needed and view the feeding requirements for all horses displayed together and grouped by the day's time and type of feed
-
-
-
-
-xx. As an owner
-xx. As a rider
-xx. As a staff member
-
+27. As a horse owner I want a community page where I can view listings and announcements and create and edit my own
+28. As a horse owner I want to see my horse's routines and schedules diaplayed with a simple, intuitive layout
+29. As a horse owner I want to be able to receive a weekly or daily update on my horse's exercise and appointment schedule via email or sms
+30. As a horse owner I want a weekly and monthly calendar view of my horse's upcoming competitions
+31. As a rider I want to be be able to view previous exercise routines and performance trends and track future exercise and competition schedules of the horses I ride to help me stay consistent and achieve my goals
+32. As a rider I want to engage with clients, staff, and owners on the community page and buy/sell riding equipment
+33. As a staff member, I want thorough and efficient storage of horse schedules and routines so that all fellow staff, riders, and owners know what is going on with each horse, thus avoiding surprise events and missed appointments
+34. As a staff member I want a record of my management of the horses I work with so that owners know their horses are receiving great care
+35. As a staff member I want to engage with clients, staff, and owners on the community page and buy/sell riding equipment
 
 ### Site Goals
 
