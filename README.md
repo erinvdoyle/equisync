@@ -254,3 +254,4 @@ The UI for this project was planned with Balsamiq Wireframes
 ## Credits
 ![Extending the User Model](https://docs.djangoproject.com/en/5.1/topics/auth/customizing/#extending-user)
 ![Creating User Profiles Automatically](https://www.codu.co/articles/easily-create-user-profiles-with-django-allauth-nsbnigtx)
+![Using Signals](https://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/)
