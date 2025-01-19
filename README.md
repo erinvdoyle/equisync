@@ -122,12 +122,35 @@ Introduction to EquiSync project
 
 ### Project Goal
 
-1. 
-2. 
-3. 
-4. 
+The primary goals of EquiSunc are:
+
+1. Streamline Stable Operations
+2. Enhance Communication
+3. Empower Horse Owners
+4. Enable Data-Driven Decisions
+5. Foster Community Engagement
+6. Most Importantly, Prioritize Horse Welfare and Performance
 
 ### Scope
+EquiSync is a horse stable management system designed to streamline communication and daily operations for barn managers, staff, riders, and horse owners. This application integrates key functionalities like scheduling, horse profile management, feeding guidelines, and a community page for announcements, events, and sales. 
+
+The scope of this project includes:
+
+1. User Management
+  - Support for multiple user roles: Barn Manager (Admin), owners, riders, and staff
+  - Role-based permissions for access across the platform
+2. Horse Management
+  - Detailed profiles for each horse, including age, breed, owner, vet, and relevant health or management notes
+  - The ability to view and manage individual and group schedules for feeding, exercise, and appointments
+3. Show and Event Scheduling
+  - Weekly and monthly calendar views for all upcoming horse shows
+  - Shows schedules can be updated in real-time by barn managers and approved staff 
+4. The Community Page
+  - A centralized space for announcements, events, and sales ads
+  - Users enabled to post, edit, and delete content (with Admin approval for published posts)
+5. Scalability and Ease of Use
+  - An application which accomodates stables of varying sizes
+  - An intuitive and accessible interface that performs across multiple devices
 
 #### Features
 
