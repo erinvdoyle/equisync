@@ -27,15 +27,6 @@ class Profile(models.Model):
         return f"Profile for {self.user.username}"
 
 
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    """
-    signal handler function to create a user profile when a new user is created
-    Source for explanation: Codu, as credited in README.md
-    """
-    if created:
-        Profile.objects.create(user=instance)
-
 class Horse(models.Model):
     """
     temporary model to be removed when horse management app is created
