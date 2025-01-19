@@ -122,7 +122,7 @@ Introduction to EquiSync project
 
 ### Project Goal
 
-The primary goals of EquiSunc are:
+The primary goals of EquiSunc:
 
 1. Streamline Stable Operations
 2. Enhance Communication
