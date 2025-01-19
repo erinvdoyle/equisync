@@ -105,8 +105,11 @@ Introduction to EquiSync project
 The Entity Relationship Diagram for EquiSync was created with Lucid Charts
 
 <details>
-  <summary>EquiSync ERD (click)</summary>
-  ![database schema](./assets/readme-images/schema.png)
+  <summary>Equisync ERD (click)</summary>
+  
+  - **Data Schema**  
+    ![database schema](./assets/readme-images/schema.png)
+
 </details>
 
 ### Wireframes
