@@ -246,3 +246,10 @@ The UI for this project was planned with Balsamiq Wireframes
 ### Color Scheme
 
 ### Typography
+
+
+
+
+
+## Credits
+![Extending the User Model](]https://docs.djangoproject.com/en/5.1/topics/auth/customizing/#extending-user)
