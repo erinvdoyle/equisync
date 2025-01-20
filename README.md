@@ -122,7 +122,7 @@ Introduction to EquiSync project
 
 ### Project Goal
 
-The primary goals of EquiSunc:
+The primary goals of EquiSync:
 
 1. Streamline Stable Operations
 2. Enhance Communication
@@ -181,6 +181,52 @@ The Entity Relationship Diagram for EquiSync was created with Lucid Charts
   ![database schema](./assets/readme-images/schema.png)
 
 </details>
+
+#### Models
+
+1. User
+2. Profile
+3. Access Permissions
+4. Events
+5. Announcements
+6. SalesAds
+7. Horse
+8. Feed
+9. Appointments
+10. Exercise
+11. Show Schedule
+
+#### Relationships
+
+1. User to AccessPermissions  
+**One-to-One**: Each user has a single set of access permissions  
+
+2. User to Profile  
+**One-to-One**: Each user has one profile containing additional details  
+
+3. Profile to Events  
+**One-to-Many**: One profile can post multiple events, but an event belongs only to one profile  
+
+4. Profile to Announcements  
+**One-to-Many**: One profile can create multiple announcements, but an announcement belongs to only one profile  
+
+5. Profile to SalesAds  
+**One-to-Many**: One profile can advertize multiple sales ads, but each ad belongs to only one profile  
+
+6. Profile to Horse  
+**Many-to-Many**: A profile can be associated with multiple horses (a horse owner may own multiple horses) and each horse can be associated with multiple profiles (for example, owner *and* staff)  
+
+7. Horse to Feed  
+**One-to-One**: Each horse has a single feeding schedule. Modifications to the feeding schedule occur infrequently and archives are not stored  
+
+8. Horse to Appointments  
+**One-to-Many**: Each horse has one unique appointments schedule at any given time, but archives are stored so that there are many schedules on record  
+
+9. Horse to Exercise  
+**One-to-Many**: Each horse has one unique exercise schedule at any given time, but archives are stored so that there are many schedules on record  
+
+10. Horse to ShowSchedule  
+**One-to-Many**: Each horse has one unique show schedule at any given time, but archives are stored so that there are many schedules on record  
 
 ### Wireframes
 The UI for this project was planned with Balsamiq Wireframes
@@ -252,6 +298,6 @@ The UI for this project was planned with Balsamiq Wireframes
 
 
 ## Credits
-![Extending the User Model](https://docs.djangoproject.com/en/5.1/topics/auth/customizing/#extending-user)
-![Creating User Profiles Automatically](https://www.codu.co/articles/easily-create-user-profiles-with-django-allauth-nsbnigtx)
-![Using Signals](https://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/)
+[Extending the User Model](https://docs.djangoproject.com/en/5.1/topics/auth/customizing/#extending-user)  
+[Creating User Profiles Automatically](https://www.codu.co/articles/easily-create-user-profiles-with-django-allauth-nsbnigtx)  
+[Using Signals](https://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/)  
