@@ -184,48 +184,69 @@ The Entity Relationship Diagram for EquiSync was created with Lucid Charts
 
 #### Models
 
-1. User
-2. Profile
-3. Access Permissions
-4. Events
-5. Announcements
-6. SalesAds
-7. Horse
-8. Feed
-9. Appointments
-10. Exercise
-11. Show Schedule
+1. User  
+The primary account management and authentication system. Contains login information (username, password, email) and connects to the Profile for additional details  
+
+2. Profile  
+Extends the User model to store additional personal and role-specific details such as role (owner, rider, staff), associated horses, and contact information
+
+3. AccessPermissions  
+Defines the specific permissions or roles for users (admin, read-only, edit)  
+
+4. Events  
+Represents community page events organized by users, such as barn gatherings, dinners, or parties. Includes details like date, location, and an event description  
+
+5. Announcements  
+Allows users to post updates or important notices for the community  
+
+6. SalesAds  
+Advertisements created by users to buy, sell, or trade items related to horse care and riding  
+
+7. Horse  
+A detailed profile for each horse, including attributes like name, age, breed, owner, and photo. Serves as the central model connecting to feed, exercise, appointments, and show schedules  
+
+8. Feed  
+The feeding schedule for a horse, detailing types of feed, amounts, supplements and medications, and times of feeding  
+
+9. Appointments  
+Tracks appointments for a horse, such as vet visits, farrier sessions, or other scheduled activities  
+
+10. Exercise  
+Stores the exercise schedule for a horse  
+
+11. ShowSchedule  
+Represents the show and competition schedule for a horse, including dates, event locations, and details about participation  
 
 #### Relationships
 
-1. User to AccessPermissions  
+1. User-to-AccessPermissions  
 **One-to-One**: Each user has a single set of access permissions  
 
-2. User to Profile  
+2. User-to-Profile  
 **One-to-One**: Each user has one profile containing additional details  
 
-3. Profile to Events  
+3. Profile-to-Events  
 **One-to-Many**: One profile can post multiple events, but an event belongs only to one profile  
 
-4. Profile to Announcements  
+4. Profile-to-Announcements  
 **One-to-Many**: One profile can create multiple announcements, but an announcement belongs to only one profile  
 
-5. Profile to SalesAds  
+5. Profile-to-SalesAds  
 **One-to-Many**: One profile can advertize multiple sales ads, but each ad belongs to only one profile  
 
-6. Profile to Horse  
+6. Profile-to-Horse  
 **Many-to-Many**: A profile can be associated with multiple horses (a horse owner may own multiple horses) and each horse can be associated with multiple profiles (for example, owner *and* staff)  
 
-7. Horse to Feed  
+7. Horse-to-Feed  
 **One-to-One**: Each horse has a single feeding schedule. Modifications to the feeding schedule occur infrequently and archives are not stored  
 
-8. Horse to Appointments  
+8. Horse-to-Appointments  
 **One-to-Many**: Each horse has one unique appointments schedule at any given time, but archives are stored so that there are many schedules on record  
 
-9. Horse to Exercise  
+9. Horse-to-Exercise  
 **One-to-Many**: Each horse has one unique exercise schedule at any given time, but archives are stored so that there are many schedules on record  
 
-10. Horse to ShowSchedule  
+10. Horse-to-ShowSchedule  
 **One-to-Many**: Each horse has one unique show schedule at any given time, but archives are stored so that there are many schedules on record  
 
 ### Wireframes
