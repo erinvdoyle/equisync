@@ -10,6 +10,7 @@ class Profile(models.Model):
     """
 
     ROLE_CHOICES = [
+        ('Barn Manager', 'Barn Manager'),
         ('Horse Owner', 'Horse Owner'),
         ('Rider', 'Rider'),
         ('Staff Member', 'Staff Member'),
