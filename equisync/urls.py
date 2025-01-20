@@ -20,6 +20,6 @@ from users import views
  
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('users/', my_test, name='users'),
-    path('profile/', views.view_profile, name='view_profile'),  
+    path('profile/', views.view_profile, name='view_profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),  
 ]
