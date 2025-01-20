@@ -320,5 +320,7 @@ The UI for this project was planned with Balsamiq Wireframes
 
 ## Credits
 [Extending the User Model](https://docs.djangoproject.com/en/5.1/topics/auth/customizing/#extending-user)  
-[Creating User Profiles Automatically](https://www.codu.co/articles/easily-create-user-profiles-with-django-allauth-nsbnigtx)  
+[Creating User Profiles Automatically](https://www.codu.co/articles/easily-create-user-profiles-with-django-allauth-nsbnigtx)
+[Using hasattr()](https://hinty.io/ivictbor/create-user-profiles-in-django-if-they-does-not-exist/)  
 [Using Signals](https://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/)  
+[Building an Online Marketplace](https://www.youtube.com/watch?v=ZxMB6Njs3ck)  
