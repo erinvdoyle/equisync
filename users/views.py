@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views import generic
 from .models import Profile
 from .forms import ProfileForm
 
@@ -28,3 +29,9 @@ def edit_profile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, 'users/edit_profile.html', {'form': form})
+
+def index(request):
+    """
+    renders the index template
+    """
+    return render(request, 'users/index.html')
