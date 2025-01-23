@@ -1,0 +1,184 @@
+/* --- General Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    background-color: #f4f1eb; 
+    color: #4a4a4a; 
+}
+
+h1, h2 {
+    color: #6a3e26; 
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* --- Form Styles ----------------------------------------------------------------------------------------------------------------------- */
+form {
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #4a4a4a;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d4d4d4;
+    border-radius: 6px;
+}
+
+form button {
+    background-color: #6a3e26; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #905133; 
+}
+
+/* --- Ads and Announcement Sections ------------------------------------------------------------------------------------------------------ */
+.ads-section,
+.announcements-section {
+    margin-top: 20px;
+    background-color: #fcf8f3; 
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.ads-section div,
+.announcements-section div {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    color: #4a4a4a;
+}
+
+.ads-section div:last-child,
+.announcements-section div:last-child {
+    border-bottom: none; 
+}
+
+.announcements-section h2,
+.ads-section h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #905133; 
+}
+
+/* --- Gradient Navbar ---------------------------------------------------------------------------------------------------------------------- */
+.navbar-gradient {
+    background: linear-gradient(to right, #6a3e26, #905133, #f4a261); 
+    background-size: 200%; 
+    background-position: center;
+    color: white !important;
+    transition: background 0.5s ease-in-out;
+}
+
+.navbar-gradient .navbar-brand {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-gradient .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-gradient .nav-link {
+    color: white !important;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-gradient .nav-link:hover {
+    color: #f4a261 !important; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-gradient .navbar-text {
+    color: rgba(255, 255, 255, 0.9); 
+    font-style: italic;
+}
+
+
+/* --- Footer Styles ---------------------------------------------------------------------------------------------------------------------- */
+.footer {
+    background-color: #6a3e26; 
+    color: white;
+    padding: 15px 0;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.footer i {
+    font-size: 20px;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.footer i:hover {
+    color: #f4a261; 
+}
+
+
+/* --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
+a {
+    text-decoration: none;
+    color: #6a3e26;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #905133;
+}
+
+button.primary {
+    background-color: #f4a261; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.primary:hover {
+    background-color: #e66f00; 
+}
+
+/* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form textarea {
+        width: 66.6666%; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+}
