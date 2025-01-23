@@ -22,3 +22,17 @@ def submit_ad(request):
         form = AdForm()
 
     return render(request, 'ads/submit_ad.html', {'form': form})
+
+
+@login_required
+def edit_ad(request, ad_id):
+    ad = get_object_or_404(Ad, id=ad_id)
+    if request.method == 'POST':
+        form = AdForm(request.POST, request.FILES, instance=ad)
+        if form.is_valid():
+            form.save()
+            return redirect('community_overview')
+    else:
+        form = AdForm(instance=ad)
+
+    return render(request, 'ads/edit_ad.html', {'form': form, 'ad': ad})

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from community.ads.views import submit_ad
+from community.ads.views import submit_ad, edit_ad
 from community.views import community_overview
 from users import views
  
@@ -27,5 +27,6 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('', include('users.urls')),
     path('community/', community_overview, name='community_overview'),
-    path('community/submit_ad/', submit_ad, name='submit_ad'),      
+    path('community/submit_ad/', submit_ad, name='submit_ad'),
+    path('community/edit_ad/<int:ad_id>/', edit_ad, name='edit_ad'),
 ]
