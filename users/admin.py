@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from .models import Profile
+from community.ads.models import Ad
 
 # Register your models here.
 class ProfileInline(admin.StackedInline):
@@ -13,5 +14,11 @@ class UserAdmin(admin.ModelAdmin):
     fields = ("username", "password")
     inlines = [ProfileInline]
 
+class AdAdmin(admin.ModelAdmin):
+    list_display = ('ad_type', 'user', 'date_posted', 'approved') 
+    list_filter = ('ad_type', 'approved')  
+    search_fields = ('description', 'contact_info')  
+
 admin.site.unregister(User)  
 admin.site.register(User, UserAdmin)
+admin.site.register(Ad, AdAdmin)
