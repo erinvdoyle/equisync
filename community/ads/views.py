@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Ad
 from .forms import AdForm
@@ -17,7 +17,7 @@ def submit_ad(request):
             ad = form.save(commit=False)
             ad.user = request.user  
             ad.save()
-            return redirect('community_overview') 
+            return render(request, 'ads/preview_ad.html', {'ad': ad, 'form': form}) 
     else:
         form = AdForm()
 
@@ -36,3 +36,4 @@ def edit_ad(request, ad_id):
         form = AdForm(instance=ad)
 
     return render(request, 'ads/edit_ad.html', {'form': form, 'ad': ad})
+
