@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from community.views import community
+from community.views import community_overview
 from users import views
  
 urlpatterns = [
@@ -24,6 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', views.view_profile, name='view_profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
-    path('', include('users.urls')),  
-    path('community/', community, name='community'),
+    path('', include('users.urls')),
+    path('community/', community_overview, name='community_overview'),      
 ]
