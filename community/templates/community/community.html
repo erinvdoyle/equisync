@@ -1,10 +1,109 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>The Community Page</h1>
+<div class="container">
+    <div class="section-title">
+        <h1>Stable Community</h1>
+        <p>Welcome to the Stable Community! Browse sales ads and announcements, or post your own to stay connected with other equine enthusiasts.</p>
+    </div>
+</div>
 
-    <h3>Ads</h3>
-    <h3>Announcements</h3>
-    <h3>Events</h3>
+<!-- Sales Ads Section -->
+<div class="container my-4">
+    <h2 class="mb-3">Sales Ads</h2>
+    <div id="salesAdsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="ad-card">
+                            <img src="https://via.placeholder.com/300x150" class="card-img-top card-img" alt="Ad 1">
+                            <div class="p-3">
+                                <h5 class="card-title">Horse Saddle for Sale</h5>
+                                <p class="card-text">High-quality saddle, lightly used. $150.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="ad-card">
+                            <img src="https://via.placeholder.com/300x150" class="card-img-top card-img" alt="Ad 2">
+                            <div class="p-3">
+                                <h5 class="card-title">Barn Supplies</h5>
+                                <p class="card-text">Bulk sale of barn essentials. Inquire for prices.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="ad-card">
+                            <img src="https://via.placeholder.com/300x150" class="card-img-top card-img" alt="Ad 3">
+                            <div class="p-3">
+                                <h5 class="card-title">Thoroughbred Mare</h5>
+                                <p class="card-text">8-year-old mare, trained for jumping. $8,000.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional rows for ads can go here -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#salesAdsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#salesAdsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- Announcements Section -->
+<div class="container my-4">
+    <h2 class="mb-3">Announcements</h2>
+    <div id="announcementsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="announcement-card">
+                            <img src="https://via.placeholder.com/300x150" class="card-img-top card-img" alt="Announcement 1">
+                            <div class="p-3">
+                                <h5 class="card-title">Community Meeting</h5>
+                                <p class="card-text">Join us this Saturday at 2 PM for our monthly meeting.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="announcement-card">
+                            <img src="https://via.placeholder.com/300x150" class="card-img-top card-img" alt="Announcement 2">
+                            <div class="p-3">
+                                <h5 class="card-title">Show Jumping Event</h5>
+                                <p class="card-text">Register now for the upcoming jumping competition.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="announcement-card">
+                            <img src="https://via.placeholder.com/300x150" class="card-img-top card-img" alt="Announcement 3">
+                            <div class="p-3">
+                                <h5 class="card-title">Volunteer Opportunity</h5>
+                                <p class="card-text">Help us organize the annual charity ride!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional rows for announcements can go here -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#announcementsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#announcementsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
 {% endblock %}
 
