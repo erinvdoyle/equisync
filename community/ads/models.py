@@ -13,6 +13,7 @@ class Ad(models.Model):
     ad_type = models.CharField(max_length=10, choices=AD_TYPE_CHOICES)
     image = models.ImageField(upload_to='ads/images', blank=True, null=True)
     description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     date_posted = models.DateTimeField(auto_now_add=True)
     contact_info = models.CharField(max_length=255)
     approved = models.BooleanField(default=False)
