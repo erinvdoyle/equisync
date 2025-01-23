@@ -16,6 +16,16 @@ h1, h2 {
     color: #6a3e26; 
 }
 
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-title p {
+    font-size: 1rem;
+    color: #555;
+}
+
 .container {
     max-width: 900px;
     margin: auto;
@@ -85,6 +95,34 @@ form button:hover {
     font-size: 22px;
     color: #905133; 
 }
+
+/* --- Card Styling ------------------------------------------------------------------------------------------------------------------------ */
+.ad-card, .announcement-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ad-card:hover, .announcement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-img {
+    height: 150px;
+    object-fit: cover;
+}
+
+/* --- Carousel Button Styling ------------------------------------------------------------------------------------------------------------- */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
 
 /* --- Gradient Navbar ---------------------------------------------------------------------------------------------------------------------- */
 .navbar-gradient {
