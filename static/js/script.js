@@ -1,6 +1,5 @@
-console.log(document.getElementById('modalTitle')); 
-console.log(document.getElementById('detailsModal')); 
-
+const adModal = new bootstrap.Modal(document.getElementById('adModal'), { backdrop: true });
+const announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'), { backdrop: true });
 
 // Function to open Ads Modal
 function openModal(title, description, imageUrl) {
@@ -15,7 +14,6 @@ function openModal(title, description, imageUrl) {
         image.style.display = 'none';
     }
 
-    const adModal = new bootstrap.Modal(document.getElementById('adModal'));
     adModal.show();
 }
 
@@ -25,8 +23,9 @@ function openAnnouncementModal(title, content) {
     document.getElementById('announcementModalLabel').textContent = title;
     document.getElementById('modalAnnouncementContent').textContent = content;
 
-    const announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'));
     announcementModal.show();
 }
+
+
 
 

@@ -9,4 +9,4 @@ def community_overview(request):
     return render(request, 'community/community.html', {
         'ads': ads,
         'announcements': announcements,
-    })
+    }) 
