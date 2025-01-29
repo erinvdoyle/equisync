@@ -20,7 +20,7 @@
                 {% if ad.image %}
                 <img src="{{ ad.image.url }}" class="card-img-top" alt="{{ ad.description }}">
                 {% else %}
-                <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="Placeholder Image">
+                <img src="" class="card-img-top" alt="Placeholder Image">
                 {% endif %}
                 <div class="p-3">
                     <h5 class="card-title">{{ ad.ad_type|title }}</h5>
@@ -47,7 +47,7 @@
     </div>
 </div>
 
-        <!-- Carousel controls -->
+        <!-- Carousel controls
         <button class="carousel-control-prev control-btn" type="button" data-bs-target="#salesAdsCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -57,7 +57,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-</div>
+</div> -->
 
 <!-- Modal for Details -->
 <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
@@ -99,14 +99,14 @@
 </div>
 
 <!-- Carousel Controls -->
-<button class="carousel-control-prev control-btn" type="button" data-bs-target="#announcementsCarousel" data-bs-slide="prev">
+<!-- <button class="carousel-control-prev control-btn" type="button" data-bs-target="#announcementsCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
 </button>
 <button class="carousel-control-next control-btn" type="button" data-bs-target="#announcementsCarousel" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
-</button>
+</button> -->
 
 <!-- Modal for Announcements -->
 <div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">

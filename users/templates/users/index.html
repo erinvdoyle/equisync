@@ -1,11 +1,38 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <!-- index.html content starts here -->
+<!-- Introduction Modal -->
+<div id="introModal" class="modal show fade" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Welcome to Equisync</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="" alt="Equisync Logo" class="img-fluid mb-3" style="max-width: 200px;">
+                <p>
+                    Equisync is your premier equestrian platform, designed to connect riders, trainers, and enthusiasts 
+                    with the best events, services, and resources.
+                </p>
+                <p>Explore our marketplace, discover upcoming events, and join our thriving equestrian community.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Enter Equisync</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- index.html content ends here -->
 {% endblock %}
 {% block copyright %}
     Copyright 2025 Erin Doyle
 {% endblock %}
+
+<script src="{% static 'js/script.js' %}"></script>
