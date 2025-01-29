@@ -1,3 +1,13 @@
+// Intro modal on index.html
+document.addEventListener("DOMContentLoaded", function () {
+    let introModal = new bootstrap.Modal(document.getElementById("introModal"), {
+        backdrop: "static", 
+        keyboard: false     
+    });
+    introModal.show();
+});
+
+
 const adModal = new bootstrap.Modal(document.getElementById('adModal'), { backdrop: true });
 const announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'), { backdrop: true });
 
@@ -25,7 +35,4 @@ function openAnnouncementModal(title, content) {
 
     announcementModal.show();
 }
-
-
-
 
