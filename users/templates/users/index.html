@@ -36,66 +36,73 @@
         </p>
     </div>
 
-    <!-- Bootstrap Carousel -->
-    <div id="homeCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <img src="" class="d-block w-100" alt="profiles">
-                <div class="carousel-caption d-none d-md-block">
+<!-- Bootstrap Carousel -->
+<div id="homeCarousel" class="carousel slide mt-4" data-bs-ride="false" data-bs-interval="false">
+    <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="carousel-content">
+                <img src="{% static 'images/admin.png' %}" class="carousel-img" alt="Profiles">
+                <div class="carousel-caption">
                     <h5>Custom Profiles</h5>
-                    <p>Add staff, client, owner profiles and grant access as you wish</p>
-                </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-                <img src="" class="d-block w-100" alt="schedules trackers">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Track your horses' schedules and routines</h5>
-                    <p>Track your stable's exercise and feed routines; manage appointments; keep a record when needed.</p>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="carousel-item">
-                <img src="" class="d-block w-100" alt="Competition calendar">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Show Schedules</h5>
-                    <p>Add and track upcoming competitions and events</p>
-                </div>
-            </div>
-
-            <!-- Slide 4 -->
-            <div class="carousel-item">
-                <img src="" class="d-block w-100" alt="Equestrian Community">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Community Page</h5>
-                    <p>Connect with the stable community: View and post sales and wanted ads, announcements, and keep an eye on stable events</p>
+                    <p>Add staff, client, and owner profiles, and grant access as needed.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <div class="carousel-content">
+                <img src="{% static 'images/horse-feed.png' %}" class="carousel-img" alt="Schedules Trackers">
+                <div class="carousel-caption">
+                    <h5>Track Your Horses' Schedules</h5>
+                    <p>Monitor exercise, feeding routines, and appointments.</p>
+                </div>
+            </div>
+        </div>
 
-        <!-- Carousel Indicators -->
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <div class="carousel-content">
+                <img src="{% static 'images/show.png' %}" class="carousel-img" alt="Competition Calendar">
+                <div class="carousel-caption">
+                    <h5>Show Schedules</h5>
+                    <p>Track upcoming competitions and events.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="carousel-item">
+            <div class="carousel-content">
+                <img src="{% static 'images/our-community.png' %}" class="carousel-img" alt="Equestrian Community">
+                <div class="carousel-caption">
+                    <h5>Community Page</h5>
+                    <p>Connect with the stable community and post sales, wanted ads, and announcements.</p>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="3"></button>
+    </div>
+</div>
 
 <!-- index.html content ends here -->
 {% endblock %}

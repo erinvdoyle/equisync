@@ -220,86 +220,96 @@ form button:hover {
 }
 
 /* --- Carousel ------------------------------------------------------------------------------------------------------------- */
-.carousel-item img {
-    height: 500px;
-    object-fit: cover;
+#homeCarousel {
+    max-width: 600px;
+    width: 100%; 
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: block;
+}
+
+.carousel-item {
+    text-align: center;
+    width: 100%;
+}
+
+.carousel-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    border-radius: 8px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto; 
+}
+
+.carousel-caption {
+    position: static; 
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .carousel-caption p {
     color: #4a4a4a;
+    font-size: 1rem;
 }
 
 .carousel-caption h5 {
     color: #6a3e26;
+    font-size: 1.5rem;
 }
 
-/*.control-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+.carousel-caption p,
+.carousel-caption h5 {
+    max-width: 80%;  
+    margin-left: auto;
+    margin-right: auto;
 }
 
+/* --- Controls ------------------------------------------------------------------------------------- */
 .carousel-control-prev,
 .carousel-control-next {
     position: absolute;
-    top: 50%;
+    width: auto;
+    height: auto;
+    top: 30%;
     transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.5); 
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    background-color: rgba(0, 0, 0, 0.8); 
+    background-color: transparent;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: white; 
+    background-color: #6a3e26; 
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+} 
+
+/* --- Indicators ----------------------------------------------------------------------------------- */
+.carousel-indicators {
+    position: absolute;
+    bottom: -5px; 
+    left: 35%;
+    transform: translateX(-50%); 
+    z-index: 10; 
+}
+
+.carousel-indicators button {
+    background-color: #6a3e26; 
     width: 20px;
-    height: 20px;
-    mask: url('data:image/svg+xml;base64,...'); 
-    -webkit-mask: url('data:image/svg+xml;base64,...') no-repeat center / contain;
+    height: 5px;
+    margin: 0 3.5px; 
+    transition: background-color 0.3s ease-in-out;
 }
 
-.carousel .row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    overflow: hidden;
+.carousel-indicators .active {
+    background-color: #905133; 
 }
 
-/* Three cards per row */
-/* .carousel .col-lg-4 {
-    flex: 0 0 auto;
-    max-width: 33.333%;
-    padding: 10px; 
-}
-
-.ad-card, .announcement-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.ad-card img, .announcement-card img {
-    border-radius: 5px 5px 0 0;
-    max-height: 150px;
-    object-fit: cover;
-}
-
-.carousel-inner {
-    padding: 10px 0;
-}  */
 
 /* --- Collapse Section (For Read More) ------------------------------------------------------------------------------------------- */
 .announcement-collapse {
@@ -515,5 +525,11 @@ button.primary:hover {
     .ads-section .row,
     .announcements-section .row {
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+        max-height: 250px; 
     }
 }
