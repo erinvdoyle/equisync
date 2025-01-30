@@ -59,7 +59,7 @@
     </div>
 </div> -->
 
-<!-- Modal for Details -->
+<!-- Modal for Ad Details -->
 <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -76,49 +76,33 @@
 </div>
 
 <!-- Announcements Section -->
-<div class="container-fluid section-wrapper my-4">
+<div class="container-fluid section-wrapper my-4 announcements-section">
     <h2 class="section-header">Announcements</h2>
-    <div class="row">
-        {% for announcement in announcements %}
-        <div class="col-lg-4 col-md-6 col-12 mb-4">
-            <div class="announcement-card">
-                <div class="p-3">
-                    <h5 class="card-title">{{ announcement.title|title }}</h5>
-                    <p class="card-text">{{ announcement.content|truncatechars:100 }}</p>
-                    <button class="card-btn"
-                        onclick="openAnnouncementModal('{{ announcement.title|title }}', '{{ announcement.content|escapejs }}')"
-                        data-bs-toggle="modal"
-                        data-bs-target="#announcementModal">
-                        Read More
-                    </button>
+    <div class="container">
+        <div class="row">
+            {% for announcement in announcements %}
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="announcement-card">
+                    <div class="p-3">
+                       
+                        <h5 class="card-title">{{ announcement.title|title }}</h5>
+
+                        <p class="card-text">{{ announcement.description|truncatechars:100 }}</p>
+
+                        <button class="card-btn" data-bs-toggle="collapse" data-bs-target="#announcement{{ forloop.counter }}">
+                            Read More
+                        </button>
+
+                        <!-- Collapsible Content for Full Description -->
+                        <div id="announcement{{ forloop.counter }}" class="collapse announcement-collapse mt-2">
+                            <p>{{ announcement.description }}</p>
+                            
+                            <p><strong>Contact Info:</strong> {{ announcement.contact_info }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
-<!-- Carousel Controls -->
-<!-- <button class="carousel-control-prev control-btn" type="button" data-bs-target="#announcementsCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-</button>
-<button class="carousel-control-next control-btn" type="button" data-bs-target="#announcementsCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-</button> -->
-
-<!-- Modal for Announcements -->
-<div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="announcementModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="modalAnnouncementContent"></p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
