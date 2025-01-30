@@ -33,7 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'equisync-d4a4079b524b.herokuapp.com',  
     '.herokuapp.com',  
-    '8000-erinvdoyle-equisync-uqcw06qmtq2.ws.codeinstitute-ide.net',  
+    '127.0.0.1',  
 ]
 
 
@@ -106,7 +106,7 @@ DATABASES = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.codeinstitute-ide.net/",
+    "https://localhost",
     "https://*.herokuapp.com"
 ]
 

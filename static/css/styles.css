@@ -93,11 +93,15 @@ form button:hover {
     border-bottom: none;
 }
 
-.ads-section .row,
-.announcements-section .row {
+.ads-section .row {
     display: grid;
     grid-template-columns: repeat(1, 1fr); 
     gap: 15px;
+}
+
+.announcements-section .row {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .announcements-section h2,
@@ -215,7 +219,7 @@ form button:hover {
     background-color: #905133;
 }
 
-/* --- Carousel Button Styling ------------------------------------------------------------------------------------------------------------- */
+/* --- Carousel Button Styling -------------------------------------------------------------------------------------------------------------
 .control-btn {
     position: absolute;
     top: 50%;
@@ -261,7 +265,7 @@ form button:hover {
 }
 
 /* Three cards per row */
-.carousel .col-lg-4 {
+/* .carousel .col-lg-4 {
     flex: 0 0 auto;
     max-width: 33.333%;
     padding: 10px; 
@@ -282,6 +286,30 @@ form button:hover {
 
 .carousel-inner {
     padding: 10px 0;
+}  */
+
+/* --- Collapse Section (For Read More) ------------------------------------------------------------------------------------------- */
+.announcement-collapse {
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-left: 3px solid #6a3e26;
+    border-radius: 5px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+}
+
+.announcement-collapse.show {
+    display: block;
+    opacity: 1;
+}
+
+/* --- Animation for Smooth Expanding --------------------------------------------------------------------------------------------- */
+.announcement-collapse.collapsing {
+    height: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease, height 0.3s ease-in-out;
 }
 
 /* --- Weekly Events Section ------------------------------------------------------------------------------------------------------------------*/
@@ -413,10 +441,11 @@ button.primary:hover {
         margin-left: auto;
         margin-right: auto;
     }
-    .carousel-inner .row {
+    
+    /* .carousel-inner .row {
         display: flex;
         justify-content: space-between;
-    }
+    } */
 
     .calendar-table th, .calendar-table td {
         width: 14%;
@@ -428,12 +457,13 @@ button.primary:hover {
         gap: 15px; 
     }
 
-    .ad-card {
+    .ad-card, .announcement-card {
         width: 100%;
         max-width: 100%;
     }
 
-    .ad-card img {
+
+    .ad-card img, .announcement-card img  {
         max-height: 150px;
         object-fit: cover;
     }
@@ -445,39 +475,32 @@ button.primary:hover {
         grid-template-columns: repeat(2, 1fr); 
     }
 
-    .ad-card {
+    .ad-card, .announcement-card {
         margin-bottom: 15px;
     }
 
-    .ad-card img {
+    .ad-card img, .announcement-card img  {
         max-height: 150px;
         object-fit: cover;
     }
 }
 
 @media (max-width: 576px) {
-    .row {
+     .row {
         grid-template-columns: repeat(1, 1fr);
-    }
+    } 
 
-    .ad-card {
+    .ad-card, .announcement-card {
         margin-bottom: 15px;
     }
 
-    .ad-card img {
+    .ad-card img, .announcement-card img {
         max-height: 150px; 
         object-fit: cover; 
-    }.ads-section .row,
+    }
+    
+    .ads-section .row,
     .announcements-section .row {
         grid-template-columns: repeat(1, 1fr);
-    }
-
-    .ad-card {
-        margin-bottom: 15px;
-    }
-
-    .ad-card img {
-        max-height: 150px;
-        object-fit: cover;
     }
 }
