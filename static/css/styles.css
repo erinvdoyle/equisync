@@ -219,8 +219,21 @@ form button:hover {
     background-color: #905133;
 }
 
-/* --- Carousel Button Styling -------------------------------------------------------------------------------------------------------------
-.control-btn {
+/* --- Carousel ------------------------------------------------------------------------------------------------------------- */
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.carousel-caption p {
+    color: #4a4a4a;
+}
+
+.carousel-caption h5 {
+    color: #6a3e26;
+}
+
+/*.control-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
