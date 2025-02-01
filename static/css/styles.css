@@ -77,6 +77,111 @@ form button:hover {
 }
 
 /* --- Ads and Announcement Sections ------------------------------------------------------------------------------------------------------ */
+/*--- Ad Section Toolbar--------------------------------------------------------------------------------------------------------------------*/
+
+.toolbar {
+    position: relative;
+    width: calc(100% + 40px); 
+    margin: -20px -20px 0 -20px; 
+    height: 60px; 
+    padding: 10px 20px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px 8px 0 0;  
+}
+
+.toolbar .section-header {
+    font-size: 1.25rem; 
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.toolbar-form form {
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        padding: 0;
+        gap: 4px;
+}
+
+
+/* .search-field, */
+/* .category-field {
+    width: 120px !important;
+    padding: 5px 10px !important;
+    height: 32px; 
+    border: none;
+    background: rgba(255, 255, 255, 0.2); 
+    color: white; 
+    border-radius: 5px;
+} */
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.search-container::after {
+    content: "\f002"; 
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 10px; 
+    color: #999;
+    pointer-events: none;
+}
+
+.search-field {
+    width: 85px !important;
+    height: 32px; 
+    padding: 5px 30px 5px 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 15px !important;
+}
+
+.search-field::placeholder {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.category-field {
+    appearance: none;
+    width: 130px;
+    height: 32px;
+    padding: 5px 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    appearance: none;
+}
+
+.toolbar-form button {
+    background: linear-gradient(to right, #6a3e26, #905133, #f4a261);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.toolbar-form button:hover {
+    opacity: 0.8;
+}
+
+
+/*--- Ads and Announcement Main Sections ----------------------------------------------------------------------------------------------------*/
 .ads-section,
 .announcements-section {
     margin-top: 20px;
@@ -221,9 +326,6 @@ form button:hover {
 
 /* --- Carousel ------------------------------------------------------------------------------------------------------------- */
 #homeCarousel {
-    /* max-width: 600px; */
-    /* width: 100%;
-    height: 350px;  */
     width: 80%; 
     max-width: 1440px; 
     min-width: 320px; 
@@ -246,7 +348,6 @@ form button:hover {
 }
 
 .carousel-img {
-    /* max-width: 100%; */
     width: 100%;
     height: auto;
     max-height: 400px;
@@ -257,9 +358,6 @@ form button:hover {
 }
 
 .carousel-caption {
-    /* position: static; 
-    text-align: center;
-    width: 100%; */
     margin-top: 15px;
     position: relative;
     /* bottom: 40px; */
@@ -285,8 +383,6 @@ form button:hover {
 .carousel-caption p,
 .carousel-caption h5 {
     max-width: 100%;  
-    /* margin-left: 0;
-    margin-right: 0; */
 }
 
 /* --- Controls ------------------------------------------------------------------------------------- */
@@ -584,5 +680,26 @@ button.primary:hover {
     }
     .carousel-control-next {
         right: -30px;
+    }
+
+    .search-field {
+        width: 35px !important; 
+        padding: 8px 10px; 
+        text-indent: -9999px; 
+    }
+
+    .search-container::after {
+        right: 12px; 
+        font-size: 16px; 
+    }
+
+    .search-field:focus {
+        width: 140px; 
+        font-size: 14px; 
+        text-align: left;
+    }
+
+    .category-field {
+        width: 55px;
     }
 }
