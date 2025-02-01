@@ -11,53 +11,96 @@
 </div>
 
 <!-- Sales Ads Section -->
-<div class="container-fluid section-wrapper my-4">
-    <h2 class="section-header">Sales Ads</h2>
-    <div class="row">
-        {% for ad in ads %}
-        <div class="col-lg-4 col-md-6 col-12 mb-4">
-            <div class="ad-card">
-                {% if ad.image %}
-                <img src="{{ ad.image.url }}" class="card-img-top" alt="{{ ad.description }}">
-                {% else %}
-                <img src="" class="card-img-top" alt="Placeholder Image">
-                {% endif %}
-                <div class="p-3">
-                    <h5 class="card-title">{{ ad.ad_type|title }}</h5>
-                    <p class="card-text">{{ ad.description|truncatechars:50 }}</p>
+<div class="section-wrapper my-4">
+    <!-- Sales Ads Toolbar -->
+    <div class="navbar-gradient toolbar p-3">
+        <h2 class="section-header mb-0 text-white">Sales Ads</h2>
+        <div class="toolbar-form">
+            <form method="GET">
+            <!-- Search -->
+            <div class="search-container">
+                <input type="text" name="search" class="search-field" placeholder="Search" value="{{ request.GET.search }}">
+            </div>           
+                <!-- Filter -->
+                <select name="category" class="category-field">
+                    <option value="">Filter</option>
+                    <option value="Horse" {% if request.GET.category == "Horse" %}selected{% endif %}>Horse</option>
+                    <option value="Equipment" {% if request.GET.category == "Equipment" %}selected{% endif %}>Equipment</option>
+                    <option value="Clothing" {% if request.GET.category == "Clothing" %}selected{% endif %}>Clothing</option>
+                    <option value="Machinery" {% if request.GET.category == "Machinery" %}selected{% endif %}>Machinery</option>
+                    <option value="Animal" {% if request.GET.category == "Animal" %}selected{% endif %}>Animal</option>
+                    <option value="Other" {% if request.GET.category == "Other" %}selected{% endif %}>Other</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ads Section -->
+    <div class="container mt-3">
+        <div class="row">
+            {% for ad in page_obj %}
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="ad-card">
                     {% if ad.image %}
+                    <img src="{{ ad.image.url }}" class="card-img-top" alt="{{ ad.description }}">
+                    {% else %}
+                    <img src="" class="card-img-top" alt="Placeholder Image">
+                    {% endif %}
+                    <div class="p-3">
+                        <h5 class="card-title">{{ ad.ad_type|title }}</h5>
+                        <p class="card-text">{{ ad.description|truncatechars:50 }}</p>
+                        {% if ad.image %}
                         <button class="card-btn"
                             onclick="openModal('{{ ad.ad_type|title }}', '{{ ad.description|escapejs }}', '{{ ad.image.url }}')"
                             data-bs-toggle="modal"
                             data-bs-target="#adModal">
                             View Details
                         </button>
-                    {% else %}
+                        {% else %}
                         <button class="card-btn"
                             onclick="openModal('{{ ad.ad_type|title }}', '{{ ad.description|escapejs }}', 'https://via.placeholder.com/300x150')"
                             data-bs-toggle="modal"
                             data-bs-target="#adModal">
                             View Details
                         </button>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+            {% empty %}
+            <p class="text-center">No ads found.</p>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
 
-        <!-- Carousel controls
-        <button class="carousel-control-prev control-btn" type="button" data-bs-target="#salesAdsCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next control-btn" type="button" data-bs-target="#salesAdsCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div> -->
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-4">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Previous</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Last</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
 
 <!-- Modal for Ad Details -->
 <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
@@ -84,9 +127,7 @@
             <div class="col-lg-4 col-md-6 col-12 mb-4">
                 <div class="announcement-card">
                     <div class="p-3">
-                       
                         <h5 class="card-title">{{ announcement.title|title }}</h5>
-
                         <p class="card-text">{{ announcement.description|truncatechars:100 }}</p>
 
                         <button class="card-btn" data-bs-toggle="collapse" data-bs-target="#announcement{{ forloop.counter }}">
@@ -96,7 +137,6 @@
                         <!-- Collapsible Content for Full Description -->
                         <div id="announcement{{ forloop.counter }}" class="collapse announcement-collapse mt-2">
                             <p>{{ announcement.description }}</p>
-                            
                             <p><strong>Contact Info:</strong> {{ announcement.contact_info }}</p>
                         </div>
                     </div>
@@ -139,6 +179,4 @@
 </div>
 
 {% endblock %}
-
 <script src="{% static 'js/script.js' %}"></script>
-
