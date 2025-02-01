@@ -221,10 +221,19 @@ form button:hover {
 
 /* --- Carousel ------------------------------------------------------------------------------------------------------------- */
 #homeCarousel {
-    max-width: 600px;
-    width: 100%; 
+    /* max-width: 600px; */
+    /* width: 100%;
+    height: 350px;  */
+    width: 80%; 
+    max-width: 1440px; 
+    min-width: 320px; 
+    height: auto;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
 }
 
 .carousel-inner {
@@ -237,20 +246,30 @@ form button:hover {
 }
 
 .carousel-img {
-    max-width: 100%;
+    /* max-width: 100%; */
+    width: 100%;
     height: auto;
-    max-height: 300px;
+    max-height: 400px;
     border-radius: 8px;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
     margin: 0 auto; 
 }
 
 .carousel-caption {
-    position: static; 
+    /* position: static; 
     text-align: center;
+    width: 100%; */
+    margin-top: 15px;
+    position: relative;
+    /* bottom: 40px; */
+    left: 0;
+    /* transform: translateX(-50%); */
     width: 100%;
-    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .carousel-caption p {
@@ -265,9 +284,9 @@ form button:hover {
 
 .carousel-caption p,
 .carousel-caption h5 {
-    max-width: 80%;  
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 100%;  
+    /* margin-left: 0;
+    margin-right: 0; */
 }
 
 /* --- Controls ------------------------------------------------------------------------------------- */
@@ -279,6 +298,7 @@ form button:hover {
     top: 30%;
     transform: translateY(-50%);
     background-color: transparent;
+    z-index: 31;
 }
 
 .carousel-control-prev-icon,
@@ -287,15 +307,28 @@ form button:hover {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-} 
+}
+
+.carousel-control-prev {
+    left: -80px;
+}
+
+.carousel-control-next {
+    right: -80px;
+}
+
+
 
 /* --- Indicators ----------------------------------------------------------------------------------- */
 .carousel-indicators {
     position: absolute;
-    bottom: -5px; 
+    bottom: -50px; 
     left: 35%;
     transform: translateX(-50%); 
-    z-index: 10; 
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 7px;  
 }
 
 .carousel-indicators button {
@@ -465,11 +498,6 @@ button.primary:hover {
         margin-right: auto;
     }
     
-    /* .carousel-inner .row {
-        display: flex;
-        justify-content: space-between;
-    } */
-
     .calendar-table th, .calendar-table td {
         width: 14%;
     }
@@ -508,6 +536,20 @@ button.primary:hover {
     }
 }
 
+@media (max-width: 480px) { 
+    #homeCarousel {
+        height: 250px; 
+    }
+    
+    .carousel-control-prev {
+        left: -15px;
+    }
+    
+    .carousel-control-next {
+        right: -15px;
+    }
+}
+
 @media (max-width: 576px) {
      .row {
         grid-template-columns: repeat(1, 1fr);
@@ -531,5 +573,16 @@ button.primary:hover {
 @media (max-width: 768px) {
     .carousel-item img {
         max-height: 250px; 
+    }
+
+    #homeCarousel {
+        height: 300px;
+    }
+
+    .carousel-control-prev {
+        left: -30px;
+    }
+    .carousel-control-next {
+        right: -30px;
     }
 }
