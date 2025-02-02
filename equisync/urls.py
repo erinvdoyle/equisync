@@ -34,7 +34,7 @@ urlpatterns = [
     path('community/edit_ad/<int:ad_id>/', edit_ad, name='edit_ad'),
     path('community/submit_announcement/', submit_announcement, name='submit_announcement'),
     path('community/edit_announcement/<int:announcement_id>/', edit_announcement, name='edit_announcement'),
-] 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

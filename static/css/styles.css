@@ -106,17 +106,10 @@ form button:hover {
         gap: 4px;
 }
 
-
-/* .search-field, */
-/* .category-field {
-    width: 120px !important;
-    padding: 5px 10px !important;
-    height: 32px; 
-    border: none;
-    background: rgba(255, 255, 255, 0.2); 
-    color: white; 
-    border-radius: 5px;
-} */
+.toolbar-form {
+    display: flex;
+    align-items: flex-start;
+}
 
 .search-container {
     position: relative;
@@ -131,7 +124,7 @@ form button:hover {
     font-weight: 900;
     position: absolute;
     right: 10px; 
-    color: #999;
+    color: #6a3e26;
     pointer-events: none;
 }
 
@@ -141,7 +134,8 @@ form button:hover {
     padding: 5px 30px 5px 10px;
     border: none;
     background: rgba(255, 255, 255, 0.2);
-    color: white;
+    color: #6a3e26;
+    font-weight: bold;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -150,7 +144,7 @@ form button:hover {
 
 .search-field::placeholder {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
+    color: #6a3e26);
 }
 
 .category-field {
@@ -160,10 +154,22 @@ form button:hover {
     padding: 5px 10px;
     border: none;
     background: rgba(255, 255, 255, 0.2);
-    color: white;
+    color: #6a3e26;
     border-radius: 5px;
     cursor: pointer;
     appearance: none;
+    position: relative;
+    font-weight: bold;
+}
+
+.category-field::after {
+    content: "\f0d7";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 10px; 
+    color: #999;
+    pointer-events: none;
 }
 
 .toolbar-form button {
@@ -180,6 +186,26 @@ form button:hover {
     opacity: 0.8;
 }
 
+.post-ad-btn {
+    align-self: flex-start;
+    background-color: #905133;
+    color: white;
+    padding: 5px 15px;
+    margin-top: 14px;
+    margin-right: 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.post-ad-btn:hover {
+    background-color: #6a3e26; 
+}
+
+.short-text {
+    display: none;
+}
 
 /*--- Ads and Announcement Main Sections ----------------------------------------------------------------------------------------------------*/
 .ads-section,
@@ -701,5 +727,13 @@ button.primary:hover {
 
     .category-field {
         width: 55px;
+    }
+    
+    .full-text {
+        display: none;
+    }
+
+    .short-text {
+        display: inline;
     }
 }
