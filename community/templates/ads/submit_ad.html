@@ -5,7 +5,7 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <button type="submit">Post Ad</button>
 </form>
 <a href="{% url 'community_overview' %}">Cancel</a>
 {% endblock %}
