@@ -344,6 +344,7 @@ form button:hover {
 }
 
 .modal-header {
+    text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
     color: #6a3e26;
@@ -354,6 +355,11 @@ form button:hover {
     max-height: 300px;
     object-fit: cover;
     margin-bottom: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
 }
 
 .modal-footer button {
@@ -369,6 +375,39 @@ form button:hover {
 
 .modal-footer button:hover {
     background-color: #905133;
+}
+
+.modal-body p {
+    text-align: left;
+}
+
+.modal-body li {
+    text-align: left;
+}
+
+.modal-1 {
+    color: #905133;
+    font-weight: bold;
+}
+
+.modal-2 {
+    color: #f4a261;
+    font-weight: bold;
+}
+
+.modal-3 {
+    color: rgb(31, 71, 72);
+    font-weight: bold;
+}
+
+.modal-4 {
+    color: #e66f00;
+    font-weight: bold;
+}
+
+.modal-5 {
+    color:rgb(129, 51, 51);
+    font-weight: bold;
 }
 
 /* --- Carousel ------------------------------------------------------------------------------------------------------------- */
