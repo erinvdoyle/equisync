@@ -149,17 +149,20 @@ form button:hover {
 
 .category-field {
     appearance: none;
-    width: 130px;
+    width: 85px;
     height: 32px;
     padding: 5px 10px;
     border: none;
     background: rgba(255, 255, 255, 0.2);
     color: #6a3e26;
     border-radius: 5px;
+    border: 1px solid white;
     cursor: pointer;
     appearance: none;
     position: relative;
     font-weight: bold;
+    margin-top: 15px !important;
+    margin-left: 4px !important;
 }
 
 .category-field::after {
@@ -265,6 +268,24 @@ form button:hover {
     object-fit: cover;
     border-radius: 8px 8px 0 0;
 }
+
+
+.ad-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+}
+
+.ad-label.for-sale {
+    background-color: green;
+}
+
+.ad-label.wanted {
+    background-color: red;
+}
+
 
 .card-title {
     font-size: 1.2rem;

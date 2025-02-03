@@ -6,7 +6,7 @@ from .filters import AdFilter
 
 
 def community_overview(request):
-    ads = Ad.objects.filter(approved=True)
+    ads = Ad.objects.filter(approved=True).order_by('-date_posted')
 
     ad_filter = AdFilter(request.GET, queryset=ads)
 
