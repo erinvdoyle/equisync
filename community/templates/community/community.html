@@ -39,6 +39,7 @@
     <!-- Filter -->
                     <select name="category" class="category-field" onchange="this.form.submit()">
                         <option value="">Filter &#8595;</option>
+                        <option value="reset">Reset Filters</option>
                         <option value="Horse" {% if request.GET.category == "Horse" %}selected{% endif %}>Horse</option>
                         <option value="Equipment" {% if request.GET.category == "Equipment" %}selected{% endif %}>Equipment</option>
                         <option value="Clothing" {% if request.GET.category == "Clothing" %}selected{% endif %}>Clothing</option>
@@ -46,6 +47,8 @@
                         <option value="Animal" {% if request.GET.category == "Animal" %}selected{% endif %}>Animal</option>
                         <option value="Other" {% if request.GET.category == "Other" %}selected{% endif %}>Other</option>
                     </select>
+                    <!-- Hidden Reset Button -->
+                    <input type="reset" value="Reset Filters" style="display: none;">
             </form>
         </div>
     </div>
