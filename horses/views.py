@@ -43,3 +43,7 @@ def delete_horse(request, horse_id):
     horse = get_object_or_404(HorseProfile, id=horse_id)
     horse.delete()
     return redirect('community_overview')
+
+def horse_list(request):
+    horses = HorseProfile.objects.all()
+    return render(request, 'horses/horse_list.html', {'horses': horses})
