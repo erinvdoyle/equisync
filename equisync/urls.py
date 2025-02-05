@@ -22,6 +22,7 @@ from community.views import community_overview
 from users import views
 from django.conf import settings
 from django.conf.urls.static import static
+from horses import views as horses_views
  
 urlpatterns = [
     path("accounts/", include("allauth.urls")),
@@ -34,6 +35,8 @@ urlpatterns = [
     path('community/edit_ad/<int:ad_id>/', edit_ad, name='edit_ad'),
     path('community/submit_announcement/', submit_announcement, name='submit_announcement'),
     path('community/edit_announcement/<int:announcement_id>/', edit_announcement, name='edit_announcement'),
+    path('horses/', include('horses.urls')),
+    path('delete/<int:horse_id>/', horses_views.delete_horse, name='delete_horse'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 
 if settings.DEBUG:
