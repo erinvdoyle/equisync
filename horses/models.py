@@ -19,11 +19,5 @@ class HorseProfile(models.Model):
     def most_recent_ride(self):
         return self.rider
 
-    def most_recent_barn_manager(self):
-        return self.barn_manager
-
     def most_recent_staff(self):
         return self.staff
-
-    def most_recent_owner(self):
-        return self.owner
