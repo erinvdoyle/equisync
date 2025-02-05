@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'community',
     'django_filters',
     'users',
+    'horses',
 ]
 
 SITE_ID = 1

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ horse.name }}</h1>
+    <p>Breed: {{ horse.breed }}</p>
+    <p>Age: {{ horse.age }}</p>
+    <p>Gender: {{ horse.gender }}</p>
+    <p>Description: {{ horse.description }}</p>
+    <p>Owner: {{ horse.owner.username }}</p>
+    <p>Staff: {{ horse.staff.username }}</p>
+    <p>Barn Manager: {{ horse.barn_manager.username }}</p>
+    <p>Rider: {{ horse.rider.username }}</p>
+    <p>Most Recent Ride: {{ horse.most_recent_ride.name }}</p>
+    <p>Most Recent Barn Manager: {{ horse.most_recent_barn_manager.name }}</p>
+    <p>Most Recent Staff: {{ horse.most_recent_staff.name }}</p>
+    <img src="{{ horse.image.url }}" alt="Horse Image">
+
+{% endblock %}
