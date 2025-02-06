@@ -1,10 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
-# Create your models here.
-class Profile(models.Model):
+class Profile(User):
     """
     extends user class for automatic profile creation
     """
@@ -16,17 +13,13 @@ class Profile(models.Model):
         ('Staff Member', 'Staff Member'),
     ]
 
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, related_name='users_profile', blank=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, null=True, blank=True)
-    horse = models.ForeignKey('Horse', on_delete=models.SET_NULL, null=True, blank=True)
     contact = models.CharField(max_length=100, blank=True)
     notes = models.TextField(blank=True)
     is_approved = models.BooleanField(default=False)
 
-
     def __str__(self):
-        return f"Profile for {self.user.username}"
-
+        return f"Profile for {self.username}"
 
 class Horse(models.Model):
     """
@@ -36,3 +29,4 @@ class Horse(models.Model):
 
     def __str__(self):
         return self.name
+
