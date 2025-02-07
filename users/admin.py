@@ -1,32 +1,24 @@
 from django.contrib import admin
-from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
 from .models import Profile
-from community.announcements.models import Announcement
-from community.ads.models import Ad
 
-# Register your models here.
-class ProfileInline(admin.StackedInline):
+class ProfileInline(admin.StackedInline):  
     model = Profile
     can_delete = False
     verbose_name_plural = 'Profile'
+    fk_name = 'user'  
 
-class UserAdmin(admin.ModelAdmin):
-    model = User
-    fields = ("username", "password")
-    inlines = [ProfileInline]
+class CustomUserAdmin(UserAdmin):
+    inlines = (ProfileInline,)
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'last_login') 
+    list_filter = ('is_staff', 'is_superuser', 'is_active')  
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+    )
 
-class AdAdmin(admin.ModelAdmin):
-    list_display = ('ad_type', 'user', 'date_posted', 'approved') 
-    list_filter = ('ad_type', 'approved')  
-    search_fields = ('description', 'contact_info')
-
-class AnnouncementAdmin(admin.ModelAdmin):
-    list_display = ('user', 'description', 'date_posted', 'approved')
-    list_filter = ('approved', 'date_posted')  
-    search_fields = ('description', 'contact_info')  
-
-admin.site.unregister(User)  
-admin.site.register(User, UserAdmin)
-admin.site.register(Ad, AdAdmin)
-admin.site.register(Announcement, AnnouncementAdmin)
-
+admin.site.unregister(get_user_model())  
+admin.site.register(get_user_model(), CustomUserAdmin)
