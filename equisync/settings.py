@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'users',
     'horses',
     'dbbackup',
+    'feeding_management',
 ]
 
 SITE_ID = 1
