@@ -1,18 +1,8 @@
 {% extends "base.html" %}
+{% load django_tables2 %}
 
 {% block content %}
-<h1>Daily Feeding Overview</h1>
+    <h1>Daily Feeding Overview</h1>
 
-    {% for entry in feeding_data %}
-        <p>
-            <strong>{{ entry.horse_name }}:</strong>
-            B {{ entry.breakfast_quantity }}{{ entry.breakfast_feed }},
-            L {{ entry.lunch_quantity }}{{ entry.lunch_feed }},
-            D {{ entry.dinner_quantity }}{{ entry.dinner_feed }},
-            Hay: {{ entry.hay_quantity }}{{ entry.hay }},
-            Supplements: {{ entry.supplements }},
-            Medicines: {{ entry.medicines }},
-            Notes: {{ entry.notes }}
-        </p>
-    {% endfor %}
+    {% render_table table %}
 {% endblock %}

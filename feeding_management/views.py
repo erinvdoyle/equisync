@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from horses.models import HorseProfile 
-from .models import FeedingChart
-from .forms import FeedingChartForm
+from feeding_management.models import FeedingChart
+from .tables import FeedingChartTable
 
 @login_required
 def horse_feeding_chart(request, horse_id):
@@ -28,40 +28,56 @@ def horse_feeding_chart(request, horse_id):
 
 @login_required
 def all_horses_feeding(request):
-    horses = HorseProfile.objects.all()  
-    feeding_data = []
+    horses = HorseProfile.objects.all()
+    table_data = []
     for horse in horses:
         feeding_chart = getattr(horse, 'feeding_chart', None)
         if feeding_chart:
-            feeding_data.append({
-                'horse_name': horse.name,
-                'breakfast_feed': feeding_chart.breakfast_feed,
-                'breakfast_quantity': feeding_chart.breakfast_quantity,
-                'lunch_feed': feeding_chart.lunch_feed,
-                'lunch_quantity': feeding_chart.lunch_quantity,
-                'dinner_feed': feeding_chart.dinner_feed,
-                'dinner_quantity': feeding_chart.dinner_quantity,
-                'hay': feeding_chart.hay,
-                'hay_quantity': feeding_chart.hay_quantity,
-                'supplements': feeding_chart.supplements,
-                'medicines': feeding_chart.medicines,
-                'notes': feeding_chart.notes,
-            })
-        else:
-            feeding_data.append({
-                'horse_name': horse.name,
-                'breakfast_feed': "Not Set",
-                'breakfast_quantity': "Not Set",
-                'lunch_feed': "Not Set",
-                'lunch_quantity': "Not Set",
-                'dinner_feed': "Not Set",
-                'dinner_quantity': "Not Set",
-                'hay': "Not Set",
-                'hay_quantity': "Not Set",
-                'supplements': "Not Set",
-                'medicines': "Not Set",
-                'notes': "Not Set",
-            })
-    context = {'feeding_data': feeding_data}
+            table_data.append(feeding_chart)
+
+    table = FeedingChartTable(table_data)
+
+    context = {'table': table}
     return render(request, 'feeding_management/all_horses_feeding.html', context)
+
+
+
+# @login_required
+# def all_horses_feeding(request):
+#     horses = HorseProfile.objects.all()  
+#     feeding_data = []
+#     for horse in horses:
+#         feeding_chart = getattr(horse, 'feeding_chart', None)
+#         if feeding_chart:
+#             feeding_data.append({
+#                 'horse_name': horse.name,
+#                 'breakfast_feed': feeding_chart.breakfast_feed,
+#                 'breakfast_quantity': feeding_chart.breakfast_quantity,
+#                 'lunch_feed': feeding_chart.lunch_feed,
+#                 'lunch_quantity': feeding_chart.lunch_quantity,
+#                 'dinner_feed': feeding_chart.dinner_feed,
+#                 'dinner_quantity': feeding_chart.dinner_quantity,
+#                 'hay': feeding_chart.hay,
+#                 'hay_quantity': feeding_chart.hay_quantity,
+#                 'supplements': feeding_chart.supplements,
+#                 'medicines': feeding_chart.medicines,
+#                 'notes': feeding_chart.notes,
+#             })
+#         else:
+#             feeding_data.append({
+#                 'horse_name': horse.name,
+#                 'breakfast_feed': "Not Set",
+#                 'breakfast_quantity': "Not Set",
+#                 'lunch_feed': "Not Set",
+#                 'lunch_quantity': "Not Set",
+#                 'dinner_feed': "Not Set",
+#                 'dinner_quantity': "Not Set",
+#                 'hay': "Not Set",
+#                 'hay_quantity': "Not Set",
+#                 'supplements': "Not Set",
+#                 'medicines': "Not Set",
+#                 'notes': "Not Set",
+#             })
+#     context = {'feeding_data': feeding_data}
+#     return render(request, 'feeding_management/all_horses_feeding.html', context)
 
