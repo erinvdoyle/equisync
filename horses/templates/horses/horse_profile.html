@@ -11,6 +11,9 @@
     <p>Rider: {{ horse.rider.username }}</p>
     <p>Last ridden by: {{ horse.most_recent_ride.name }}</p>
     <p>Last cared for by: {{ horse.most_recent_staff.name }}</p>
-    <img src="{{ horse.image.url }}" alt="Horse Image">
+    
+    {% if horse.image %}
+        <img src="{{ horse.image.url }}" alt="Horse Image">
+    {% endif %}
 
 {% endblock %}
