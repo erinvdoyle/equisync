@@ -37,6 +37,7 @@ urlpatterns = [
     path('community/edit_announcement/<int:announcement_id>/', edit_announcement, name='edit_announcement'),
     path('horses/', include('horses.urls')),
     path('delete/<int:horse_id>/', horses_views.delete_horse, name='delete_horse'),
+    path('feeding/', include('feeding_management.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 
 if settings.DEBUG:

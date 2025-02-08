@@ -10,7 +10,6 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('horses', '0004_remove_horseprofile_temp_field'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
