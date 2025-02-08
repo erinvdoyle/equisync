@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import HorseProfile
 from .forms import HorseForm
+from users.models import Profile
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -10,8 +11,9 @@ import json
 @login_required
 def horse_profile(request, horse_id):
     horse = get_object_or_404(HorseProfile, id=horse_id)
-    profiles = Profile.objects.filter(horse=horse)
-    return render(request, 'horses/horse_profile.html', {'horse': horse, 'profiles': profiles})
+    profiles = Profile.objects.filter(user=horse.owner)
+    context = {'horse': horse, 'profiles': profiles}
+    return render(request, 'horses/horse_profile.html', context)
 
 @login_required
 def edit_horse_profile(request, horse_id):
