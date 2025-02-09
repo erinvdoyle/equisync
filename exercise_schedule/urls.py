@@ -10,4 +10,5 @@ urlpatterns = [
     path('weekly/<str:date>/', views.weekly_schedule_view, name='weekly_schedule_view_date'),
     path('archive/', views.archive_schedule_view, name='archive_schedule_view'),
     path('create/', views.create_schedule_entry, name='create_schedule_entry'),
+    path('horse/<int:horse_id>/exercise/', views.horse_exercise_schedule_view, name='horse_exercise_schedule'),
 ]

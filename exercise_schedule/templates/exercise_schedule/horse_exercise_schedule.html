@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load exercise_tags %}
+
+{% block content %}
+    <h1>{{ horse.name }} - Exercise Schedule</h1>
+
+    <h2>Select Timeframe:</h2>
+    <form method="get">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ start_date|date:'Y-m-d' }}">
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ end_date|date:'Y-m-d' }}">
+        <button type="submit">Update Chart</button>
+    </form>
+
+    <h2>Exercise Breakdown ({{ start_date }} to {{ end_date }})</h2>
+    <div style="width:400px; height:400px;">
+        <canvas id="exerciseChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('exerciseChart').getContext('2d');
+            if (ctx) {
+                const myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: [{% for item in labels %}"{{ item }}",{% endfor %}],
+                        datasets: [{
+                            label: 'Exercise Breakdown',
+                            data: [{% for item in data %}{{ item }},{% endfor %}],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Exercise Breakdown',
+                                padding: 10,
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                console.error("Could not get context for chart");
+            }
+        });
+    </script>
+
+    <h2>Weekly Exercise Schedule</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Exercise Type</th>
+                <th>Duration (mins)</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for day in days_of_week %}
+            <tr>
+                <td>{{ day|date:"l, M d, 'y" }}</td>
+                {% if weekly_schedule_items|get_item:day %}
+                <td>
+                    {% for item in weekly_schedule_items|get_item:day %}
+                    <div>{{ item.get_exercise_type_display }}</div>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for item in weekly_schedule_items|get_item:day %}
+                    <div>{{ item.duration }}</div>
+                    {% endfor %}
+                </td>
+                <td>
+                </td>
+                {% else %}
+                <td>No Schedule</td>
+                <td>No Schedule</td>
+                <td>No Schedule</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
+
+
+
