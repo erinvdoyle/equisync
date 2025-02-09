@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Feeding Chart for {{ horse.name }}</h1>
+
+    <p><strong>Breakfast:</strong> {{ feeding_chart.get_breakfast_info }}</p>
+    <p><strong>Lunch:</strong> {{ feeding_chart.get_lunch_info }}</p>
+    <p><strong>Dinner:</strong> {{ feeding_chart.get_dinner_info }}</p>
+    <p><strong>Hay:</strong> {{ feeding_chart.get_hay_info }}</p>
+    <p><strong>Supplements:</strong> {{ feeding_chart.supplements }}</p>
+    <p><strong>Medicines:</strong> {{ feeding_chart.medicines }}</p>
+    <p><strong>Notes:</strong> {{ feeding_chart.notes }}</p>
+
+{% endblock %}
