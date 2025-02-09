@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Daily Exercise Schedule - {{ date }}</h1>
+
+    <h2>Schedule</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Horse</th>
+                <th>Exercise Type</th>
+                <th>Duration</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for schedule in schedules %}
+                <tr>
+                    <td>{{ schedule.horse.name }}</td>
+                    <td>{{ schedule.exercise_type }}</td>
+                    <td>{{ schedule.duration }}</td>
+                    <td>{{ schedule.notes }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No exercise schedules for this date.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

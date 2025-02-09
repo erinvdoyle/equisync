@@ -6,4 +6,4 @@ class ExerciseScheduleForm(forms.ModelForm):
 
     class Meta:
         model = ExerciseSchedule
-        fields = ['horse', 'date', 'exercise_type', 'duration', 'notes']
+        fields = ['horse', 'date', 'notes']
