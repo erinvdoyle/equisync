@@ -4,18 +4,12 @@
 {% block content %}
     <h1>Weekly Exercise Schedule - {{ start_week }} to {{ end_week }}</h1>
 
-    <form method="get">
-        <label for="date">Select Week:</label>
-        <input type="date" id="date" name="date">
-        <button type="submit">View</button>
-    </form>
-
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Horse</th>
                 {% for day in days_of_week %}
-                <th>{{ day|date:"l, M d, 'y" }}</th>
+                    <th>{{ day|date:"l, M d, 'y" }}</th>
                 {% endfor %}
             </tr>
         </thead>
@@ -42,4 +36,3 @@
         </tbody>
     </table>
 {% endblock %}
-
