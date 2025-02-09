@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Weekly Exercise Schedule - {{ start_week }} to {{ end_week }}</h1>
+
+    <form method="get">
+        <label for="date">Select Week:</label>
+        <input type="date" id="date" name="date">
+        <button type="submit">View</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Horse</th>
+                <th>Date</th>
+                <th>Exercise Type</th>
+                <th>Duration</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for schedule in schedules %}
+            <tr>
+                <td>{{ schedule.horse.name }}</td>
+                <td>{{ schedule.date }}</td>
+                <td>{{ schedule.exercise_type }}</td>
+                <td>{{ schedule.duration }}</td>
+                <td>{{ schedule.notes }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

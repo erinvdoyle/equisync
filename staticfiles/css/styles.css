@@ -1,0 +1,806 @@
+/* --- General Styles ------------------------------------------------------------------------------------------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    background-color: #f4f1eb;
+    color: #4a4a4a;
+}
+
+h1, h2 {
+    color: #6a3e26;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.section-wrapper {
+    background-color: #fff6e5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    width: 80%;
+}
+
+
+.section-header {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* --- Form Styles ----------------------------------------------------------------------------------------------------------------------- */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #4a4a4a;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d4d4d4;
+    border-radius: 6px;
+}
+
+form button {
+    background-color: #6a3e26;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #905133;
+}
+
+/* --- Ads and Announcement Sections ------------------------------------------------------------------------------------------------------ */
+/*--- Ad Section Toolbar--------------------------------------------------------------------------------------------------------------------*/
+
+.toolbar {
+    position: relative;
+    width: calc(100% + 40px); 
+    margin: -20px -20px 0 -20px; 
+    height: 60px; 
+    padding: 10px 20px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px 8px 0 0;  
+}
+
+.toolbar .section-header {
+    font-size: 1.25rem; 
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.toolbar-form form {
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        padding: 0;
+        gap: 4px;
+}
+
+.toolbar-form {
+    display: flex;
+    align-items: flex-start;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.search-container::after {
+    content: "\f002"; 
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 10px; 
+    color: #6a3e26;
+    pointer-events: none;
+}
+
+.search-field {
+    width: 85px !important;
+    height: 32px; 
+    padding: 5px 30px 5px 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #6a3e26;
+    font-weight: bold;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 15px !important;
+}
+
+.search-field::placeholder {
+    font-size: 14px;
+    color: #6a3e26);
+}
+
+.category-field {
+    appearance: none;
+    width: 85px;
+    height: 32px;
+    padding: 5px 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #6a3e26;
+    border-radius: 5px;
+    border: 1px solid white;
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+    font-weight: bold;
+    margin-top: 15px !important;
+    margin-left: 4px !important;
+}
+
+.category-field::after {
+    content: "\f0d7";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 10px; 
+    color: #999;
+    pointer-events: none;
+}
+
+.toolbar-form button {
+    background: linear-gradient(to right, #6a3e26, #905133, #f4a261);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.toolbar-form button:hover {
+    opacity: 0.8;
+}
+
+.post-ad-btn {
+    align-self: flex-start;
+    background-color: #905133;
+    color: white;
+    padding: 5px 15px;
+    margin-top: 14px;
+    margin-right: 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.post-ad-btn:hover {
+    background-color: #6a3e26; 
+}
+
+.short-text {
+    display: none;
+}
+
+/*--- Ads and Announcement Main Sections ----------------------------------------------------------------------------------------------------*/
+.ads-section,
+.announcements-section {
+    margin-top: 20px;
+}
+
+.ads-section div,
+.announcements-section div {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.ads-section div:last-child,
+.announcements-section div:last-child {
+    border-bottom: none;
+}
+
+.ads-section .row {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 15px;
+}
+
+.announcements-section .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.announcements-section h2,
+.ads-section h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #905133;
+}
+
+/* --- Card Styling ------------------------------------------------------------------------------------------------------------------------ */
+.ad-card, .announcement-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ad-card:hover, .announcement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ad-card img, .announcement-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+
+.ad-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+}
+
+.ad-label.for-sale {
+    background-color: green;
+}
+
+.ad-label.wanted {
+    background-color: red;
+}
+
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #6a3e26;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.card-btn {
+    margin-top: auto;
+    background-color: #6a3e26;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card-btn:hover {
+    background-color: #905133;
+}
+
+/* --- Modal Styling ------------------------------------------------------------------------------------------------------------- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    border: 2px solid brown;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header, .modal-body, .modal-footer {
+    margin-bottom: 10px;
+}
+
+.modal-header {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6a3e26;
+}
+
+.modal-body {
+    margin-top: -10px;
+}
+
+.modal-body img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-footer button {
+    background-color: #6a3e26;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-footer button:hover {
+    background-color: #905133;
+}
+
+.modal-body p {
+    text-align: left;
+}
+
+.modal-body li {
+    text-align: left;
+}
+
+.modal-1 {
+    color: #905133;
+    font-weight: bold;
+}
+
+.modal-2 {
+    color: #f4a261;
+    font-weight: bold;
+}
+
+.modal-3 {
+    color: rgb(31, 71, 72);
+    font-weight: bold;
+}
+
+.modal-4 {
+    color: #e66f00;
+    font-weight: bold;
+}
+
+.modal-5 {
+    color:rgb(129, 51, 51);
+    font-weight: bold;
+}
+
+/* --- Carousel ------------------------------------------------------------------------------------------------------------- */
+#homeCarousel {
+    width: 80%; 
+    max-width: 1440px; 
+    min-width: 320px; 
+    height: auto;
+    margin: 0 auto;
+    overflow: visible;
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+
+.carousel-inner {
+    display: block;
+}
+
+.carousel-item {
+    text-align: center;
+    width: 100%;
+}
+
+.carousel-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto; 
+}
+
+.carousel-caption {
+    margin-top: 15px;
+    position: relative;
+    /* bottom: 40px; */
+    left: 0;
+    /* transform: translateX(-50%); */
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel-caption p {
+    color: #4a4a4a;
+    font-size: 1rem;
+}
+
+.carousel-caption h5 {
+    color: #6a3e26;
+    font-size: 1.5rem;
+}
+
+.carousel-caption p,
+.carousel-caption h5 {
+    max-width: 100%;  
+}
+
+/* --- Controls ------------------------------------------------------------------------------------- */
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: 30%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    z-index: 31;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #6a3e26; 
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.carousel-control-prev {
+    left: -80px;
+}
+
+.carousel-control-next {
+    right: -80px;
+}
+
+
+
+/* --- Indicators ----------------------------------------------------------------------------------- */
+.carousel-indicators {
+    position: absolute;
+    bottom: -50px; 
+    left: 35%;
+    transform: translateX(-50%); 
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 7px;  
+}
+
+.carousel-indicators button {
+    background-color: #6a3e26; 
+    width: 20px;
+    height: 5px;
+    margin: 0 3.5px; 
+    transition: background-color 0.3s ease-in-out;
+}
+
+.carousel-indicators .active {
+    background-color: #905133; 
+}
+
+
+/* --- Collapse Section (For Read More) ------------------------------------------------------------------------------------------- */
+.announcement-collapse {
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-left: 3px solid #6a3e26;
+    border-radius: 5px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+}
+
+.announcement-collapse.show {
+    display: block;
+    opacity: 1;
+}
+
+/* --- Animation for Smooth Expanding --------------------------------------------------------------------------------------------- */
+.announcement-collapse.collapsing {
+    height: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease, height 0.3s ease-in-out;
+}
+
+/* --- Weekly Events Section ------------------------------------------------------------------------------------------------------------------*/
+.calendar-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendar-table th, .calendar-table td {
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.calendar-table th {
+    background-color: #6a3e26;
+    color: white;
+    font-weight: bold;
+}
+
+.event-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.event-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Gradient Navbar ---------------------------------------------------------------------------------------------------------------------- */
+.navbar-gradient {
+    background: linear-gradient(to right, #6a3e26, #905133, #f4a261); 
+    background-size: 200%; 
+    background-position: center;
+    color: white !important;
+    transition: background 0.5s ease-in-out;
+}
+
+.navbar-gradient .navbar-brand {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-gradient .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-gradient .nav-link {
+    color: white !important;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-gradient .nav-link:hover {
+    color: #f4a261 !important; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-gradient .navbar-text {
+    color: rgba(255, 255, 255, 0.9); 
+    font-style: italic;
+}
+
+/* --- Footer Styles ---------------------------------------------------------------------------------------------------------------------- */
+.footer {
+    background-color: #6a3e26; 
+    color: white;
+    padding: 15px 0;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.footer i {
+    font-size: 20px;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.footer i:hover {
+    color: #f4a261; 
+}
+
+/* --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
+a {
+    text-decoration: none;
+    color: #6a3e26;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #905133;
+}
+
+button.primary {
+    background-color: #f4a261; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.primary:hover {
+    background-color: #e66f00; 
+}
+
+/* --- Django Tables ---------------------------------------------------------------------------------------------------------------------- */
+
+/* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
+/* --- For Larger Screens (Desktops and Tablets) --------------------------*/
+@media (min-width: 768px) {
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form textarea {
+        width: 66.6666%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .calendar-table th, .calendar-table td {
+        width: 14%;
+    }
+    
+    .ads-section .row,
+    .announcements-section .row {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 15px; 
+    }
+
+    .ad-card, .announcement-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .ad-card img, .announcement-card img  {
+        max-height: 150px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .ads-section .row,
+    .announcements-section .row {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    .ad-card, .announcement-card {
+        margin-bottom: 15px;
+    }
+
+    .ad-card img, .announcement-card img  {
+        max-height: 150px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 480px) { 
+    #homeCarousel {
+        height: 250px; 
+    }
+    
+    .carousel-control-prev {
+        left: -15px;
+    }
+    
+    .carousel-control-next {
+        right: -15px;
+    }
+}
+
+@media (max-width: 576px) {
+     .row {
+        grid-template-columns: repeat(1, 1fr);
+    } 
+
+    .ad-card, .announcement-card {
+        margin-bottom: 15px;
+    }
+
+    .ad-card img, .announcement-card img {
+        max-height: 150px; 
+        object-fit: cover; 
+    }
+    
+    .ads-section .row,
+    .announcements-section .row {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+        max-height: 250px; 
+    }
+
+    #homeCarousel {
+        height: 300px;
+    }
+
+    .carousel-control-prev {
+        left: -30px;
+    }
+    .carousel-control-next {
+        right: -30px;
+    }
+
+    .search-field {
+        width: 35px !important; 
+        padding: 8px 10px; 
+        text-indent: -9999px; 
+    }
+
+    .search-container::after {
+        right: 12px; 
+        font-size: 16px; 
+    }
+
+    .search-field:focus {
+        width: 140px; 
+        font-size: 14px; 
+        text-align: left;
+    }
+
+    .category-field {
+        width: 55px;
+    }
+    
+    .full-text {
+        display: none;
+    }
+
+    .short-text {
+        display: inline;
+    }
+}
