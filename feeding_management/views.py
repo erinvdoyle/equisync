@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from horses.models import HorseProfile 
 from feeding_management.models import FeedingChart
 from .tables import FeedingChartTable
+from .models import FeedingChart
+from .forms import FeedingChartForm
+from django.contrib.admin.views.decorators import staff_member_required
 
 @login_required
 def horse_feeding_chart(request, horse_id):
