@@ -43,6 +43,17 @@ def all_horses_feeding(request):
     context = {'table': table}
     return render(request, 'feeding_management/all_horses_feeding.html', context)
 
+@login_required
+def horse_feeding_chart_readonly(request, horse_id):
+    horse = get_object_or_404(HorseProfile, pk=horse_id)
+    feeding_chart = get_object_or_404(FeedingChart, horse=horse)
+
+    context = {
+        'horse': horse,
+        'feeding_chart': feeding_chart,
+    }
+    return render(request, 'feeding_management/horse_feeding_chart_readonly.html', context)
+
 
 
 # @login_required
