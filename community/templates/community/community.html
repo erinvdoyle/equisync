@@ -20,20 +20,20 @@
         </h2>
         <div class="toolbar-form">
             {% if user.is_authenticated %}
-                <a href="{% url 'submit_ad' %}" class="post-ad-btn">
+                <a href="{% url 'community:submit_ad' %}" class="post-ad-btn">
                     <span class="full-text">Post Ad</span>
                     <span class="short-text">Post</span>
                 </a>
             {% endif %}
 <!-- Search Form -->
-<form method="GET" action="{% url 'community_overview' %}" class="search-form">
+<form method="GET" action="{% url 'community:community_overview' %}" class="search-form">
     <div class="search-container">
         <input type="text" name="search" class="search-field" placeholder="Search" value="{{ request.GET.search }}">
     </div>
 </form>
 
 <!-- Filter Form -->
-<form method="GET" action="{% url 'community_overview' %}" class="filter-form">
+<form method="GET" action="{% url 'community:community_overview' %}" class="filter-form">
     <input type="hidden" name="search" value="{{ request.GET.search }}">
     
     <!-- Filter -->

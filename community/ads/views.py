@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Ad
 from .forms import AdForm
+from django.urls import reverse
 
 
 # Create your views here.
@@ -31,7 +32,7 @@ def edit_ad(request, ad_id):
         form = AdForm(request.POST, request.FILES, instance=ad)
         if form.is_valid():
             form.save()
-            return redirect('community_overview')
+            return redirect(reverse('community:community_overview'))
     else:
         form = AdForm(instance=ad)
 
