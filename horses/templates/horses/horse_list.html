@@ -1,5 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+    <h1>Horses</h1>
 
+    <div class="horse-list">
+        {% for horse in horses %}
+            <div class="horse-item">
+                <a href="{% url 'horses:horse_profile' horse.id %}">
+                    {% if horse.image %}
+                        <img src="{{ horse.image.url }}" alt="{{ horse.name }}" style="max-width: 200px; max-height: 200px;">
+                    {% else %}
+                        <img src="{% static 'path/to/default_horse_image.jpg' %}" alt="Default Horse Image" style="max-width: 200px; max-height: 200px;">
+                    {% endif %}
+                    <h2>{{ horse.name }}</h2>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
