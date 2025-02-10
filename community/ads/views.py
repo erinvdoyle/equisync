@@ -38,3 +38,6 @@ def edit_ad(request, ad_id):
 
     return render(request, 'ads/edit_ad.html', {'form': form, 'ad': ad})
 
+def ad_detail(request, ad_id):
+    ad = get_object_or_404(Ad, pk=ad_id)
+    return render(request, 'ads/ad_detail.html', {'ad': ad})

@@ -5,6 +5,7 @@ from .models import Profile
 from .forms import ProfileForm
 from horses.models import HorseProfile
 from feeding_management.models import FeedingChart
+from exercise_schedule.models import ExerciseSchedule
 from community.ads.models import Ad
 from community.announcements.models import Announcement
 
@@ -46,6 +47,7 @@ def dashboard(request):
     profile = Profile.objects.filter(user=user).first()
     horses = HorseProfile.objects.filter(owner=user)
     feeding_charts = FeedingChart.objects.filter(horse__owner=user)
+    exercise_schedules = ExerciseSchedule.objects.filter(horse__owner=user)
     ads = Ad.objects.filter(user=user)
     announcements = Announcement.objects.filter(user=user)
 
@@ -54,6 +56,7 @@ def dashboard(request):
         'profile': profile,
         'horses': horses,
         'feeding_charts': feeding_charts,
+        'exercise_schedules': exercise_schedules,
         'ads': ads,
         'announcements': announcements,
     }

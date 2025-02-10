@@ -5,8 +5,8 @@
 
     {% if profile %}
         <h2>Your Profile</h2>
-        <p>Bio: {{ profile.bio }}</p>
-        {# Display other profile information #}
+        <a href="{% url 'users:view_profile' %}">View</a>
+
     {% endif %}
 
     <h2>Your Horses</h2>
@@ -31,26 +31,49 @@
         <p>No feeding schedules found.</p>
     {% endif %}
 
-    <h2>Your Ads</h2>
-    {% if ads %}
+    <h2>Exercise Schedules</h2>
+    {% if exercise_schedules %}
         <ul>
-            {% for ad in ads %}
-                <li>{{ ad.title }} - <a href="{% url 'community:edit_ad' ad.id %}">Edit</a></li>
+            {% for schedule in exercise_schedules %}
+                <li>
+                    <a href="{% url 'exercise_schedule:horse_exercise_schedule' schedule.horse.id %}">
+                    Exercise Schedule for {{ schedule.horse.name }}
+                    </a>
+                </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No ads found.</p>
+        <p>No exercise schedules found.</p>
     {% endif %}
 
-    <h2>Your Announcements</h2>
-    {% if announcements %}
-        <ul>
-            {% for announcement in announcements %}
-                <li>{{ announcement.title }} - <a href="{% url 'community:edit_announcement' announcement.id %}">Edit</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No announcements found.</p>
-    {% endif %}
+    <h2>Your Ads</h2>
+{% if ads %}
+    <ul>
+        {% for ad in ads %}
+            <li>
+              <a href="{% url 'community:ad_detail' ad.id %}">
+                {{ ad.get_ad_type_display }} - {{ ad.description|truncatechars:50 }} ({{ ad.date_posted|date:"Y-m-d" }})
+              </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No ads found.</p>
+{% endif %}
+
+<h2>Your Announcements</h2>
+{% if announcements %}
+    <ul>
+        {% for announcement in announcements %}
+            <li>
+              <a href="{% url 'community:announcement_detail' announcement.id %}">
+                {{ announcement.description|truncatechars:50 }} ({{ announcement.date_posted|date:"Y-m-d" }})
+              </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No announcements found.</p>
+{% endif %}
 
 {% endblock %}

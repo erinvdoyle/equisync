@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Announcement
 from .forms import AnnouncementForm
@@ -38,3 +38,7 @@ def community_overview(request):
         'ads': ads,
         'announcements': announcements,
     })
+
+def announcement_detail(request, announcement_id):
+    announcement = get_object_or_404(Announcement, pk=announcement_id)
+    return render(request, 'announcements/announcement_detail.html', {'announcement': announcement})

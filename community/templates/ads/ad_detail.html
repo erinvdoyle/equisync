@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Ad Detail</h1>
+  <h2>{{ ad.get_ad_type_display }}</h2>
+  <p><strong>Title:</strong> {{ ad.title }}</p>
+  <p><strong>Description:</strong> {{ ad.description }}</p>
+  <p><strong>Price:</strong> {{ ad.price }}</p>
+  <p><strong>Contact:</strong> {{ ad.contact_information }}</p>
+  <p><strong>Posted Date:</strong> {{ ad.date_posted }}</p>
+
+  {% if ad.image %}
+    <img src="{{ ad.image.url }}" alt="Ad Image">
+  {% endif %}
+{% endblock %}
