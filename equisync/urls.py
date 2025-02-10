@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from community.ads.views import submit_ad, edit_ad
-from community.announcements.views import submit_announcement, edit_announcement
-from community.views import community_overview
+# from community.ads.views import submit_ad, edit_ad
+# from community.announcements.views import submit_announcement, edit_announcement
+# from community.views import community_overview
 from users import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -30,11 +30,12 @@ urlpatterns = [
     path('profile/', views.view_profile, name='view_profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('', include('users.urls')),
-    path('community/', community_overview, name='community_overview'),
-    path('community/submit_ad/', submit_ad, name='submit_ad'),
-    path('community/edit_ad/<int:ad_id>/', edit_ad, name='edit_ad'),
-    path('community/submit_announcement/', submit_announcement, name='submit_announcement'),
-    path('community/edit_announcement/<int:announcement_id>/', edit_announcement, name='edit_announcement'),
+    path('community/', include('community.urls', namespace='community')),
+    # path('community/', community_overview, name='community_overview'),
+    # path('community/submit_ad/', submit_ad, name='submit_ad'),
+    # path('community/edit_ad/<int:ad_id>/', edit_ad, name='edit_ad'),
+    # path('community/submit_announcement/', submit_announcement, name='submit_announcement'),
+    # path('community/edit_announcement/<int:announcement_id>/', edit_announcement, name='edit_announcement'),
     path('horses/', include('horses.urls')),
     path('delete/<int:horse_id>/', horses_views.delete_horse, name='delete_horse'),
     path('feeding/', include('feeding_management.urls')),

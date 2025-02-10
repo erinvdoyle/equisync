@@ -32,43 +32,53 @@
 <body class="d-flex flex-column h-100 main-bg">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-gradient">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ home_url }}">EquiSync</span></span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
-                            href="{{ home_url }}">Home</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == community_url %}active{% endif %}" aria-current="page"
-                            href="{{ community_url }}">Community</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'account_signup' %}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <span class="navbar-text text-muted">
-                    your stable management system
-                </span>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-gradient">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">EquiSync</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page"
+                        href="{% url 'home' %}">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'horse_list' %}">Horses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'exercise_schedule:weekly_schedule_view' %}">Exercise</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'feeding_management:all_horses_feeding' %}">Feed</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'community:community_overview' %}">Community</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+            <span class="navbar-text text-muted">
+                your stable management system
+            </span>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <main class="flex-shrink-0 main-bg">
 

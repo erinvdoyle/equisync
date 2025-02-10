@@ -10,10 +10,11 @@
     <img src="{{ ad.image.url }}" alt="Ad Image" />
 {% endif %}
     
-<form method="post" action="{% url 'submit_ad' %}">
+<form method="post" action="{% url 'community:submit_ad' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit Ad</button>
-    <a href="{% url 'edit_ad' ad.id %}">Edit Ad</a>
-    <a href="{% url 'community_overview' %}">Cancel</a>
+    <a href="{% url 'community:edit_ad' ad.id %}">Edit Ad</a>
+    <a href="{% url 'community:community_overview' %}">Cancel</a>
+</form>
 {% endblock %}
