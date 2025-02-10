@@ -27,9 +27,10 @@ from horses import views as horses_views
 urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
     path('profile/', views.view_profile, name='view_profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
-    path('', include('users.urls')),
+    # path('', include('users.urls')),
     path('community/', include('community.urls', namespace='community')),
     # path('community/', community_overview, name='community_overview'),
     # path('community/submit_ad/', submit_ad, name='submit_ad'),
@@ -40,7 +41,6 @@ urlpatterns = [
     path('delete/<int:horse_id>/', horses_views.delete_horse, name='delete_horse'),
     path('feeding/', include('feeding_management.urls')),
     path('exercise_schedule/', include('exercise_schedule.urls')),
-    path('users/', include('users.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 
 if settings.DEBUG:
