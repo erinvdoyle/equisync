@@ -12,7 +12,7 @@
     <p>Last ridden by: {{ horse.most_recent_ride.name }}</p>
     <p>Last cared for by: {{ horse.most_recent_staff.name }}</p>
     <p>Feeding Chart: <a href="{% url 'feeding_management:horse_feeding_chart_readonly' horse.id %}">View</a></p>
-    <p>Exercise Schedule: <a href="{% url 'horse_exercise_schedule' horse.id %}">View</a></p>
+    <p>Exercise Schedule: <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}">View</a></p>
     
     {% if horse.image %}
         <img src="{{ horse.image.url }}" alt="Horse Image">
