@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Welcome, {{ user.username }}!</h1>
+
+    {% if profile %}
+        <h2>Your Profile</h2>
+        <p>Bio: {{ profile.bio }}</p>
+        {# Display other profile information #}
+    {% endif %}
+
+    <h2>Your Horses</h2>
+    {% if horses %}
+        <ul>
+            {% for horse in horses %}
+                <li><a href="{% url 'horses:horse_profile' horse.id %}">{{ horse.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You don't have any horses yet.</p>
+    {% endif %}
+
+    <h2>Feeding Schedules</h2>
+    {% if feeding_charts %}
+        <ul>
+            {% for chart in feeding_charts %}
+                <li><a href="{% url 'feeding_management:horse_feeding_chart_readonly' chart.horse.id %}">{{ chart.horse.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No feeding schedules found.</p>
+    {% endif %}
+
+    <h2>Your Ads</h2>
+    {% if ads %}
+        <ul>
+            {% for ad in ads %}
+                <li>{{ ad.title }} - <a href="{% url 'community:edit_ad' ad.id %}">Edit</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No ads found.</p>
+    {% endif %}
+
+    <h2>Your Announcements</h2>
+    {% if announcements %}
+        <ul>
+            {% for announcement in announcements %}
+                <li>{{ announcement.title }} - <a href="{% url 'community:edit_announcement' announcement.id %}">Edit</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No announcements found.</p>
+    {% endif %}
+
+{% endblock %}
