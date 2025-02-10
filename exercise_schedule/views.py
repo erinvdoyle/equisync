@@ -35,10 +35,11 @@ def weekly_schedule_view(request, date=None):
     else:
         template = 'exercise_schedule/weekly_schedule_readonly.html'
 
-    if date is None:
-        date = datetime.date.today()
+    date_str = request.GET.get('date')
+    if date_str:
+        date = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
     else:
-        date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
+        date = datetime.date.today()
 
     start_week = date - datetime.timedelta(days=date.weekday())
     end_week = start_week + datetime.timedelta(days=6)
