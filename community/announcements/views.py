@@ -43,11 +43,25 @@ def community_overview(request):
         'announcements': announcements,
     })
 
+@login_required
 def announcement_detail(request, announcement_id):
     announcement = get_object_or_404(Announcement, pk=announcement_id)
     content_type = ContentType.objects.get_for_model(Announcement)
     comments = Comment.objects.filter(content_type=content_type, object_id=announcement_id).order_by('-created_at')
-    form = CommentForm()
+    # form = CommentForm()
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.content_type = content_type
+            comment.object_id = announcement_id
+            comment.user = request.user
+            comment.content_object = announcement
+            comment.save()
+            return redirect('community:announcement_detail', announcement_id=announcement_id)
+    else:
+        form = CommentForm()
 
     return render(request, 'announcements/announcement_detail.html', {
         'announcement': announcement,
