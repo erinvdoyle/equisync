@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Add Comment</h2>
+
+    <p>Commenting on: {{ object }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Comment</button>
+    </form>
+
+    <a href="{% url 'community:community_overview' %}">Cancel</a>
+{% endblock %}

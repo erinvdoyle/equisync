@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Announcement(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -11,6 +12,9 @@ class Announcement(models.Model):
 
     def __str__(self):
         return f"Announcement by {self.user.username} on {self.date_posted}"
+    
+    def get_absolute_url(self):
+        return reverse('community:announcement_detail', kwargs={'announcement_id': self.pk})
 
 class Reaction(models.Model):
     EMOJI_CHOICES = [

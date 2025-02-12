@@ -5,4 +5,16 @@
   <h2>{{ announcement.title }}</h2>
   <p><strong>Description:</strong> {{ announcement.description }}</p>
   <p><strong>Posted Date:</strong> {{ announcement.date_posted }}</p>
+
+  <h2>Comments</h2>
+  {% for comment in comments %}
+    <p>{{ comment.user }}: {{ comment.text }}</p>
+  {% endfor %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Comment</button>
+  </form>
+
 {% endblock %}

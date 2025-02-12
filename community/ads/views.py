@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Ad
 from .forms import AdForm
 from django.urls import reverse
+from community.forms import CommentForm
+from django.contrib.contenttypes.models import ContentType
+from community.models import Comment
 
 
 # Create your views here.
@@ -40,4 +43,13 @@ def edit_ad(request, ad_id):
 
 def ad_detail(request, ad_id):
     ad = get_object_or_404(Ad, pk=ad_id)
-    return render(request, 'ads/ad_detail.html', {'ad': ad})
+    content_type = ContentType.objects.get_for_model(Ad)
+    comments = Comment.objects.filter(content_type=content_type, object_id=ad_id).order_by('-created_at')
+    form = CommentForm()
+
+    return render(request, 'ads/ad_detail.html', {
+        'ad': ad,
+        'comments': comments,
+        'form': form,
+        'content_type':content_type,
+    })

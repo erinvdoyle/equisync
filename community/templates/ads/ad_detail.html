@@ -9,7 +9,19 @@
   <p><strong>Contact:</strong> {{ ad.contact_information }}</p>
   <p><strong>Posted Date:</strong> {{ ad.date_posted }}</p>
 
+  <h2>Comments</h2>
+  {% for comment in comments %}
+    <p>{{ comment.user }}: {{ comment.text }}</p>
+  {% endfor %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Comment</button>
+  </form>
+
   {% if ad.image %}
     <img src="{{ ad.image.url }}" alt="Ad Image">
   {% endif %}
+  
 {% endblock %}

@@ -61,7 +61,7 @@
         <div class="row">
             {% for ad in page_obj %}
             <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <div class="ad-card">
+                <div class="ad-card" data-announcement-id="{{ ad.id }}">
                     {% if ad.image %}
                     <img src="{{ ad.image.url }}" class="card-img-top" alt="{{ ad.description }}">
                     {% else %}
@@ -91,6 +91,7 @@
                         </button>
                         {% endif %}
                     </div>
+                    <a href="{% url 'community:add_comment' content_type_id=content_type_ad.id object_id=ad.id %}">Add Comment</a>
                 </div>
             </div>
             {% empty %}
@@ -191,6 +192,7 @@
                         </div>
                     </div>
                 </div>
+                <a href="{% url 'community:add_comment' content_type_id=content_type_announcement.id object_id=announcement.id %}">Add Comment</a>
             </div>
             {% endfor %}
         </div>
