@@ -23,5 +23,7 @@
   {% if ad.image %}
     <img src="{{ ad.image.url }}" alt="Ad Image">
   {% endif %}
+
+  <a href="{% url 'community:community_overview' %}">Back to Community</a>
   
 {% endblock %}

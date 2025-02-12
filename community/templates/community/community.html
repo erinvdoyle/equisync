@@ -91,7 +91,9 @@
                         </button>
                         {% endif %}
                     </div>
-                    <a href="{% url 'community:add_comment' content_type_id=content_type_ad.id object_id=ad.id %}">Add Comment</a>
+                    <a href="{% url 'community:ad_detail' ad_id=ad.id %}">
+                        Comments ({{ ad_comment_counts|get_item:ad.id }})
+                    </a>
                 </div>
             </div>
             {% empty %}
@@ -192,7 +194,9 @@
                         </div>
                     </div>
                 </div>
-                <a href="{% url 'community:add_comment' content_type_id=content_type_announcement.id object_id=announcement.id %}">Add Comment</a>
+                <a href="{% url 'community:announcement_detail' announcement_id=announcement.id %}">
+                    Comments ({{ announcement_comment_counts|get_item:announcement.id }})
+                </a>
             </div>
             {% endfor %}
         </div>

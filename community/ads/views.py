@@ -41,15 +41,29 @@ def edit_ad(request, ad_id):
 
     return render(request, 'ads/edit_ad.html', {'form': form, 'ad': ad})
 
+@login_required
 def ad_detail(request, ad_id):
     ad = get_object_or_404(Ad, pk=ad_id)
     content_type = ContentType.objects.get_for_model(Ad)
     comments = Comment.objects.filter(content_type=content_type, object_id=ad_id).order_by('-created_at')
     form = CommentForm()
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.content_type = content_type
+            comment.object_id = ad_id
+            comment.user = request.user
+            comment.content_object = ad
+            comment.save()
+            return redirect('community:ad_detail', ad_id=ad_id)
+    else:
+        form = CommentForm()
 
     return render(request, 'ads/ad_detail.html', {
         'ad': ad,
         'comments': comments,
         'form': form,
-        'content_type':content_type,
+        'content_type': content_type,
     })

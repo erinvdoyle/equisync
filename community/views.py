@@ -36,6 +36,16 @@ def community_overview(request):
             
     content_type_ad = ContentType.objects.get_for_model(Ad)
     content_type_announcement = ContentType.objects.get_for_model(Announcement)
+    
+    ad_comment_counts = {}
+    for ad in ads:
+        content_type = ContentType.objects.get_for_model(Ad)
+        ad_comment_counts[ad.id] = Comment.objects.filter(content_type=content_type, object_id=ad.id).count()
+
+    announcement_comment_counts = {}
+    for announcement in announcements:
+        content_type = ContentType.objects.get_for_model(Announcement)
+        announcement_comment_counts[announcement.id] = Comment.objects.filter(content_type=content_type, object_id=announcement.id).count()
 
     return render(request, 'community/community.html', {
         "filter": ad_filter,
@@ -44,7 +54,10 @@ def community_overview(request):
         'most_clicked_emojis': most_clicked_emojis,
         'user_reactions': user_reactions,
         'content_type_ad': content_type_ad,
-        'content_type_announcement': content_type_announcement, 
+        'content_type_announcement': content_type_announcement,
+        'ad_comment_counts': ad_comment_counts,
+        'announcement_comment_counts': announcement_comment_counts,
+        
     })
     
 @login_required
