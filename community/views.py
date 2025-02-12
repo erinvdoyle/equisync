@@ -56,8 +56,7 @@ def community_overview(request):
         'content_type_ad': content_type_ad,
         'content_type_announcement': content_type_announcement,
         'ad_comment_counts': ad_comment_counts,
-        'announcement_comment_counts': announcement_comment_counts,
-        
+        'announcement_comment_counts': announcement_comment_counts,       
     })
     
 @login_required
@@ -81,3 +80,25 @@ def add_comment(request, content_type_id, object_id):
         form = CommentForm()
 
     return render(request, 'community/add_comment.html', {'form': form, 'object': obj})
+
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id, user=request.user)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect(comment.content_object.get_absolute_url())
+    else:
+        form = CommentForm(instance=comment)
+
+    return render(request, 'community/edit_comment.html', {'form': form, 'comment': comment})
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id, user=request.user)
+    content_object_url = comment.content_object.get_absolute_url()  # Store URL before deleting
+
+    comment.delete()
+    return redirect(content_object_url)
