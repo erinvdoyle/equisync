@@ -5,6 +5,7 @@ from .announcements.views import submit_announcement, edit_announcement
 from .views import community_overview
 from .ads import views as ads_views
 from .announcements import views as announcement_views
+from . import views_reactions
 
 # from django.conf import settings
 # from django.conf.urls.static import static  
@@ -22,6 +23,7 @@ urlpatterns = [
         path('edit/<int:announcement_id>/', announcement_views.edit_announcement, name='edit_announcement'),
         path('<int:announcement_id>/', announcement_views.announcement_detail, name='announcement_detail'),
     ])),
+    path('react/', views_reactions.react_to_announcement, name='react_to_announcement'),
     path('', views.community_overview, name='community_overview'),
 ]
 

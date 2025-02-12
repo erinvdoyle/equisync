@@ -415,6 +415,29 @@ form button:hover {
     font-weight: bold;
 }
 
+/* --- Emoji ---------------------------------------------------------------------------------------------------------------- */
+.emoji-btn {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: black;
+}
+
+.emoji-btn:hover {
+    background-color: #ddd;
+}
+
+.emoji-btn.active {
+    background-color: #32bacf;
+    color: white;
+}
+
+.emoji-btn:focus {
+    outline: none;
+}
+
+
 /* --- Carousel ------------------------------------------------------------------------------------------------------------- */
 #homeCarousel {
     width: 80%; 
