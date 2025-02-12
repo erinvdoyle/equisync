@@ -11,8 +11,17 @@
 
   <h2>Comments</h2>
   {% for comment in comments %}
-    <p>{{ comment.user }}: {{ comment.text }}</p>
-  {% endfor %}
+    <p>
+        {{ comment.text }}<br>
+        Posted by: <a href="mailto:{{ comment.user.email }}">{{ comment.user.username }}</a> at {{ comment.created_at|date:"M. d, Y, g:i a" }}
+        {% if comment.user == request.user %}
+            | <a href="{% url 'community:edit_comment' comment_id=comment.id %}">Edit</a>
+            | <a href="{% url 'community:delete_comment' comment_id=comment.id %}">Delete</a>
+        {% else %}
+            | <a href="{% url 'community:add_comment' content_type_id=content_type.id object_id=ad.id %}">Add Comment</a>
+        {% endif %}
+    </p>
+{% endfor %}
 
   <form method="post">
     {% csrf_token %}

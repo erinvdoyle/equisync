@@ -26,6 +26,8 @@ urlpatterns = [
     path('react/', views_reactions.react_to_announcement, name='react_to_announcement'),
     path('', views.community_overview, name='community_overview'),
     path('comment/add/<int:content_type_id>/<int:object_id>/', views.add_comment, name='add_comment'),
+    path('comment/edit/<int:comment_id>/', views.edit_comment, name='edit_comment'),
+    path('comment/delete/<int:comment_id>/', views.delete_comment, name='delete_comment'),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
