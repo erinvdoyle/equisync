@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Announcement, Reaction
 from .forms import AnnouncementForm
+from community.forms import CommentForm
+from django.contrib.contenttypes.models import ContentType
+from community.models import Comment
+
 
 @login_required
 def submit_announcement(request):
@@ -41,4 +45,13 @@ def community_overview(request):
 
 def announcement_detail(request, announcement_id):
     announcement = get_object_or_404(Announcement, pk=announcement_id)
-    return render(request, 'announcements/announcement_detail.html', {'announcement': announcement})
+    content_type = ContentType.objects.get_for_model(Announcement)
+    comments = Comment.objects.filter(content_type=content_type, object_id=announcement_id).order_by('-created_at')
+    form = CommentForm()
+
+    return render(request, 'announcements/announcement_detail.html', {
+        'announcement': announcement,
+        'comments': comments,
+        'form': form,
+        'content_type': content_type,
+    })
