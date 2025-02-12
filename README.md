@@ -324,4 +324,9 @@ The UI for this project was planned with Balsamiq Wireframes
 [Using hasattr()](https://hinty.io/ivictbor/create-user-profiles-in-django-if-they-does-not-exist/)  
 [Using Signals](https://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/)  
 [Adding model permission using Django Groups](https://stackoverflow.com/questions/8898724/django-admin-giving-staff-members-access-to-certain-areas-by-default/8900247)  
-[Building an Online Marketplace](https://www.youtube.com/watch?v=ZxMB6Njs3ck)  
+[Building an Online Marketplace](https://www.youtube.com/watch?v=ZxMB6Njs3ck)
+[Django Models: Basics and Best Practices](https://dev.to/pragativerma18/django-models-basics-and-best-practices-49e4)
+[Creating Custom Template Tags and Filters](https://django.readthedocs.io/en/stable/howto/custom-template-tags.html)
+[Understanding and Implementing Custom Template Tags](https://dev.to/3bdelrahman/understanding-and-implementing-custom-template-tags-in-django-5cao)  
+[Making Emojis Clickable](https://laracasts.com/discuss/channels/javascript/make-emojis-clickable-and-display-the-click-count?reply=932315)
+
