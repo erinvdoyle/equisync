@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid section-wrapper my-4">
+    <h2 class="section-header">Create New Event</h2>
+    <form method="post" action="{% url 'community:create_event' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Event Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="time" class="form-label">Time (optional)</label>
+            <input type="time" class="form-control" id="time" name="time">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Event</button>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info mt-3">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

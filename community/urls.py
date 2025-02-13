@@ -2,7 +2,7 @@ from django.urls import path, include
 from . import views
 from .ads.views import submit_ad, edit_ad
 from .announcements.views import submit_announcement, edit_announcement  
-from .views import community_overview
+from .views import community_overview, create_event
 from .ads import views as ads_views
 from .announcements import views as announcement_views
 from . import views_reactions
@@ -28,6 +28,9 @@ urlpatterns = [
     path('comment/add/<int:content_type_id>/<int:object_id>/', views.add_comment, name='add_comment'),
     path('comment/edit/<int:comment_id>/', views.edit_comment, name='edit_comment'),
     path('comment/delete/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+    path('create/', create_event, name='create_event'),
+    path('this-week/', views.this_weeks_events, name='this_week_events'),
+    path('event/<int:event_id>/', views.event_detail, name='event_detail'),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

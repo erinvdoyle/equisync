@@ -9,8 +9,10 @@ from django.db.models import Count, OuterRef, Exists, BooleanField
 from django.db.models import Case, When
 from django.db import connection
 from django.contrib.contenttypes.models import ContentType
-from .models import Comment
+from .models import Comment, CommunityEvent
 from .forms import CommentForm
+from django.utils import timezone
+from django.http import HttpResponse
 
 
 def community_overview(request):
@@ -46,6 +48,12 @@ def community_overview(request):
     for announcement in announcements:
         content_type = ContentType.objects.get_for_model(Announcement)
         announcement_comment_counts[announcement.id] = Comment.objects.filter(content_type=content_type, object_id=announcement.id).count()
+        
+    today = timezone.now().date()
+    start_of_week = today - timezone.timedelta(days=today.weekday())
+    end_of_week = start_of_week + timezone.timedelta(days=6)
+    community_events = CommunityEvent.objects.filter(date__range=[start_of_week, end_of_week], approved=True)
+    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
     return render(request, 'community/community.html', {
         "filter": ad_filter,
@@ -56,7 +64,9 @@ def community_overview(request):
         'content_type_ad': content_type_ad,
         'content_type_announcement': content_type_announcement,
         'ad_comment_counts': ad_comment_counts,
-        'announcement_comment_counts': announcement_comment_counts,       
+        'announcement_comment_counts': announcement_comment_counts,
+        'community_events': community_events,
+        'days_of_week': days_of_week,       
     })
     
 @login_required
@@ -98,7 +108,45 @@ def edit_comment(request, comment_id):
 @login_required
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id, user=request.user)
-    content_object_url = comment.content_object.get_absolute_url()  # Store URL before deleting
+    content_object_url = comment.content_object.get_absolute_url()
 
     comment.delete()
     return redirect(content_object_url)
+
+def this_weeks_events(request):
+    today = timezone.now().date()
+    start_of_week = today - timezone.timedelta(days=today.weekday())
+    end_of_week = start_of_week + timezone.timedelta(days=6)
+    
+    community_events = CommunityEvent.objects.filter(date__range=[start_of_week, end_of_week], approved=True)
+    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+
+    return render(request, 'community/this_weeks_events.html', {
+        'community_events': community_events,
+        'days_of_week': days_of_week,
+    })
+
+
+@login_required
+def create_event(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+
+        event = CommunityEvent.objects.create(
+            title=title,
+            description=description,
+            date=date,
+            time=time if time else None,
+            created_by=request.user
+        )
+        return redirect('community:community_overview')
+    else:
+        return render(request, 'community/create_event.html')
+    
+def event_detail(request, event_id):
+    event = get_object_or_404(CommunityEvent, pk=event_id)
+    return render(request, 'community/event_detail.html', {'event': event})
