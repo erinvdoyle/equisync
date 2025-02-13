@@ -2,6 +2,59 @@ document.addEventListener('DOMContentLoaded', function() {
     const emojiButtons = document.querySelectorAll('.emoji-btn');
     const emojiClickCounts = JSON.parse(localStorage.getItem('emojiClickCounts')) || {};
 
+    // Function to update most clicked emoji on page load
+    function updateMostClickedEmojiOnLoad(announcementId) {
+        const mostClickedDiv = document.querySelector(`.announcement-card[data-announcement-id="${announcementId}"] .most-clicked`);
+        if (mostClickedDiv) {
+            let maxCount = 0;
+            let mostClickedEmoji = null;
+
+            // Calculate most clicked emoji from local storage
+            for (const [emoji, count] of Object.entries(emojiClickCounts)) {
+                if (count > maxCount) {
+                    maxCount = count;
+                    mostClickedEmoji = emoji;
+                }
+            }
+
+            // Display result
+            if (mostClickedEmoji) {
+                mostClickedDiv.textContent = `Most Reacted: ${mostClickedEmoji}`;
+            } else {
+                mostClickedDiv.textContent = 'No reactions yet.';
+            }
+        }
+    }
+
+    // Function to update most clicked emoji after a reaction
+    function updateMostClickedEmoji(announcementId) {
+        const mostClickedDiv = document.querySelector(`.announcement-card[data-announcement-id="${announcementId}"] .most-clicked`);
+        // Logic to calculate and display the most clicked emoji can be similar to above or adapted as needed.
+        let maxCount = 0;
+        let mostClickedEmoji = null;
+
+        for (const [emoji, count] of Object.entries(emojiClickCounts)) {
+            if (count > maxCount) {
+                maxCount = count;
+                mostClickedEmoji = emoji;
+            }
+        }
+
+        if (mostClickedDiv) {
+            if (mostClickedEmoji) {
+                mostClickedDiv.textContent = `Most Reacted: ${mostClickedEmoji}`;
+            } else {
+                mostClickedDiv.textContent = 'No reactions yet.';
+            }
+        }
+    }
+
+    // Call this function for each announcement card on page load
+    document.querySelectorAll('.announcement-card').forEach(card => {
+        const announcementId = card.dataset.announcementId;
+        updateMostClickedEmojiOnLoad(announcementId);
+    });
+
     emojiButtons.forEach(button => {
         button.addEventListener('click', function() {
             console.log('Emoji button clicked!');
@@ -40,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     return; 
                 }
 
-                // Update most clicked emoji based on local storage counts
+                // Update most clicked emoji after reaction
                 updateMostClickedEmoji(announcementId);
             })
             .catch(error => {
@@ -48,29 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-
-    function updateMostClickedEmoji(announcementId) {
-        // Find the most clicked emoji
-        let maxCount = 0;
-        let mostClickedEmoji = null;
-
-        for (const [emoji, count] of Object.entries(emojiClickCounts)) {
-            if (count > maxCount) {
-                maxCount = count;
-                mostClickedEmoji = emoji;
-            }
-        }
-
-        // Update the display
-        const mostClickedDiv = document.querySelector(`.announcement-card[data-announcement-id="${announcementId}"] .most-clicked`);
-        if (mostClickedDiv) {
-            if (mostClickedEmoji) {
-                mostClickedDiv.textContent = `Most Reacted: ${mostClickedEmoji}`;
-            } else {
-                mostClickedDiv.textContent = 'No reactions yet.';
-            }
-        }
-    }
 
     function getCookie(name) {
         let cookieValue = null;
@@ -88,3 +118,4 @@ document.addEventListener('DOMContentLoaded', function() {
         return cookieValue;
     }
 });
+
