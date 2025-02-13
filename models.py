@@ -131,6 +131,19 @@ class CommunityAnnouncement(models.Model):
         db_table = 'community_announcement'
 
 
+class CommunityComment(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    object_id = models.IntegerField()
+    text = models.TextField()
+    created_at = models.DateTimeField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'community_comment'
+
+
 class CommunityReaction(models.Model):
     id = models.BigAutoField(primary_key=True)
     emoji = models.CharField(max_length=2)
