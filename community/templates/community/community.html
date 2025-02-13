@@ -209,32 +209,34 @@
 <!-- Weekly Events Section -->
 <div class="container-fluid section-wrapper my-4">
     <h2 class="section-header">This Week's Events</h2>
+    <a href="{% url 'community:create_event' %}" class="btn btn-primary">Create New Event</a>
     <div class="calendar-section">
         <table class="table table-bordered text-center calendar-table">
             <thead>
                 <tr>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
+                    {% for day in days_of_week %}
+                        <th>{{ day }}</th>
+                    {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><a href="#" class="event-link">Horse Training</a></td>
-                    <td><a href="#" class="event-link"></a></td>
-                    <td><a href="#" class="event-link"></a></td>
-                    <td><a href="#" class="event-link"></a></td>
-                    <td><a href="#" class="event-link"></a></td>
-                    <td><a href="#" class="event-link"></a></td>
-                    <td><a href="#" class="event-link"></a></td>
+                    {% for day in days_of_week %}
+                        <td>
+                            {% with current_day=day %}
+                                {% for event in community_events %}
+                                    {% if event.date|date:"l" == current_day %}
+                                        <a href="{% url 'community:event_detail' event.id %}" class="event-link">{{ event.title }}</a><br>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        </td>
+                    {% endfor %}
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ event.title }}</h1>
+    <p>{{ event.description }}</p>
+    <p>Date: {{ event.date }}</p>
+    {% if event.time %}
+        <p>Time: {{ event.time }}</p>
+    {% endif %}
+</div>
+{% endblock %}
