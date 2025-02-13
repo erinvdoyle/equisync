@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load reaction_tags %}
-
+{% load dict_filters %}
 
 {% block content %}
 <!-- Stable Community Page -->
@@ -156,36 +156,39 @@
             <div class="col-lg-4 col-md-6 col-12 mb-4">
                 <div class="announcement-card" data-announcement-id="{{ announcement.id }}">
                     <div class="p-3">            
-                            <h5 class="card-title">{{ announcement.title|title }}</h5>
+                        <h5 class="card-title">{{ announcement.title|title }}</h5>
                         <p class="card-text">{{ announcement.description|truncatechars:100 }}</p>
-                        
-                        <!-- Most Clicked Emoji -->
-                        {% if most_clicked_emojis|get_item:announcement.id %}
-                            <div class="most-clicked" style="text-align: right;">
-                                Most Reacted: {{ most_clicked_emojis|get_item:announcement.id }}
-                            </div>
-                        {% endif %}
-
-                        <!-- Emoji Reactions -->
-                        <div class="emoji-reactions">
-                            {% with reactions='👍 ❤️ 😂 😮 😢 😡' %}
-                                {% for emoji in reactions.split %}
-                                    <button class="emoji-btn {% if emoji in user_reactions.announcement.id %}active{% endif %}"
-                                            data-announcement-id="{{ announcement.id }}"
-                                            data-emoji="{{ emoji }}">
-                                        {{ emoji }}
-                                    </button>
-                                {% endfor %}
-                            {% endwith %}
-                        </div>
-
-                        <button
-                            class="card-btn"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#announcement{{ forloop.counter }}"
-                        >
-                            Read More
-                        </button>
+                  
+                                   <!-- Most Clicked Emoji -->
+                                    <div class="most-clicked" style="text-align: right;">
+                                        {% if most_clicked_emojis and announcement.id in most_clicked_emojis %}
+                                            Most Reacted: {{ most_clicked_emojis|get_item:announcement.id }}
+                                        {% else %}
+                                            No reactions yet.
+                                        {% endif %}
+                                    </div>
+        
+                                <!-- Emoji Reactions -->
+                                <div class="emoji-reactions">
+                                    {% with reactions='👍 ❤️ 😂 😮 😢 😡' %}
+                                        {% for emoji in reactions.split %}
+                                            <button class="emoji-btn"
+                                                    type="button"
+                                                    data-announcement-id="{{ announcement.id }}"
+                                                    data-emoji="{{ emoji }}">
+                                                {{ emoji }}
+                                            </button>
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+        
+                                <button
+                                    class="card-btn"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#announcement{{ forloop.counter }}"
+                                >
+                                    Read More
+                                </button>
 
                         <!-- Collapsible Content for Full Description -->
                         <div id="announcement{{ forloop.counter }}" class="collapse announcement-collapse mt-2">

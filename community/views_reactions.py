@@ -15,14 +15,18 @@ def react_to_announcement(request):
 
         try:
             reaction, created = Reaction.objects.get_or_create(user=user, announcement=announcement, emoji=emoji)
+            status = 'added' if created else 'removed'
+            
             if not created:
                 reaction.delete()
-                status = 'removed'
-            else:
-                status = 'added'
 
-            # Recalculate most clicked emoji
-            most_clicked = Reaction.objects.filter(announcement=announcement).values('emoji').annotate(emoji_count=Count('emoji')).order_by('-emoji_count').first()
+            most_clicked = (
+                Reaction.objects.filter(announcement=announcement)
+                .values('emoji')
+                .annotate(emoji_count=Count('emoji'))
+                .order_by('-emoji_count')
+                .first()
+            )
             most_clicked_emoji = most_clicked['emoji'] if most_clicked else None
 
             return JsonResponse({
@@ -33,5 +37,5 @@ def react_to_announcement(request):
             })
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
-    return JsonResponse({'status': 'invalid request'})
 
+    return JsonResponse({'status': 'invalid request'})

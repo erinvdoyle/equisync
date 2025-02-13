@@ -40,21 +40,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     return; 
                 }
 
-                // Update most clicked emoji
-                const mostClickedDiv = document.querySelector(`.announcement-card[data-announcement-id="${announcementId}"] .most-clicked`);
-                if (mostClickedDiv) {
-                    if (data.most_clicked_emoji) {
-                        mostClickedDiv.textContent = `Most Reacted: ${data.most_clicked_emoji}`;
-                    } else {
-                        mostClickedDiv.textContent = '';
-                    }
-                }
+                // Update most clicked emoji based on local storage counts
+                updateMostClickedEmoji(announcementId);
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         });
     });
+
+    function updateMostClickedEmoji(announcementId) {
+        // Find the most clicked emoji
+        let maxCount = 0;
+        let mostClickedEmoji = null;
+
+        for (const [emoji, count] of Object.entries(emojiClickCounts)) {
+            if (count > maxCount) {
+                maxCount = count;
+                mostClickedEmoji = emoji;
+            }
+        }
+
+        // Update the display
+        const mostClickedDiv = document.querySelector(`.announcement-card[data-announcement-id="${announcementId}"] .most-clicked`);
+        if (mostClickedDiv) {
+            if (mostClickedEmoji) {
+                mostClickedDiv.textContent = `Most Reacted: ${mostClickedEmoji}`;
+            } else {
+                mostClickedDiv.textContent = 'No reactions yet.';
+            }
+        }
+    }
 
     function getCookie(name) {
         let cookieValue = null;
@@ -72,4 +88,3 @@ document.addEventListener('DOMContentLoaded', function() {
         return cookieValue;
     }
 });
-
