@@ -3,17 +3,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .ads.models import Ad
 from .announcements.models import Announcement, Reaction
 from django.core.paginator import Paginator
-from django_filters.views import FilterView
 from .filters import AdFilter
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count, OuterRef, Exists, BooleanField
-from django.db.models import Case, When
-from django.db import connection
+from django.db.models import Count
 from django.contrib.contenttypes.models import ContentType
 from .models import Comment, CommunityEvent
 from .forms import CommentForm
 from django.utils import timezone
-from django.http import HttpResponse
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 
@@ -52,6 +48,10 @@ def community_overview(request, year=None, month=None, day=None):
         announcement_comment_counts[announcement.id] = Comment.objects.filter(content_type=content_type, object_id=announcement.id).count()
         
     today = timezone.now().date()
+    current_week_start = today - timezone.timedelta(days=today.weekday())
+    
+    recent_weeks = [(current_week_start - timezone.timedelta(weeks=i)) for i in range(5)]
+
     
     if year and month and day:
         current_date = datetime.date(year, month, day)
@@ -82,6 +82,7 @@ def community_overview(request, year=None, month=None, day=None):
         'days_of_week': days_of_week,
         'previous_week': previous_week,
         'next_week': next_week,
+        'recent_weeks': recent_weeks,
     }
 
     return render(request, 'community/community.html', context)
