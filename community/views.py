@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, get_object_or_404, redirect
 from .ads.models import Ad
 from .announcements.models import Announcement, Reaction
@@ -13,9 +14,10 @@ from .models import Comment, CommunityEvent
 from .forms import CommentForm
 from django.utils import timezone
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
-
-def community_overview(request):
+def community_overview(request, year=None, month=None, day=None):
     ads = Ad.objects.filter(approved=True).order_by('-date_posted')
     ad_filter = AdFilter(request.GET, queryset=ads)
 
@@ -50,14 +52,25 @@ def community_overview(request):
         announcement_comment_counts[announcement.id] = Comment.objects.filter(content_type=content_type, object_id=announcement.id).count()
         
     today = timezone.now().date()
-    start_of_week = today - timezone.timedelta(days=today.weekday())
-    end_of_week = start_of_week + timezone.timedelta(days=6)
-    community_events = CommunityEvent.objects.filter(date__range=[start_of_week, end_of_week], approved=True)
-    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    
+    if year and month and day:
+        current_date = datetime.date(year, month, day)
+    else:
+        current_date = today
 
-    return render(request, 'community/community.html', {
-        "filter": ad_filter,
-        "page_obj": page_obj,
+    start_of_week = current_date - timezone.timedelta(days=current_date.weekday())
+    end_of_week = start_of_week + timezone.timedelta(days=6)
+
+    community_events = CommunityEvent.objects.filter(date__range=[start_of_week, end_of_week], approved=True)
+    
+    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    
+    previous_week = start_of_week - timezone.timedelta(days=7)
+    next_week = start_of_week + timezone.timedelta(days=7)
+
+    context = {
+        'filter': ad_filter,
+        'page_obj': page_obj,
         'announcements': announcements,
         'most_clicked_emojis': most_clicked_emojis,
         'user_reactions': user_reactions,
@@ -66,8 +79,27 @@ def community_overview(request):
         'ad_comment_counts': ad_comment_counts,
         'announcement_comment_counts': announcement_comment_counts,
         'community_events': community_events,
-        'days_of_week': days_of_week,       
+        'days_of_week': days_of_week,
+        'previous_week': previous_week,
+        'next_week': next_week,
+    }
+
+    return render(request, 'community/community.html', context)
+
+def get_weekly_events(request, year, month, day):
+    current_date = datetime.date(year, month, day)
+    start_of_week = current_date - datetime.timedelta(days=current_date.weekday())
+    end_of_week = start_of_week + datetime.timedelta(days=6)
+
+    community_events = CommunityEvent.objects.filter(date__range=[start_of_week, end_of_week], approved=True)
+    
+    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    
+    html = render_to_string('community/weekly_events.html', {
+        'community_events': community_events,
+        'days_of_week': days_of_week
     })
+    return JsonResponse({'html': html})
     
 @login_required
 def add_comment(request, content_type_id, object_id):

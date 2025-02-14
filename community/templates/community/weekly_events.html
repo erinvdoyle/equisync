@@ -1,0 +1,22 @@
+<table class="table table-bordered text-center calendar-table">
+    <thead>
+        <tr>
+            {% for day in days_of_week %}
+                <th>{{ day }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for day in days_of_week %}
+                <td>
+                    {% for event in community_events %}
+                        {% if event.date|date:"l" == day %}
+                            <a href="{% url 'community:event_detail' event.id %}" class="event-link">{{ event.title }}</a><br>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>

@@ -29,8 +29,10 @@ urlpatterns = [
     path('comment/edit/<int:comment_id>/', views.edit_comment, name='edit_comment'),
     path('comment/delete/<int:comment_id>/', views.delete_comment, name='delete_comment'),
     path('create/', create_event, name='create_event'),
-    path('this-week/', views.this_weeks_events, name='this_week_events'),
+    # path('this-week/', views.this_weeks_events, name='this_week_events'),
+    path('week/<int:year>/<int:month>/<int:day>/', views.community_overview, name='community_overview_week'),
     path('event/<int:event_id>/', views.event_detail, name='event_detail'),
+    path('get-weekly-events/<int:year>/<int:month>/<int:day>/', views.get_weekly_events, name='get_weekly_events'),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
