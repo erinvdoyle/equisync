@@ -1,16 +1,31 @@
 {% extends "base.html" %}
+{% load calendar_tags %}
 
 {% block content %}
-<h2>Calendar</h2>
-<a href="{% url 'competitions:add_event' %}" class="btn btn-primary">Add Event</a>
+    <h2>Calendar</h2>
 
-<div id="calendar">
-    {% for event in events %}
-        <div>
-            <h3>{{ event.title }}</h3>
-            <p>{{ event.start_time }} - {{ event.end_time }}</p>
-            <p>{{ event.description }}</p>
-        </div>
-    {% endfor %}
-</div>
+    {% if view_type == 'month' %}
+        <h3>Month View: {{ month }}/{{ year }}</h3>
+        {% month_calendar year month %}
+    {% endif %}
+
+    {% if view_type == 'week' %}
+        <h3>Week View: {{ month }}/{{ day }}/{{ year }}</h3>
+        {% weekly_events year month day as events %}
+        <ul>
+            {% for event in events %}
+                <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if view_type == 'day' %}
+        <h3>Day View: {{ month }}/{{ day }}/{{ year }}</h3>
+        {% daily_events year month day as events %}
+        <ul>
+            {% for event in events %}
+                <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
