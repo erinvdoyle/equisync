@@ -10,6 +10,7 @@ class Event(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     favorited_by = models.ManyToManyField(User, related_name='favorite_events', blank=True)
+    is_archived = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

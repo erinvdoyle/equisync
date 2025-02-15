@@ -3,6 +3,8 @@ from .models import Event
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, JsonResponse
 from datetime import date, timedelta
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 def calendar_view(request, year=None, month=None):
@@ -10,8 +12,29 @@ def calendar_view(request, year=None, month=None):
     year = int(year) if year else today.year
     month = int(month) if month else today.month
     
-    events = Event.objects.filter(start_time__year=year, start_time__month=month, approved=True)
-    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'view_type': 'month', 'events': events})
+    show_archived = request.GET.get('archived', False) == 'true'
+    search_term = request.GET.get('search', '')
+
+    if show_archived:
+        events = Event.objects.filter(is_archived=True)
+    else:
+        events = Event.objects.filter(start_time__year=year, start_time__month=month, approved=True, is_archived=False)
+
+    if search_term:
+        events = events.filter(Q(title__icontains=search_term) | Q(description__icontains=search_term))
+
+    paginator = Paginator(events, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'competitions/calendar.html', {
+        'year': year,
+        'month': month,
+        'view_type': 'month',
+        'page_obj': page_obj,
+        'show_archived': show_archived,
+        'search_term': search_term,
+    })
 
 def week_view(request, year, month, day):
     current_date = date(year, month, day)
