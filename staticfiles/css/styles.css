@@ -696,6 +696,38 @@ button.primary:hover {
     background-color: #e66f00; 
 }
 
+/* --- Competitions Events Calendar -------------------------------------------------------------------------------------------------------- */
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendar th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+.calendar td {
+    border: 1px solid #ddd;
+    height: 80px;
+    text-align: center;
+}
+
+.calendar .noday {
+    background-color: #f9f9f9;
+}
+
+.calendar .mon, .calendar .tue, .calendar .wed, 
+.calendar .thu, .calendar .fri, .calendar .sat, 
+.calendar .sun {
+    background-color: #fff;
+}
+
+.calendar td:hover {
+    background-color: #f1f1f1;
+}
+
 /* --- Django Tables ---------------------------------------------------------------------------------------------------------------------- */
 
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
