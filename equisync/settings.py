@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'feeding_management',
     'django_tables2',
     'exercise_schedule',
+    'competitions',
 ]
 
 SITE_ID = 1
