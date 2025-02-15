@@ -4,19 +4,22 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from competitions.models import Event
+from datetime import date, timedelta
 
 
-@login_required
-def calendar_view(request):
-    today = timezone.now()
-    events = Event.objects.filter(start_time__gte=today)
+def calendar_view(request, year=None, month=None):
+    today = date.today()
+    year = int(year) if year else today.year
+    month = int(month) if month else today.month
+    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'view_type': 'month'})
 
-    context = {
-        'events': events,
-        'today': today,
-    }
-    
-    return render(request, 'competitions/calendar.html', context)
+def week_view(request, year, month, day):
+    current_date = date(year, month, day)
+    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'day': day, 'view_type': 'week'})
+
+def day_view(request, year, month, day):
+    current_date = date(year, month, day)
+    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'day': day, 'view_type': 'day'})
 
 @login_required
 def add_event(request):
