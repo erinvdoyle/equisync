@@ -8,6 +8,7 @@ from feeding_management.models import FeedingChart
 from exercise_schedule.models import ExerciseSchedule
 from community.ads.models import Ad
 from community.announcements.models import Announcement
+from competitions.models import Event
 
 
 # Create your views here.
@@ -50,7 +51,7 @@ def dashboard(request):
     exercise_schedules = ExerciseSchedule.objects.filter(horse__owner=user)
     ads = Ad.objects.filter(user=user)
     announcements = Announcement.objects.filter(user=user)
-
+    favorite_events = Event.objects.filter(favorited_by=request.user)
     context = {
         'user': user,
         'profile': profile,
@@ -59,5 +60,6 @@ def dashboard(request):
         'exercise_schedules': exercise_schedules,
         'ads': ads,
         'announcements': announcements,
+        'favorite_events': favorite_events,
     }
     return render(request, 'users/dashboard.html', context)
