@@ -1,9 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Event
-from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
-from competitions.models import Event
+from django.http import HttpResponseForbidden, JsonResponse
 from datetime import date, timedelta
 
 
@@ -11,15 +9,21 @@ def calendar_view(request, year=None, month=None):
     today = date.today()
     year = int(year) if year else today.year
     month = int(month) if month else today.month
-    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'view_type': 'month'})
+    
+    events = Event.objects.filter(start_time__year=year, start_time__month=month, approved=True)
+    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'view_type': 'month', 'events': events})
 
 def week_view(request, year, month, day):
     current_date = date(year, month, day)
-    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'day': day, 'view_type': 'week'})
+    start_date = current_date - timedelta(days=current_date.weekday())
+    end_date = start_date + timedelta(days=6)
+    events = Event.objects.filter(start_time__range=[start_date, end_date], approved=True)
+    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'day': day, 'view_type': 'week', 'events':events})
 
 def day_view(request, year, month, day):
     current_date = date(year, month, day)
-    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'day': day, 'view_type': 'day'})
+    events = Event.objects.filter(start_time__date=current_date, approved=True)
+    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'day': day, 'view_type': 'day', 'events':events})
 
 @login_required
 def add_event(request):
@@ -85,3 +89,9 @@ def delete_event(request, event_id):
         return redirect('competitions:calendar_view')
 
     return render(request, 'competitions/calendar_view')
+
+def events_json(request):
+    events = Event.objects.all()
+    data = [{'title': event.title, 'start': event.start_time.isoformat(), 'end': event.end_time.isoformat()} for event in events]
+    return JsonResponse(data, safe=False)
+
