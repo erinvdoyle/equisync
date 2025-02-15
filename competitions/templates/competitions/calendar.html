@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Calendar</h2>
+<a href="{% url 'competitions:add_event' %}" class="btn btn-primary">Add Event</a>
+
+<div id="calendar">
+    {% for event in events %}
+        <div>
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.start_time }} - {{ event.end_time }}</p>
+            <p>{{ event.description }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
