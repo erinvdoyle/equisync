@@ -59,6 +59,7 @@ def calendar_view(request, year=None, month=None):
         'prev_month': prev_month,
         'next_year': next_year,
         'next_month': next_month,
+        'today': today,
     }
 
     if request.user.is_authenticated:

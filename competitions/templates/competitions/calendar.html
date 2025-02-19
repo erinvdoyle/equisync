@@ -11,8 +11,8 @@
     <span></span>
     <div class="events-calendar" style="display: flex; align-items: center;">
         <a href="{% url 'competitions:month_view' year=prev_year month=prev_month %}" style="font-size: smaller;">&lt;</a>
-        <a href="{% url 'competitions:week_view' year=year month=month day=1 %}" style="font-size: smaller; margin-left: 5px; margin-right: 5px;">Week</a>
-        <a href="{% url 'competitions:day_view' year=year month=month day=1 %}" style="font-size: smaller; margin-right: 5px;">Day</a>
+        <a href="{% url 'competitions:week_view' year=today.year month=today.month day=today.day %}" style="font-size: smaller; margin-left: 5px; margin-right: 5px;">Week</a>
+        <a href="{% url 'competitions:day_view' year=today.year month=today.month day=today.day %}" style="font-size: smaller; margin-right: 5px;">Day</a>
 
         {% if user.is_authenticated %}
             <a href="{% url 'competitions:add_event' %}" style="font-size: smaller; margin-left: 10px;">Add event</a>
