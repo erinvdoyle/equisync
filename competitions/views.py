@@ -2,15 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Event
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from django.db.models import Q
 from django.core.paginator import Paginator
 import calendar
 from django.urls import reverse
-
+from django.utils import timezone
 
 def calendar_view(request, year=None, month=None):
-    today = date.today()
+    today = timezone.now().date()
     year = int(year) if year else today.year
     month = int(month) if month else today.month
     
@@ -68,16 +68,90 @@ def calendar_view(request, year=None, month=None):
     return render(request, 'competitions/calendar.html', context)
 
 def week_view(request, year, month, day):
-    current_date = date(year, month, day)
+    current_date = date(year=int(year), month=int(month), day=int(day))
     start_date = current_date - timedelta(days=current_date.weekday())
     end_date = start_date + timedelta(days=6)
+
+    search_term = request.GET.get('search', '')
+
     events = Event.objects.filter(start_time__range=[start_date, end_date], approved=True)
-    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'day': day, 'view_type': 'week', 'events':events})
+
+    if search_term:
+        events = events.filter(Q(title__icontains=search_term) | Q(description__icontains=search_term))
+
+    prev_week_start = start_date - timedelta(days=7)
+    next_week_start = start_date + timedelta(days=7)
+
+    prev_year, prev_month, prev_day = prev_week_start.year, prev_week_start.month, prev_week_start.day
+    next_year, next_month, next_day = next_week_start.year, next_week_start.month, next_week_start.day
+    
+    week_days = []
+    for i in range(7):
+        current_day = start_date + timedelta(days=i)
+        events_for_day = events.filter(
+            start_time__date__lte=current_day,
+            end_time__date__gte=current_day
+        )
+        week_days.append({
+            'date': current_day,
+            'events': events_for_day,
+        })
+
+    context = {
+        'year': year,
+        'month': month,
+        'day': day,
+        'view_type': 'week',
+        'week_days': week_days,
+        'events': events,
+        'prev_year': prev_year,
+        'prev_month': prev_month,
+        'prev_day': prev_day,
+        'next_year': next_year,
+        'next_month': next_month,
+        'next_day': next_day,
+        'search_term': search_term,
+    }
+
+    return render(request, 'competitions/week_calendar.html', context)
+
 
 def day_view(request, year, month, day):
-    current_date = date(year, month, day)
-    events = Event.objects.filter(start_time__date=current_date, approved=True)
-    return render(request, 'competitions/calendar.html', {'year': year, 'month': month, 'day': day, 'view_type': 'day', 'events':events})
+    current_date = date(year=int(year), month=int(month), day=int(day))
+
+    search_term = request.GET.get('search', '')
+
+    events = Event.objects.filter(
+        start_time__date__lte=current_date,
+        end_time__date__gte=current_date,
+        approved=True
+    )
+
+    if search_term:
+        events = events.filter(Q(title__icontains=search_term) | Q(description__icontains=search_term))
+
+    prev_date = current_date - timedelta(days=1)
+    next_date = current_date + timedelta(days=1)
+
+    prev_year, prev_month, prev_day = prev_date.year, prev_date.month, prev_date.day
+    next_year, next_month, next_day = next_date.year, next_date.month, next_date.day
+
+    context = {
+        'year': year,
+        'month': month,
+        'day': day,
+        'view_type': 'day',
+        'events': events,
+        'prev_year': prev_year,
+        'prev_month': prev_month,
+        'prev_day': prev_day,
+        'next_year': next_year,
+        'next_month': next_month,
+        'next_day': next_day,
+        'search_term': search_term,
+    }
+
+    return render(request, 'competitions/day_calendar.html', context)
 
 @login_required
 def add_event(request):
