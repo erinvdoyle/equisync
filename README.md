@@ -316,7 +316,11 @@ The UI for this project was planned with Balsamiq Wireframes
 
 
 
+## Use of AI
 
+### Troubleshooting, errors, and bugs
+
+### Events Calendar Section
 
 ## Credits
 [Extending the User Model](https://docs.djangoproject.com/en/5.1/topics/auth/customizing/#extending-user)  
