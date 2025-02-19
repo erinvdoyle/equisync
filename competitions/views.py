@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Event
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, JsonResponse
+from django.http import JsonResponse
 from datetime import date, timedelta
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -34,6 +34,7 @@ def calendar_view(request, year=None, month=None):
         'page_obj': page_obj,
         'show_archived': show_archived,
         'search_term': search_term,
+        'events': events
     })
 
 def week_view(request, year, month, day):
@@ -83,8 +84,8 @@ def favorite_event(request, event_id):
 
 @login_required
 def event_detail(request, event_id):
-  event = get_object_or_404(Event, id=event_id)
-  return render(request, 'competitions/event_detail.html', {'event': event})
+    event = get_object_or_404(Event, id=event_id)
+    return render(request, 'competitions/event_detail.html', {'event': event})
 
 @login_required
 def edit_event(request, event_id):
@@ -114,7 +115,10 @@ def delete_event(request, event_id):
     return render(request, 'competitions/calendar_view')
 
 def events_json(request):
-    events = Event.objects.all()
-    data = [{'title': event.title, 'start': event.start_time.isoformat(), 'end': event.end_time.isoformat()} for event in events]
+    events = Event.objects.filter(approved=True)
+    data = [{'title': event.title,
+             'start': event.start_time.isoformat(),
+             'end': event.end_time.isoformat(),
+             'url': reverse('competitions:event_detail', args=[event.id])} for event in events]
+    
     return JsonResponse(data, safe=False)
-

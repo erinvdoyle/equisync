@@ -16,4 +16,4 @@ class Event(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse('competitions:event_detail', args=[str(self.id)])
+        return reverse('competitions:event_detail', args=[self.id])
