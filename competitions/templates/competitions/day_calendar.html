@@ -15,9 +15,10 @@
         {% if user.is_authenticated %}
             <a href="{% url 'competitions:add_event' %}" style="font-size: smaller; margin-left: 10px;">Add event</a>
         {% endif %}
-        {% if user_has_events %}
-            <a href="{% url 'competitions:edit_event' event_id=user_event.id %}" style="font-size: smaller; margin-left: 10px;">Edit event</a>
-        {% endif %}
+        
+       {% if user_has_events %}
+           <a href="{% url 'competitions:edit_event' event_id=user_event.id %}" style="font-size: smaller; margin-left: 10px;">Edit event</a>
+       {% endif %}
 
        <form method="get" action="{% url 'competitions:day_view' year=year month=month day=day %}" class="search-form" style="display:inline;">
             <input type="text" name="search" placeholder="Search" value="{{ request.GET.search }}" style="width: 50px; font-size: smaller;">
@@ -40,7 +41,12 @@
         <tbody>
             {% for event in events %}
                 <tr>
-                    <td><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></td>
+                    <td>
+                        <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                            {% if request.user.is_authenticated and event.is_favorited %}
+                                 <i class="fas fa-heart" style="color: red;"></i>
+                            {% endif %}
+                    </td>
                 </tr>
             {% empty %}
                 <tr><td>No events scheduled for today.</td></tr> 

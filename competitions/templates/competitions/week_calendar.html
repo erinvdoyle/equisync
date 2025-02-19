@@ -42,15 +42,16 @@
         <tbody>
             {% for day_info in week_days %}
                 <tr>
-                    <td>{{ day_info.date|date:"D, M d" }}</td> <!-- Format the date -->
+                    <td>{{ day_info.date|date:"D, M d" }}</td>
                     <td>
-                        {% if day_info.events %}
-                            {% for event in day_info.events %}
-                                <div><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></div>
-                            {% endfor %}
-                        {% else %}
+                        {% for event in day_info.events %}
+                            <div><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></div>
+                            {% if event.is_favorited %}
+                                <i class="fas fa-heart" style="color:red;"></i>
+                            {% endif %}
+                        {% empty %}
                             No events scheduled for this day.
-                        {% endif %}
+                        {% endfor %}
                     </td>
                 </tr>
             {% endfor %}
@@ -59,10 +60,4 @@
 </div>
 
 {% endblock %}
-
-
-
-
-
-
 
