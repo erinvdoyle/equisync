@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Scheduled Competitions & Events</h2>
+<span>Click an event for details. Suggest an event (subject to approval) with the Add button</span>
+
+<h3 style="display: flex; justify-content: space-between; align-items: center;">
+    <span>Day View: {{ month }}/{{ day }}/{{ year }}</span>
+    <div class="events-calendar" style="display: flex; align-items: center;">
+        <a href="{% url 'competitions:day_view' year=prev_year month=prev_month day=prev_day %}" style="font-size: smaller;">&lt;</a>
+        <a href="{% url 'competitions:month_view' year=year month=month %}" style="font-size: smaller; margin-left: 5px;">Month</a>
+        <a href="{% url 'competitions:week_view' year=year month=month day=day %}" style="font-size: smaller; margin-left: 5px;">Week</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'competitions:add_event' %}" style="font-size: smaller; margin-left: 10px;">Add event</a>
+        {% endif %}
+        {% if user_has_events %}
+            <a href="{% url 'competitions:edit_event' event_id=user_event.id %}" style="font-size: smaller; margin-left: 10px;">Edit event</a>
+        {% endif %}
+
+       <form method="get" action="{% url 'competitions:day_view' year=year month=month day=day %}" class="search-form" style="display:inline;">
+            <input type="text" name="search" placeholder="Search" value="{{ request.GET.search }}" style="width: 50px; font-size: smaller;">
+            <button type="submit" style="font-size: smaller;">
+                <i class="fas fa-search"></i>
+            </button>
+       </form>
+
+       <a href="{% url 'competitions:day_view' year=next_year month=next_month day=next_day %}" style="font-size: smaller;">&gt;</a>
+   </div>
+</h3>
+
+<div class="custom-calendar-container">
+    <table class="calendar">
+        <thead>
+            <tr>
+                <th>Event</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></td>
+                </tr>
+            {% empty %}
+                <tr><td>No events scheduled for today.</td></tr> 
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+
+
+
+
