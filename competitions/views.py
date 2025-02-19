@@ -38,11 +38,15 @@ def calendar_view(request, year=None, month=None):
 
     if search_term:
         events = events.filter(Q(title__icontains=search_term) | Q(description__icontains=search_term))
-
+        
     paginator = Paginator(events, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    if request.user.is_authenticated:
+        for event in events:
+            event.is_favorited = request.user in event.favorited_by.all()
+    
     context = {
         'year': year,
         'month': month,
@@ -79,23 +83,31 @@ def week_view(request, year, month, day):
     if search_term:
         events = events.filter(Q(title__icontains=search_term) | Q(description__icontains=search_term))
 
+    week_days = []
+    for i in range(7):
+        current_day = start_date + timedelta(days=i)
+        events_for_day = Event.objects.filter(
+            start_time__date__lte=current_day,
+            end_time__date__gte=current_day,
+            approved=True
+        )
+        if search_term:
+            events_for_day = events_for_day.filter(Q(title__icontains=search_term) | Q(description__icontains=search_term))
+
+        if request.user.is_authenticated:
+            for event in events_for_day:
+                event.is_favorited = request.user in event.favorited_by.all()
+
+        week_days.append({
+            'date': current_day,
+            'events': events_for_day,
+        })
+
     prev_week_start = start_date - timedelta(days=7)
     next_week_start = start_date + timedelta(days=7)
 
     prev_year, prev_month, prev_day = prev_week_start.year, prev_week_start.month, prev_week_start.day
     next_year, next_month, next_day = next_week_start.year, next_week_start.month, next_week_start.day
-    
-    week_days = []
-    for i in range(7):
-        current_day = start_date + timedelta(days=i)
-        events_for_day = events.filter(
-            start_time__date__lte=current_day,
-            end_time__date__gte=current_day
-        )
-        week_days.append({
-            'date': current_day,
-            'events': events_for_day,
-        })
 
     context = {
         'year': year,
@@ -103,7 +115,6 @@ def week_view(request, year, month, day):
         'day': day,
         'view_type': 'week',
         'week_days': week_days,
-        'events': events,
         'prev_year': prev_year,
         'prev_month': prev_month,
         'prev_day': prev_day,
@@ -114,7 +125,6 @@ def week_view(request, year, month, day):
     }
 
     return render(request, 'competitions/week_calendar.html', context)
-
 
 def day_view(request, year, month, day):
     current_date = date(year=int(year), month=int(month), day=int(day))
@@ -129,6 +139,10 @@ def day_view(request, year, month, day):
 
     if search_term:
         events = events.filter(Q(title__icontains=search_term) | Q(description__icontains=search_term))
+
+    if request.user.is_authenticated:
+        for event in events:
+            event.is_favorited = request.user in event.favorited_by.all()
 
     prev_date = current_date - timedelta(days=1)
     next_date = current_date + timedelta(days=1)
@@ -152,6 +166,7 @@ def day_view(request, year, month, day):
     }
 
     return render(request, 'competitions/day_calendar.html', context)
+
 
 @login_required
 def add_event(request):
