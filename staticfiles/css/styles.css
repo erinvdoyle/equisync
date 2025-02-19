@@ -697,35 +697,80 @@ button.primary:hover {
 }
 
 /* --- Competitions Events Calendar -------------------------------------------------------------------------------------------------------- */
-.calendar {
+/* Styles for the calendar container */
+.custom-calendar-container {
+    width: 100%;
+    margin-bottom: 20px; /* Add some spacing below the calendar */
+}
+
+/* Styles for the calendar table */
+.custom-calendar-container .calendar {
     width: 100%;
     border-collapse: collapse;
 }
 
-.calendar th {
+/* Styles for the calendar header */
+.custom-calendar-container .calendar th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* Styles for the calendar cells */
+.custom-calendar-container .calendar td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+    height: 100px; /* Adjust as needed */
+}
+
+/* Styles for the "noday" cells */
+.custom-calendar-container .calendar .noday {
+    background-color: #f9f9f9;
+}
+
+/* Styles for the day names */
+.custom-calendar-container .calendar .mon,
+.custom-calendar-container .calendar .tue,
+.custom-calendar-container .calendar .wed,
+.custom-calendar-container .calendar .thu,
+.custom-calendar-container .calendar .fri,
+.custom-calendar-container .calendar .sat,
+.custom-calendar-container .calendar .sun {
+    background-color: #fff; /* White background */
+    color:#4CAF50;
+}
+
+.custom-calendar-container .calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-calendar-container .calendar td {
+    width: 100px; /* Set a fixed width for each day cell */
+    height: 100px; /* Set a fixed height for each day cell */
+    border: 1px solid #ddd; /* Border for clarity */
+    text-align: center;
+    vertical-align: top;
+    overflow: hidden; /* Hide overflow content */
+}
+
+/* Styles for the day names */
+.custom-calendar-container .calendar th {
     background-color: #4CAF50;
     color: white;
     padding: 10px;
 }
 
-.calendar td {
-    border: 1px solid #ddd;
-    height: 80px;
-    text-align: center;
-}
-
-.calendar .noday {
-    background-color: #f9f9f9;
-}
-
-.calendar .mon, .calendar .tue, .calendar .wed, 
-.calendar .thu, .calendar .fri, .calendar .sat, 
-.calendar .sun {
-    background-color: #fff;
-}
-
-.calendar td:hover {
-    background-color: #f1f1f1;
+.custom-calendar-container .calendar td .event-link {
+    display: block; /* Make it a block element */
+    white-space: nowrap; /* Prevent line breaks */
+    overflow: hidden; /* Hide overflow content */
+    text-overflow: ellipsis; /* Add ellipsis when text is too long */
+    max-width: 100%; /* Ensure it does not exceed the cell width */
 }
 
 /* --- Django Tables ---------------------------------------------------------------------------------------------------------------------- */

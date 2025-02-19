@@ -22,22 +22,24 @@ class EventCalendar(calendar.HTMLCalendar):
             today = date(self.year, self.month, day)
             day_events = [event for event in self.events if event.start_time.date() <= today <= event.end_time.date()]
             event_links = ''.join(f'<div><a href="{event.get_absolute_url()}">{event.title}</a></div>' for event in day_events)
-
             return f'<td class="{self.cssclasses[weekday]}">{day}{event_links}</td>'
-    
+
     def formatweekheader(self):
         """
         Return a header for a week as a table row.
         """
-        s = ''.join('<th class="%s">%s</th>' % (self.cssclasses[i], calendar.weekheader(3)[i]) for i in range(7))
-        return '<tr class="days">%s</tr>' % s
+        weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        s = ''.join(f'<th class="{day.lower()}">{day}</th>' for day in weekdays)
+        return f'<tr class="days">{s}</tr>'
 
 @register.simple_tag
 def month_calendar(year, month, events):
     cal = EventCalendar(events, year, month)
+    week_header = " "
     html_calendar = cal.formatmonth(year, month)
-    html_calendar = html_calendar.replace('<table', '<table class="calendar"')
-    
+
+    html_calendar = html_calendar.replace('<table border="0" cellpadding="0" cellspacing="0" class="month">', f'<table class="calendar">{week_header}')
+
     return html_calendar
 
 @register.simple_tag

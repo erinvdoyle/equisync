@@ -35,18 +35,3 @@ function openAnnouncementModal(title, content) {
 
     announcementModal.show();
 }
-
-// Initialize FullCalendar
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        events: '/competitions/events_json/', 
-        dateClick: function(info) {
-            alert('Date: ' + info.dateStr);
-        }
-    });
-
-    calendar.render();
-});
