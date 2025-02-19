@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from datetime import date, timedelta
 from django.db.models import Q
 from django.core.paginator import Paginator
+import calendar
+from django.urls import reverse
 
 
 def calendar_view(request, year=None, month=None):
@@ -15,6 +17,20 @@ def calendar_view(request, year=None, month=None):
     show_archived = request.GET.get('archived', False) == 'true'
     search_term = request.GET.get('search', '')
 
+    if month == 1:
+        prev_year = year - 1
+        prev_month = 12
+    else:
+        prev_year = year
+        prev_month = month - 1
+
+    if month == 12:
+        next_year = year + 1
+        next_month = 1
+    else:
+        next_year = year
+        next_month = month + 1
+    
     if show_archived:
         events = Event.objects.filter(is_archived=True)
     else:
@@ -27,15 +43,29 @@ def calendar_view(request, year=None, month=None):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'competitions/calendar.html', {
+    context = {
         'year': year,
         'month': month,
         'view_type': 'month',
         'page_obj': page_obj,
         'show_archived': show_archived,
         'search_term': search_term,
-        'events': events
-    })
+        'events': events,
+        'prev_year': prev_year,
+        'prev_month': prev_month,
+        'next_year': next_year,
+        'next_month': next_month,
+    }
+
+    if request.user.is_authenticated:
+        user_event = Event.objects.filter(created_by=request.user).first()
+        if user_event:
+            context['user_has_events'] = True
+            context['user_event'] = user_event
+        else:
+            context['user_has_events'] = False
+
+    return render(request, 'competitions/calendar.html', context)
 
 def week_view(request, year, month, day):
     current_date = date(year, month, day)
