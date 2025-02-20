@@ -8,10 +8,10 @@ from feeding_management.models import FeedingChart
 from exercise_schedule.models import ExerciseSchedule
 from community.ads.models import Ad
 from community.announcements.models import Announcement
-from competitions.models import Event
+from competitions.models import Event, Notification, EventHorse
+from competitions.utils import create_notifications_for_past_events 
 
 
-# Create your views here.
 @login_required
 def view_profile(request):
     """
@@ -52,6 +52,12 @@ def dashboard(request):
     ads = Ad.objects.filter(user=user)
     announcements = Announcement.objects.filter(user=user)
     favorite_events = Event.objects.filter(favorited_by=request.user)
+    create_notifications_for_past_events() 
+    notifications = Notification.objects.filter(user=request.user, read=False)
+    competition_results = EventHorse.objects.filter(horse__owner=user)
+    
+    
+    
     context = {
         'user': user,
         'profile': profile,
@@ -61,5 +67,16 @@ def dashboard(request):
         'ads': ads,
         'announcements': announcements,
         'favorite_events': favorite_events,
+        'notifications': notifications,
+        'competition_results': competition_results,
     }
+    
     return render(request, 'users/dashboard.html', context)
+
+@login_required
+def mark_notification_as_read(request, notification_id):
+    notification = get_object_or_404(Notification, id=notification_id, user=request.user)
+    notification.read = True
+    notification.save()
+    
+    return redirect('users:dashboard')

@@ -334,4 +334,4 @@ The UI for this project was planned with Balsamiq Wireframes
 [Understanding and Implementing Custom Template Tags](https://dev.to/3bdelrahman/understanding-and-implementing-custom-template-tags-in-django-5cao)  
 [Making Emojis Clickable](https://laracasts.com/discuss/channels/javascript/make-emojis-clickable-and-display-the-click-count?reply=932315)
 [Displaying Number of Comments](https://stackoverflow.com/questions/35941445/how-to-display-number-of-comments-in-django)
-
+[Implementing Reminder Functionality for Events](https://stackoverflow.com/questions/65561569/implement-reminder-functionality-for-events-in-python-django)
