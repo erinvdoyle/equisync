@@ -27,6 +27,7 @@ class EventHorse(models.Model):
     class_details = models.CharField(max_length=200, blank=True, null=True)
     results = models.CharField(max_length=200, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
+    performance_rating = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return f"{self.horse.name} at {self.event.title} - {self.class_details or 'No Class'}"
