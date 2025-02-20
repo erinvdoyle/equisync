@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 import calendar
 from django.urls import reverse
 from django.utils import timezone
+from horses.models import HorseProfile
 
 def calendar_view(request, year=None, month=None):
     today = timezone.now().date()
@@ -232,7 +233,19 @@ def favorite_event(request, event_id):
 @login_required
 def event_detail(request, event_id):
     event = get_object_or_404(Event, id=event_id)
-    return render(request, 'competitions/event_detail.html', {'event': event})
+    if request.method == 'POST':
+        horse_ids = request.POST.getlist('horses')
+        event.horses.set(horse_ids)
+        return redirect('competitions:event_detail', event_id=event.id)
+    
+    user_horses = HorseProfile.objects.filter(owner=request.user)
+
+    context = {
+        'event': event,
+        'user_horses': user_horses,
+    }
+
+    return render(request, 'competitions/event_detail.html', context)
 
 @login_required
 def edit_event(request, event_id):
