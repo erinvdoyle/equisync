@@ -84,20 +84,19 @@
     </ul>
     
     <h2>My Competition Results</h2>
-{% if competition_results %}
-    <ul>
-        {% for result in competition_results %}
-            <li>
-                <a href="{% url 'competitions:edit_event_horse_source' result.id 'dashboard' %}">
-                    {{ result.horse.name }} - {{ result.class_details }}: 
-                    Results: {{ result.results|default:"No results yet" }} 
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No competition results found.</p>
-{% endif %}
+    {% if competition_results %}
+        <ul>
+            {% for result in competition_results %}
+                <li>
+                    <a href="{% url 'competitions:edit_event_horse_source' result.id 'dashboard' %}">
+                        {{ result.horse.name }} - {{ result.event.title }} - {{ result.event.start_time|date:"Y-m-d" }} - {{ result.class_details }} - Results: {{ result.results|default:"No results yet" }} 
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No competition results found.</p>
+    {% endif %}
 
     <h2>Notifications</h2>
     {% if notifications %}
