@@ -9,6 +9,7 @@ import calendar
 from django.urls import reverse
 from django.utils import timezone
 from horses.models import HorseProfile
+from competitions.utils import create_notifications_for_past_events
 
 def calendar_view(request, year=None, month=None):
     today = timezone.now().date()
@@ -310,6 +311,7 @@ def edit_event_horse(request, event_horse_id, source='event_detail'):
 
         if source == 'dashboard':
             event_horse.results = request.POST.get('results')
+            event_horse.performance_rating = request.POST.get('performance_rating')
 
         event_horse.save()
 

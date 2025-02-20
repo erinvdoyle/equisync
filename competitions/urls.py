@@ -17,5 +17,5 @@ urlpatterns = [
     path('events_json/', views.events_json, name='events_json'),
     path('event-horse/edit/<int:event_horse_id>/', edit_event_horse, name='edit_event_horse'),
     path('event-horse/remove/<int:event_horse_id>/', remove_event_horse, name='remove_event_horse'),
-    path('event-horse/edit/<int:event_horse_id>/<str:source>/', edit_event_horse, name='edit_event_horse_source'), 
+    path('event-horse/edit/<int:event_horse_id>/<str:source>/', edit_event_horse, name='edit_event_horse_source'),
 ]
