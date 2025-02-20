@@ -6,7 +6,6 @@
   <p><strong>Start Time:</strong> {{ event.start_time }}</p>
   <p><strong>End Time:</strong> {{ event.end_time }}</p>
   <p><strong>Description:</strong> {{ event.description }}</p>
-
   <p><strong>Created By:</strong> {{ event.created_by.username }}</p>
 
   <!-- Favoriting Form -->
@@ -27,6 +26,29 @@
       <button type="submit" class="btn btn-danger">Delete Event</button>
     </form>
   {% endif %}
+
+  <!-- Add Horses and View Attending Horses -->
+  <h3>Add Horse</h3>
+    <form method="post">
+        {% csrf_token %}
+        <label>Select Horses:</label><br>
+        {% for horse in user_horses %}
+            <input type="checkbox" name="horses" value="{{ horse.id }}">
+            {{ horse.name }} ({{ horse.breed }})<br>
+        {% endfor %}
+        <button type="submit">Add Horses</button>
+    </form>
+
+    <h3>Horses Attending</h3>
+    <ul>
+        {% for horse in event.horses.all %}
+            <li>{{ horse.name }} ({{ horse.breed }})</li>
+        {% empty %}
+            <li>No horses attending this event.</li>
+        {% endfor %}
+    </ul>
+</div>
+
 
   <a href="{% url 'competitions:calendar_view' %}" class="btn btn-secondary">Back to Calendar</a>
 
