@@ -9,25 +9,7 @@
 {% if view_type == 'month' %}
 <h3 style="display: flex; justify-content: space-between; align-items: center;">
     <span></span>
-    <div class="events-calendar" style="display: flex; align-items: center;">
-        <a href="{% url 'competitions:month_view' year=prev_year month=prev_month %}" style="font-size: smaller;">&lt;</a>
-        <a href="{% url 'competitions:week_view' year=today.year month=today.month day=today.day %}" style="font-size: smaller; margin-left: 5px; margin-right: 5px;">Week</a>
-        <a href="{% url 'competitions:day_view' year=today.year month=today.month day=today.day %}" style="font-size: smaller; margin-right: 5px;">Day</a>
-
-        {% if user.is_authenticated %}
-            <a href="{% url 'competitions:add_event' %}" style="font-size: smaller; margin-left: 10px;">Add event</a>
-        {% endif %}
-        {% if user_has_events %}
-            <a href="{% url 'competitions:edit_event' event_id=user_event.id %}" style="font-size: smaller;">Edit event</a>
-        {% endif %}
-        <form method="get" action="{% url 'competitions:month_view' year=year month=month %}" class="search-form" style="display: inline;">
-            <input type="text" name="search" placeholder="Search" style="width: 50px; font-size: smaller;">
-            <button type="submit" style="font-size: smaller;">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-        <a href="{% url 'competitions:month_view' year=next_year month=next_month %}" style="font-size: smaller;">&gt;</a>
-    </div>
+    {% include 'competitions/calendar_nav.html' %}
 </h3>
 <div class="custom-calendar-container">
     {% month_calendar year month events as calendar_html %}
@@ -40,4 +22,3 @@
 {% endif %}
 
 {% endblock %}
-
