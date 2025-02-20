@@ -60,6 +60,7 @@ def calendar_view(request, year=None, month=None):
         'next_year': next_year,
         'next_month': next_month,
         'today': today,
+        'day': 1,
     }
 
     if request.user.is_authenticated:
@@ -73,6 +74,7 @@ def calendar_view(request, year=None, month=None):
     return render(request, 'competitions/calendar.html', context)
 
 def week_view(request, year, month, day):
+    today = timezone.now().date()
     current_date = date(year=int(year), month=int(month), day=int(day))
     start_date = current_date - timedelta(days=current_date.weekday())
     end_date = start_date + timedelta(days=6)
@@ -123,11 +125,21 @@ def week_view(request, year, month, day):
         'next_month': next_month,
         'next_day': next_day,
         'search_term': search_term,
+        'today': today,
     }
+    
+    if request.user.is_authenticated:
+        user_event = Event.objects.filter(created_by=request.user).first()
+        if user_event:
+            context['user_has_events'] = True
+            context['user_event'] = user_event
+        else:
+            context['user_has_events'] = False
 
     return render(request, 'competitions/week_calendar.html', context)
 
 def day_view(request, year, month, day):
+    today = timezone.now().date()
     current_date = date(year=int(year), month=int(month), day=int(day))
 
     search_term = request.GET.get('search', '')
@@ -150,6 +162,11 @@ def day_view(request, year, month, day):
 
     prev_year, prev_month, prev_day = prev_date.year, prev_date.month, prev_date.day
     next_year, next_month, next_day = next_date.year, next_date.month, next_date.day
+    
+    try:
+        display_date = date(year, month, day)
+    except ValueError:
+        display_date = date(year, month, 1)
 
     context = {
         'year': year,
@@ -164,7 +181,17 @@ def day_view(request, year, month, day):
         'next_month': next_month,
         'next_day': next_day,
         'search_term': search_term,
+        'today': today,
+        'display_date': display_date,
     }
+    
+    if request.user.is_authenticated:
+        user_event = Event.objects.filter(created_by=request.user).first()
+        if user_event:
+            context['user_has_events'] = True
+            context['user_event'] = user_event
+        else:
+            context['user_has_events'] = False
 
     return render(request, 'competitions/day_calendar.html', context)
 
