@@ -20,3 +20,13 @@ class Event(models.Model):
     
     def get_absolute_url(self):
         return reverse('competitions:event_detail', args=[self.id])
+    
+class EventHorse(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    horse = models.ForeignKey(HorseProfile, on_delete=models.CASCADE)
+    class_details = models.CharField(max_length=200, blank=True, null=True)
+    results = models.CharField(max_length=200, blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.horse.name} at {self.event.title} - {self.class_details or 'No Class'}"

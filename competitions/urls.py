@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import event_detail, edit_event_horse, remove_event_horse
 
 app_name = 'competitions'
 
@@ -14,4 +15,6 @@ urlpatterns = [
     path('day/<int:year>/<int:month>/<int:day>/', views.day_view, name='day_view'),
     path('event/<int:event_id>/', views.event_detail, name='event_detail'),
     path('events_json/', views.events_json, name='events_json'),
+    path('event-horse/edit/<int:event_horse_id>/', edit_event_horse, name='edit_event_horse'),
+    path('event-horse/remove/<int:event_horse_id>/', remove_event_horse, name='remove_event_horse'),
 ]
