@@ -1,55 +1,110 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Event Details</h2>
-  <h3>{{ event.title }}</h3>
-  <p><strong>Start Time:</strong> {{ event.start_time }}</p>
-  <p><strong>End Time:</strong> {{ event.end_time }}</p>
-  <p><strong>Description:</strong> {{ event.description }}</p>
-  <p><strong>Created By:</strong> {{ event.created_by.username }}</p>
+<div class="event-detail-container">
+    <div class="event-details">
+        <h2 class="event-title">{{ event.title }}</h2>
+        <p class="event-start-time"><strong>Start Time:</strong> {{ event.start_time }}</p>
+        <p class="event-end-time"><strong>End Time:</strong> {{ event.end_time }}</p>
+        <p class="event-description"><strong>Description:</strong> {{ event.description }}</p>
+        <p class="event-created-by"><strong>Created By:</strong> {{ event.created_by.username }}</p>
+    </div>
 
-  <!-- Favoriting Form -->
-  <form method="post" action="{% url 'competitions:favorite_event' event.id %}">
-    {% csrf_token %}
-    {% if request.user in event.favorited_by.all %}
-      <button type="submit">Unfavorite</button>
-    {% else %}
-      <button type="submit">Favorite</button>
-    {% endif %}
-  </form>
+    <div class="action-buttons">
+        <form class="event-detail-button" method="post" action="{% url 'competitions:favorite_event' event.id %}">
+            {% csrf_token %}
+            {% if request.user in event.favorited_by.all %}
+                <button type="submit" class="btn-favorite">Unfavorite</button>
+            {% else %}
+                <button type="submit" class="btn-favorite">Favorite</button>
+            {% endif %}
+        </form>
 
-  <!-- Edit and Delete Buttons (for event creator) -->
-  {% if request.user == event.created_by %}
-    <a href="{% url 'competitions:edit_event' event.id %}" class="btn btn-primary">Edit Event</a>
-    <form method="post" action="{% url 'competitions:delete_event' event.id %}" onsubmit="return confirm('Are you sure you want to delete this event?');">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Delete Event</button>
-    </form>
-  {% endif %}
+        {% if request.user == event.created_by %}
+            <a href="{% url 'competitions:edit_event' event.id %}" class="btn">Edit Event</a>
+            <form class="event-detail-button" method="post" action="{% url 'competitions:delete_event' event.id %}" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                {% csrf_token %}
+                <button type="submit" class="btn">Delete Event</button>
+            </form>
+        {% endif %}
+    </div>
 
-  <!-- Add Horses and View Attending Horses -->
-  <h3>Add Horse</h3>
-    <form method="post">
-        {% csrf_token %}
-        <label>Select Horses:</label><br>
-        {% for horse in user_horses %}
-            <input type="checkbox" name="horses" value="{{ horse.id }}">
-            {{ horse.name }} ({{ horse.breed }})<br>
-        {% endfor %}
-        <button type="submit">Add Horses</button>
-    </form>
+    <div class="attendees-section">
+      <h3 class="attendees-title">Horses Attending</h3>
+      {% if event_horses_data %}
+          <ul class="attendees-list">
+              {% for event_horse in event_horses_data %}
+                  <li>
+                      <a href="{% url 'horses:horse_profile' event_horse.horse.id %}">{{ event_horse.horse.name }}</a>: 
+                      {{ event_horse.class_details }}
+                      <!-- Edit and Remove buttons for each horse -->
+                      <a href="{% url 'competitions:edit_event_horse' event_horse.id %}" class="btn">Edit Horse</a>
+                      <form class="event-detail-button" method="post" action="{% url 'competitions:remove_event_horse' event_horse.id %}" style="display:inline;" onsubmit="return confirm('Are you sure you want to remove this horse from the event?');">
+                          {% csrf_token %}
+                          <button type="submit" class="btn">Remove Horse</button>
+                      </form>
+                  </li>
+              {% endfor %}
+          </ul>
+      {% else %}
+          <p>No horses attending this event.</p>
+      {% endif %}
+  </div>
+  
+    <!-- Add Horse Section -->
+    <div class="add-horse-buttons">
+        <button id="toggleAddHorseDetails" class="btn">Add Horse</button>
 
-    <h3>Horses Attending</h3>
-    <ul>
-        {% for horse in event.horses.all %}
-            <li>{{ horse.name }} ({{ horse.breed }})</li>
-        {% empty %}
-            <li>No horses attending this event.</li>
-        {% endfor %}
-    </ul>
+        <div id="addHorseDetailsContainer" style="display: none;" class="add-horse-details-container">
+            <form method="post">
+                {% csrf_token %}
+                <label>Select Horses:</label><br>
+                <select id="horseSelect" name="horses" class="horse-select">
+                    {% for horse in user_horses %}
+                        <option value="{{ horse.id }}">{{ horse.name }} ({{ horse.breed }})</option>
+                    {% endfor %}
+                </select>
+
+                <div id="classDetailsContainer" class="class-details-container">
+                    <!-- Class details field -->
+                    <div class="class-detail-field">
+                        <label>Class Details:</label>
+                        <input type="text" name="class_details[]">
+                        <label>Notes:</label>
+                        <textarea name="notes[]"></textarea>
+                    </div>
+                </div>
+
+                <button type="button" id="addAnotherClass" class="btn">+</button>
+                <button type="submit" class="btn">Add Horse</button>
+            </form>
+        </div>
+
+    </div>
+
 </div>
 
+<script>
+// JavaScript to toggle visibility of the add horse details container
+document.getElementById("toggleAddHorseDetails").addEventListener("click", function() {
+    var container = document.getElementById("addHorseDetailsContainer");
+    container.style.display = (container.style.display === "none") ? "block" : "none";
+});
 
-  <a href="{% url 'competitions:calendar_view' %}" class="btn btn-secondary">Back to Calendar</a>
+// JavaScript to add more class detail fields
+document.getElementById("addAnotherClass").addEventListener("click", function() {
+    var classDetailsContainer = document.getElementById("classDetailsContainer");
+    var newClassDiv = document.createElement("div");
+    newClassDiv.classList.add("class-detail-field");
+    
+    newClassDiv.innerHTML = `
+        <label>Class Details:</label>
+        <input type="text" name="class_details[]">
+        <label>Notes:</label>
+        <textarea name="notes[]"></textarea>`;
+    
+    classDetailsContainer.appendChild(newClassDiv);
+});
+</script>
 
 {% endblock %}

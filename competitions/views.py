@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Event
+from .models import Event, EventHorse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from datetime import date, timedelta, datetime
@@ -233,16 +233,33 @@ def favorite_event(request, event_id):
 @login_required
 def event_detail(request, event_id):
     event = get_object_or_404(Event, id=event_id)
+
     if request.method == 'POST':
         horse_ids = request.POST.getlist('horses')
-        event.horses.set(horse_ids)
+
+        for horse_id in horse_ids:
+            class_details = request.POST.get('class_details')
+            notes = request.POST.get('notes')
+            horse = get_object_or_404(HorseProfile, id=horse_id)
+
+            EventHorse.objects.update_or_create(
+                event=event,
+                horse=horse,
+                defaults={
+                    'class_details': class_details,
+                    'notes': notes,
+                }
+            )
+        
         return redirect('competitions:event_detail', event_id=event.id)
-    
+
     user_horses = HorseProfile.objects.filter(owner=request.user)
+    event_horses_data = EventHorse.objects.filter(event=event)
 
     context = {
         'event': event,
         'user_horses': user_horses,
+        'event_horses_data': event_horses_data,
     }
 
     return render(request, 'competitions/event_detail.html', context)
@@ -282,3 +299,34 @@ def events_json(request):
              'url': reverse('competitions:event_detail', args=[event.id])} for event in events]
     
     return JsonResponse(data, safe=False)
+
+@login_required
+def edit_event_horse(request, event_horse_id):
+    event_horse = get_object_or_404(EventHorse, id=event_horse_id)
+
+    if request.method == 'POST':
+        event_horse.class_details = request.POST.get('class_details')
+        event_horse.notes = request.POST.get('notes')
+        event_horse.save()
+
+        return redirect('competitions:event_detail', event_id=event_horse.event.id)
+
+    context = {
+        'event_horse': event_horse,
+    }
+    return render(request, 'competitions/edit_event_horse.html', context)
+
+@login_required
+def remove_event_horse(request, event_horse_id):
+    event_horse = get_object_or_404(EventHorse, id=event_horse_id)
+    event_id = event_horse.event.id
+
+    if request.method == 'POST':
+        event_horse.delete()
+
+        return redirect('competitions:event_detail', event_id=event_id)
+
+    context = {
+        'event_horse': event_horse,
+    }
+    return render(request, 'competitions/remove_event_horse.html', context)
