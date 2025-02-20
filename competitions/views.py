@@ -301,15 +301,22 @@ def events_json(request):
     return JsonResponse(data, safe=False)
 
 @login_required
-def edit_event_horse(request, event_horse_id):
+def edit_event_horse(request, event_horse_id, source='event_detail'):
     event_horse = get_object_or_404(EventHorse, id=event_horse_id)
 
     if request.method == 'POST':
         event_horse.class_details = request.POST.get('class_details')
         event_horse.notes = request.POST.get('notes')
+
+        if source == 'dashboard':
+            event_horse.results = request.POST.get('results')
+
         event_horse.save()
 
-        return redirect('competitions:event_detail', event_id=event_horse.event.id)
+        if source == 'dashboard':
+            return redirect('users:dashboard')
+        else:
+            return redirect('competitions:event_detail', event_id=event_horse.event.id)
 
     context = {
         'event_horse': event_horse,
