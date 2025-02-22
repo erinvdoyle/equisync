@@ -4,11 +4,13 @@
     <h1>Welcome, {{ user.username }}!</h1>
 
     {% if profile %}
+        <!-- User Profile -->
         <h2>Your Profile</h2>
         <a href="{% url 'users:view_profile' %}">View</a>
 
     {% endif %}
 
+    <!-- User's Horses -->
     <h2>Your Horses</h2>
     {% if horses %}
         <ul>
@@ -20,6 +22,7 @@
         <p>You don't have any horses yet.</p>
     {% endif %}
 
+    <!-- Horse Feeding Chart -->
     <h2>Feeding Schedules</h2>
     {% if feeding_charts %}
         <ul>
@@ -31,6 +34,7 @@
         <p>No feeding schedules found.</p>
     {% endif %}
 
+    <!-- Horse Exercise Schedules -->
     <h2>Exercise Schedules</h2>
     {% if exercise_schedules %}
         <ul>
@@ -46,6 +50,7 @@
         <p>No exercise schedules found.</p>
     {% endif %}
 
+    <!-- User's Ads -->
     <h2>Your Ads</h2>
     {% if ads %}
         <ul>
@@ -61,6 +66,7 @@
         <p>No ads found.</p>
     {% endif %}
 
+    <!-- User's Announcements -->
     <h2>Your Announcements</h2>
     {% if announcements %}
         <ul>
@@ -75,7 +81,8 @@
     {% else %}
         <p>No announcements found.</p>
     {% endif %}
-
+    
+    <!-- Favorited Events -->
     <h2>My Favorite Events</h2>
     <ul>
         {% for event in favorite_events %}
@@ -83,37 +90,54 @@
         {% endfor %}
     </ul>
     
-    <h2>My Competition Results</h2>
-    {% if competition_results %}
-        <ul>
-            {% for result in competition_results %}
-                <li>
-                    <a href="{% url 'competitions:edit_event_horse_source' result.id 'dashboard' %}">
-                        {{ result.horse.name }} - {{ result.event.title }} - {{ result.event.start_time|date:"Y-m-d" }} - {{ result.class_details }} - Results: {{ result.results|default:"No results yet" }} 
-                    </a>
-                </li>
+    <!-- Competition Results -->
+    <section class="dashboard-section">
+        <h2>My Competition Results</h2>
+        {% if paginated_results %}
+            {% for horse, page_obj in paginated_results.items %}
+                <h3>Recent Results for {{ horse.name }}</h3>
+                <ul>
+                    {% for result in page_obj.object_list %}
+                        <li>
+                            {{ result.horse.name }} - {{ result.event.title }} - {{ result.event.start_time|date:"Y-m-d" }} - {{ result.class_details }} - Results: {{ result.results|default:"No results yet" }}
+                            <a href="{% url 'competitions:edit_event_horse_source' result.id 'dashboard' %}" class='btn'>
+                                {% if result.results %}
+                                    Edit Results
+                                {% else %}
+                                    +
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+    
+                <!-- Pagination Controls -->
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page_{{ horse.id }}=1">« first</a>
+                            <a href="?page_{{ horse.id }}={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+    
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+    
+                        {% if page_obj.has_next %}
+                            <a href="?page_{{ horse.id }}={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page_{{ horse.id }}={{ page_obj.paginator.num_pages }}">last »</a>
+                        {% endif %}
+                    </span>
+                </div>
+    
+                <!-- Archive Button -->
+                <a href="{% url 'competitions:horse_results_archive' horse.id %}" class='btn'>View Result Archive</a>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No competition results found.</p>
-    {% endif %}
-
-    <h2>Notifications</h2>
-    {% if notifications %}
-        <ul>
-            {% for notification in notifications %}
-                <li>
-                    {{ notification.message }}
-                    <form method="post" action="{% url 'users:mark_notification_as_read' notification.id %}">
-                        {% csrf_token %}
-                        <button type="submit">Mark as Read</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No new notifications.</p>
-    {% endif %}
-
-{% endblock %}
-
+        {% else %}
+            <p>No competition results found.</p>
+        {% endif %}
+    </section>
+    
+    <a href="{% url 'users:dashboard' %}" class='btn'>Dashboard</a>
+    
+    {% endblock %}

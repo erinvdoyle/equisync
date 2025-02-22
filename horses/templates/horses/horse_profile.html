@@ -13,6 +13,8 @@
     <p>Last cared for by: {{ horse.most_recent_staff.name }}</p>
     <p>Feeding Chart: <a href="{% url 'feeding_management:horse_feeding_chart_readonly' horse.id %}">View</a></p>
     <p>Exercise Schedule: <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}">View</a></p>
+    <p>Competition Results: <a href="{% url 'competitions:horse_results_archive' horse.id %}">View</a></p>
+
     
     {% if horse.image %}
         <img src="{{ horse.image.url }}" alt="Horse Image">

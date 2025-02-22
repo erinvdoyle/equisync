@@ -1036,7 +1036,30 @@ button.primary:hover {
 #star5:checked ~ label > svg {
     fill: #ab68ff;
 }
-  
+
+/* --- Dashboard Page ---------------------------------------------------------------------------------------------------------------------- */
+.dashboard-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.dashboard-section h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.dashboard-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard-section li {
+    margin-bottom: 5px;
+}
 
 /* --- Django Tables ---------------------------------------------------------------------------------------------------------------------- */
 
