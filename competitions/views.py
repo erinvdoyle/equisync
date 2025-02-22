@@ -339,3 +339,15 @@ def remove_event_horse(request, event_horse_id):
         'event_horse': event_horse,
     }
     return render(request, 'competitions/remove_event_horse.html', context)
+
+@login_required
+def horse_results_archive(request, horse_id):
+    horse = get_object_or_404(HorseProfile, id=horse_id)
+    results = EventHorse.objects.filter(horse=horse).order_by('-event__start_time')
+
+    context = {
+        'horse': horse,
+        'results': results,
+    }
+    
+    return render(request, 'competitions/horse_results_archive.html', context)

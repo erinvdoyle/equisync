@@ -9,8 +9,8 @@ from exercise_schedule.models import ExerciseSchedule
 from community.ads.models import Ad
 from community.announcements.models import Announcement
 from competitions.models import Event, Notification, EventHorse
-from competitions.utils import create_notifications_for_past_events 
-
+from competitions.utils import create_notifications_for_past_events
+from django.core.paginator import Paginator
 
 @login_required
 def view_profile(request):
@@ -54,9 +54,17 @@ def dashboard(request):
     favorite_events = Event.objects.filter(favorited_by=request.user)
     create_notifications_for_past_events() 
     notifications = Notification.objects.filter(user=request.user, read=False)
-    competition_results = EventHorse.objects.filter(horse__owner=user)
+    competition_results = {}
+    for horse in horses:
+        results = EventHorse.objects.filter(horse=horse).order_by('-event__start_time')
+        competition_results[horse] = results
     
-    
+    paginated_results = {}
+    for horse, results in competition_results.items():
+        paginator = Paginator(results, 4)
+        page_number = request.GET.get(f'page_{horse.id}')
+        page_obj = paginator.get_page(page_number)
+        paginated_results[horse] = page_obj
     
     context = {
         'user': user,
@@ -69,6 +77,7 @@ def dashboard(request):
         'favorite_events': favorite_events,
         'notifications': notifications,
         'competition_results': competition_results,
+        'paginated_results': paginated_results,
     }
     
     return render(request, 'users/dashboard.html', context)

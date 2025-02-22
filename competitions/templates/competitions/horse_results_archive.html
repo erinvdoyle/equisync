@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Results Archive for {{ horse.name }}</h1>
+
+    {% if results %}
+        <ul>
+            {% for result in results %}
+                <li>
+                    <strong>{{ result.event.title }}</strong><br>
+                    Date: {{ result.event.start_time|date:"Y-m-d" }}<br>
+                    Class Details: {{ result.class_details }}<br>
+                    Results: {{ result.results|default:"No results yet" }}<br>
+                    Performance Rating: {{ result.performance_rating|default:"Not rated" }}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found for this horse.</p>
+    {% endif %}
+
+    <a href="{% url 'users:dashboard' %}" class='btn'>Back to Dashboard</a>
+</div>
+{% endblock %}
