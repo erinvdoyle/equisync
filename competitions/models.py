@@ -28,6 +28,8 @@ class EventHorse(models.Model):
     results = models.CharField(max_length=200, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     performance_rating = models.CharField(max_length=20, blank=True, null=True)
+    jump_height = models.FloatField(blank=True, null=True)
+    number_of_faults = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.horse.name} at {self.event.title} - {self.class_details or 'No Class'}"
