@@ -308,10 +308,24 @@ def edit_event_horse(request, event_horse_id, source='event_detail'):
     if request.method == 'POST':
         event_horse.class_details = request.POST.get('class_details')
         event_horse.notes = request.POST.get('notes')
+        jump_height_value = request.POST.get('jump_height')
+
+        if jump_height_value and jump_height_value != "Other":
+            try:
+                event_horse.jump_height = float(jump_height_value.replace('m', '').replace('cm', '').strip())
+                event_horse.jump_height_str = jump_height_value
+            except ValueError:
+                event_horse.jump_height = None
+                event_horse.jump_height_str = None
+
+        number_of_faults_value = request.POST.get('number_of_faults')
+        
+        if number_of_faults_value.isdigit():
+            event_horse.number_of_faults = int(number_of_faults_value)
+        else:
+            event_horse.number_of_faults = None
 
         if source == 'dashboard':
-            event_horse.jump_height = request.POST.get('jump_height')
-            event_horse.number_of_faults = request.POST.get('number_of_faults')
             event_horse.results = request.POST.get('results')
             event_horse.performance_rating = request.POST.get('performance_rating')
 
@@ -326,6 +340,7 @@ def edit_event_horse(request, event_horse_id, source='event_detail'):
         'event_horse': event_horse,
     }
     return render(request, 'competitions/edit_event_horse.html', context)
+
 
 @login_required
 def remove_event_horse(request, event_horse_id):
