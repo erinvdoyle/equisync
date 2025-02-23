@@ -11,7 +11,7 @@
         <strong>{{ result.event.title }}</strong><br>
         Date: {{ result.event.start_time|date:"Y-m-d" }}<br>
         Class Details: {{ result.class_details }}<br>
-        Height: {{ result.jump_height }}<br>
+        Height: {{ result.jump_height_str }}<br>
         Faults: {{ result.number_of_faults }}<br>
         Notes: {{ result.results|default:"No results yet" }}<br>
 
@@ -36,7 +36,7 @@
 </div>
 
 <!-- Performance Tracking Data -->
-<!-- <div class="container">
+<div class="container">
     <h1>Performance Archive for {{ horse.name }}</h1>
     
     <canvas id="performanceChart"></canvas>
@@ -49,5 +49,5 @@
             faults: {{ faults|safe }},
         };
     </script>
-</div> -->
+</div>
 {% endblock %}

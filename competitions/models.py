@@ -29,6 +29,7 @@ class EventHorse(models.Model):
     notes = models.TextField(blank=True, null=True)
     performance_rating = models.CharField(max_length=20, blank=True, null=True)
     jump_height = models.FloatField(blank=True, null=True)
+    jump_height_str = models.CharField(max_length=20, blank=True, null=True)
     number_of_faults = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
