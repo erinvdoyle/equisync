@@ -17,7 +17,41 @@
             <label for="notes">Notes:</label>
             <textarea class="form-control" id="notes" name="notes">{{ event_horse.notes }}</textarea>
         </div>
+         <!-- Jump Height -->
+         <!-- Jump Height -->
+<div class="form-group">
+    <label for="jump_height">Jump Height:</label>
+    <select class="form-control" id="jump_height" name="jump_height">
+        <option value="">Select Jump Height</option>
+        <option value="X-Rails" {% if event_horse.jump_height == 'X-Rails' %}selected{% endif %}>X-Rails</option>
+        <option value="60cm" {% if event_horse.jump_height == '60cm' %}selected{% endif %}>60cm</option>
+        <option value="70cm" {% if event_horse.jump_height == '70cm' %}selected{% endif %}>70cm</option>
+        <option value="80cm" {% if event_horse.jump_height == '80cm' %}selected{% endif %}>80cm</option>
+        <option value="90cm" {% if event_horse.jump_height == '90cm' %}selected{% endif %}>90cm</option>
+        <option value="1m" {% if event_horse.jump_height == '1m' %}selected{% endif %}>1m</option>
+        <option value="1.05m" {% if event_horse.jump_height == '1.05m' %}selected{% endif %}>1.05m</option>
+        <option value="1.10m" {% if event_horse.jump_height == '1.10m' %}selected{% endif %}>1.10m</option>
+        <option value="1.15m" {% if event_horse.jump_height == '1.15m' %}selected{% endif %}>1.15m</option>
+        <option value="1.20m" {% if event_horse.jump_height == '1.20m' %}selected{% endif %}>1.20m</option>
+        <option value="1.25m" {% if event_horse.jump_height == '1.25m' %}selected{% endif %}>1.25m</option>
+        <option value="1.30m" {% if event_horse.jump_height == '1.30m' %}selected{% endif %}>1.30m</option>
+        <option value="1.35m" {% if event_horse.jump_height == '1.35m' %}selected{% endif %}>1.35m</option>
+        <option value="1.40m" {% if event_horse.jump_height == '1.40m' %}selected{% endif %}>1.40m</option>
+        <option value="1.45m" {% if event_horse.jump_height == '1.45m' %}selected{% endif %}>1.45m</option>
+        <option value="1.50m" {% if event_horse.jump_height == '1.50m' %}selected{% endif %}>1.50m</option>
+        <option value="1.55m" {% if event_horse.jump_height == '1.55m' %}selected{% endif %}>1.55m</option>
+        <option value="1.60m" {% if event_horse.jump_height == '1.60m' %}selected{% endif %}>1.60m</option>
+        <option value="Six Bar" {% if event_horse.jump_height == 'Six Bar' %}selected{% endif %}>Six Bar</option>
+        <option value="Puissance" {% if event_horse.jump_height == 'Puissance' %}selected{% endif %}>Puissance</option>
+        <option value="Other" {% if event_horse.jump_height == 'Other' %}selected{% endif %}>Other</option>
+    </select>
+</div>
 
+         <!-- Number of Faults -->
+         <div class="form-group">
+            <label for="number_of_faults">Faults:</label>
+            <input type="text" class="form-control" id="number_of_faults" name="number_of_faults" value="{{ event_horse.number_of_faults }}">
+        </div>
          <!-- Results Field -->
          <div class="form-group">
              <label for="results">Results:</label>

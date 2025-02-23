@@ -35,3 +35,56 @@ function openAnnouncementModal(title, content) {
 
     announcementModal.show();
 }
+
+// Function for Performance Tracking
+document.addEventListener("DOMContentLoaded", function() {
+    var ctx = document.getElementById("performanceChart").getContext("2d");
+    var performanceChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: performanceData.dates,
+            datasets: [
+                {
+                    label: "Performance Rating",
+                    data: performanceData.ratings,
+                    borderColor: "#ab68ff",
+                    backgroundColor: "rgba(171, 104, 255, 0.2)",
+                    fill: true,
+                },
+                {
+                    label: "Jump Height (cm)",
+                    data: performanceData.jump_heights,
+                    borderColor: "#19c37d",
+                    backgroundColor: "rgba(25, 195, 125, 0.2)",
+                    fill: true,
+                },
+                {
+                    label: "Number of Faults",
+                    data: performanceData.faults,
+                    borderColor: "#ef4444",
+                    backgroundColor: "rgba(239, 68, 68, 0.2)",
+                    fill: true,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Performance Metrics",
+                    },
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: "Event Date",
+                    },
+                },
+            },
+        },
+    });
+});

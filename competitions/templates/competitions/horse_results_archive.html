@@ -11,7 +11,9 @@
         <strong>{{ result.event.title }}</strong><br>
         Date: {{ result.event.start_time|date:"Y-m-d" }}<br>
         Class Details: {{ result.class_details }}<br>
-        Results: {{ result.results|default:"No results yet" }}<br>
+        Height: {{ result.jump_height }}<br>
+        Faults: {{ result.number_of_faults }}<br>
+        Notes: {{ result.results|default:"No results yet" }}<br>
 
         <!-- Display Performance Rating with SVG Stars -->
         Performance Rating:
@@ -29,8 +31,23 @@
     </li>
 {% endfor %}
 
-{% endif %}             
+{% endif %} 
 
 </div>
 
-{% endblock content %}
+<!-- Performance Tracking Data -->
+<!-- <div class="container">
+    <h1>Performance Archive for {{ horse.name }}</h1>
+    
+    <canvas id="performanceChart"></canvas>
+
+    <script>
+        var performanceData = {
+            dates: {{ dates|safe }},
+            ratings: {{ ratings|safe }},
+            jump_heights: {{ jump_heights|safe }},
+            faults: {{ faults|safe }},
+        };
+    </script>
+</div> -->
+{% endblock %}

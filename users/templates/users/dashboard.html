@@ -99,7 +99,7 @@
                 <ul>
                     {% for result in page_obj.object_list %}
                         <li>
-                            {{ result.horse.name }} - {{ result.event.title }} - {{ result.event.start_time|date:"Y-m-d" }} - {{ result.class_details }} - Results: {{ result.results|default:"No results yet" }}
+                            {{ result.event.title }} - {{ result.event.start_time|date:"Y-m-d" }} - {{ result.class_details }} - Results: {{ result.results|default:"No results yet" }}
                             <a href="{% url 'competitions:edit_event_horse_source' result.id 'dashboard' %}" class='btn'>
                                 {% if result.results %}
                                     Edit Results

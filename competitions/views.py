@@ -310,6 +310,8 @@ def edit_event_horse(request, event_horse_id, source='event_detail'):
         event_horse.notes = request.POST.get('notes')
 
         if source == 'dashboard':
+            event_horse.jump_height = request.POST.get('jump_height')
+            event_horse.number_of_faults = request.POST.get('number_of_faults')
             event_horse.results = request.POST.get('results')
             event_horse.performance_rating = request.POST.get('performance_rating')
 
@@ -351,3 +353,24 @@ def horse_results_archive(request, horse_id):
     }
     
     return render(request, 'competitions/horse_results_archive.html', context)
+
+@login_required
+def horse_performance(request, horse_id):
+    horse_results = EventHorse.objects.filter(horse_id=horse_id).order_by("event__start_time")
+
+    # Data for graph
+    dates = [result.event.start_time.strftime("%Y-%m-%d") for result in horse_results]
+    ratings = [int(result.performance_rating) if result.performance_rating else 0 for result in horse_results]
+    jump_heights = [result.jump_height if result.jump_height is not None else 0 for result in horse_results]
+    faults = [result.number_of_faults if result.number_of_faults is not None else 0 for result in horse_results]
+
+    context = {
+        "horse": horse_results.first().horse if horse_results.exists() else None,
+        "results": horse_results,
+        "dates": dates,
+        "ratings": ratings,
+        "jump_heights": jump_heights,
+        "faults": faults,
+    }
+    
+    return render(request, "performance_archive.html", context)
