@@ -1061,6 +1061,21 @@ button.primary:hover {
     margin-bottom: 5px;
 }
 
+.notification-bell {
+    font-size: 1.25 rem;
+    color: red;
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px red;
+    }
+    100% {
+        text-shadow: 0 0 1.5px red;
+    }
+}
+
 /* --- Performance Rating Stars ------------------------------------------------------------------------------------------------------------ */
 .star-1 {
     fill: #ef4444;
