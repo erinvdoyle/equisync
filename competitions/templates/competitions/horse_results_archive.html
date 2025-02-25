@@ -2,13 +2,40 @@
 {% load static %}
 
 {% block content %}
+
+<!-- Results Archive -->
 <div class="container">
     <h1>Results Archive for {{ horse.name }}</h1>
 
     {% if results %}
-        <ul>
+
+    <div class="filters">
+        <label for="sortResults">Sort by:</label>
+        <select id="sortResults">
+            <option value="date">Date (Newest First)</option>
+            <option value="date_asc">Date (Oldest First)</option>
+            <option value="title">Title (A-Z)</option>
+            <option value="title_desc">Title (Z-A)</option>
+            <option value="height">Jump Height (Highest First)</option>
+            <option value="height_asc">Jump Height (Lowest First)</option>
+        </select>
+    
+        <label for="filterMonth">Filter by:</label>
+        <select id="filterMonth">
+            <option value="all">All Time</option>
+            <option value="this_month">This Month</option>
+            <option value="this_year">This Year</option>
+            <option value="last_6">Last 6 Months</option>
+        </select>
+    </div>
+    
+
+        <ul id="resultsList">
             {% for result in results %}
-    <li>
+    <li class="result-item"
+        data-date="{{ result.event.start_time|date:'Y-m-d' }}"
+        data-title="{{ result.event.title }}"
+        data-height="{{ result.jump_height|default:0 }}">
         <strong>{{ result.event.title }}</strong><br>
         Date: {{ result.event.start_time|date:"Y-m-d" }}<br>
         Class Details: {{ result.class_details }}<br>
@@ -67,6 +94,69 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let resultsList = document.getElementById("resultsList");
+        let sortSelect = document.getElementById("sortResults");
+        let filterSelect = document.getElementById("filterMonth");
+
+        function sortResults() {
+            let items = Array.from(resultsList.getElementsByClassName("result-item"));
+            let sortValue = sortSelect.value;
+
+            items.sort((a, b) => {
+                let dateA = new Date(a.dataset.date);
+                let dateB = new Date(b.dataset.date);
+                let titleA = a.dataset.title.toLowerCase();
+                let titleB = b.dataset.title.toLowerCase();
+                let heightA = parseFloat(a.dataset.height);
+                let heightB = parseFloat(b.dataset.height);
+
+                if (sortValue === "date") return dateB - dateA;
+                if (sortValue === "date_asc") return dateA - dateB;
+                if (sortValue === "title") return titleA.localeCompare(titleB);
+                if (sortValue === "title_desc") return titleB.localeCompare(titleA);
+                if (sortValue === "height") return heightB - heightA;
+                if (sortValue === "height_asc") return heightA - heightB;
+            });
+
+            resultsList.innerHTML = "";
+            items.forEach(item => resultsList.appendChild(item));
+        }
+
+        function filterResults() {
+            let items = Array.from(resultsList.getElementsByClassName("result-item"));
+            let filterValue = filterSelect.value;
+            let now = new Date();
+
+            items.forEach(item => {
+                let itemDate = new Date(item.dataset.date);
+                let show = true;
+
+                if (filterValue === "this_month") {
+                    show = itemDate.getFullYear() === now.getFullYear() && itemDate.getMonth() === now.getMonth();
+                } else if (filterValue === "this_year") {
+                    show = itemDate.getFullYear() === now.getFullYear();
+                } else if (filterValue === "last_6") {
+                    let sixMonthsAgo = new Date();
+                    sixMonthsAgo.setMonth(now.getMonth() - 6);
+                    show = itemDate >= sixMonthsAgo;
+                }
+
+                item.style.display = show ? "block" : "none";
+            });
+        }
+
+        sortSelect.addEventListener("change", sortResults);
+        filterSelect.addEventListener("change", filterResults);
+
+        sortResults();
+    });
+
+
+
+
+
+
     document.addEventListener("DOMContentLoaded", function () {
         let rawData = {
             dates: [],
