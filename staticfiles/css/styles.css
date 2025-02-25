@@ -1087,6 +1087,17 @@ button.primary:hover {
     height: 400px;
 }
 
+.chart-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.filter-group {
+    display: flex;
+    gap: 10px;
+}
+
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
 /* --- For Larger Screens (Desktops and Tablets) --------------------------*/
 @media (min-width: 768px) {
