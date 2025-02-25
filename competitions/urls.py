@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import event_detail, edit_event_horse, remove_event_horse
+from .views import event_detail, edit_event_horse, remove_event_horse, horse_results_archive
 
 app_name = 'competitions'
 

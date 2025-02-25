@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="container">
@@ -38,16 +39,56 @@
 <!-- Performance Tracking Data -->
 <div class="container">
     <h1>Performance Archive for {{ horse.name }}</h1>
-    
-    <canvas id="performanceChart"></canvas>
-
-    <script>
-        var performanceData = {
-            dates: {{ dates|safe }},
-            ratings: {{ ratings|safe }},
-            jump_heights: {{ jump_heights|safe }},
-            faults: {{ faults|safe }},
-        };
-    </script>
+    <canvas id="performanceChart" width="400" height="200"></canvas>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let dates = [];
+        let ratings = [];
+        let jumpHeights = [];
+        let faults = [];
+
+        {% for result in results %}
+            dates.push("{{ result.event.start_time|date:'Y-m-d' }}");
+            ratings.push({{ result.performance_rating|default:0 }});
+            jumpHeights.push({{ result.jump_height|default:0 }});
+            faults.push({{ result.number_of_faults|default:0 }});
+        {% endfor %}
+
+        console.log("🐴 Performance Data:", { dates, ratings, jumpHeights, faults });
+
+        let ctx = document.getElementById("performanceChart").getContext("2d");
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: dates,
+                datasets: [
+                    {
+                        label: "Performance Rating",
+                        data: ratings,
+                        borderColor: "blue",
+                        fill: false,
+                    },
+                    {
+                        label: "Jump Height",
+                        data: jumpHeights,
+                        borderColor: "green",
+                        fill: false,
+                    },
+                    {
+                        label: "Faults",
+                        data: faults,
+                        borderColor: "red",
+                        fill: false,
+                    },
+                ],
+            },
+        });
+    });
+</script>
+
+
+
 {% endblock %}
