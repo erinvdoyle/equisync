@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.views import generic
+# from django.views import generic
 from .models import Profile
 from .forms import ProfileForm
 from horses.models import HorseProfile

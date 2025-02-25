@@ -11,16 +11,35 @@
     {% endif %}
 
     <!-- User's Horses -->
-    <h2>Your Horses</h2>
-    {% if horses %}
-        <ul>
-            {% for horse in horses %}
-                <li><a href="{% url 'horses:horse_profile' horse.id %}">{{ horse.name }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>You don't have any horses yet.</p>
-    {% endif %}
+        <h2>Your Horses</h2>
+        {% if horses %}
+            <ul>
+                {% for horse in horses %}
+                    <li><a href="{% url 'horses:horse_profile' horse.id %}">{{ horse.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You don't have any horses yet.</p>
+        {% endif %}
+
+    <!-- Notifications -->
+        <h2>Notifications</h2>
+        {% if notifications %}
+            <ul>
+                {% for notification in notifications %}
+                    <li>
+                        {{ notification.message }} - {{ notification.created_at }}
+                        <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn">
+                            Update Results
+                        </a>
+                        <a href="{% url 'users:mark_notification_as_read' notification.id %}">Mark as read</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No new notifications.</p>
+        {% endif %}
+
 
     <!-- Horse Feeding Chart -->
     <h2>Feeding Schedules</h2>
