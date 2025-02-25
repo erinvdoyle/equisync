@@ -56,9 +56,11 @@ INSTALLED_APPS = [
     'users',
     'horses',
     'feeding_management',
-    'django_tables2',
+    # 'django_tables2',
     'exercise_schedule',
     'competitions',
+    # 'django_celery_beat',
+    'notifications',
 ]
 
 SITE_ID = 1
