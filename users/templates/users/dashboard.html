@@ -25,12 +25,13 @@
     <!-- Notifications -->
         <h2>Notifications</h2>
         {% if notifications %}
-            <ul>
+            <ul style="list-style-type: none; padding: 0;">
                 {% for notification in notifications %}
-                    <li>
-                        {{ notification.message }} - {{ notification.created_at }}
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <i class="fas fa-bell notification-bell"></i>
+                        <span>{{ notification.message }} - {{ notification.created_at }}</span>
                         <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn">
-                            Update Results
+                            Update Result
                         </a>
                         <a href="{% url 'users:mark_notification_as_read' notification.id %}">Mark as read</a>
                     </li>
