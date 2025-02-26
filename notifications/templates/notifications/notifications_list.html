@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Notifications</h2>
+    {% if notifications %}
+        <ul class="list-group">
+            {% for notification in notifications %}
+                <li class="list-group-item {% if not notification.is_read %}bg-light{% endif %}">
+                    <a href="{% url 'notification_detail' notification.id %}">
+                        {{ notification.message }}
+                    </a>
+                    <span class="text-muted small float-end">{{ notification.timestamp|date:"M d, Y H:i" }}</span>
+                </li>
+                <form action="{% url 'mark_as_read' notification.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Mark as Read</button>
+                </form>                
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">No notifications.</p>
+    {% endif %}
+</div>
+{% endblock %}
