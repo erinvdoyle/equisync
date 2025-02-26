@@ -42,47 +42,59 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:dashboard' %}">Dashboard</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'horses:horse_list' %}">Horses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'exercise_schedule:weekly_schedule_view' %}">Exercise</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'feeding_management:all_horses_feeding' %}">Feed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'competitions:calendar_view' %}">Competitions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'community:community_overview' %}">Community</a>
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page"
-                        href="{% url 'users:home' %}">Home</a>
-                </li>
-                {% endif %}
-
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'horses:horse_list' %}">Horses</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'exercise_schedule:weekly_schedule_view' %}">Exercise</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'feeding_management:all_horses_feeding' %}">Feed</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'competitions:calendar_view' %}">Competitions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'community:community_overview' %}">Community</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'users:home' %}">Home</a>
+                    </li>
                 {% endif %}
             </ul>
-            <span class="navbar-text text-muted">
-                your stable management system
-            </span>
+
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                            {% if unread_notifications > 0 %}
+                                <span class="badge bg-danger">{{ unread_notifications }}</span>
+                            {% endif %}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{% url 'users:view_profile' %}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'notifications_list' %}">Notifications 
+                                {% if unread_notifications > 0 %}
+                                    <span class="badge bg-danger">{{ unread_notifications }}</span>
+                                {% endif %}
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
     </div>
 </nav>
@@ -112,8 +124,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'community/js/reactions.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js'></script> -->
 </body>
 
 </html>
