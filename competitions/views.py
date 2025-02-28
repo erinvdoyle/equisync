@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.utils import timezone
 from horses.models import HorseProfile
 from competitions.utils import create_notifications_for_past_events
+from notifications.models import Notification
 
 def calendar_view(request, year=None, month=None):
     today = timezone.now().date()
@@ -330,6 +331,12 @@ def edit_event_horse(request, event_horse_id, source='event_detail'):
             event_horse.performance_rating = request.POST.get('performance_rating')
 
         event_horse.save()
+        
+        if source == 'dashboard':
+            notifications = Notification.objects.filter(event_horse=event_horse, user=request.user)
+            for notification in notifications:
+                notification.read = True
+                notification.save()
 
         if source == 'dashboard':
             return redirect('users:dashboard')
@@ -380,3 +387,10 @@ def horse_performance(request, horse_id):
     }
 
     return render(request, "competitions/horse_results_archive.html", context)
+
+@login_required
+def mark_event_notification_as_read(request, notification_id):
+    notification = get_object_or_404(Notification, id=notification_id, user=request.user)
+    notification.read = True
+    notification.save()
+    return redirect('users:dashboard')

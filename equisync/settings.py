@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'users',
     'horses',
     'feeding_management',
-    # 'django_tables2',
+    'django_tables2',
     'exercise_schedule',
     'competitions',
     # 'django_celery_beat',
@@ -92,27 +92,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "users.context_processors.unread_notifications_count",
             ],
         },
     },
 ]
 
-TEMPLATE_CONTEXT_PROCESSORS = [
-    'django.template.context_processors.request',
-]
-
 WSGI_APPLICATION = 'equisync.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# DATABASES = {
-    # 'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-# }
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))

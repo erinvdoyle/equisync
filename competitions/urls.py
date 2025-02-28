@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from .views import event_detail, edit_event_horse, remove_event_horse, horse_results_archive
+from competitions.views import mark_event_notification_as_read
+
 
 app_name = 'competitions'
 
@@ -19,4 +21,5 @@ urlpatterns = [
     path('event-horse/remove/<int:event_horse_id>/', remove_event_horse, name='remove_event_horse'),
     path('event-horse/edit/<int:event_horse_id>/<str:source>/', edit_event_horse, name='edit_event_horse_source'),
     path('horse/<int:horse_id>/results/', views.horse_results_archive, name='horse_results_archive'),
+    path('mark-read/event/<int:notification_id>/', mark_event_notification_as_read, name='mark_event_notification_as_read'),
 ]

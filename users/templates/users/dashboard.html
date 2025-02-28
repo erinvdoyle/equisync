@@ -22,24 +22,64 @@
             <p>You don't have any horses yet.</p>
         {% endif %}
 
-    <!-- Notifications -->
-        <h2>Notifications</h2>
-        {% if notifications %}
-            <ul style="list-style-type: none; padding: 0;">
-                {% for notification in notifications %}
-                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <i class="fas fa-bell notification-bell"></i>
+    <!-- Event Notifications -->
+        <h2>Event Notifications</h2>
+        {% if event_notifications %}
+            <ul id="event-notifications-list" class="list-group">
+                {% for notification in event_notifications %}
+                    <li id="event-notification-{{ notification.id }}" class="list-group-item d-flex justify-content-between align-items-center {% if not notification.is_read %}bg-light{% endif %}">
+                        <!-- Bell Icon for Unread Notifications -->
+                        {% if not notification.is_read %}
+                            <i class="fas fa-bell notification-bell"></i>
+                        {% endif %}
+                        
                         <span>{{ notification.message }} - {{ notification.created_at }}</span>
-                        <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn">
-                            Update Result
-                        </a>
-                        <a href="{% url 'users:mark_notification_as_read' notification.id %}">Mark as read</a>
+
+                        {% if notification.event_horse %}
+                            <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn btn-sm btn-outline-primary">
+                                Update Results
+                            </a>
+                        {% endif %}
+
+                        <button class="btn btn-sm btn-outline-secondary mark-read-btn" onclick="markEventNotificationAsRead(this)" data-notification-id="{{ notification.id }}">
+                            <i class="fas fa-check d-none"></i> Mark as Read
+                        </button>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No new notifications.</p>
-        {% endif %}
+            <!-- muted bell icon for no notifications -->
+            <p><i class="fas fa-bell-slash text-muted"></i> No event notifications.</p>
+    {% endif %}
+
+    <!-- User Notifications -->
+    <h2>User Notifications</h2>
+    {% if user_notifications %}
+        <ul id="user-notifications-list" class="list-group">
+            {% for notification in user_notifications %}
+                <li id="user-notification-{{ notification.id }}" class="list-group-item d-flex justify-content-between align-items-center">
+                    <!-- Bell Icon for Unread Notifications -->
+                    {% if not notification.is_read %}
+                        <i class="fas fa-bell notification-bell"></i>
+                    {% endif %}
+                    
+                    <span>{{ notification.message }} - {{ notification.created_at }}</span>
+
+                    <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn btn-sm btn-outline-primary">
+                        Update Result
+                    </a>
+
+                    <button class="btn btn-sm btn-outline-secondary mark-read-btn" onclick="markUserNotificationAsRead(this)" data-notification-id="{{ notification.id }}">
+                        <i class="fas fa-check d-none"></i> Mark as Read
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <!-- Non-glowing muted bell icon for no notifications -->
+        <p><i class="fas fa-bell-slash text-muted"></i> No user notifications.</p>
+    {% endif %}
+
 
 
     <!-- Horse Feeding Chart -->
@@ -160,4 +200,69 @@
     
     <a href="{% url 'users:dashboard' %}" class='btn'>Dashboard</a>
     
+    <script>
+        function markEventNotificationAsRead(button) {
+            const notificationId = button.getAttribute("data-notification-id");
+            fetch(`/notifications/mark-as-read/${notificationId}/`, { 
+                method: "POST", 
+                headers: { "X-CSRFToken": "{{ csrf_token }}" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const listItem = document.getElementById(`event-notification-${notificationId}`);
+                    if (listItem) {
+                        listItem.remove();
+                    }
+    
+                    // Check if the red notification bell should be updated
+                    updateNavbarNotificationBadge();
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    
+        function markUserNotificationAsRead(button) {
+            const notificationId = button.getAttribute("data-notification-id");
+            fetch(`/notifications/mark-as-read/${notificationId}/`, { 
+                method: "POST", 
+                headers: { "X-CSRFToken": "{{ csrf_token }}" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const listItem = document.getElementById(`user-notification-${notificationId}`);
+                    if (listItem) {
+                        listItem.remove();
+                    }
+    
+                    // Check if the red notification bell should be updated
+                    updateNavbarNotificationBadge();
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    
+        function updateNavbarNotificationBadge() {
+            // Count unread notifications in the navbar dropdown
+            const unreadCount = document.querySelectorAll('.notification-bell').length;
+            const badge = document.querySelector('.navbar-nav .badge');
+            
+            if (badge) {
+                if (unreadCount > 0) {
+                    badge.textContent = unreadCount;
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+        }
+    
+        // Update the notification badge on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            updateNavbarNotificationBadge();
+        });
+    </script>
+    
+
+
     {% endblock %}

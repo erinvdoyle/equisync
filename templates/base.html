@@ -29,6 +29,14 @@
         <script src="https://kit.fontawesome.com/85da640026.js" crossorigin="anonymous"></script>
 </head>
 
+<style>
+    .badge {
+      display: inline-block !important;
+      opacity: 1 !important;
+      visibility: visible !important;  
+    }
+  </style>
+
 <body class="d-flex flex-column h-100 main-bg">
 
 <!-- Navigation -->
@@ -66,26 +74,39 @@
                     </li>
                 {% endif %}
             </ul>
-
+            
+            <!-- User Profile and Notification Dropdown-->
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-circle fa-2x"></i>
-                            {% if unread_notifications > 0 %}
-                                <span class="badge bg-danger">{{ unread_notifications }}</span>
-                            {% endif %}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="{% url 'users:view_profile' %}">Profile</a></li>
-                            <li><a class="dropdown-item" href="{% url 'notifications_list' %}">Notifications 
-                                {% if unread_notifications > 0 %}
-                                    <span class="badge bg-danger">{{ unread_notifications }}</span>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle fa-2x"></i>
+                        {% if unread_notifications_count > 0 %}
+                            <span class="badge bg-danger">{{ unread_notifications_count }}</span>
+                        {% endif %}
+                    </a>
+                    
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <!-- Notifications -->
+                        <li>
+                            <a class="dropdown-item d-flex justify-content-between align-items-center" href="{% url 'notifications_list' %}">
+                                <span>Notifications</span>
+                                {% if unread_notifications_count > 0 %}
+                                    <span class="badge bg-danger ms-2">{{ unread_notifications_count }}</span>
                                 {% endif %}
-                            </a></li>
-                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
-                        </ul>
-                    </li>
+                            </a>
+                        </li>
+                
+                        <!-- Profile -->
+                        <li>
+                            <a class="dropdown-item" href="{% url 'users:view_profile' %}">Profile</a>
+                        </li>
+
+                
+                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+                
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
@@ -95,6 +116,7 @@
                     </li>
                 {% endif %}
             </ul>
+                                  
         </div>
     </div>
 </nav>
