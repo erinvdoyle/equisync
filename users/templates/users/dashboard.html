@@ -65,9 +65,11 @@
                     
                     <span>{{ notification.message }} - {{ notification.created_at }}</span>
 
-                    <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn btn-sm btn-outline-primary">
-                        Update Result
-                    </a>
+                    {% if notification.event_horse %}
+                        <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn btn-sm btn-outline-primary">
+                            Update Result
+                        </a>
+                    {% endif %}
 
                     <button class="btn btn-sm btn-outline-secondary mark-read-btn" onclick="markUserNotificationAsRead(this)" data-notification-id="{{ notification.id }}">
                         <i class="fas fa-check d-none"></i> Mark as Read
