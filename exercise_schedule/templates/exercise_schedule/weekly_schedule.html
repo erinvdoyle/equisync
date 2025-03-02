@@ -10,6 +10,36 @@
         <button type="submit">View</button>
     </form>
 
+    <div class="exercise-legend">
+        <h3>Exercise Key</h3>
+        <table class="legend-table">
+            <tr>
+                <td><span class="legend-box walker"></span></td>
+                <td>Walker</td>
+                <td><span class="legend-box turnout"></span></td>
+                <td>Turnout</td>
+            </tr>
+            <tr>
+                <td><span class="legend-box lunge"></span></td>
+                <td>Lunge</td>
+                <td><span class="legend-box ride"></span></td>
+                <td>Ride</td>
+            </tr>
+            <tr>
+                <td><span class="legend-box hand_walk"></span></td>
+                <td>Hand Walk</td>
+                <td><span class="legend-box groundwork"></span></td>
+                <td>Groundwork</td>
+            </tr>
+            <tr>
+                <td><span class="legend-box graze"></span></td>
+                <td>Graze</td>
+                <td><span class="legend-box other"></span></td>
+                <td>Other</td>
+            </tr>
+        </table>
+    </div>
+
     <div class="exercise-calendar-container">
         <table class="exercise-table">
             <thead>
@@ -23,7 +53,9 @@
             <tbody>
                 {% for horse in horses %}
                     <tr>
-                        <td>{{ horse.name }}</td>
+                        <td>
+                            <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="horse-link">{{ horse.name }}</a>
+                        </td>
                         {% for day in days_of_week %}
                             {% with schedules=weekly_schedule|get_item:horse|get_item:day %}
                                 <td>

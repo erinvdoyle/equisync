@@ -1222,7 +1222,7 @@ button.primary:hover {
     cursor: pointer;
 }
 
- /* Background colors for exercise labels */
+ /* --- Background colors for exercise labels -------------------------------------------------------------------------------------------------*/
  .exercise-calendar-container .exercise-table .label-walker {
     background-color: #FFCCCB;
 }
@@ -1254,6 +1254,72 @@ button.primary:hover {
 .exercise-calendar-container .exercise-table .label-other {
     background-color: #F0E68C;
 }
+
+/* --- Legend Styles --------------------------------------------------------------------------------------------------------------------------*/
+.exercise-legend {
+    display: none;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.exercise-legend h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.legend-table {
+    border-collapse: collapse;
+    width: auto;
+    margin: 0 auto;
+}
+
+.legend-table td {
+    padding: 2px;
+    vertical-align: middle;
+}
+
+.legend-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.legend-box.walker {
+    background-color: #FFCCCB;
+}
+
+.legend-box.lunge {
+    background-color: #FFFACD;
+}
+
+.legend-box.hand_walk {
+    background-color: #E0FFFF;
+}
+
+.legend-box.graze {
+    background-color: #D3D3D3;
+}
+
+.legend-box.turnout {
+    background-color: #98FB98;
+}
+
+.legend-box.ride {
+    background-color: #ADD8E6;
+}
+
+.legend-box.groundwork {
+    background-color: #FFB6C1;
+}
+
+.legend-box.other {
+    background-color: #F0E68C;
+}
+
 
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
 /* --- For Larger Screens (Desktops and Tablets) --------------------------*/
@@ -1441,5 +1507,22 @@ button.primary:hover {
 
     .exercise-calendar-container .exercise-table .exercise-item.label-other::before {
         background-color: #F0E68C;
+    }
+
+    .exercise-legend {
+        display: block;
+    }
+
+    .exercise-legend h3 {
+        font-size: 14px;
+    }
+
+    .legend-table td {
+        padding: 1px;
+    }
+
+    .legend-box {
+        width: 10px;
+        height: 10px;
     }
 }
