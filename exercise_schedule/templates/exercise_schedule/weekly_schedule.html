@@ -2,13 +2,16 @@
 {% load exercise_tags %}
 
 {% block content %}
-    <h1>Weekly Exercise Schedule - {{ start_week }} to {{ end_week }}</h1>
+    <h1 class="exercise-heading">Weekly Exercise Schedule</h1>
 
-    <form method="get">
-        <label for="date">Select Week:</label>
-        <input type="date" id="date" name="date">
-        <button type="submit">View</button>
-    </form>
+    <div class="events-calendar-nav">
+        <form method="get" class="search-form">
+            <label for="date"></label>
+            <input type="date" id="date" name="date" class="date-input">
+            <button type="submit" class="select-week-button" id="select-week-button">Select Week</button>
+        </form>
+        <button type="button" id="add-exercise-button" class="nav-button">Add Exercise</button>
+    </div>
 
     <div class="exercise-legend">
         <h3>Exercise Key</h3>
@@ -134,6 +137,11 @@
                     const date = this.getAttribute("data-date");
                     openModal(scheduleId, horseName, date);
                 });
+            });
+
+            // Add event listener to the "Add Exercise" button
+            document.getElementById("add-exercise-button").addEventListener("click", function () {
+                window.location.href = `{% url 'exercise_schedule:daily_schedule_view' %}`;
             });
         });
     </script>

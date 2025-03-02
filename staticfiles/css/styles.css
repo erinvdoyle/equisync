@@ -1222,6 +1222,28 @@ button.primary:hover {
     cursor: pointer;
 }
 
+.exercise-heading {
+    text-align: center;
+}
+
+#select-week-button {
+    padding: 8px 16px; /* Increase padding to make the button wider */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 34px;
+    margin: 0 5px;
+    display: inline-block;
+    line-height: 1;
+}
+
+#select-week-button:hover {
+    background-color: #45a049;
+}
+
  /* --- Background colors for exercise labels -------------------------------------------------------------------------------------------------*/
  .exercise-calendar-container .exercise-table .label-walker {
     background-color: #FFCCCB;
