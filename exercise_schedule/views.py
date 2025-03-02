@@ -18,8 +18,16 @@ def daily_schedule_view(request, date=None, horse_id=None):
     queryset = ExerciseSchedule.objects.filter(date=date)
     if horse_id:
         queryset = queryset.filter(horse_id=horse_id)
+        
+    user_horses = HorseProfile.objects.filter(
+        Q(owner=request.user) |
+        Q(staff=request.user) |
+        Q(barn_manager=request.user) |
+        Q(rider=request.user)
+    ).distinct()
 
     schedule_form = ExerciseScheduleForm(initial={'date': date})
+    schedule_form.fields['horse'].queryset = user_horses
     item_forms = [ExerciseScheduleItemForm(prefix=str(i)) for i in range(3)]
 
     if request.method == 'POST':
@@ -64,7 +72,14 @@ def weekly_schedule_view(request, date=None):
     start_week = date - datetime.timedelta(days=date.weekday())
     end_week = start_week + datetime.timedelta(days=6)
 
-    horses = HorseProfile.objects.all()
+    all_horses = HorseProfile.objects.all()
+
+    user_horses = HorseProfile.objects.filter(
+        Q(owner=request.user) |
+        Q(staff=request.user) |
+        Q(barn_manager=request.user) |
+        Q(rider=request.user)
+    ).distinct()
 
     weekly_schedule = {}
     days_of_week = []
@@ -73,7 +88,7 @@ def weekly_schedule_view(request, date=None):
         day = start_week + datetime.timedelta(days=i)
         days_of_week.append(day)
 
-    for horse in horses:
+    for horse in all_horses:
         weekly_schedule[horse] = {}
         for i in range(7):
             day = start_week + datetime.timedelta(days=i)
@@ -84,8 +99,9 @@ def weekly_schedule_view(request, date=None):
         'weekly_schedule': weekly_schedule,
         'start_week': start_week,
         'end_week': end_week,
-        'horses': horses,
+        'horses': all_horses,
         'days_of_week': days_of_week,
+        'user_horses': user_horses,
     }
     return render(request, template, context)
 
