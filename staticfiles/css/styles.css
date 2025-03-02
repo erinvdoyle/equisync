@@ -1165,7 +1165,7 @@ button.primary:hover {
 .exercise-calendar-container .exercise-table .details-link {
     color: #19c37d;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
     font-size: 16px;
     display: block;
     text-align: center;
@@ -1385,43 +1385,61 @@ button.primary:hover {
     }
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 768px) {
+    .exercise-calendar-container .exercise-table th,
+    .exercise-calendar-container .exercise-table td {
+        font-size: 10px;
+        padding: 2px;
+    }
+
+    .exercise-calendar-container .exercise-table td {
+        height: auto;
+        white-space: normal;
+    }
+
     .exercise-calendar-container .exercise-table .exercise-item span {
         display: none;
     }
-}
 
-.exercise-calendar-container .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-}
+    .exercise-calendar-container .exercise-table .exercise-item::before {
+        content: attr(data-time-category);
+        display: inline-block;
+        padding: 2px 4px;
+        border-radius: 3px;
+        color: white;
+        font-size: 10px;
+    }
 
-.exercise-calendar-container .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    width: 80%;
-    max-width: 500px;
-}
+    .exercise-calendar-container .exercise-table .exercise-item.label-walker::before {
+        background-color: #FFCCCB;
+    }
 
-.exercise-calendar-container .exercise-close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+    .exercise-calendar-container .exercise-table .exercise-item.label-lunge::before {
+        background-color: #FFFACD;
+    }
 
-.exercise-calendar-container .exercise-close:hover,
-.exercise-calendar-container .exercise-close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+    .exercise-calendar-container .exercise-table .exercise-item.label-hand_walk::before {
+        background-color: #E0FFFF;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-graze::before {
+        background-color: #D3D3D3;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-turnout::before {
+        background-color: #98FB98;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-ride::before {
+        background-color: #ADD8E6;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-groundwork::before {
+        background-color: #FFB6C1;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-other::before {
+        background-color: #F0E68C;
+    }
 }
