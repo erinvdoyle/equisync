@@ -1,37 +1,90 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Daily Exercise Schedule - {{ date }}</h1>
+<h1>Daily Exercise Schedule - {{ date }}</h1>
 
-    <form method="get">
-        <label for="date">Select Date:</label>
-        <input type="date" id="date" name="date" value="{{ date|date:'Y-m-d' }}">
-        <button type="submit">View</button>
-    </form>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create Entry</button>
-    </form>
+<!-- Date Selection Form -->
+<form method="get">
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" name="date" value="{{ date|date:'Y-m-d' }}" max="{{ date|date:'Y-m-d' }}">
+    <button type="submit">View</button>
+</form>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Horse</th>
-                <th>Exercise Type</th>
-                <th>Duration</th>
-                <th>Notes</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for schedule in schedules %}
-            <tr>
-                <td>{{ schedule.horse.name }}</td>
-                <td>{{ schedule.exercise_type }}</td>
-                <td>{{ schedule.duration }}</td>
-                <td>{{ schedule.notes }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h2>Add/Update Exercise Schedule</h2>
+<form method="post">
+    {% csrf_token %}
+    
+    <!-- Horse & Date Selection -->
+    {{ schedule_form.horse }}
+    {{ schedule_form.date }}
+
+    <!-- AM Exercise -->
+    <h3>AM Exercise</h3>
+    <div class="exercise-item">
+        {{ item_forms.0.exercise_type.label_tag }} {{ item_forms.0.exercise_type }}
+        {{ item_forms.0.duration.label_tag }} {{ item_forms.0.duration }}
+        <input type="hidden" name="{{ item_forms.0.prefix }}-time_category" value="am">
+    </div>
+
+    <!-- PM Exercise -->
+    <h3>PM Exercise</h3>
+    <div class="exercise-item">
+        {{ item_forms.1.exercise_type.label_tag }} {{ item_forms.1.exercise_type }}
+        {{ item_forms.1.duration.label_tag }} {{ item_forms.1.duration }}
+        <input type="hidden" name="{{ item_forms.1.prefix }}-time_category" value="pm">
+    </div>
+
+    <!-- Additional Exercise -->
+    <h3>Additional Exercise</h3>
+    <div class="exercise-item">
+        {{ item_forms.2.exercise_type.label_tag }} {{ item_forms.2.exercise_type }}
+        {{ item_forms.2.duration.label_tag }} {{ item_forms.2.duration }}
+        <input type="hidden" name="{{ item_forms.2.prefix }}-time_category" value="additional">
+    </div>
+
+    <!-- Notes -->
+    {{ schedule_form.notes.label_tag }} {{ schedule_form.notes }}
+
+    <button type="submit">Update Schedule</button>
+    <a href="{% url 'exercise_schedule:weekly_schedule_view' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+<!-- Current Schedule -->
+<h2>Current Schedule</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Horse</th>
+            <th>Exercise Type</th>
+            <th>Duration</th>
+            <th>Time Category</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for schedule in schedules %}
+        <tr>
+            <td>{{ schedule.horse.name }}</td>
+            <td>
+                {% for item in schedule.schedule_items.all %}
+                    {{ item.get_exercise_type_display }}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {% for item in schedule.schedule_items.all %}
+                    {{ item.duration }} mins<br>
+                {% endfor %}
+            </td>
+            <td>
+                {% for item in schedule.schedule_items.all %}
+                    {{ item.time_category|default:"-" }}<br>
+                {% endfor %}
+            </td>
+            <td>{{ schedule.notes }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'exercise_schedule:weekly_schedule_view' %}" class="btn btn-primary">Back to Weekly Schedule</a>
 {% endblock %}
