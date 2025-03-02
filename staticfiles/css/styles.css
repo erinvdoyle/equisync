@@ -1145,12 +1145,13 @@ button.primary:hover {
 
 .exercise-calendar-container .exercise-table td {
     border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+    padding: 5px;
+    text-align: left;
     vertical-align: top;
     height: 100px;
     width: 150px;
     overflow: hidden;
+    font-size: 16px;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -1162,9 +1163,13 @@ button.primary:hover {
 }
 
 .exercise-calendar-container .exercise-table .details-link {
-    color: blue;
+    color: #19c37d;
     cursor: pointer;
     text-decoration: underline;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    margin-top: 5px;
 }
 
 .exercise-calendar-container .exercise-table .noday {
@@ -1215,10 +1220,6 @@ button.primary:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-.exercise-type {
-    font-size: 14px;
 }
 
  /* Background colors for exercise labels */

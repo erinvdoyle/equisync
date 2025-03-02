@@ -30,32 +30,33 @@
                                     {% if schedules %}
                                         {% for schedule in schedules %}
                                             <div class="exercise-item">
-                                                <strong>AM:</strong>
+                                                <!-- <strong>AM:</strong> -->
                                                 {% for item in schedule.schedule_items.all %}
                                                     {% if item.time_category == 'am' %}
-                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span><br>
+                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }}</span><br>
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
                                             <div class="exercise-item">
-                                                <strong>PM:</strong>
+                                                <!-- <strong>PM:</strong> -->
                                                 {% for item in schedule.schedule_items.all %}
                                                     {% if item.time_category == 'pm' %}
-                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span><br>
+                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }}</span><br>
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
                                             <div class="exercise-item">
-                                                <strong>Additional:</strong>
+                                                <!-- <strong>Additional:</strong> -->
                                                 {% for item in schedule.schedule_items.all %}
                                                     {% if item.time_category == 'additional' %}
-                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span><br>
+                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }}</span><br>
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
                                             <div class="details-link" data-schedule-id="{{ schedule.id }}" data-horse-name="{{ horse.name }}" data-date="{{ day|date:'M d' }}">
-                                                Details
+                                                <i class="fas fa-info-circle"></i>
                                             </div>
+                                            
                                         {% endfor %}
                                     {% else %}
                                         <span>N/A</span>
