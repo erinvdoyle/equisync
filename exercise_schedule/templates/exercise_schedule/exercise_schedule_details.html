@@ -1,0 +1,22 @@
+<h3>Exercise Details</h3>
+<p><strong>AM:</strong></p>
+<ul>
+    {% for item in am_items %}
+        <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
+    {% endfor %}
+</ul>
+<p><strong>PM:</strong></p>
+<ul>
+    {% for item in pm_items %}
+        <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
+    {% endfor %}
+</ul>
+<p><strong>Additional:</strong></p>
+<ul>
+    {% for item in additional_items %}
+        <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
+    {% endfor %}
+</ul>
+<p><strong>Notes:</strong> {{ notes }}</p>
+
+

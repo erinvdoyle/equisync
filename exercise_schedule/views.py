@@ -1,10 +1,10 @@
 import datetime
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import ExerciseSchedule, ExerciseScheduleItem
-from .forms import ExerciseScheduleForm
+from .forms import ExerciseScheduleForm, ExerciseScheduleItemForm
 import datetime
 from horses.models import HorseProfile
-from django.db.models import Count, IntegerField, Sum
+from django.db.models import IntegerField, Sum
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
@@ -19,11 +19,31 @@ def daily_schedule_view(request, date=None, horse_id=None):
     if horse_id:
         queryset = queryset.filter(horse_id=horse_id)
 
-    form = ExerciseScheduleForm()
+    schedule_form = ExerciseScheduleForm(initial={'date': date})
+    item_forms = [ExerciseScheduleItemForm(prefix=str(i)) for i in range(3)]
+
+    if request.method == 'POST':
+        schedule_form = ExerciseScheduleForm(request.POST)
+        item_forms = [ExerciseScheduleItemForm(request.POST, prefix=str(i)) for i in range(3)]
+
+        if schedule_form.is_valid() and all(form.is_valid() for form in item_forms):
+            schedule = schedule_form.save(commit=False)
+            schedule.created_by = request.user
+            schedule.save()
+
+            for form in item_forms:
+                if form.cleaned_data['exercise_type'] and form.cleaned_data['duration']:
+                    item = form.save(commit=False)
+                    item.schedule = schedule
+                    item.save()
+
+            return redirect('exercise_schedule:daily_schedule_view_date', date=date.strftime("%Y-%m-%d"))
+
     context = {
         'schedules': queryset,
         'date': date,
-        'form': form,
+        'schedule_form': schedule_form,
+        'item_forms': item_forms,
         'horse_profiles': HorseProfile.objects.all()
     }
     return render(request, 'exercise_schedule/daily_schedule.html', context)
@@ -57,11 +77,8 @@ def weekly_schedule_view(request, date=None):
         weekly_schedule[horse] = {}
         for i in range(7):
             day = start_week + datetime.timedelta(days=i)
-            try:
-                schedule = ExerciseSchedule.objects.get(horse=horse, date=day)
-                weekly_schedule[horse][day] = schedule
-            except ExerciseSchedule.DoesNotExist:
-                weekly_schedule[horse][day] = None
+            schedules = ExerciseSchedule.objects.filter(horse=horse, date=day).prefetch_related('schedule_items')
+            weekly_schedule[horse][day] = schedules if schedules.exists() else None
 
     context = {
         'weekly_schedule': weekly_schedule,
@@ -71,6 +88,7 @@ def weekly_schedule_view(request, date=None):
         'days_of_week': days_of_week,
     }
     return render(request, template, context)
+
 
 def archive_schedule_view(request):
     search_term = request.GET.get('search')
@@ -156,3 +174,23 @@ def horse_exercise_schedule_view(request, horse_id, start_date=None, end_date=No
         'end_date': end_date,
     }
     return render(request, 'exercise_schedule/horse_exercise_schedule.html', context)
+
+def exercise_details_view(request, schedule_id):
+    schedule = get_object_or_404(ExerciseSchedule, pk=schedule_id)
+
+    am_items = schedule.schedule_items.filter(time_category='am')
+    pm_items = schedule.schedule_items.filter(time_category='pm')
+    additional_items = schedule.schedule_items.filter(time_category='additional')
+
+    notes = schedule.notes
+
+    context = {
+        'am_items': am_items,
+        'pm_items': pm_items,
+        'additional_items': additional_items,
+        'notes': notes,
+        'horse_name': schedule.horse.name,
+        'date': schedule.date.strftime('%b %d, %Y'),
+    }
+
+    return render(request, 'exercise_schedule/exercise_schedule_details.html', context)

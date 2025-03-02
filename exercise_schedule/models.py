@@ -29,10 +29,17 @@ EXERCISE_CHOICES = [
     ('other', 'Other'),
 ]
 
+TIME_CATEGORY_CHOICES = [
+    ('am', 'AM'),
+    ('pm', 'PM'),
+    ('additional', 'Additional'),
+]
+
 class ExerciseScheduleItem(models.Model):
     schedule = models.ForeignKey(ExerciseSchedule, on_delete=models.CASCADE, related_name='schedule_items')
     exercise_type = models.CharField(max_length=50, choices=EXERCISE_CHOICES)
     duration = models.PositiveIntegerField(default=0, help_text="Duration in minutes")
+    time_category = models.CharField(max_length=20, choices=TIME_CATEGORY_CHOICES, default='am')
 
     def __str__(self):
         return f"{self.get_exercise_type_display()} ({self.duration} mins)"

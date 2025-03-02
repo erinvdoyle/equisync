@@ -10,36 +10,122 @@
         <button type="submit">View</button>
     </form>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Horse</th>
-                {% for day in days_of_week %}
-                <th>{{ day|date:"l, M d, 'y" }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for horse in horses %}
+    <div class="exercise-calendar-container">
+        <table class="exercise-table">
+            <thead>
                 <tr>
-                    <td>{{ horse.name }}</td>
+                    <th>Horse</th>
                     {% for day in days_of_week %}
-                        {% with schedule=weekly_schedule|get_item:horse|get_item:day %}
-                            <td>
-                                {% if schedule %}
-                                    {% for item in schedule.schedule_items.all %}
-                                        <div>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</div>
-                                    {% endfor %}
-                                    <div>Notes: {{ schedule.notes }}</div>
-                                {% else %}
-                                    N/a
-                                {% endif %}
-                            </td>
-                        {% endwith %}
+                        <th class="{{ day|date:'l'|lower }}">{{ day|date:"M d" }}</th>
                     {% endfor %}
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for horse in horses %}
+                    <tr>
+                        <td>{{ horse.name }}</td>
+                        {% for day in days_of_week %}
+                            {% with schedules=weekly_schedule|get_item:horse|get_item:day %}
+                                <td>
+                                    {% if schedules %}
+                                        {% for schedule in schedules %}
+                                            <div class="exercise-item">
+                                                <strong>AM:</strong>
+                                                {% for item in schedule.schedule_items.all %}
+                                                    {% if item.time_category == 'am' %}
+                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span><br>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                            <div class="exercise-item">
+                                                <strong>PM:</strong>
+                                                {% for item in schedule.schedule_items.all %}
+                                                    {% if item.time_category == 'pm' %}
+                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span><br>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                            <div class="exercise-item">
+                                                <strong>Additional:</strong>
+                                                {% for item in schedule.schedule_items.all %}
+                                                    {% if item.time_category == 'additional' %}
+                                                        <span class="label-{{ item.exercise_type }}">{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span><br>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                            <div class="details-link" data-schedule-id="{{ schedule.id }}" data-horse-name="{{ horse.name }}" data-date="{{ day|date:'M d' }}">
+                                                Details
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <span>N/A</span>
+                                    {% endif %}
+                                </td>
+                            {% endwith %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="exerciseModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="exercise-close">&times;</span>
+            <h2 class="modal-title"></h2>
+            <div id="exercise-modal-details"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const exerciseModal = document.getElementById("exerciseModal");
+            const closeModalButton = document.querySelector(".exercise-close");
+
+            // Function to open the modal
+            function openModal(scheduleId, horseName, date) {
+                document.querySelector("#exerciseModal .modal-title").textContent = `${horseName}'s Schedule, ${date}`;
+                document.getElementById("exercise-modal-details").innerHTML = 'Loading...';
+
+                // Fetch exercise details
+                fetch(`/exercise_schedule/details/${scheduleId}/`)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById("exercise-modal-details").innerHTML = html;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching exercise details:", error);
+                    });
+
+                exerciseModal.style.display = 'block';
+            }
+
+            // Event listener for modal close
+            closeModalButton.addEventListener("click", function () {
+                exerciseModal.style.display = 'none';
+            });
+
+            // Event listener to close modal when clicking outside
+            window.addEventListener("click", function (event) {
+                if (event.target == exerciseModal) {
+                    exerciseModal.style.display = 'none';
+                }
+            });
+
+            // Add event listeners to all "Details" links
+            document.querySelectorAll(".details-link").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    const scheduleId = this.getAttribute("data-schedule-id");
+                    const horseName = this.getAttribute("data-horse-name");
+                    const date = this.getAttribute("data-date");
+                    openModal(scheduleId, horseName, date);
+                });
+            });
+        });
+    </script>
 {% endblock %}
+
+
+
 
