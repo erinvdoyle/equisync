@@ -1227,7 +1227,7 @@ button.primary:hover {
 }
 
 #select-week-button {
-    padding: 8px 16px; /* Increase padding to make the button wider */
+    padding: 8px 16px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -1342,6 +1342,93 @@ button.primary:hover {
     background-color: #F0E68C;
 }
 
+/* --- Exercise Form Styles -------------------------------------------------------------------------------------------- */
+.exercise-form-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.exercise-form-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.exercise-form-container label {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.exercise-form-container input[type="text"],
+.exercise-form-container input[type="date"],
+.exercise-form-container select,
+.exercise-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.exercise-form-container button[type="submit"],
+.exercise-form-container .exercise-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.exercise-form-container button[type="submit"]:hover,
+.exercise-form-container .exercise-btn:hover {
+    background-color: #45a049;
+}
+
+.exercise-form-container .exercise-item {
+    margin-bottom: 20px;
+}
+
+.exercise-form-container .exercise-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.exercise-form-container .exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.exercise-form-container .exercise-table th,
+.exercise-form-container .exercise-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.exercise-form-container .exercise-table th {
+    background-color: #f0f0f0;
+}
+
+.exercise-form-container .exercise-btn-secondary,
+.exercise-form-container .exercise-btn-primary {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
 
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
 /* --- For Larger Screens (Desktops and Tablets) --------------------------*/
@@ -1546,5 +1633,59 @@ button.primary:hover {
     .legend-box {
         width: 10px;
         height: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .exercise-form-container {
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .exercise-form-container .form-section,
+    .exercise-form-container .schedule-section {
+        flex: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .exercise-form-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 425px) {
+    .exercise-form-container {
+        padding: 10px;
+    }
+
+    .exercise-form-container h2 {
+        font-size: 20px;
+    }
+
+    .exercise-form-container label {
+        font-size: 12px;
+    }
+
+    .exercise-form-container input[type="text"],
+    .exercise-form-container input[type="date"],
+    .exercise-form-container select,
+    .exercise-form-container textarea {
+        font-size: 12px;
+    }
+
+    .exercise-form-container button[type="submit"],
+    .exercise-form-container .exercise-btn {
+        font-size: 12px;
+    }
+
+    .exercise-form-container .exercise-item h3 {
+        font-size: 16px;
+    }
+
+    .exercise-form-container .exercise-table th,
+    .exercise-form-container .exercise-table td {
+        padding: 10px;
+        font-size: 12px;
     }
 }

@@ -18,7 +18,7 @@ def daily_schedule_view(request, date=None, horse_id=None):
     queryset = ExerciseSchedule.objects.filter(date=date)
     if horse_id:
         queryset = queryset.filter(horse_id=horse_id)
-        
+
     user_horses = HorseProfile.objects.filter(
         Q(owner=request.user) |
         Q(staff=request.user) |
@@ -37,7 +37,14 @@ def daily_schedule_view(request, date=None, horse_id=None):
         if schedule_form.is_valid() and all(form.is_valid() for form in item_forms):
             schedule = schedule_form.save(commit=False)
             schedule.created_by = request.user
-            schedule.save()
+
+            existing_schedule = ExerciseSchedule.objects.filter(horse=schedule.horse, date=date).first()
+            if existing_schedule:
+                schedule.id = existing_schedule.id
+                schedule.save(update_fields=['horse', 'date', 'notes', 'created_by', 'updated_at'])
+                ExerciseScheduleItem.objects.filter(schedule=existing_schedule).delete()
+            else:
+                schedule.save()
 
             for form in item_forms:
                 if form.cleaned_data['exercise_type'] and form.cleaned_data['duration']:
@@ -47,12 +54,22 @@ def daily_schedule_view(request, date=None, horse_id=None):
 
             return redirect('exercise_schedule:daily_schedule_view_date', date=date.strftime("%Y-%m-%d"))
 
+    selected_horse_id = request.GET.get('horse_id')
+    existing_schedule = None
+    if selected_horse_id:
+        selected_horse = get_object_or_404(HorseProfile, id=selected_horse_id)
+        existing_schedule = ExerciseSchedule.objects.filter(horse=selected_horse, date=date).first()
+        if existing_schedule:
+            schedule_form = ExerciseScheduleForm(instance=existing_schedule)
+            item_forms = [ExerciseScheduleItemForm(instance=item, prefix=str(i)) for i, item in enumerate(existing_schedule.schedule_items.all())]
+
     context = {
         'schedules': queryset,
         'date': date,
         'schedule_form': schedule_form,
         'item_forms': item_forms,
-        'horse_profiles': HorseProfile.objects.all()
+        'user_horses': user_horses,
+        'existing_schedule': existing_schedule,
     }
     return render(request, 'exercise_schedule/daily_schedule.html', context)
 
