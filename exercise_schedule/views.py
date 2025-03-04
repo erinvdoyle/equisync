@@ -4,9 +4,11 @@ from .models import ExerciseSchedule, ExerciseScheduleItem
 from .forms import ExerciseScheduleForm, ExerciseScheduleItemForm
 import datetime
 from horses.models import HorseProfile
-from django.db.models import IntegerField, Sum
+from django.db.models import IntegerField, Sum, Avg
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import JsonResponse
+
 
 @login_required
 def daily_schedule_view(request, date=None, horse_id=None):
@@ -151,22 +153,30 @@ def create_schedule_entry(request):
     return render(request, 'exercise_schedule/create_schedule_entry.html', {'form': form})
 
 @login_required
-def horse_exercise_schedule_view(request, horse_id, start_date=None, end_date=None):
+def horse_exercise_schedule_view(request, horse_id):
     horse = get_object_or_404(HorseProfile, pk=horse_id)
 
-    if request.method == 'GET':
-        start_date_str = request.GET.get('start_date')
-        end_date_str = request.GET.get('end_date')
+    start_date_str = request.GET.get('start_date')
+    end_date_str = request.GET.get('end_date')
+    timeframe = request.GET.get('timeframe', 'week')
 
-        if start_date_str:
-            start_date = datetime.datetime.strptime(start_date_str, "%Y-%m-%d").date()
-        else:
-            start_date = datetime.date.today() - datetime.timedelta(days=7)
+    today = datetime.date.today()
 
-        if end_date_str:
-            end_date = datetime.datetime.strptime(end_date_str, "%Y-%m-%d").date()
-        else:
-            end_date = datetime.date.today()
+    if timeframe == 'day':
+        start_date = today
+        end_date = today
+    elif timeframe == 'week':
+        start_date = today - datetime.timedelta(days=today.weekday())
+        end_date = start_date + datetime.timedelta(days=6)
+    elif timeframe == 'month':
+        start_date = today.replace(day=1)
+        end_date = (start_date + datetime.timedelta(days=32)).replace(day=1) - datetime.timedelta(days=1)
+    elif timeframe == 'year':
+        start_date = today.replace(month=1, day=1)
+        end_date = today.replace(month=12, day=31)
+    else:
+        start_date = datetime.datetime.strptime(start_date_str, "%Y-%m-%d").date()
+        end_date = datetime.datetime.strptime(end_date_str, "%Y-%m-%d").date()
 
     exercise_data = ExerciseScheduleItem.objects.filter(
         schedule__horse=horse,
@@ -175,6 +185,33 @@ def horse_exercise_schedule_view(request, horse_id, start_date=None, end_date=No
 
     labels = [item['exercise_type'] for item in exercise_data]
     data = [item['total_duration'] for item in exercise_data]
+
+    exercise_breakdown_minutes = [
+        {'exercise_type': item['exercise_type'], 'total_minutes': item['total_duration'], 'total_hours': round(item['total_duration'] / 60.0 * 2) / 2}
+        for item in exercise_data
+    ]
+
+    exercise_breakdown_minutes_html = ''.join(
+        f'<li>{item["exercise_type"]}: {item["total_minutes"]} minutes ({item["total_hours"]} hours)</li>'
+        for item in exercise_breakdown_minutes
+    )
+
+    if timeframe != 'day':
+        average_exercise_time = [
+            {'exercise_type': item['exercise_type'], 'average_minutes': item['average_minutes'], 'average_hours': round(item['average_minutes'] / 60.0 * 2) / 2}
+            for item in ExerciseScheduleItem.objects.filter(
+                schedule__horse=horse,
+                schedule__date__range=[start_date, end_date]
+            ).values('exercise_type').annotate(average_minutes=Avg('duration'))
+        ]
+        average_exercise_time_html = ''.join(
+            f'<li>{item["exercise_type"]}: {item["average_hours"]} hours</li>'
+            if item['average_hours'] >= 0.5 else f'<li>{item["exercise_type"]}: {item["average_minutes"]} minutes</li>'
+            for item in average_exercise_time
+        )
+    else:
+        average_exercise_time = []
+        average_exercise_time_html = ''
 
     date = datetime.date.today()
     start_week = date - datetime.timedelta(days=date.weekday())
@@ -187,13 +224,18 @@ def horse_exercise_schedule_view(request, horse_id, start_date=None, end_date=No
         day = start_week + datetime.timedelta(days=i)
         days_of_week.append(day)
 
-    weekly_schedule_items = {}
     for day in days_of_week:
         try:
             schedule_items = ExerciseScheduleItem.objects.filter(schedule__horse=horse, schedule__date=day)
             weekly_schedule_items[day] = schedule_items
         except ExerciseScheduleItem.DoesNotExist:
             weekly_schedule_items[day] = None
+
+    previous_weeks = []
+    for i in range(10):
+        week_start = start_week - datetime.timedelta(weeks=i)
+        week_end = week_start + datetime.timedelta(days=6)
+        previous_weeks.append({'start_date': week_start, 'end_date': week_end})
 
     context = {
         'horse': horse,
@@ -205,8 +247,38 @@ def horse_exercise_schedule_view(request, horse_id, start_date=None, end_date=No
         'days_of_week': days_of_week,
         'start_date': start_date,
         'end_date': end_date,
+        'exercise_breakdown_minutes': exercise_breakdown_minutes,
+        'exercise_breakdown_minutes_html': exercise_breakdown_minutes_html,
+        'average_exercise_time': average_exercise_time,
+        'average_exercise_time_html': average_exercise_time_html,
+        'timeframe': timeframe,
+        'previous_weeks': previous_weeks,
     }
+
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return JsonResponse({
+            'labels': labels,
+            'data': data,
+            'exercise_breakdown_minutes_html': exercise_breakdown_minutes_html,
+            'average_exercise_time_html': average_exercise_time_html,
+            'weekly_schedule_items': {day.strftime('%Y-%m-%d'): [{'exercise_type': item.get_exercise_type_display(), 'duration': item.duration} for item in items] for day, items in weekly_schedule_items.items()},
+        })
+
     return render(request, 'exercise_schedule/horse_exercise_schedule.html', context)
+
+def weekly_exercise_schedule(request, horse_id):
+    horse = get_object_or_404(HorseProfile, pk=horse_id)
+    start_date_str = request.GET.get('start_date')
+    start_date = datetime.datetime.strptime(start_date_str, "%Y-%m-%d").date()
+    end_date = start_date + datetime.timedelta(days=6)
+
+    weekly_schedule_items = {}
+    for day in (start_date + datetime.timedelta(n) for n in range(7)):
+        schedule_items = ExerciseScheduleItem.objects.filter(schedule__horse=horse, schedule__date=day)
+        weekly_schedule_items[day.strftime('%Y-%m-%d')] = [{'exercise_type': item.get_exercise_type_display(), 'duration': item.duration} for item in schedule_items]
+
+    return JsonResponse({'weekly_schedule_items': weekly_schedule_items})
+
 
 def exercise_details_view(request, schedule_id):
     schedule = get_object_or_404(ExerciseSchedule, pk=schedule_id)

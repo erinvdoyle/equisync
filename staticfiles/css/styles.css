@@ -1430,6 +1430,41 @@ button.primary:hover {
     margin-top: 20px;
 }
 
+/* --- Horse Exercise Schedule ------------------------------------------------------------------------------------------------------------ */
+.chart-and-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.weekly-schedule-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weekly-schedule-controls button {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: .5rem 1rem;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .15s ease-in-out;
+}
+
+.weekly-schedule-controls button:hover {
+    background-color: #f0f0f0;
+}
+
+.weekly-schedule-controls select {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: .5rem;
+    font-size: 14px;
+}
+
+
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
 /* --- For Larger Screens (Desktops and Tablets) --------------------------*/
 @media (min-width: 768px) {
@@ -1644,6 +1679,14 @@ button.primary:hover {
 
     .exercise-form-container .form-section,
     .exercise-form-container .schedule-section {
+        flex: 1;
+    }
+
+    .chart-and-breakdown {
+        flex-direction: row;
+    }
+
+    .time-breakdown {
         flex: 1;
     }
 }
