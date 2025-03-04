@@ -2,76 +2,73 @@
 {% load exercise_tags %}
 
 {% block content %}
-    <h1>{{ horse.name }} - Exercise Schedule</h1>
+    <h1>{{ horse.name }}'s Exercise Schedule</h1>
+    <span>Exposition goes here</span>
 
-    <h2>Select Timeframe:</h2>
-    <form method="get">
-        <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" value="{{ start_date|date:'Y-m-d' }}">
-        <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date" value="{{ end_date|date:'Y-m-d' }}">
-        <button type="submit">Update Chart</button>
-    </form>
-
-    <h2>Exercise Breakdown ({{ start_date }} to {{ end_date }})</h2>
-    <div style="width:400px; height:400px;">
-        <canvas id="exerciseChart"></canvas>
+    <div class="controls">
+        <form method="get" id="timeframe-form">
+            <div class="radio-inputs">
+                <label>
+                    <input type="radio" name="timeframe" value="week" {% if timeframe == 'week' %}checked{% endif %}>
+                    <span class="name">Week</span>
+                </label>
+                <label>
+                    <input type="radio" name="timeframe" value="month" {% if timeframe == 'month' %}checked{% endif %}>
+                    <span class="name">Month</span>
+                </label>
+                <label>
+                    <input type="radio" name="timeframe" value="year" {% if timeframe == 'year' %}checked{% endif %}>
+                    <span class="name">Year</span>
+                </label>
+            </div>
+            <div class="date-inputs">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" value="{{ start_date|date:'Y-m-d' }}">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" value="{{ end_date|date:'Y-m-d' }}">
+                <button type="submit">Update Chart</button>
+            </div>
+        </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ctx = document.getElementById('exerciseChart').getContext('2d');
-            if (ctx) {
-                const myChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: [{% for item in labels %}"{{ item }}",{% endfor %}],
-                        datasets: [{
-                            label: 'Exercise Breakdown',
-                            data: [{% for item in data %}{{ item }},{% endfor %}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
-                            title: {
-                                display: true,
-                                text: 'Exercise Breakdown',
-                                padding: 10,
-                                font: {
-                                    size: 16
-                                }
-                            }
-                        }
-                    }
-                });
-            } else {
-                console.error("Could not get context for chart");
-            }
-        });
-    </script>
+    <div class="chart-and-breakdown">
+        <div style="width:400px; height:400px;">
+            <canvas id="exerciseChart"></canvas>
+        </div>
+
+        <div class="time-breakdown">
+            <h2 style="text-decoration: underline; font-size: 1.5em;">Total Exercise Time</h2>
+            <ul style="font-size: 1em;" id="time-breakdown-minutes">
+                {% for item in exercise_breakdown_minutes %}
+                <li>{{ item.exercise_type }}: {{ item.total_minutes }} minutes ({{ item.total_hours }} hours)</li>
+                {% endfor %}
+            </ul>
+
+            {% if timeframe != 'day' %}
+            <h2 style="text-decoration: underline; font-size: 1.5em;">Average Exercise Time</h2>
+            <p>In this period, {{ horse.name }} spent an average of:</p>
+            <ul style="font-size: 1em;" id="average-exercise-time">
+                {% for item in average_exercise_time %}
+                <li>{{ item.exercise_type }}: {{ item.average_hours }} hours</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="weekly-schedule-controls">
+        <button id="prev-week">Previous Week</button>
+        <select id="week-select">
+            {% for week in previous_weeks %}
+            <option value="{{ week.start_date|date:'Y-m-d' }}" {% if week.start_date == start_week %}selected{% endif %}>
+                Week of {{ week.start_date|date:"M d, Y" }}
+            </option>
+            {% endfor %}
+        </select>
+        <button id="next-week">Next Week</button>
+        <button id="update-button">Update</button>
+    </div>
+    
 
     <h2>Weekly Exercise Schedule</h2>
     <table class="table table-bordered">
@@ -109,10 +106,173 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('exerciseChart').getContext('2d');
+    const form = document.getElementById('timeframe-form');
+    const radioButtons = form.querySelectorAll('input[name="timeframe"]');
+    const minutesSection = document.getElementById('time-breakdown-minutes');
+    const averageSection = document.getElementById('average-exercise-time');
+    const weekSelect = document.getElementById('week-select');
+    const updateButton = document.getElementById('update-button');
+    const prevWeekButton = document.getElementById('prev-week');
+    const nextWeekButton = document.getElementById('next-week');
+
+    function updateChart() {
+        const timeframe = form.querySelector('input[name="timeframe"]:checked').value;
+        const startDate = form.start_date.value;
+        const endDate = form.end_date.value;
+
+        fetch(`{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}?timeframe=${timeframe}&start_date=${startDate}&end_date=${endDate}`)
+            .then(response => response.json())
+            .then(data => {
+                myChart.data.labels = data.labels;
+                myChart.data.datasets[0].data = data.data;
+                myChart.update();
+
+                minutesSection.innerHTML = data.exercise_breakdown_minutes_html;
+                if (timeframe !== 'day') {
+                    averageSection.innerHTML = data.average_exercise_time_html;
+                }
+            })
+            .catch(error => {
+                // Commented out to avoid logging errors to the console
+                // console.error("Error fetching chart data:", error);
+            });
+    }
+
+    function updateWeeklySchedule() {
+        const selectedWeek = weekSelect.value;
+
+        fetch(`{% url 'exercise_schedule:weekly_exercise_schedule' horse.id %}?start_date=${selectedWeek}`)
+            .then(response => response.json())
+            .then(data => {
+                // Update the weekly schedule table
+                const tableBody = document.querySelector('table tbody');
+                tableBody.innerHTML = '';
+                Object.entries(data.weekly_schedule_items).forEach(([day, items]) => {
+                    const row = document.createElement('tr');
+                    const dateCell = document.createElement('td');
+                    dateCell.textContent = new Date(day).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
+                    row.appendChild(dateCell);
+
+                    const exerciseTypeCell = document.createElement('td');
+                    const durationCell = document.createElement('td');
+                    const notesCell = document.createElement('td');
+
+                    if (items.length > 0) {
+                        items.forEach(item => {
+                            const exerciseTypeDiv = document.createElement('div');
+                            exerciseTypeDiv.textContent = item.exercise_type;
+                            exerciseTypeCell.appendChild(exerciseTypeDiv);
+
+                            const durationDiv = document.createElement('div');
+                            durationDiv.textContent = item.duration;
+                            durationCell.appendChild(durationDiv);
+                        });
+                    } else {
+                        exerciseTypeCell.textContent = 'No Schedule';
+                        durationCell.textContent = 'No Schedule';
+                        notesCell.textContent = 'No Schedule';
+                    }
+
+                    row.appendChild(exerciseTypeCell);
+                    row.appendChild(durationCell);
+                    row.appendChild(notesCell);
+                    tableBody.appendChild(row);
+                });
+
+                const today = new Date();
+                const selectedWeekStart = new Date(selectedWeek);
+                const currentWeekStart = new Date(today.setDate(today.getDate() - today.getDay()));
+                if (selectedWeekStart.getTime() >= currentWeekStart.getTime()) {
+                    nextWeekButton.style.display = 'none';
+                } else {
+                    nextWeekButton.style.display = 'inline-block';
+                }
+            })
+            .catch(error => {
+                // Commented out to avoid logging errors to the console
+                // console.error("Error fetching weekly schedule data:", error);
+            });
+    }
+
+    prevWeekButton.addEventListener('click', function () {
+        const selectedWeek = weekSelect.value;
+        const [year, month, day] = selectedWeek.split('-').map(Number);
+        const prevWeekDate = new Date(year, month - 1, day - 7);
+        weekSelect.value = prevWeekDate.toISOString().split('T')[0];
+        updateWeeklySchedule();
+    });
+
+    nextWeekButton.addEventListener('click', function () {
+        const selectedWeek = weekSelect.value;
+        const [year, month, day] = selectedWeek.split('-').map(Number);
+        const nextWeekDate = new Date(year, month - 1, day + 7);
+        weekSelect.value = nextWeekDate.toISOString().split('T')[0];
+        updateWeeklySchedule();
+    });
+
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [{% for item in labels %}"{{ item }}",{% endfor %}],
+            datasets: [{
+                label: 'Exercise Breakdown',
+                data: [{% for item in data %}{{ item }},{% endfor %}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Exercise Breakdown',
+                    padding: 10,
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        }
+    });
+
+    radioButtons.forEach(button => {
+        button.addEventListener('change', updateChart);
+    });
+
+    form.start_date.addEventListener('change', updateChart);
+    form.end_date.addEventListener('change', updateChart);
+
+    updateButton.addEventListener('click', updateWeeklySchedule);
+
+    // Initial load of the weekly schedule
+    updateWeeklySchedule();
+});
+
+    </script>
+
 {% endblock %}
-
-
-
-
-
-
