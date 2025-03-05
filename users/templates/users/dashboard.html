@@ -112,6 +112,56 @@
         <p>No exercise schedules found.</p>
     {% endif %}
 
+    <!-- Upcoming Appointments -->
+    <h2>Upcoming Appointments</h2>
+  <div class="upcoming-appointments">
+    {% for horse_data in horses_with_upcoming_appointments %}
+      <div class="horse-upcoming-appointments">
+        <h3>{{ horse_data.horse.name }}'s Upcoming Appointments</h3>
+        {% if horse_data.upcoming_appointments.exists %}
+          <ul>
+            {% for appointment in horse_data.upcoming_appointments %}
+            <li>
+                <strong>{{ appointment.date|date:"M d, Y" }}</strong> - 
+                {{ appointment.get_appointment_type_display }} Appointment with {{ appointment.practitioner }} - 
+                {% if appointment.time %}
+                  {{ appointment.time|time:"g:i A" }}
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No upcoming appointments found for this horse.</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+    <!-- Appointment History -->
+    <h2>Appointment History</h2>
+  <div class="horses-appointments-archive">
+    {% for horse_data in horses_with_appointments %}
+      <div class="horse-appointments">
+        <h3>{{ horse_data.horse.name }}'s Appointment History</h3>
+        {% if horse_data.appointments.exists %}
+          <ul>
+            {% for appointment in horse_data.appointments %}
+              <li>
+                <strong>{{ appointment.date|date:"M d, Y" }}</strong> - 
+                {{ appointment.get_appointment_type_display }} Appointment with {{ appointment.practitioner }} - 
+                {% if appointment.time %}
+                  {{ appointment.time|time:"g:i A" }}
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No past appointments found for this horse.</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
     <!-- User's Ads -->
     <h2>Your Ads</h2>
     {% if ads %}
