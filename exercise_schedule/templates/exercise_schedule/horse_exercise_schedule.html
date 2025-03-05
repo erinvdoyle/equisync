@@ -20,6 +20,10 @@
                     <input type="radio" name="timeframe" value="year" {% if timeframe == 'year' %}checked{% endif %}>
                     <span class="name">Year</span>
                 </label>
+                <label>
+                    <input type="radio" name="timeframe" value="custom">
+                    <span class="name">Custom</span>
+                </label>
             </div>
             <div class="date-inputs">
                 <label for="start_date">Start Date:</label>
@@ -121,27 +125,34 @@
     const nextWeekButton = document.getElementById('next-week');
 
     function updateChart() {
-        const timeframe = form.querySelector('input[name="timeframe"]:checked').value;
-        const startDate = form.start_date.value;
-        const endDate = form.end_date.value;
+    const timeframe = form.querySelector('input[name="timeframe"]:checked').value;
+    const startDate = form.start_date.value;
+    const endDate = form.end_date.value;
 
-        fetch(`{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}?timeframe=${timeframe}&start_date=${startDate}&end_date=${endDate}`)
-            .then(response => response.json())
-            .then(data => {
-                myChart.data.labels = data.labels;
-                myChart.data.datasets[0].data = data.data;
-                myChart.update();
-
-                minutesSection.innerHTML = data.exercise_breakdown_minutes_html;
-                if (timeframe !== 'day') {
-                    averageSection.innerHTML = data.average_exercise_time_html;
-                }
-            })
-            .catch(error => {
-                // Commented out to avoid logging errors to the console
-                // console.error("Error fetching chart data:", error);
-            });
+    let url = `{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}?`;
+    if (timeframe === 'custom') {
+        url += `start_date=${startDate}&end_date=${endDate}`;
+    } else {
+        url += `timeframe=${timeframe}`;
     }
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            myChart.data.labels = data.labels;
+            myChart.data.datasets[0].data = data.data;
+            myChart.update();
+
+            minutesSection.innerHTML = data.exercise_breakdown_minutes_html;
+            if (timeframe !== 'day') {
+                averageSection.innerHTML = data.average_exercise_time_html;
+            }
+        })
+        .catch(error => {
+            // Commented out to avoid logging errors to the console
+            // console.error("Error fetching chart data:", error);
+        });
+}
 
     function updateWeeklySchedule() {
         const selectedWeek = weekSelect.value;

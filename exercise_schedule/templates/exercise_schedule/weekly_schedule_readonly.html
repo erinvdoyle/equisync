@@ -2,37 +2,83 @@
 {% load exercise_tags %}
 
 {% block content %}
-    <h1>Weekly Exercise Schedule - {{ start_week }} to {{ end_week }}</h1>
+    <h1 class="exercise-heading">Weekly Exercise Schedule</h1>
 
-    <table class="table table-bordered">
-        <thead>
+    <div class="events-calendar-nav">
+        <form method="get" class="search-form">
+            <label for="date"></label>
+            <input type="date" id="date" name="date" class="date-input" disabled>
+            <button type="submit" class="select-week-button" id="select-week-button" disabled>Select Week</button>
+        </form>
+    </div>
+
+    <div class="exercise-legend">
+        <h3>Exercise Key</h3>
+        <table class="legend-table">
             <tr>
-                <th>Horse</th>
-                {% for day in days_of_week %}
-                    <th>{{ day|date:"l, M d, 'y" }}</th>
-                {% endfor %}
+                <td><span class="legend-box walker"></span></td>
+                <td>Walker</td>
+                <td><span class="legend-box turnout"></span></td>
+                <td>Turnout</td>
             </tr>
-        </thead>
-        <tbody>
-            {% for horse in horses %}
+            <tr>
+                <td><span class="legend-box lunge"></span></td>
+                <td>Lunge</td>
+                <td><span class="legend-box ride"></span></td>
+                <td>Ride</td>
+            </tr>
+            <tr>
+                <td><span class="legend-box hand_walk"></span></td>
+                <td>Hand Walk</td>
+                <td><span class="legend-box groundwork"></span></td>
+                <td>Groundwork</td>
+            </tr>
+            <tr>
+                <td><span class="legend-box graze"></span></td>
+                <td>Graze</td>
+                <td><span class="legend-box other"></span></td>
+                <td>Other</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="exercise-calendar-container">
+        <table class="exercise-table">
+            <thead>
                 <tr>
-                    <td>{{ horse.name }}</td>
+                    <th>Horse</th>
                     {% for day in days_of_week %}
-                        {% with schedule=weekly_schedule|get_item:horse|get_item:day %}
-                            <td>
-                                {% if schedule %}
-                                    {% for item in schedule.schedule_items.all %}
-                                        <div>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</div>
-                                    {% endfor %}
-                                    <div>Notes: {{ schedule.notes }}</div>
-                                {% else %}
-                                    N/a
-                                {% endif %}
-                            </td>
-                        {% endwith %}
+                        <th class="{{ day|date:'l'|lower }}">{{ day|date:"M d" }}</th>
                     {% endfor %}
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for horse in horses %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="horse-link">{{ horse.name }}</a>
+                        </td>
+                        {% for day in days_of_week %}
+                            {% with schedules=weekly_schedule|get_item:horse|get_item:day %}
+                                <td>
+                                    {% if schedules %}
+                                        {% for schedule in schedules %}
+                                            {% for item in schedule.schedule_items.all %}
+                                                <div class="exercise-item label-{{ item.exercise_type }}" data-time-category="{{ item.time_category|capfirst }}">
+                                                    <span>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span>
+                                                </div>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <span>N/A</span>
+                                    {% endif %}
+                                </td>
+                            {% endwith %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
+

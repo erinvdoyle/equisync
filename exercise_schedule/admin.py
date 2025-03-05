@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ExerciseSchedule, ExerciseScheduleItem
+from .models import ExerciseSchedule, ExerciseScheduleItem, Appointment
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
@@ -64,3 +64,9 @@ class ExerciseScheduleAdmin(admin.ModelAdmin):
 class ExerciseScheduleItemAdmin(admin.ModelAdmin):
     list_display = ('schedule', 'exercise_type', 'duration')
     list_filter = ('exercise_type',)
+    
+@admin.register(Appointment)
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ('horse', 'date', 'appointment_type', 'practitioner', 'time')
+    list_filter = ('appointment_type', 'date')
+    search_fields = ('horse__name', 'practitioner')

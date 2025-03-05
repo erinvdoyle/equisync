@@ -1,0 +1,6 @@
+<h3>Appointments</h3>
+<ul>
+    {% for appointment in appointments %}
+        <li><strong>{{ appointment.get_appointment_type_display }}</strong> with {{ appointment.practitioner }} at {{ appointment.time }}</li>
+    {% endfor %}
+</ul>

@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import exercise_details_view, weekly_exercise_schedule
+from .views import exercise_details_view, weekly_exercise_schedule, add_appointment_view, appointment_details_view
 
 app_name = 'exercise_schedule'
 
@@ -14,4 +14,7 @@ urlpatterns = [
     path('horse/<int:horse_id>/exercise/', views.horse_exercise_schedule_view, name='horse_exercise_schedule'),
     path('details/<int:schedule_id>/', exercise_details_view, name='exercise_details'),
     path('horse/<int:horse_id>/weekly_exercise_schedule/', weekly_exercise_schedule, name='weekly_exercise_schedule'),
+    path('add_appointment/', views.add_appointment_view, name='add_appointment'),
+    path('appointments/<str:horse_name>/<str:date_str>/', views.appointment_details_view, name='appointment_details'),
+
 ]
