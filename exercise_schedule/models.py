@@ -1,6 +1,10 @@
 from django.db import models
 from horses.models import HorseProfile
 from django.contrib.auth.models import User
+from django.utils import timezone
+
+
+
 
 
 # Create your models here.
@@ -44,3 +48,26 @@ class ExerciseScheduleItem(models.Model):
 
     def __str__(self):
         return f"{self.get_exercise_type_display()} ({self.duration} mins)"
+    
+class Appointment(models.Model):
+    APPOINTMENT_TYPE_CHOICES = [
+        ('farrier', 'Farrier'),
+        ('vet', 'Vet'),
+        ('physio', 'Physio'),
+        ('dentist', 'Dentist'),
+        ('other', 'Other'),
+    ]
+
+    horse = models.ForeignKey(HorseProfile, on_delete=models.CASCADE, related_name='appointments')
+    date = models.DateField(default=timezone.now)
+    appointment_type = models.CharField(max_length=50, choices=APPOINTMENT_TYPE_CHOICES)
+    practitioner = models.CharField(max_length=100)
+    time = models.TimeField()
+    contact_details = models.CharField(max_length=255, blank=True, null=True)
+    notes = models.TextField(blank=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='appointments_created')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.get_appointment_type_display()} for {self.horse.name} on {self.created_at.strftime('%Y-%m-%d')}"

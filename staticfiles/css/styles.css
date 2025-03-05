@@ -1154,6 +1154,17 @@ button.primary:hover {
     font-size: 16px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    position: relative;
+}
+
+.green-icon {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: #19c37d;
+    cursor: pointer;
 }
 
 .exercise-calendar-container .exercise-table td:hover {
@@ -1162,15 +1173,15 @@ button.primary:hover {
     text-overflow: clip;
 }
 
-.exercise-calendar-container .exercise-table .details-link {
-    color: #19c37d;
+/* .exercise-calendar-container .exercise-table .details-link {
+    /* color: #19c37d;
     cursor: pointer;
     text-decoration: none;
     font-size: 16px;
     display: block;
     text-align: center;
-    margin-top: 5px;
-}
+    margin-top: 5px; */
+} */
 
 .exercise-calendar-container .exercise-table .noday {
     background-color: #f9f9f9;
@@ -1278,11 +1289,19 @@ button.primary:hover {
 }
 
 /* --- Legend Styles --------------------------------------------------------------------------------------------------------------------------*/
+.legend-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns content to the right */
+    gap: 20px; /* Adds space between the two legend divs */
+}
+
 .exercise-legend {
-    display: none;
+    display: block; /* Ensure they are visible */
     text-align: center;
-    margin-bottom: 10px;
     font-size: 12px;
+    padding: 10px;
+    background-color: #f9f9f9; /* Optional: light background */
+    border-radius: 8px;
 }
 
 .exercise-legend h3 {
@@ -1463,6 +1482,34 @@ button.primary:hover {
     padding: .5rem;
     font-size: 14px;
 }
+
+.appointment-legend-box {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 5px;
+}
+
+.appointment-farrier {
+    outline: 3px solid rgba(128, 0, 128, 0.3); /* Purple with 50% opacity */
+}
+
+.appointment-vet {
+    outline: 2px solid rgba(0, 128, 0, 0.5); /* Green with 50% opacity */
+}
+
+.appointment-physio {
+    outline: 2px solid rgba(255, 255, 0, 0.5); /* Yellow with 50% opacity */
+}
+
+.appointment-dentist {
+    outline: 2px solid rgba(255, 165, 0, 0.5); /* Orange with 50% opacity */
+}
+
+.appointment-other {
+    outline: 2px solid rgba(0, 0, 255, 0.5); /* Blue with 50% opacity */
+}
+
 
 
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */

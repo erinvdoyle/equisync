@@ -1,22 +1,32 @@
-<h3>Exercise Details</h3>
-<p><strong>AM:</strong></p>
 <ul>
-    {% for item in am_items %}
-        <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
-    {% endfor %}
+    <p><strong>AM:</strong></p>
+    <ul>
+        {% for item in am_items %}
+            <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
+        {% endfor %}
+    </ul>
+    <p><strong>PM:</strong></p>
+    <ul>
+        {% for item in pm_items %}
+            <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Additional:</strong></p>
+    <ul>
+        {% for item in additional_items %}
+            <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Notes:</strong> {{ notes }}</p>
+    {% if appointments %}
+        <h3>Appointments</h3>
+        <ul>
+            {% for appointment in appointments %}
+                <li><strong>{{ appointment.get_appointment_type_display }}</strong> with {{ appointment.practitioner }} at {{ appointment.time }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </ul>
-<p><strong>PM:</strong></p>
-<ul>
-    {% for item in pm_items %}
-        <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
-    {% endfor %}
-</ul>
-<p><strong>Additional:</strong></p>
-<ul>
-    {% for item in additional_items %}
-        <li>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</li>
-    {% endfor %}
-</ul>
-<p><strong>Notes:</strong> {{ notes }}</p>
+    
 
 

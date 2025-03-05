@@ -1,21 +1,22 @@
 import datetime
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import ExerciseSchedule, ExerciseScheduleItem
-from .forms import ExerciseScheduleForm, ExerciseScheduleItemForm
-import datetime
+from .models import ExerciseSchedule, ExerciseScheduleItem, Appointment
+from .forms import ExerciseScheduleForm, ExerciseScheduleItemForm, AppointmentForm
+from datetime import datetime, date as dt, timedelta
 from horses.models import HorseProfile
 from django.db.models import IntegerField, Sum, Avg
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import JsonResponse
+import logging
 
 
 @login_required
 def daily_schedule_view(request, date=None, horse_id=None):
     if date is None:
-        date = datetime.date.today()
+        date = dt.today()
     else:
-        date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
+        date = datetime.strptime(date, "%Y-%m-%d").date()
 
     queryset = ExerciseSchedule.objects.filter(date=date)
     if horse_id:
@@ -76,43 +77,40 @@ def daily_schedule_view(request, date=None, horse_id=None):
     return render(request, 'exercise_schedule/daily_schedule.html', context)
 
 @login_required
-def weekly_schedule_view(request, date=None):
-    if request.user.is_staff or request.user.has_perm('exercise_schedule.change_exerciseschedule'):
-        template = 'exercise_schedule/weekly_schedule.html'
-    else:
-        template = 'exercise_schedule/weekly_schedule_readonly.html'
-
+def weekly_schedule_view(request, selected_date=None):
     date_str = request.GET.get('date')
     if date_str:
-        date = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
+        try:
+            selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        except ValueError:
+            selected_date = dt.today()
     else:
-        date = datetime.date.today()
+        selected_date = dt.today()
 
-    start_week = date - datetime.timedelta(days=date.weekday())
-    end_week = start_week + datetime.timedelta(days=6)
+    start_week = selected_date - timedelta(days=selected_date.weekday())
+    end_week = start_week + timedelta(days=6)
 
     all_horses = HorseProfile.objects.all()
-
     user_horses = HorseProfile.objects.filter(
-        Q(owner=request.user) |
-        Q(staff=request.user) |
-        Q(barn_manager=request.user) |
-        Q(rider=request.user)
+        Q(owner=request.user) | Q(staff=request.user) | Q(barn_manager=request.user) | Q(rider=request.user)
     ).distinct()
 
     weekly_schedule = {}
-    days_of_week = []
-
-    for i in range(7):
-        day = start_week + datetime.timedelta(days=i)
-        days_of_week.append(day)
+    days_of_week = [start_week + timedelta(days=i) for i in range(7)]
 
     for horse in all_horses:
         weekly_schedule[horse] = {}
-        for i in range(7):
-            day = start_week + datetime.timedelta(days=i)
+        for day in days_of_week:
             schedules = ExerciseSchedule.objects.filter(horse=horse, date=day).prefetch_related('schedule_items')
-            weekly_schedule[horse][day] = schedules if schedules.exists() else None
+            appointments = Appointment.objects.filter(horse=horse, date=day)
+
+            weekly_schedule[horse][day] = {
+                'schedules': schedules if schedules.exists() else None,
+                'appointments': list(appointments)
+            }
+            
+    template_name = 'exercise_schedule/weekly_schedule.html' if request.user.is_staff or request.user.has_perm('exercise_schedule.change_exerciseschedule') else 'exercise_schedule/weekly_schedule_readonly.html'
+
 
     context = {
         'weekly_schedule': weekly_schedule,
@@ -122,8 +120,7 @@ def weekly_schedule_view(request, date=None):
         'days_of_week': days_of_week,
         'user_horses': user_horses,
     }
-    return render(request, template, context)
-
+    return render(request, template_name, context)
 
 def archive_schedule_view(request):
     search_term = request.GET.get('search')
@@ -152,6 +149,8 @@ def create_schedule_entry(request):
         form = ExerciseScheduleForm()
     return render(request, 'exercise_schedule/create_schedule_entry.html', {'form': form})
 
+logging.basicConfig(level=logging.DEBUG)
+
 @login_required
 def horse_exercise_schedule_view(request, horse_id):
     horse = get_object_or_404(HorseProfile, pk=horse_id)
@@ -160,23 +159,30 @@ def horse_exercise_schedule_view(request, horse_id):
     end_date_str = request.GET.get('end_date')
     timeframe = request.GET.get('timeframe', 'week')
 
-    today = datetime.date.today()
+    today = dt.today()
 
     if timeframe == 'day':
         start_date = today
         end_date = today
     elif timeframe == 'week':
-        start_date = today - datetime.timedelta(days=today.weekday())
-        end_date = start_date + datetime.timedelta(days=6)
+        start_date = today - timedelta(days=today.weekday())
+        end_date = start_date + timedelta(days=6)
     elif timeframe == 'month':
         start_date = today.replace(day=1)
-        end_date = (start_date + datetime.timedelta(days=32)).replace(day=1) - datetime.timedelta(days=1)
+        end_date = (start_date + timedelta(days=32)).replace(day=1) - timedelta(days=1)
     elif timeframe == 'year':
         start_date = today.replace(month=1, day=1)
         end_date = today.replace(month=12, day=31)
+    elif timeframe == 'custom':
+        if start_date_str and end_date_str:
+            start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
+            end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
+        else:
+            start_date = today - timedelta(days=today.weekday())
+            end_date = start_date + timedelta(days=6)
     else:
-        start_date = datetime.datetime.strptime(start_date_str, "%Y-%m-%d").date()
-        end_date = datetime.datetime.strptime(end_date_str, "%Y-%m-%d").date()
+        start_date = today - timedelta(days=today.weekday())
+        end_date = start_date + timedelta(days=6)
 
     exercise_data = ExerciseScheduleItem.objects.filter(
         schedule__horse=horse,
@@ -213,15 +219,15 @@ def horse_exercise_schedule_view(request, horse_id):
         average_exercise_time = []
         average_exercise_time_html = ''
 
-    date = datetime.date.today()
-    start_week = date - datetime.timedelta(days=date.weekday())
-    end_week = start_week + datetime.timedelta(days=6)
+    date = dt.today()
+    start_week = date - timedelta(days=date.weekday())
+    end_week = start_week + timedelta(days=6)
 
     weekly_schedule_items = {}
     days_of_week = []
 
     for i in range(7):
-        day = start_week + datetime.timedelta(days=i)
+        day = start_week + timedelta(days=i)
         days_of_week.append(day)
 
     for day in days_of_week:
@@ -233,8 +239,8 @@ def horse_exercise_schedule_view(request, horse_id):
 
     previous_weeks = []
     for i in range(10):
-        week_start = start_week - datetime.timedelta(weeks=i)
-        week_end = week_start + datetime.timedelta(days=6)
+        week_start = start_week - timedelta(weeks=i)
+        week_end = week_start + timedelta(days=6)
         previous_weeks.append({'start_date': week_start, 'end_date': week_end})
 
     context = {
@@ -266,20 +272,26 @@ def horse_exercise_schedule_view(request, horse_id):
 
     return render(request, 'exercise_schedule/horse_exercise_schedule.html', context)
 
+@login_required
 def weekly_exercise_schedule(request, horse_id):
     horse = get_object_or_404(HorseProfile, pk=horse_id)
     start_date_str = request.GET.get('start_date')
-    start_date = datetime.datetime.strptime(start_date_str, "%Y-%m-%d").date()
-    end_date = start_date + datetime.timedelta(days=6)
+
+    try:
+        start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
+    except ValueError:
+        return JsonResponse({'error': 'Invalid date format'}, status=400)
+
+    end_date = start_date + timedelta(days=6)
 
     weekly_schedule_items = {}
-    for day in (start_date + datetime.timedelta(n) for n in range(7)):
+    for day in (start_date + timedelta(n) for n in range(7)):
         schedule_items = ExerciseScheduleItem.objects.filter(schedule__horse=horse, schedule__date=day)
         weekly_schedule_items[day.strftime('%Y-%m-%d')] = [{'exercise_type': item.get_exercise_type_display(), 'duration': item.duration} for item in schedule_items]
 
     return JsonResponse({'weekly_schedule_items': weekly_schedule_items})
 
-
+@login_required
 def exercise_details_view(request, schedule_id):
     schedule = get_object_or_404(ExerciseSchedule, pk=schedule_id)
 
@@ -289,6 +301,8 @@ def exercise_details_view(request, schedule_id):
 
     notes = schedule.notes
 
+    appointments = Appointment.objects.filter(horse=schedule.horse, date=schedule.date)
+
     context = {
         'am_items': am_items,
         'pm_items': pm_items,
@@ -296,6 +310,38 @@ def exercise_details_view(request, schedule_id):
         'notes': notes,
         'horse_name': schedule.horse.name,
         'date': schedule.date.strftime('%b %d, %Y'),
+        'appointments': appointments,
     }
 
     return render(request, 'exercise_schedule/exercise_schedule_details.html', context)
+
+@login_required
+def add_appointment_view(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            appointment = form.save(commit=False)
+            appointment.created_by = request.user
+            appointment.save()
+            return redirect('exercise_schedule:weekly_schedule_view')
+
+    else:
+        form = AppointmentForm()
+
+    return render(request, 'exercise_schedule/add_appointment.html', {'form': form})
+
+@login_required
+def appointment_details_view(request, horse_name, date_str):
+    try:
+        date = datetime.strptime(date_str, "%b %d").replace(year=datetime.now().year).date()
+    except ValueError:
+        return render(request, 'exercise_schedule/error.html', {'message': 'Invalid date format'})
+
+    appointments = Appointment.objects.filter(horse__name=horse_name, date=date)
+
+    context = {
+        'appointments': appointments,
+        'horse_name': horse_name,
+        'date': date,
+    }
+    return render(request, 'exercise_schedule/appointment_details.html', context)

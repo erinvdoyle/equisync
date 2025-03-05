@@ -1,5 +1,5 @@
 from django import forms
-from .models import ExerciseSchedule, ExerciseScheduleItem, EXERCISE_CHOICES
+from .models import ExerciseSchedule, ExerciseScheduleItem, EXERCISE_CHOICES, Appointment
 
 class ExerciseScheduleForm(forms.ModelForm):
     date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
@@ -17,4 +17,13 @@ class ExerciseScheduleItemForm(forms.ModelForm):
         widgets = {
             'exercise_type': forms.Select(choices=EXERCISE_CHOICES),
             'duration': forms.NumberInput(attrs={'min': 1}),
+        }
+        
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ['horse', 'date', 'appointment_type', 'practitioner', 'time', 'contact_details', 'notes']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'time': forms.TimeInput(attrs={'type': 'time'}),
         }
