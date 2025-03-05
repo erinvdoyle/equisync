@@ -12,6 +12,8 @@ from competitions.utils import create_notifications_for_past_events
 from django.core.paginator import Paginator
 from notifications.models import Notification
 from django.http import JsonResponse
+from exercise_schedule.models import Appointment
+from django.utils import timezone
 
 
 
@@ -74,6 +76,25 @@ def dashboard(request):
         page_obj = paginator.get_page(page_number)
         paginated_results[horse] = page_obj
         
+    horses_with_upcoming_appointments = []
+    horses_with_appointments = []
+
+    for horse in horses:
+        current_time = timezone.now()
+
+        appointments = Appointment.objects.filter(horse=horse, date__lte=current_time.date()).order_by('-date')
+        horses_with_appointments.append({
+            'horse': horse,
+            'appointments': appointments
+        })
+
+        upcoming_appointments = Appointment.objects.filter(horse=horse, date__gte=current_time.date()).order_by('date')
+        horses_with_upcoming_appointments.append({
+            'horse': horse,
+            'upcoming_appointments': upcoming_appointments
+        })
+
+        
     print(f"Notifications count: {notifications.count()} for {user.username}")
     
     context = {
@@ -91,6 +112,8 @@ def dashboard(request):
         'user_notifications': user_notifications,
         'event_notifications': event_notifications,
         'unread_notifications_count': unread_notifications_count,
+        'horses_with_appointments': horses_with_appointments,
+        'horses_with_upcoming_appointments': horses_with_upcoming_appointments,
     }
     
     return render(request, 'users/dashboard.html', context)
