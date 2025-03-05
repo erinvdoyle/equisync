@@ -96,39 +96,36 @@
                             {% endif %}
                         >
 
-                            {% if schedule_data %}
-                                {% if schedule_data.schedules %}
-                                    {% for schedule in schedule_data.schedules %}
-                                        {% for item in schedule.schedule_items.all %}
-                                            <div class="exercise-item label-{{ item.exercise_type }}" data-time-category="{{ item.time_category|capfirst }}">
-                                                <span>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span>
-                                            </div>
-                                        {% endfor %}
-                                    {% endfor %}
-                                {% endif %}
-                                {% if schedule_data.appointments %}
-                                    {% for appointment in schedule_data.appointments %}
-                                        <p></p>
-                                    {% endfor %}
-                                {% endif %}
-                                {% if schedule_data.schedules or schedule_data.appointments %}
-                                    {% if schedule_data.schedules %}
-                                        <div class="details-link" data-schedule-id="{{ schedule_data.schedules.0.id }}" data-horse-name="{{ horse.name }}" data-date="{{ day|date:'M d' }}">
-                                            <div class="green-icon">      
-                                                <i class="fas fa-info-circle"></i>
-                                            </div>
-                                        </div>
-                                    {% else %}
-                                        <div class="details-link" data-schedule-id="" data-horse-name="{{ horse.name }}" data-date="{{ day|date:'M d' }}">
-                                            <div class="green-icon">      
-                                                <i class="fas fa-info-circle"></i>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                {% endif %}
-                            {% else %}
-                                <span>N/A</span>
-                            {% endif %}
+                        {% if schedule_data %}
+                        {% if schedule_data.schedules %}
+                            {# Display exercise details if present #}
+                            {% for schedule in schedule_data.schedules %}
+                                {% for item in schedule.schedule_items.all %}
+                                    <div class="exercise-item label-{{ item.exercise_type }}" data-time-category="{{ item.time_category|capfirst }}">
+                                        <span>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% elif schedule_data.appointments %}
+                            {# If there is no exercise, display appointment type #}
+                            {% for appointment in schedule_data.appointments %}
+                                <span class="appointment-text">{{ appointment.get_appointment_type_display }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        {# Display the green icon only if there are exercises or appointments #}
+                        {% if schedule_data.schedules or schedule_data.appointments %}
+                            <div class="details-link" data-schedule-id="{% if schedule_data.schedules %}{{ schedule_data.schedules.0.id }}{% endif %}" data-horse-name="{{ horse.name }}" data-date="{{ day|date:'M d' }}">
+                                <div class="green-icon">      
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <span>N/A</span>
+                    {% endif %}
+
+                    
                         </td>
                         {% endwith %}
                     {% endfor %}
