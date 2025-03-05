@@ -97,21 +97,43 @@
     {% endif %}
 
     <!-- Horse Exercise Schedules -->
-    <h2>Exercise Schedules</h2>
-    {% if exercise_schedules %}
-        <ul>
-            {% for schedule in exercise_schedules %}
-                <li>
-                    <a href="{% url 'exercise_schedule:horse_exercise_schedule' schedule.horse.id %}">
-                    Exercise Schedule for {{ schedule.horse.name }}
-                    </a>
-                </li>
+    <h2>Exercise Schedule</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Horse</th>
+                <th>Date</th>
+                <th>Exercise Schedule</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for schedule_for_horse in weekly_schedule_items %}
+                {% for schedule_item in schedule_for_horse %}
+                    <tr>
+                        {% if forloop.first %}
+                            <td rowspan="{{ schedule_for_horse|length }}">
+                                {{ schedule_item.horse.name }}
+                            </td>
+                        {% endif %}
+                        
+                        <td>{{ schedule_item.day|date:"l, M d, 'y" }}</td>
+                        
+                        <td>
+                            {% if schedule_item.schedule_items %}
+                                {% for item in schedule_item.schedule_items %}
+                                    {{ item.exercise_type }} ({{ item.duration }} mins){% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                No Schedule
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No exercise schedules found.</p>
-    {% endif %}
-
+        </tbody>
+    </table>
+    
+    
     <!-- Upcoming Appointments -->
     <h2>Upcoming Appointments</h2>
   <div class="upcoming-appointments">

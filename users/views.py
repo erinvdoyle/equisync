@@ -4,7 +4,7 @@ from .models import Profile
 from .forms import ProfileForm
 from horses.models import HorseProfile
 from feeding_management.models import FeedingChart
-from exercise_schedule.models import ExerciseSchedule
+from exercise_schedule.models import ExerciseSchedule, Appointment, ExerciseScheduleItem
 from community.ads.models import Ad
 from community.announcements.models import Announcement
 from competitions.models import Event, EventHorse
@@ -12,9 +12,8 @@ from competitions.utils import create_notifications_for_past_events
 from django.core.paginator import Paginator
 from notifications.models import Notification
 from django.http import JsonResponse
-from exercise_schedule.models import Appointment
 from django.utils import timezone
-
+from datetime import timedelta, datetime
 
 
 @login_required
@@ -47,6 +46,14 @@ def index(request):
     """
     return render(request, 'users/index.html')
 
+def get_days_of_week(start_date=None):
+    if not start_date:
+        start_date = datetime.now()
+    
+    start_of_week = start_date - timedelta(days=start_date.weekday())
+    days_of_week = [start_of_week + timedelta(days=i) for i in range(7)]
+    return days_of_week
+
 @login_required
 def dashboard(request):
     user = request.user
@@ -76,6 +83,19 @@ def dashboard(request):
         page_obj = paginator.get_page(page_number)
         paginated_results[horse] = page_obj
         
+    weekly_schedule_items = []
+    for horse in horses:
+        schedule_for_horse = []
+        for day in range(7):
+            day_date = timezone.now().date() + timedelta(days=day)
+            schedule_items = ExerciseScheduleItem.objects.filter(schedule__horse=horse, schedule__date=day_date)
+            schedule_for_horse.append({
+                'horse': horse,
+                'day': day_date,
+                'schedule_items': schedule_items
+            })
+        weekly_schedule_items.append(schedule_for_horse)
+ 
     horses_with_upcoming_appointments = []
     horses_with_appointments = []
 
@@ -94,7 +114,7 @@ def dashboard(request):
             'upcoming_appointments': upcoming_appointments
         })
 
-        
+    days_of_week = get_days_of_week()  
     print(f"Notifications count: {notifications.count()} for {user.username}")
     
     context = {
@@ -112,8 +132,10 @@ def dashboard(request):
         'user_notifications': user_notifications,
         'event_notifications': event_notifications,
         'unread_notifications_count': unread_notifications_count,
+        'weekly_schedule_items': weekly_schedule_items,
         'horses_with_appointments': horses_with_appointments,
         'horses_with_upcoming_appointments': horses_with_upcoming_appointments,
+        'days_of_week': days_of_week,
     }
     
     return render(request, 'users/dashboard.html', context)
