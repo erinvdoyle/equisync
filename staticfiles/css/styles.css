@@ -171,48 +171,41 @@ h1, h2 {
 }
 
 /*--- Dashboard section headers ---*/
-/* 🟠 My Horses Section - Warm Gold */
 #my-horses h2 {
-    background-color: #af7c87 !important; /* Muted warm gold */
-    color: #343a40 !important; /* Dark navy text */
+    background-color: #af7c87 !important;
+    color: #343a40 !important;
     padding: 12px;
     border-radius: 8px;
     text-align: center;
 }
 
-/* 🔵 Notifications Section - Deep Navy */
 #notifications .card-header {
-    background-color: #343a40 !important; /* Same as sidebar */
-    color: #ffffff !important; /* White text */
+    background-color: #343a40 !important;
+    color: #ffffff !important;
 }
 
-/* 🟡 Appointments Section - Soft Golden Tan */
 #appointments .card-header {
-    background-color: #f5cfd5 !important; /* Soft golden tan */
-    color: #343a40 !important; /* Dark navy text */
+    background-color: #f5cfd5 !important;
+    color: #343a40 !important;
 }
 
-/* 🟢 Management Section - Soft Teal */
 #management .card-header {
-    background-color: #77656d !important; /* Soft muted teal */
-    color: #ffffff !important; /* White text */
+    background-color: #77656d !important;
+    color: #ffffff !important;
 }
 
-/* 🏆 Competitions Section - Cool Slate Blue */
 #competitions .card-header {
-    background-color: #7d7e80 !important; /* Cool slate blue */
-    color: #ffffff !important; /* White text */
+    background-color: #7d7e80 !important;
+    color: #ffffff !important;
 }
 
-/* 📢 Ads & Announcements Section - Muted Rose */
 #ads-announcements .card-header {
-    background-color: #d8a7b1 !important; /* Muted rose */
-    color: #343a40 !important; /* Dark navy text */
+    background-color: #d8a7b1 !important;
+    color: #343a40 !important;
 }
 
-/* 🔲 Section Background Styling */
 section {
-    background-color: #f7f7f7 !important; /* Light gray background */
+    background-color: #f7f7f7 !important;
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -879,25 +872,50 @@ form button:hover {
 }
 
 /* --- Footer Styles ---------------------------------------------------------------------------------------------------------------------- */
+/* --- Footer design credit: https://codepen.io/mkmllr/details/YmVeEP ---*/
+
+main {
+    flex: 1;
+}
+
 .footer {
-    background-color: #6a3e26; 
+    position: relative;
+    height: 130px;
+    min-height: 130px;
+    background: #343a40;
     color: white;
-    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    clip-path: ellipse(100% 80% at 50% 100%);
+    transition: clip-path 0.5s ease-in-out;
+    gap: 5px;
 }
 
-.footer p {
-    margin: 5px 0;
-    font-size: 14px;
+.footer-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    text-align: center;
 }
 
-.footer i {
-    font-size: 20px;
+.github-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.github-link i {
+    font-size: 24px;
     color: white;
     transition: color 0.3s ease;
 }
 
-.footer i:hover {
-    color: #f4a261; 
+.github-link i:hover {
+    color: #adb5bd;
 }
 
 /* --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
@@ -2006,6 +2024,12 @@ button.primary:hover {
 @media (max-width: 767px) {
     .exercise-form-container {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        clip-path: ellipse(180% 100% at 50% 100%);
     }
 }
 
