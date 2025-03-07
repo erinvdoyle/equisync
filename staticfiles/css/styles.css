@@ -7,13 +7,222 @@
 
 body {
     margin: 0;
-    font-family: 'Lato', sans-serif;
-    background-color: #f4f1eb;
-    color: #4a4a4a;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
 h1, h2 {
     color: #6a3e26;
+}
+ 
+/* --- Sidebar Styles -------------------------------------------------------------------------------------------------------------------------*/
+.sidebar {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.sidebar-header h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-align: center;
+    border-bottom: 1px solid #6c757d;
+    padding-bottom: 10px;
+}
+
+.sidebar-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-menu ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.sidebar-menu ul li a:hover, .sidebar-menu ul li a.active {
+    background-color: #34495e;
+}
+
+/* --- Sidebar Header --- */
+.sidebar-header {
+    text-align: center;
+    border-bottom: 1px solid #6c757d;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.sidebar-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.sidebar-welcome {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* --- Caret Toggle --- */
+.sidebar-toggle-caret {
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+/* --- Main Content Styles ------------------------------------------------------------------------------------------------------------------- */
+.main-content {
+    margin-left: 260px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+}
+
+.card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.list-group-item {
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.list-group-item:hover {
+    background-color: #f1f1f1;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.flex-container {
+    display: flex;
+    gap: 20px;
+}
+
+.full-width-card {
+    width: 100%;
+}
+
+.management-card, .competition-card, .ad-card, .announcement-card {
+    margin-bottom: 20px;
+}
+
+/*--- Dashboard section headers ---*/
+/* 🟠 My Horses Section - Warm Gold */
+#my-horses h2 {
+    background-color: #af7c87 !important; /* Muted warm gold */
+    color: #343a40 !important; /* Dark navy text */
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* 🔵 Notifications Section - Deep Navy */
+#notifications .card-header {
+    background-color: #343a40 !important; /* Same as sidebar */
+    color: #ffffff !important; /* White text */
+}
+
+/* 🟡 Appointments Section - Soft Golden Tan */
+#appointments .card-header {
+    background-color: #f5cfd5 !important; /* Soft golden tan */
+    color: #343a40 !important; /* Dark navy text */
+}
+
+/* 🟢 Management Section - Soft Teal */
+#management .card-header {
+    background-color: #77656d !important; /* Soft muted teal */
+    color: #ffffff !important; /* White text */
+}
+
+/* 🏆 Competitions Section - Cool Slate Blue */
+#competitions .card-header {
+    background-color: #7d7e80 !important; /* Cool slate blue */
+    color: #ffffff !important; /* White text */
+}
+
+/* 📢 Ads & Announcements Section - Muted Rose */
+#ads-announcements .card-header {
+    background-color: #d8a7b1 !important; /* Muted rose */
+    color: #343a40 !important; /* Dark navy text */
+}
+
+/* 🔲 Section Background Styling */
+section {
+    background-color: #f7f7f7 !important; /* Light gray background */
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* --- Utility Classes --- */
+.text-center {
+    text-align: center;
 }
 
 .section-title {
@@ -32,13 +241,18 @@ h1, h2 {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: auto;
-    width: 80%;
+    width: 100%;
 }
 
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
 
-.section-header {
-    color: #333;
-    margin-bottom: 15px;
+.sections-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 /* --- Form Styles ----------------------------------------------------------------------------------------------------------------------- */
@@ -144,7 +358,7 @@ form button:hover {
 
 .search-field::placeholder {
     font-size: 14px;
-    color: #6a3e26);
+    color: #6a3e26;
 }
 
 .category-field {
@@ -615,8 +829,14 @@ form button:hover {
 
 /* --- Gradient Navbar ---------------------------------------------------------------------------------------------------------------------- */
 .navbar-gradient {
-    background: linear-gradient(to right, #6a3e26, #905133, #f4a261); 
-    background-size: 200%; 
+    background: linear-gradient(to right, 
+        #343a40 350px,
+        #50555a 500px,
+        #af7c87 700px,
+        #f5cfd5,
+        #fdecef
+    ); 
+    background-size: 100%; 
     background-position: center;
     color: white !important;
     transition: background 0.5s ease-in-out;
@@ -1173,16 +1393,6 @@ button.primary:hover {
     text-overflow: clip;
 }
 
-/* .exercise-calendar-container .exercise-table .details-link {
-    /* color: #19c37d;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 16px;
-    display: block;
-    text-align: center;
-    margin-top: 5px; */
-} */
-
 .exercise-calendar-container .exercise-table .noday {
     background-color: #f9f9f9;
 }
@@ -1291,16 +1501,16 @@ button.primary:hover {
 /* --- Legend Styles --------------------------------------------------------------------------------------------------------------------------*/
 .legend-container {
     display: flex;
-    justify-content: flex-end; /* Aligns content to the right */
-    gap: 20px; /* Adds space between the two legend divs */
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 .exercise-legend {
-    display: block; /* Ensure they are visible */
+    display: block;
     text-align: center;
     font-size: 12px;
     padding: 10px;
-    background-color: #f9f9f9; /* Optional: light background */
+    background-color: #f9f9f9;
     border-radius: 8px;
 }
 
@@ -1491,25 +1701,24 @@ button.primary:hover {
 }
 
 .appointment-farrier {
-    outline: 3px solid rgba(128, 0, 128, 0.3); /* Purple with 50% opacity */
+    outline: 3px solid rgba(128, 0, 128, 0.3);
 }
 
 .appointment-vet {
-    outline: 2px solid rgba(0, 128, 0, 0.5); /* Green with 50% opacity */
+    outline: 2px solid rgba(0, 128, 0, 0.5);
 }
 
 .appointment-physio {
-    outline: 2px solid rgba(255, 255, 0, 0.5); /* Yellow with 50% opacity */
+    outline: 2px solid rgba(255, 255, 0, 0.5);
 }
 
 .appointment-dentist {
-    outline: 2px solid rgba(255, 165, 0, 0.5); /* Orange with 50% opacity */
+    outline: 2px solid rgba(255, 165, 0, 0.5);
 }
 
 .appointment-other {
-    outline: 2px solid rgba(0, 0, 255, 0.5); /* Blue with 50% opacity */
+    outline: 2px solid rgba(0, 0, 255, 0.5);
 }
-
 
 
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
@@ -1640,10 +1849,7 @@ button.primary:hover {
     .short-text {
         display: inline;
     }
-}
 
-
-@media (max-width: 768px) {
     .exercise-calendar-container .exercise-table th,
     .exercise-calendar-container .exercise-table td {
         font-size: 10px;
@@ -1716,8 +1922,67 @@ button.primary:hover {
         width: 10px;
         height: 10px;
     }
+
+   
+    .sections-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-wrapper {
+        width: 90%;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .main-content-expanded {
+        margin-left: 0;
+    }
+
+    .sidebar {
+        height: 100%;
+    }
+
+    .sidebar-hidden {
+        height: 80px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar-hidden .sidebar-menu {
+        display: none;
+    }
+
+    .sidebar-toggle-caret {
+        display: block !important;
+        cursor: pointer;
+        font-size: 22px;
+        margin-top: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-hidden .sidebar-toggle-caret {
+        transform: rotate(180deg);
+    }
+
+    .navbar-gradient {
+        background: linear-gradient(to right, 
+            #343a40 250px,
+            #50555a 350px,
+            #d8a7b1 500px,
+            #f5cfd5,
+            #fdecef
+        ); 
+    }
 }
 
+        
 @media (min-width: 768px) {
     .exercise-form-container {
         flex-direction: row;
@@ -1778,4 +2043,14 @@ button.primary:hover {
         padding: 10px;
         font-size: 12px;
     }
-}
+
+   .navbar-gradient {
+        background: linear-gradient(to right, 
+            #343a40 250px,
+            #50555a 320px,
+            #d8a7b1 420px,
+            #f5cfd5,
+            #fdecef
+        ); 
+     }
+ }

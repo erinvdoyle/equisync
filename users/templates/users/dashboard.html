@@ -1,342 +1,543 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Welcome, {{ user.username }}!</h1>
-
-    {% if profile %}
-        <!-- User Profile -->
-        <h2>Your Profile</h2>
-        <a href="{% url 'users:view_profile' %}">View</a>
-
-    {% endif %}
-
-    <!-- User's Horses -->
-        <h2>Your Horses</h2>
-        {% if horses %}
+<div class="dashboard-container">
+   
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">EquiSync</h2>
+            <h3 class="sidebar-welcome">Welcome, {{ user.username }}</h3>
+            <div class="sidebar-toggle-caret">
+                <i class="fas fa-caret-down"></i>
+            </div>
+        </div>
+        <div class="sidebar-menu">
             <ul>
-                {% for horse in horses %}
-                    <li><a href="{% url 'horses:horse_profile' horse.id %}">{{ horse.name }}</a></li>
-                {% endfor %}
+                <li><a href="#my-horses"><i class="fas fa-horse"></i> Your Horses</a></li>
+                <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="#appointments"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+                <li><a href="#management"><i class="fas fa-tasks"></i> Management</a></li>
+                <li><a href="#competitions"><i class="fas fa-trophy"></i> Competitions</a></li>
+                <li><a href="#ads-announcements"><i class="fas fa-bullhorn"></i> Your Community</a></li>
             </ul>
-        {% else %}
-            <p>You don't have any horses yet.</p>
-        {% endif %}
+        </div>
+    </div>
+    
+    <div class="main-content">
+    
+            <!-- My Horses Section -->
+            <section id="my-horses">
+                <h2>Your Horses</h2>
+                <div class="row">
+                    {% for horse in horses %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ horse.name }}</h5>
+                                    <p class="card-text">Breed: {{ horse.breed }} | Age: {{ horse.age }}</p>
+                                    <a href="{% url 'horses:horse_profile' horse.id %}" class="btn btn-outline-dark">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
 
-    <!-- Event Notifications -->
-        <h2>Event Notifications</h2>
-        {% if event_notifications %}
-            <ul id="event-notifications-list" class="list-group">
-                {% for notification in event_notifications %}
-                    <li id="event-notification-{{ notification.id }}" class="list-group-item d-flex justify-content-between align-items-center {% if not notification.is_read %}bg-light{% endif %}">
-                        <!-- Bell Icon for Unread Notifications -->
-                        {% if not notification.is_read %}
-                            <i class="fas fa-bell notification-bell"></i>
-                        {% endif %}
-                        
-                        <span>{{ notification.message }} - {{ notification.created_at }}</span>
-
-                        {% if notification.event_horse %}
-                            <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn btn-sm btn-outline-primary">
-                                Update Results
-                            </a>
-                        {% endif %}
-
-                        <button class="btn btn-sm btn-outline-secondary mark-read-btn" onclick="markEventNotificationAsRead(this)" data-notification-id="{{ notification.id }}">
-                            <i class="fas fa-check d-none"></i> Mark as Read
-                        </button>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <!-- muted bell icon for no notifications -->
-            <p><i class="fas fa-bell-slash text-muted"></i> No event notifications.</p>
-    {% endif %}
-
-    <!-- User Notifications -->
-    <h2>User Notifications</h2>
-    {% if user_notifications %}
-        <ul id="user-notifications-list" class="list-group">
-            {% for notification in user_notifications %}
-                <li id="user-notification-{{ notification.id }}" class="list-group-item d-flex justify-content-between align-items-center">
-                    <!-- Bell Icon for Unread Notifications -->
-                    {% if not notification.is_read %}
-                        <i class="fas fa-bell notification-bell"></i>
+            <!-- Notifications Section -->
+            <div class="flex-container">
+            <section id="notifications">
+            <div class="card notifications-card" style="max-width: 400px; margin: auto;">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5><i class="fas fa-bell"></i> Notifications</h5>
+                </div>
+                <div class="card-body" style="max-height: 350px; overflow-y: auto;">
+                    <!-- Event Notifications Section -->
+                    <h6 class="text-muted">Event Notifications</h6>
+                    {% if event_notifications %}
+                        <ul id="event-notifications-list" class="list-group mb-3">
+                            {% for notification in event_notifications %}
+                                <li id="event-notification-{{ notification.id }}" 
+                                    class="list-group-item d-flex justify-content-between align-items-center p-2 
+                                    {% if not notification.is_read %}bg-light{% endif %}">
+                                    
+                                    <div class="d-flex align-items-center">
+                                        {% if not notification.is_read %}
+                                            <i class="fas fa-bell text-warning me-2"></i>
+                                        {% endif %}
+                                        <span style="font-size: 0.9rem;">{{ notification.message }}</span>
+                                    </div>
+            
+                                    <div>
+                                        {% if notification.event_horse %}
+                                            <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" 
+                                               class="btn btn-sm btn-outline-primary">Update</a>
+                                        {% endif %}
+                                        <button class="btn btn-sm btn-outline-secondary mark-read-btn" 
+                                                onclick="markEventNotificationAsRead(this)" 
+                                                data-notification-id="{{ notification.id }}">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted text-center"><i class="fas fa-bell-slash"></i> No event notifications.</p>
                     {% endif %}
+            
+                    <!-- User Notifications Section -->
+                    <h6 class="text-muted">User Notifications</h6>
+                    {% if user_notifications %}
+                        <ul id="user-notifications-list" class="list-group">
+                            {% for notification in user_notifications %}
+                                <li id="user-notification-{{ notification.id }}" 
+                                    class="list-group-item d-flex justify-content-between align-items-center p-2">
+                                    
+                                    <div class="d-flex align-items-center">
+                                        {% if not notification.is_read %}
+                                            <i class="fas fa-bell text-warning me-2"></i>
+                                        {% endif %}
+                                        <span style="font-size: 0.9rem;">{{ notification.message }}</span>
+                                    </div>
+            
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-secondary mark-read-btn" 
+                                                onclick="markUserNotificationAsRead(this)" 
+                                                data-notification-id="{{ notification.id }}">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted text-center"><i class="fas fa-bell-slash"></i> No user notifications.</p>
+                    {% endif %}
+                </div>
+            </div>
+            </section>
+            
+            
+            <!-- Appointments Section -->
+            <section id="appointments">
+            <div class="card appointments-card" style="max-width: 500px; margin: auto;">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5><i class="fas fa-calendar-alt"></i> Appointments</h5>
+                </div>
+                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
                     
-                    <span>{{ notification.message }} - {{ notification.created_at }}</span>
-
-                    {% if notification.event_horse %}
-                        <a href="{% url 'competitions:edit_event_horse' notification.event_horse.id %}" class="btn btn-sm btn-outline-primary">
-                            Update Result
-                        </a>
+                    <!-- Upcoming Appointments Section -->
+                    <h6 class="text-muted"><i class="fas fa-clock"></i> Upcoming Appointments</h6>
+                    {% if horses_with_upcoming_appointments %}
+                        <ul class="list-group mb-3">
+                            {% for horse_data in horses_with_upcoming_appointments %}
+                                <li class="list-group-item">
+                                    <strong>{{ horse_data.horse.name }}</strong>
+                                    <ul class="ps-3 mt-1">
+                                        {% for appointment in horse_data.upcoming_appointments %}
+                                            <li>
+                                                <strong>{{ appointment.date|date:"M d, Y" }}</strong>  
+                                                - {{ appointment.get_appointment_type_display }}  
+                                                {% if appointment.time %} at {{ appointment.time|time:"g:i A" }} {% endif %}  
+                                                with <em>{{ appointment.practitioner }}</em>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted text-center"><i class="fas fa-calendar-times"></i> No upcoming appointments.</p>
                     {% endif %}
-
-                    <button class="btn btn-sm btn-outline-secondary mark-read-btn" onclick="markUserNotificationAsRead(this)" data-notification-id="{{ notification.id }}">
-                        <i class="fas fa-check d-none"></i> Mark as Read
-                    </button>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <!-- Non-glowing muted bell icon for no notifications -->
-        <p><i class="fas fa-bell-slash text-muted"></i> No user notifications.</p>
-    {% endif %}
-
-
-
-    <!-- Horse Feeding Chart -->
-    <h2>Feeding Schedules</h2>
-    {% if feeding_charts %}
-        <ul>
-            {% for chart in feeding_charts %}
-                <li><a href="{% url 'feeding_management:horse_feeding_chart_readonly' chart.horse.id %}">{{ chart.horse.name }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No feeding schedules found.</p>
-    {% endif %}
-
-    <!-- Horse Exercise Schedules -->
-    <h2>Exercise Schedule</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Horse</th>
-                <th>Date</th>
-                <th>Exercise Schedule</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for schedule_for_horse in weekly_schedule_items %}
-                {% for schedule_item in schedule_for_horse %}
-                    <tr>
-                        {% if forloop.first %}
-                            <td rowspan="{{ schedule_for_horse|length }}">
-                                {{ schedule_item.horse.name }}
-                            </td>
-                        {% endif %}
-                        
-                        <td>{{ schedule_item.day|date:"l, M d, 'y" }}</td>
-                        
-                        <td>
-                            {% if schedule_item.schedule_items %}
-                                {% for item in schedule_item.schedule_items %}
-                                    {{ item.exercise_type }} ({{ item.duration }} mins){% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            {% else %}
-                                No Schedule
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% endfor %}
-        </tbody>
-    </table>
-    
-    
-    <!-- Upcoming Appointments -->
-    <h2>Upcoming Appointments</h2>
-  <div class="upcoming-appointments">
-    {% for horse_data in horses_with_upcoming_appointments %}
-      <div class="horse-upcoming-appointments">
-        <h3>{{ horse_data.horse.name }}'s Upcoming Appointments</h3>
-        {% if horse_data.upcoming_appointments.exists %}
-          <ul>
-            {% for appointment in horse_data.upcoming_appointments %}
-            <li>
-                <strong>{{ appointment.date|date:"M d, Y" }}</strong> - 
-                {{ appointment.get_appointment_type_display }} Appointment with {{ appointment.practitioner }} - 
-                {% if appointment.time %}
-                  {{ appointment.time|time:"g:i A" }}
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No upcoming appointments found for this horse.</p>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
-
-    <!-- Appointment History -->
-    <h2>Appointment History</h2>
-  <div class="horses-appointments-archive">
-    {% for horse_data in horses_with_appointments %}
-      <div class="horse-appointments">
-        <h3>{{ horse_data.horse.name }}'s Appointment History</h3>
-        {% if horse_data.appointments.exists %}
-          <ul>
-            {% for appointment in horse_data.appointments %}
-              <li>
-                <strong>{{ appointment.date|date:"M d, Y" }}</strong> - 
-                {{ appointment.get_appointment_type_display }} Appointment with {{ appointment.practitioner }} - 
-                {% if appointment.time %}
-                  {{ appointment.time|time:"g:i A" }}
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No past appointments found for this horse.</p>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
-
-    <!-- User's Ads -->
-    <h2>Your Ads</h2>
-    {% if ads %}
-        <ul>
-            {% for ad in ads %}
-                <li>
-                  <a href="{% url 'community:ad_detail' ad.id %}">
-                    {{ ad.get_ad_type_display }} - {{ ad.description|truncatechars:50 }} ({{ ad.date_posted|date:"Y-m-d" }})
-                  </a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No ads found.</p>
-    {% endif %}
-
-    <!-- User's Announcements -->
-    <h2>Your Announcements</h2>
-    {% if announcements %}
-        <ul>
-            {% for announcement in announcements %}
-                <li>
-                  <a href="{% url 'community:announcement_detail' announcement.id %}">
-                    {{ announcement.description|truncatechars:50 }} ({{ announcement.date_posted|date:"Y-m-d" }})
-                  </a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No announcements found.</p>
-    {% endif %}
-    
-    <!-- Favorited Events -->
-    <h2>My Favorite Events</h2>
-    <ul>
-        {% for event in favorite_events %}
-            <li>{{ event.title }} - {{ event.start_time }} to {{ event.end_time }}</li>
-        {% endfor %}
-    </ul>
-    
-    <!-- Competition Results -->
-    <section class="dashboard-section">
-        <h2>My Competition Results</h2>
-        {% if paginated_results %}
-            {% for horse, page_obj in paginated_results.items %}
-                <h3>Recent Results for {{ horse.name }}</h3>
-                <ul>
-                    {% for result in page_obj.object_list %}
-                        <li>
-                            {{ result.event.title }} - {{ result.event.start_time|date:"Y-m-d" }} - {{ result.class_details }} - Results: {{ result.results|default:"No results yet" }}
-                            <a href="{% url 'competitions:edit_event_horse_source' result.id 'dashboard' %}" class='btn'>
-                                {% if result.results %}
-                                    Edit Results
-                                {% else %}
-                                    +
-                                {% endif %}
+            
+                    <!-- Appointment History Section -->
+                    <h6 class="text-muted"><i class="fas fa-history"></i> Appointment History</h6>
+                    {% if horses_with_appointments %}
+                        <ul class="list-group">
+                            {% for horse_data in horses_with_appointments %}
+                                <li class="list-group-item">
+                                    <strong>{{ horse_data.horse.name }}</strong>
+                                    <ul class="ps-3 mt-1">
+                                        {% for appointment in horse_data.appointments %}
+                                            <li>
+                                                <strong>{{ appointment.date|date:"M d, Y" }}</strong>  
+                                                - {{ appointment.get_appointment_type_display }}  
+                                                {% if appointment.time %} at {{ appointment.time|time:"g:i A" }} {% endif %}  
+                                                with <em>{{ appointment.practitioner }}</em>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted text-center"><i class="fas fa-calendar-times"></i> No past appointments.</p>
+                    {% endif %}
+                </div>
+            </div>
+            </section>
+        </div>
+            
+ <!-- Management Section -->
+<section id="management">
+    <!-- Feeding Schedule Card -->
+    <div class="card management-card full-width-card">
+        <div class="card-header bg-success text-white">
+            <h5><i class="fas fa-utensils"></i> Feeding Schedule</h5>
+        </div>
+        <div class="card-body">
+            {% if feeding_charts %}
+                <ul class="list-group">
+                    {% for chart in feeding_charts %}
+                        <li class="list-group-item">
+                            <a href="{% url 'feeding_management:horse_feeding_chart_readonly' chart.horse.id %}" class="text-decoration-none">
+                                <strong>{{ chart.horse.name }}</strong>
                             </a>
                         </li>
                     {% endfor %}
                 </ul>
-    
-                <!-- Pagination Controls -->
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <a href="?page_{{ horse.id }}=1">« first</a>
-                            <a href="?page_{{ horse.id }}={{ page_obj.previous_page_number }}">previous</a>
-                        {% endif %}
-    
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-    
-                        {% if page_obj.has_next %}
-                            <a href="?page_{{ horse.id }}={{ page_obj.next_page_number }}">next</a>
-                            <a href="?page_{{ horse.id }}={{ page_obj.paginator.num_pages }}">last »</a>
-                        {% endif %}
-                    </span>
-                </div>
-    
-                <!-- Archive Button -->
-                <a href="{% url 'competitions:horse_results_archive' horse.id %}" class='btn'>View Result Archive</a>
-            {% endfor %}
-        {% else %}
-            <p>No competition results found.</p>
-        {% endif %}
-    </section>
-    
-    <a href="{% url 'users:dashboard' %}" class='btn'>Dashboard</a>
-    
-    <script>
-        function markEventNotificationAsRead(button) {
-            const notificationId = button.getAttribute("data-notification-id");
-            fetch(`/notifications/mark-as-read/${notificationId}/`, { 
-                method: "POST", 
-                headers: { "X-CSRFToken": "{{ csrf_token }}" }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const listItem = document.getElementById(`event-notification-${notificationId}`);
-                    if (listItem) {
-                        listItem.remove();
-                    }
-    
-                    // Check if the red notification bell should be updated
-                    updateNavbarNotificationBadge();
-                }
-            })
-            .catch(error => console.error("Error:", error));
-        }
-    
-        function markUserNotificationAsRead(button) {
-            const notificationId = button.getAttribute("data-notification-id");
-            fetch(`/notifications/mark-as-read/${notificationId}/`, { 
-                method: "POST", 
-                headers: { "X-CSRFToken": "{{ csrf_token }}" }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const listItem = document.getElementById(`user-notification-${notificationId}`);
-                    if (listItem) {
-                        listItem.remove();
-                    }
-    
-                    // Check if the red notification bell should be updated
-                    updateNavbarNotificationBadge();
-                }
-            })
-            .catch(error => console.error("Error:", error));
-        }
-    
-        function updateNavbarNotificationBadge() {
-            // Count unread notifications in the navbar dropdown
-            const unreadCount = document.querySelectorAll('.notification-bell').length;
-            const badge = document.querySelector('.navbar-nav .badge');
+            {% else %}
+                <p class="text-muted text-center"><i class="fas fa-exclamation-circle"></i> No feeding schedules found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Exercise Schedule Card -->
+    <div class="card management-card full-width-card">
+        <div class="card-header bg-info text-white">
+            <h5><i class="fas fa-dumbbell"></i> Exercise Schedule</h5>
+        </div>
+        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+            {% if weekly_schedule_items %}
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Horse</th>
+                            <th>Date</th>
+                            <th>Exercises</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for schedule_for_horse in weekly_schedule_items %}
+                            {% for schedule_item in schedule_for_horse %}
+                                <tr>
+                                    {% if forloop.first %}
+                                        <td rowspan="{{ schedule_for_horse|length }}">
+                                            <strong>{{ schedule_item.horse.name }}</strong>
+                                        </td>
+                                    {% endif %}
+                                    <td>{{ schedule_item.day|date:"M d, Y" }}</td>
+                                    <td>
+                                        {% if schedule_item.schedule_items %}
+                                            {% for item in schedule_item.schedule_items %}
+                                                {{ item.exercise_type }} ({{ item.duration }} mins){% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <span class="text-muted">No Schedule</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-muted text-center"><i class="fas fa-exclamation-circle"></i> No exercise schedules found.</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
             
-            if (badge) {
-                if (unreadCount > 0) {
-                    badge.textContent = unreadCount;
-                } else {
-                    badge.style.display = 'none';
-                }
-            }
+            <!-- Competitions Section -->
+            <section id="competitions">
+            <div class="row">
+                <!-- Favorite Events Card -->
+                <div class="col-md-6">
+                    <div class="card competition-card">
+                        <div class="card-header bg-warning text-dark">
+                            <h5><i class="fas fa-star"></i> Favorited Events</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if favorite_events %}
+                                <ul class="list-group">
+                                    {% for event in favorite_events %}
+                                        <li class="list-group-item">
+                                            <strong>{{ event.title }}</strong><br>
+                                            <span class="text-muted">{{ event.start_time|date:"M d, Y" }} - {{ event.end_time|date:"M d, Y" }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted text-center"><i class="fas fa-exclamation-circle"></i> No favorite events added.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Competition Results Card -->
+                <div class="col-md-6">
+                    <div class="card competition-card">
+                        <div class="card-header bg-primary text-white">
+                            <h5><i class="fas fa-trophy"></i> Competition Results</h5>
+                        </div>
+                        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                            {% if paginated_results %}
+                                {% for horse, page_obj in paginated_results.items %}
+                                    <h6 class="text-dark"><strong> {{ horse.name }}'s Recent Results</strong></h6>
+                                    <ul class="list-group mb-2">
+                                        {% for result in page_obj.object_list %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <strong>{{ result.event.title }}</strong><br>
+                                                    <span class="text-muted">{{ result.event.start_time|date:"M d, Y" }}</span><br>
+                                                    <span>Class: {{ result.class_details }}</span><br>
+                                                    <span>Results: <strong>{{ result.results|default:"No results yet" }}</strong></span>
+                                                </div>
+                                                <a href="{% url 'competitions:edit_event_horse_source' result.id 'dashboard' %}" class='btn btn-sm btn-outline-primary'>
+                                                    {% if result.results %}
+                                                        Edit
+                                                    {% else %}
+                                                        +
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+            
+                                    <!-- Pagination Controls -->
+                                    <div class="d-flex justify-content-between">
+                                        {% if page_obj.has_previous %}
+                                            <a href="?page_{{ horse.id }}=1" class="btn btn-sm btn-outline-secondary">« First</a>
+                                            <a href="?page_{{ horse.id }}={{ page_obj.previous_page_number }}" class="btn btn-sm btn-outline-secondary">Previous</a>
+                                        {% endif %}
+            
+                                        <span class="text-muted">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            
+                                        {% if page_obj.has_next %}
+                                            <a href="?page_{{ horse.id }}={{ page_obj.next_page_number }}" class="btn btn-sm btn-outline-secondary">Next</a>
+                                            <a href="?page_{{ horse.id }}={{ page_obj.paginator.num_pages }}" class="btn btn-sm btn-outline-secondary">Last »</a>
+                                        {% endif %}
+                                    </div>
+            
+                                    <!-- Archive Button -->
+                                    <a href="{% url 'competitions:horse_results_archive' horse.id %}" class='btn btn-sm btn-outline-dark mt-2'>View Full Archive</a>
+                                {% endfor %}
+                            {% else %}
+                                <p class="text-muted text-center"><i class="fas fa-exclamation-circle"></i> No competition results found.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+            
+            <!-- Ads & Announcements Section -->
+            <section id="ads-announcements">
+            <div class="row">
+                <!-- User's Ads Card -->
+                <div class="col-md-6">
+                    <div class="card ad-card">
+                        <div class="card-header bg-info text-white">
+                            <h5><i class="fas fa-bullhorn"></i> Your Ads</h5>
+                        </div>
+                        <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                            {% if ads %}
+                                <ul class="list-group">
+                                    {% for ad in ads %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <a href="{% url 'community:ad_detail' ad.id %}">
+                                                <strong>{{ ad.get_ad_type_display }}</strong><br>
+                                                <span class="text-muted">{{ ad.description|truncatechars:50 }}</span>
+                                            </a>
+                                            <span class="badge bg-secondary">{{ ad.date_posted|date:"M d, Y" }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted text-center"><i class="fas fa-exclamation-circle"></i> No ads found.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- User's Announcements Card -->
+                <div class="col-md-6">
+                    <div class="card announcement-card">
+                        <div class="card-header bg-success text-white">
+                            <h5><i class="fas fa-bell"></i> Your Announcements</h5>
+                        </div>
+                        <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                            {% if announcements %}
+                                <ul class="list-group">
+                                    {% for announcement in announcements %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <a href="{% url 'community:announcement_detail' announcement.id %}">
+                                                <span class="text-muted">{{ announcement.description|truncatechars:50 }}</span>
+                                            </a>
+                                            <span class="badge bg-secondary">{{ announcement.date_posted|date:"M d, Y" }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted text-center"><i class="fas fa-exclamation-circle"></i> No announcements found.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+            
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM loaded");
+
+    // Sidebar Functionality
+    const sidebar = document.querySelector(".sidebar");
+    const caretToggle = document.querySelector(".sidebar-toggle-caret");
+
+    function toggleSidebar() {
+        if (window.innerWidth < 768) {
+            sidebar.classList.toggle("sidebar-hidden");
+            caretToggle.style.display = sidebar.classList.contains("sidebar-hidden") ? "block" : "none";
         }
-    
-        // Update the notification badge on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            updateNavbarNotificationBadge();
+    }
+
+    caretToggle.addEventListener("click", function (event) {
+        event.stopPropagation();
+        toggleSidebar();
+    });
+
+    window.addEventListener("resize", function () {
+        if (window.innerWidth >= 768) {
+            sidebar.classList.remove("sidebar-hidden");
+            caretToggle.style.display = "none";
+        } else {
+            caretToggle.style.display = "block";
+        }
+    });
+
+    // Navbar Toggle Functionality
+    const navbarToggler = document.querySelector(".navbar-toggler");
+    const navbarMenu = document.querySelector(".navbar-collapse");
+    const profileDropdown = document.querySelector("#userDropdown");
+    const profileMenu = profileDropdown?.nextElementSibling;
+
+    // Bootstrap Collapse
+    const bsNavbar = new bootstrap.Collapse(navbarMenu, { toggle: false });
+
+    navbarToggler.addEventListener("click", function (event) {
+        event.stopPropagation();
+
+        if (navbarMenu.classList.contains("show")) {
+            bsNavbar.hide();
+        } else {
+            bsNavbar.show();
+        }
+    });
+
+    // Prevent profile dropdown from collapsing navbar
+    profileDropdown?.addEventListener("click", function (event) {
+        event.stopPropagation();
+
+        let isDropdownOpen = profileMenu.classList.contains("show");
+
+        // Close all other dropdowns
+        document.querySelectorAll(".navbar .dropdown-menu.show").forEach(menu => {
+            menu.classList.remove("show");
         });
-    </script>
-    
 
+        // Toggle the clicked dropdown
+        if (!isDropdownOpen) {
+            profileMenu.classList.add("show");
+        }
+    });
 
-    {% endblock %}
+    // Close Navbar and Profile Dropdown When Clicking Outside
+    document.addEventListener("click", function (event) {
+        // Close navbar if clicking outside it
+        if (!navbarMenu.contains(event.target) && !navbarToggler.contains(event.target)) {
+            bsNavbar.hide();
+        }
+
+        // Close profile dropdown if clicking outside
+        if (!profileDropdown.contains(event.target) && !profileMenu.contains(event.target)) {
+            profileMenu.classList.remove("show");
+        }
+    });
+
+    // Fix Profile Dropdown Conflict
+    document.querySelectorAll(".navbar .dropdown-toggle").forEach(function (dropdown) {
+        dropdown.addEventListener("click", function (event) {
+            event.stopPropagation();
+            let dropdownMenu = this.nextElementSibling;
+
+            document.querySelectorAll(".navbar .dropdown-menu.show").forEach(menu => {
+                if (menu !== dropdownMenu) menu.classList.remove("show");
+            });
+
+            dropdownMenu.classList.toggle("show");
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", function (event) {
+        document.querySelectorAll(".navbar .dropdown-menu.show").forEach(menu => {
+            if (!menu.contains(event.target)) {
+                menu.classList.remove("show");
+            }
+        });
+    });
+});
+
+// Scrolling for sidebar menu
+document.querySelectorAll(".sidebar-menu a").forEach(link => {
+    link.addEventListener("click", function (event) {
+        event.preventDefault();
+        const targetId = this.getAttribute("href").substring(1);
+        document.getElementById(targetId).scrollIntoView({ behavior: "smooth" });
+    });
+});
+
+// Notification Handling
+function markNotificationAsRead(button, type) {
+    const notificationId = button.getAttribute("data-notification-id");
+    fetch(`/notifications/mark-as-read/${notificationId}/`, {
+        method: "POST",
+        headers: { "X-CSRFToken": "{{ csrf_token }}" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const listItem = document.getElementById(`${type}-notification-${notificationId}`);
+            if (listItem) {
+                listItem.remove();
+            }
+            updateNavbarNotificationBadge();
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+function updateNavbarNotificationBadge() {
+    const unreadCount = document.querySelectorAll('.notification-bell').length;
+    const badge = document.querySelector('.navbar-nav .badge');
+
+    if (badge) {
+        badge.textContent = unreadCount > 0 ? unreadCount : "";
+        badge.style.display = unreadCount > 0 ? "block" : "none";
+    }
+}
+
+updateNavbarNotificationBadge();
+</script>
+        
+{% endblock %} 
