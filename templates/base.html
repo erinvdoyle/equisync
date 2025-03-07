@@ -43,10 +43,13 @@
 <nav class="navbar navbar-expand-lg navbar-gradient">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'users:home' %}">EquiSync</a>
+        
+        <!-- Proper Bootstrap Toggle Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
@@ -74,20 +77,20 @@
                     </li>
                 {% endif %}
             </ul>
-            
-            <!-- User Profile and Notification Dropdown-->
+
+            <!-- User Profile and Notification Dropdown -->
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle fa-2x"></i>
                         {% if unread_notifications_count > 0 %}
                             <span class="badge bg-danger">{{ unread_notifications_count }}</span>
                         {% endif %}
                     </a>
-                    
+
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <!-- Notifications -->
                         <li>
                             <a class="dropdown-item d-flex justify-content-between align-items-center" href="{% url 'notifications_list' %}">
                                 <span>Notifications</span>
@@ -96,17 +99,12 @@
                                 {% endif %}
                             </a>
                         </li>
-                
-                        <!-- Profile -->
                         <li>
                             <a class="dropdown-item" href="{% url 'users:view_profile' %}">Profile</a>
                         </li>
-
-                
                         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                     </ul>
                 </li>
-                
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
@@ -116,10 +114,10 @@
                     </li>
                 {% endif %}
             </ul>
-                                  
         </div>
     </div>
 </nav>
+
 
     <main class="flex-shrink-0 main-bg">
 
@@ -142,6 +140,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'community/js/reactions.js' %}"></script>
