@@ -2,14 +2,16 @@
 
 {% block content %}
 <div class="form-container">
-    <h1 class="form-title">Add a New Horse</h1>
+    <h1 class="form-title">Edit Horse</h1>
 
-    <form method="POST" enctype="multipart/form-data" action="/horses/add/">
+    <form method="POST" enctype="multipart/form-data" action="/horse/edit/{{ horse.id }}/">
         {% csrf_token %}
 
         <!-- Image Upload & Preview -->
         <div class="image-preview">
-            <img id="horseImagePreview" class="hidden-preview">
+            <img id="horseImagePreview" 
+                 src="{% if horse.image %}{{ horse.image.url }}{% endif %}" 
+                 alt="Horse Preview" class="hidden-preview">
             <div class="default-thumbnail" id="defaultThumbnail">🐴</div>
         </div>
 
@@ -19,29 +21,28 @@
             <div class="collapsible-content">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control required-input" placeholder="Enter horse's name" required>
+                    <input type="text" name="name" class="form-control required-input" value="{{ horse.name }}" required>
                     <span class="error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="breed">Breed</label>
-                    <input type="text" name="breed" class="form-control required-input" placeholder="Enter breed" required>
+                    <input type="text" name="breed" class="form-control required-input" value="{{ horse.breed }}" required>
                     <span class="error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="age">Age</label>
-                    <input type="number" name="age" class="form-control required-input" placeholder="Enter age" required min="0">
+                    <input type="number" name="age" class="form-control required-input" value="{{ horse.age }}" required min="0">
                     <span class="error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="gender">Gender</label>
                     <select name="gender" class="form-control required-input" required>
-                        <option value="" disabled selected>Select gender</option>
-                        <option value="Mare">Mare</option>
-                        <option value="Gelding">Gelding</option>
-                        <option value="Stallion">Stallion</option>
+                        <option value="Mare" {% if horse.gender == 'Mare' %}selected{% endif %}>Mare</option>
+                        <option value="Gelding" {% if horse.gender == 'Gelding' %}selected{% endif %}>Gelding</option>
+                        <option value="Stallion" {% if horse.gender == 'Stallion' %}selected{% endif %}>Stallion</option>
                     </select>
                     <span class="error-message"></span>
                 </div>
@@ -55,13 +56,37 @@
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="btn-primary">Save Horse</button>
+            <button type="submit" class="btn-primary">Save Changes</button>
             <a href="{% url 'horses:horse_list' %}" class="btn-secondary">Cancel</a>
+            <button type="button" class="btn-danger delete-horse" data-horse-id="{{ horse.id }}">Remove Horse</button>
         </div>
     </form>
 </div>
 
+<!-- JavaScript for Deleting Horse -->
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".delete-horse").addEventListener("click", function () {
+        let horseId = this.getAttribute("data-horse-id");
+        let confirmDelete = confirm("Are you sure you want to remove this horse?");
+        if (confirmDelete) {
+            fetch(`/horse/delete/${horseId}/`, {
+                method: "POST",
+                headers: { "X-CSRFToken": "{{ csrf_token }}" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Horse removed successfully.");
+                    window.location.href = "{% url 'horses:horse_list' %}";
+                } else {
+                    alert("Error: Unable to remove horse.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    });
+});
 // Function for horse profile image preview
 document.addEventListener("DOMContentLoaded", function () {
     const imageInput = document.getElementById("imageUpload");
@@ -90,9 +115,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-
-
 </script>
-
 {% endblock %}

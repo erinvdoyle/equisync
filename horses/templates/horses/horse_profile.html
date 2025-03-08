@@ -1,23 +1,70 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ horse.name }}</h1>
-    <p>Breed: {{ horse.breed }}</p>
-    <p>Age: {{ horse.age }}</p>
-    <p>Gender: {{ horse.gender }}</p>
-    <p>Owner: {{ horse.owner.username }}</p>
-    <p>Staff: {{ horse.staff.username }}</p>
-    <p>Barn Manager: {{ horse.barn_manager.username }}</p>
-    <p>Rider: {{ horse.rider.username }}</p>
-    <p>Last ridden by: {{ horse.most_recent_ride.name }}</p>
-    <p>Last cared for by: {{ horse.most_recent_staff.name }}</p>
-    <p>Feeding Chart: <a href="{% url 'feeding_management:horse_feeding_chart_readonly' horse.id %}">View</a></p>
-    <p>Exercise Schedule: <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}">View</a></p>
-    <p>Competition Results: <a href="{% url 'competitions:horse_results_archive' horse.id %}">View</a></p>
+<div class="horse-profile-container">
+    <!-- Horse Image & Basic Info -->
+    <div class="horse-header">
+        <div class="horse-image">
+            {% if horse.image %}
+                <img src="{{ horse.image.url }}" alt="{{ horse.name }}">
+            {% else %}
+                <div class="default-horse-icon">🐴</div>
+            {% endif %}
+        </div>
+        <div class="horse-details">
+            <h1 class="horse-name">{{ horse.name }}</h1>
+            <p class="horse-breed">{{ horse.breed }}</p>
+            <p class="horse-age-gender">{{ horse.age }} years old • {{ horse.gender }}</p>
+        </div>
+    </div>
 
-    
-    {% if horse.image %}
-        <img src="{{ horse.image.url }}" alt="Horse Image">
-    {% endif %}
+    <!-- Horse Info Section -->
+    <div class="horse-info-container">
+        <div class="horse-info-card">
+            <h2>Care & Management</h2>
+            <p><strong>Owner:</strong> {{ horse.owner.get_full_name|default:horse.owner.username }}</p>
+            <p><strong>Barn Manager:</strong> {{ horse.barn_manager.get_full_name|default:horse.barn_manager.username }}</p>
+            <p><strong>Staff:</strong> 
+                {% for staff_member in horse.staff.all %}
+                    {{ staff_member.get_full_name|default:staff_member.username }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    None Assigned
+                {% endfor %}
+            </p>
+        </div>
 
+        <div class="horse-info-card">
+            <h2>Riding & Exercise</h2>
+            <p><strong>Primary Rider:</strong> {{ horse.rider.get_full_name|default:horse.rider.username }}</p>
+            <p><strong>Last Ridden By:</strong> {{ horse.most_recent_ride.name }}</p>
+            <p><strong>Exercise Schedule:</strong> 
+                <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="info-link">View</a>
+            </p>
+        </div>
+
+        <div class="horse-info-card">
+            <h2>Health & Nutrition</h2>
+            <p><strong>Last Cared For By:</strong> {{ horse.most_recent_staff.name }}</p>
+            <p><strong>Feeding Chart:</strong> 
+                <a href="{% url 'feeding_management:horse_feeding_chart_readonly' horse.id %}" class="info-link">View</a>
+            </p>
+        </div>
+
+        <div class="horse-info-card">
+            <h2>Competitions</h2>
+            <p><strong>Competition Results:</strong> 
+                <a href="{% url 'competitions:horse_results_archive' horse.id %}" class="info-link">View</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="horse-action-buttons">
+        <a href="{% url 'horses:edit_horse_profile' horse.id %}
+        " class="btn-primary">Edit/Remove Profile</a>
+        <a href="{% url 'horses:horse_list' %}" class="btn-secondary">Back</a>
+    </div>
+
+</div>
 {% endblock %}
+

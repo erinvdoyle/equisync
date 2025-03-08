@@ -13,7 +13,7 @@ body {
 }
 
 h1, h2 {
-    color: #6a3e26;
+    color: #d8a7b1;
 }
  
 /* --- Sidebar Styles -------------------------------------------------------------------------------------------------------------------------*/
@@ -72,7 +72,7 @@ h1, h2 {
 }
 
 .sidebar-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -249,7 +249,202 @@ section {
 }
 
 /* --- Form Styles ----------------------------------------------------------------------------------------------------------------------- */
-form {
+/* --- Form Container --- */
+.form-container {
+    max-width: 700px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* --- Form Title --- */
+.form-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+/* --- Image Preview --- */
+.image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.image-preview img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #af7c87;
+}
+
+.default-thumbnail {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background: #f5cfd5;
+    color: #343a40;
+}
+
+/* --- Form Layout --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #343a40;
+}
+
+/* --- Form Inputs & Selects --- */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d4d4d4;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #af7c87;
+    outline: none;
+}
+
+/* --- Form Buttons --- */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background: linear-gradient(120deg, #af7c87, #d8a7b1);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(120deg, #d8a7b1, #f5cfd5);
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: #7d7e80;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #343a40;
+    transform: scale(1.05);
+}
+
+.horse-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* --- Form Enhancements --- */
+.hidden-preview {
+    display: none;
+}
+
+.image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.image-preview img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #af7c87;
+}
+
+.default-thumbnail {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background: #f5cfd5;
+    color: #343a40;
+}
+
+/* --- Collapsible Sections --- */
+.collapsible-section {
+    margin-top: 20px;
+}
+
+.collapsible-header {
+    width: 100%;
+    background: linear-gradient(120deg, #af7c87, #d8a7b1);
+    color: white;
+    padding: 10px;
+    border: none;
+    text-align: left;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.collapsible-header:hover {
+    background: linear-gradient(120deg, #d8a7b1, #f5cfd5);
+}
+
+.collapsible-content {
+    display: none;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 3px solid #af7c87;
+}
+
+/* --- Form Validation --- */
+.error-message {
+    color: red;
+    font-size: 0.85rem;
+    display: none;
+    margin-top: 5px;
+}
+
+
+/* form {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -281,6 +476,228 @@ form button {
 
 form button:hover {
     background-color: #905133;
+} */
+
+/* --- Horse Profile Styles --------------------------------------------------------------------------------------------------------------- */
+/*  Horse List Styling */
+
+.custom-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+.custom-page-title {
+    text-align: center;
+    color: #343a40;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.horse-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.horse-profile-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.horse-profile-card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(120deg, #7d7e80, #d8a7b1, #f5cfd5);
+    border-radius: inherit;
+    z-index: -1;
+    filter: blur(4px);
+    opacity: 0.3;
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+.horse-profile-card:hover::before {
+    /* opacity: 1; */
+    filter: blur(6px);
+    background: linear-gradient(120deg, #fce4ec, #fadadd, #fde7f2);
+}
+
+
+.horse-profile-card:hover {
+    transform: scale(1.02);
+}
+
+.horse-profile-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+}
+
+.horse-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ddd;
+    margin-right: 15px;
+}
+
+.horse-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.default-thumbnail {
+    font-size: 2rem;
+    color: #6c757d;
+}
+
+.horse-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.horse-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.horse-info p {
+    margin: 3px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.horse-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #343a40, transparent);
+    margin: 15px 0;
+    /* color: #343a40; */
+    
+}
+
+/*  Horse Profile Page Styling */
+.horse-profile-container {
+    max-width: 900px;
+    margin: auto;
+    margin-top: 25px;
+    padding: 30px;
+    background: rgb(245, 207, 213, .3);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.horse-header {
+    display: flex;
+    align-items: center;
+    background: #77656d;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.horse-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #d8a7b1;
+    margin-right: 20px;
+}
+
+.horse-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.default-horse-icon {
+    font-size: 3rem;
+    color: #343a40;
+}
+
+.horse-details {
+    flex: 1;
+}
+
+.horse-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #77656d;
+}
+
+.horse-breed {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #d8a7b1;
+}
+
+.horse-age-gender {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.horse-info-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.horse-info-card {
+    flex: 1 1 calc(50% - 15px);
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.horse-info-card h2 {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+.horse-info-card p {
+    font-size: 1rem;
+    color: #af7c87;
+    margin: 5px 0;
+}
+
+.info-link {
+    color: #f5cfd5;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.info-link:hover {
+    text-decoration: underline;
 }
 
 /* --- Ads and Announcement Sections ------------------------------------------------------------------------------------------------------ */
@@ -862,6 +1279,25 @@ form button:hover {
     font-style: italic;
 }
 
+.navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 15px;
+}
+
+.navbar-brand {
+    flex: 0 0 250px;
+    text-align: center;
+    white-space: nowrap;
+    padding: 10px 0; 
+}
+
+.navbar-collapse {
+    flex-grow: 1;
+}
+
 .badge {
     position: absolute;
     top: 10px;
@@ -919,7 +1355,7 @@ main {
 }
 
 /* --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
-a {
+/* a {
     text-decoration: none;
     color: #6a3e26;
     transition: color 0.3s ease;
@@ -941,7 +1377,7 @@ button.primary {
 
 button.primary:hover {
     background-color: #e66f00; 
-}
+} */
 
 /* --- Competitions Events Calendar -------------------------------------------------------------------------------------------------------- */
 .custom-calendar-container {
@@ -1824,6 +2260,23 @@ button.primary:hover {
 }
 
 @media (max-width: 768px) {
+    .horse-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .horse-image {
+        margin-bottom: 15px;
+    }
+
+    .horse-info-container {
+        flex-direction: column;
+    }
+
+    .horse-info-card {
+        width: 100%;
+    }
+    
     .carousel-item img {
         max-height: 250px; 
     }
@@ -1971,6 +2424,7 @@ button.primary:hover {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding-bottom: 10px;
     }
 
     .sidebar-hidden .sidebar-menu {
@@ -2024,16 +2478,37 @@ button.primary:hover {
 @media (max-width: 767px) {
     .exercise-form-container {
         flex-direction: column;
+    }  
+
+    .navbar-brand {
+        flex: 0 0 120px;
     }
-}
 
 @media (max-width: 600px) {
     .footer {
         clip-path: ellipse(180% 100% at 50% 100%);
     }
+
+    .horse-profile-card {
+     flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .horse-thumbnail {
+        margin-bottom: 10px;
+    }
+    
+     .horse-info {
+        align-items: center;
+    }
 }
 
 @media (max-width: 425px) {
+    .horse-profile-container {
+        margin: -5px;
+    }
+
     .exercise-form-container {
         padding: 10px;
     }
