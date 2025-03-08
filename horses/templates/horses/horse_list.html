@@ -2,20 +2,35 @@
 {% load static %}
 
 {% block content %}
-    <h1>Horses</h1>
+<div class="custom-container">
+    <h1 class="custom-page-title">Horses</h1>
 
-    <div class="horse-list">
+    <div class="horse-list-container">
         {% for horse in horses %}
-            <div class="horse-item">
-                <a href="{% url 'horses:horse_profile' horse.id %}">
-                    {% if horse.image %}
-                        <img src="{{ horse.image.url }}" alt="{{ horse.name }}" style="max-width: 200px; max-height: 200px;">
-                    {% else %}
-                        <img src="{% static 'path/to/default_horse_image.jpg' %}" alt="Default Horse Image" style="max-width: 200px; max-height: 200px;">
-                    {% endif %}
-                    <h2>{{ horse.name }}</h2>
+            <div class="horse-profile-card">
+                <!-- Circular Image and Name -->
+                <a href="{% url 'horses:horse_profile' horse.id %}" class="horse-profile-link">
+                    <div class="horse-thumbnail">
+                        {% if horse.image %}
+                            <img src="{{ horse.image.url }}" alt="{{ horse.name }}">
+                        {% else %}
+                            <div class="default-thumbnail">🐴</div>
+                        {% endif %}
+                    </div>
+                    <h2 class="horse-name">{{ horse.name }}</h2>
                 </a>
+
+                <!-- Horse Details -->
+                <div class="horse-info">
+                    <p><strong>Breed:</strong> {{ horse.breed }}</p>
+                    <p><strong>Age:</strong> {{ horse.age }}</p>
+                    <p><strong>Owner:</strong> {{ horse.owner.get_full_name|default:horse.owner.username }}</p>
+                </div>
             </div>
+
+            <!-- Divider Between Horses -->
+            <hr class="horse-divider">
         {% endfor %}
     </div>
+</div>
 {% endblock %}
