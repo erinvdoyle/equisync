@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Feeding Chart for {{ horse.name }}</h1>
+<div class="feeding-container">
+    <h1 class="feeding-title">Feeding Chart for {{ horse.name }}</h1>
 
-{% if is_approved_user %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Changes</button>
-    </form>
-{% else %}
-    <p>You are not authorized to edit this feeding chart.</p>
-{% endif %}
+    {% if is_approved_user %}
+        <form method="post" class="feeding-form">
+            {% csrf_token %}
+            <div class="feeding-form-grid">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="feed-btn-primary">Save Changes</button>
+        </form>
+    {% else %}
+        <p class="not-authorized">⚠️ You are not authorized to edit this feeding chart.</p>
+    {% endif %}
+
+    <a href="{% url 'horses:horse_profile' horse.id %}" class="feed-btn-back">Back to Horse Profile</a>
+</div>
 {% endblock %}
