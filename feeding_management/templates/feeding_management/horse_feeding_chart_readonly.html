@@ -1,14 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Feeding Chart for {{ horse.name }}</h1>
+<div class="feeding-container">
+    <h1 class="feeding-title">Feeding Chart for {{ horse.name }}</h1>
 
-    <p><strong>Breakfast:</strong> {{ feeding_chart.get_breakfast_info }}</p>
-    <p><strong>Lunch:</strong> {{ feeding_chart.get_lunch_info }}</p>
-    <p><strong>Dinner:</strong> {{ feeding_chart.get_dinner_info }}</p>
-    <p><strong>Hay:</strong> {{ feeding_chart.get_hay_info }}</p>
-    <p><strong>Supplements:</strong> {{ feeding_chart.supplements }}</p>
-    <p><strong>Medicines:</strong> {{ feeding_chart.medicines }}</p>
-    <p><strong>Notes:</strong> {{ feeding_chart.notes }}</p>
+    <div class="feeding-card">
+        <h2 class="feeding-subtitle">Meals & Nutrition</h2>
+        <p><strong>🍽️ Breakfast:</strong> {{ feeding_chart.get_breakfast_info }}</p>
+        <p><strong>🍽️ Lunch:</strong> {{ feeding_chart.get_lunch_info }}</p>
+        <p><strong>🍽️ Dinner:</strong> {{ feeding_chart.get_dinner_info }}</p>
+        <p><strong>🌿 Hay:</strong> {{ feeding_chart.get_hay_info }}</p>
+    </div>
 
+    <div class="feeding-card">
+        <h2 class="feeding-subtitle">Supplements & Medicines</h2>
+        <p><strong>💊 Supplements:</strong> {{ feeding_chart.supplements }}</p>
+        <p><strong>💉 Medicines:</strong> {{ feeding_chart.medicines }}</p>
+    </div>
+
+    <div class="feeding-card">
+        <h2 class="feeding-subtitle">Additional Notes</h2>
+        <p>{{ feeding_chart.notes|default:"No notes provided." }}</p>
+    </div>
+
+    <a href="{% url 'horses:horse_profile' horse.id %}" class="feed-btn-back">⬅ Back to Horse Profile</a>
+</div>
 {% endblock %}
+

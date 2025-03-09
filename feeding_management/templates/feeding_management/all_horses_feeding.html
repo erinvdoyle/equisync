@@ -2,7 +2,30 @@
 {% load django_tables2 %}
 
 {% block content %}
-    <h1>Daily Feeding Overview</h1>
+<div class="feeding-container">
+    <h1 class="feeding-title">Daily Feeding Overview</h1>
 
-    {% render_table table %}
+    <!-- Table Layout for Large Screens-->
+    <div class="feeding-table-wrapper">
+        <div class="table-responsive feeding-chart-container d-none d-md-block">
+            {% render_table table %}
+        </div>        
+    </div>
+
+    <!-- Mobile-Friendly Layout -->
+    <div class="feeding-card-layout d-block d-md-none">
+        {% for row in table.data %}
+            <div class="feeding-card">
+                <h2 class="feeding-card-title">{{ row.horse.name }}</h2>
+                <p><strong>Breakfast:</strong> {{ row.get_breakfast_info }}</p>
+                <p><strong>Lunch:</strong> {{ row.get_lunch_info }}</p>
+                <p><strong>Dinner:</strong> {{ row.get_dinner_info }}</p>
+                <p><strong>Hay:</strong> {{ row.get_hay_info }}</p>
+                <p><strong>Supplements:</strong> {{ row.supplements }}</p>
+                <p><strong>Medicines:</strong> {{ row.medicines }}</p>
+                <p><strong>Notes:</strong> {{ row.notes }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
