@@ -15,6 +15,9 @@ import os
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -61,6 +64,8 @@ INSTALLED_APPS = [
     'competitions',
     # 'django_celery_beat',
     'notifications',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 SITE_ID = 1
@@ -154,6 +159,14 @@ STATICFILES_DIRS = [
 ]   
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxpbpx72q',
+    'API_KEY': '933612367888562',
+    'API_SECRET': 'I95uXl4d_FOG43HxQQBeY2IY_R4'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
