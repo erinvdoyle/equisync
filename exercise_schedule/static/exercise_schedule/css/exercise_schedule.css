@@ -1,0 +1,619 @@
+/* --- Exercise Schedule Table ------------------------------------------------------------------------------------------------------------ */
+.exercise-calendar-container {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 10px 15px 15px 15px;
+}
+
+.exercise-calendar-container .exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.exercise-calendar-container .exercise-table th {
+    background-color: darkslategrey;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.exercise-calendar-container .exercise-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+    height: 100px;
+    width: 150px;
+    font-size: 14px;
+    position: relative;
+    background-color: #f9f9f9;
+    transition: background 0.3s ease;
+}
+
+.exercise-calendar-container .exercise-table td:hover {
+    background-color: #f3e8f0;
+    transform: scale(1.02);
+}
+
+.green-icon {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: #19c37d;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.green-icon:hover {
+    color: #0fa863;
+    transform: translateX(-50%) scale(1.2);
+}
+
+.exercise-calendar-container .exercise-table td:hover {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: clip;
+}
+
+.exercise-calendar-container .exercise-table .noday {
+    background-color: #f9f9f9;
+}
+
+.exercise-calendar-container .exercise-table .mon,
+.exercise-calendar-container .exercise-table .tue,
+.exercise-calendar-container .exercise-table .wed,
+.exercise-calendar-container .exercise-table .thu,
+.exercise-calendar-container .exercise-table .fri,
+.exercise-calendar-container .exercise-table .sat,
+.exercise-calendar-container .exercise-table .sun {
+    background-color: #fff;
+    color: #4CAF50;
+}
+
+.exercise-calendar-container .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.exercise-calendar-container .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 80%;
+    max-width: 500px;
+}
+
+.exercise-calendar-container .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.exercise-calendar-container .close:hover,
+.exercise-calendar-container .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.exercise-heading {
+    text-align: center;
+}
+
+#select-week-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 34px;
+    margin: 0 5px;
+    display: inline-block;
+    line-height: 1;
+}
+
+#select-week-button:hover {
+    background-color: #45a049;
+}
+
+ /* --- Background colors for exercise labels -------------------------------------------------------------------------------------------------*/
+ .exercise-calendar-container .exercise-table .label-walker {
+    background-color: #FFCCCB;
+}
+
+.exercise-calendar-container .exercise-table .label-lunge {
+    background-color: #FFFACD;
+}
+
+.exercise-calendar-container .exercise-table .label-hand_walk {
+    background-color: #E0FFFF;
+}
+
+.exercise-calendar-container .exercise-table .label-graze {
+    background-color: #D3D3D3;
+}
+
+.exercise-calendar-container .exercise-table .label-turnout {
+    background-color: #98FB98;
+}
+
+.exercise-calendar-container .exercise-table .label-ride {
+    background-color: #ADD8E6;
+}
+
+.exercise-calendar-container .exercise-table .label-groundwork {
+    background-color: #FFB6C1;
+}
+
+.exercise-calendar-container .exercise-table .label-other {
+    background-color: #F0E68C;
+}
+
+/* --- Legend Styles --------------------------------------------------------------------------------------------------------------------------*/
+.legend-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 15px;
+    padding: 0 15px;
+}
+
+.exercise-legend {
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 48%;
+}
+
+.exercise-legend h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-decoration: underline;
+}
+
+.legend-table {
+    width: auto;
+    margin: 0 auto;
+}
+
+.legend-box {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+}
+
+.legend-box.walker {
+    background-color: #FFCCCB;
+}
+
+.legend-box.lunge {
+    background-color: #FFFACD;
+}
+
+.legend-box.hand_walk {
+    background-color: #E0FFFF;
+}
+
+.legend-box.graze {
+    background-color: #D3D3D3;
+}
+
+.legend-box.turnout {
+    background-color: #98FB98;
+}
+
+.legend-box.ride {
+    background-color: #ADD8E6;
+}
+
+.legend-box.groundwork {
+    background-color: #FFB6C1;
+}
+
+.legend-box.other {
+    background-color: #F0E68C;
+}
+
+/* --- Exercise Form Styles -------------------------------------------------------------------------------------------- */
+.exercise-form-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.exercise-form-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.exercise-form-container label {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.exercise-form-container input[type="text"],
+.exercise-form-container input[type="date"],
+.exercise-form-container select,
+.exercise-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.exercise-form-container button[type="submit"],
+.exercise-form-container .exercise-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.exercise-form-container button[type="submit"]:hover,
+.exercise-form-container .exercise-btn:hover {
+    background-color: #45a049;
+}
+
+.exercise-form-container .exercise-item {
+    margin-bottom: 20px;
+}
+
+.exercise-form-container .exercise-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.exercise-form-container .exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.exercise-form-container .exercise-table th,
+.exercise-form-container .exercise-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.exercise-form-container .exercise-table th {
+    background-color: #f0f0f0;
+}
+
+.exercise-form-container .exercise-btn-secondary,
+.exercise-form-container .exercise-btn-primary {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* --- Horse Exercise Schedule ------------------------------------------------------------------------------------------------------------ */
+.chart-and-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.weekly-schedule-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weekly-schedule-controls button {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: .5rem 1rem;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .15s ease-in-out;
+}
+
+.weekly-schedule-controls button:hover {
+    background-color: #f0f0f0;
+}
+
+.weekly-schedule-controls select {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: .5rem;
+    font-size: 14px;
+}
+
+.appointment-legend-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
+
+.appointment-farrier {
+    outline: 3px solid rgba(128, 0, 128, 0.3);
+}
+
+.appointment-vet {
+    outline: 2px solid rgba(0, 128, 0, 0.5);
+}
+
+.appointment-physio {
+    outline: 2px solid rgba(255, 255, 0, 0.5);
+}
+
+.appointment-dentist {
+    outline: 2px solid rgba(255, 165, 0, 0.5);
+}
+
+.appointment-other {
+    outline: 2px solid rgba(0, 0, 255, 0.5);
+}
+
+/* --- Week Selection & Buttons Row Styling (No Background) --- */
+.events-calendar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin: 15px 0 0 0;
+    padding-left: 15px;
+}
+
+.date-input {
+    padding: 6px 10px;
+    border: 2px solid #af7c87;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    color: #333;
+    width: 140px;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.date-input:focus {
+    border-color: #905f6e;
+    box-shadow: 0 0 4px rgba(175, 124, 135, 0.5);
+}
+
+.nav-button {
+    padding: 6px 12px;
+    background: #af7c87;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.nav-button:hover {
+    background: #905f6e;
+    transform: translateY(-2px);
+}
+
+.nav-button:active {
+    transform: scale(0.98);
+}
+
+.events-calendar-nav .nav-button,
+.events-calendar-nav .date-input {
+    margin: 0;
+}
+
+/* --- Media Queries ------------------------------------------------------------------------------------------------------------ */
+@media (max-width: 374px) {
+    .exercise-calendar-container {
+        padding: 10px 2px 15px 2px;
+    }
+
+    .events-calendar-nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .events-calendar-nav form {
+        grid-column: span 2;
+        text-align: center;
+    }
+
+    .events-calendar-nav .nav-button {
+        width: 100%;
+        text-align: center;
+        max-width: 150px;
+    }
+
+    /* #select-week-button {
+        margin: 0 5px 0 0;
+        width: 90%;
+    } */
+}
+
+@media screen and (max-width: 768px) {
+    .exercise-calendar-container .exercise-table th,
+    .exercise-calendar-container .exercise-table td {
+        font-size: 10px;
+        padding: 4px;
+    }
+
+    .exercise-calendar-container .exercise-table td {
+        height: auto;
+        white-space: normal;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item span {
+        display: none;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item::before {
+        content: attr(data-time-category);
+        display: inline-block;
+        padding: 2px 4px;
+        border-radius: 3px;
+        color: white;
+        font-size: 10px;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-walker::before {
+        background-color: #FFCCCB;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-lunge::before {
+        background-color: #FFFACD;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-hand_walk::before {
+        background-color: #E0FFFF;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-graze::before {
+        background-color: #D3D3D3;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-turnout::before {
+        background-color: #98FB98;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-ride::before {
+        background-color: #ADD8E6;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-groundwork::before {
+        background-color: #FFB6C1;
+    }
+
+    .exercise-calendar-container .exercise-table .exercise-item.label-other::before {
+        background-color: #F0E68C;
+    }
+
+    /* .exercise-legend {
+        display: block;
+    } */
+
+    .legend-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .exercise-legend {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .exercise-legend h3 {
+        font-size: 14px;
+    }
+
+    .legend-table td {
+        padding: 1px;
+    }
+
+    .legend-box {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .exercise-form-container {
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .exercise-form-container .form-section,
+    .exercise-form-container .schedule-section {
+        flex: 1;
+    }
+
+    .chart-and-breakdown {
+        flex-direction: row;
+    }
+
+    .time-breakdown {
+        flex: 1;
+    }
+}
+
+@media (max-width: 425px) {
+    .exercise-form-container {
+        padding: 10px;
+    }
+
+    .exercise-form-container h2 {
+        font-size: 20px;
+    }
+
+    .exercise-form-container label {
+        font-size: 12px;
+    }
+
+    .exercise-form-container input[type="text"],
+    .exercise-form-container input[type="date"],
+    .exercise-form-container select,
+    .exercise-form-container textarea {
+        font-size: 12px;
+    }
+
+    .exercise-form-container button[type="submit"],
+    .exercise-form-container .exercise-btn {
+        font-size: 12px;
+    }
+
+    .exercise-form-container .exercise-item h3 {
+        font-size: 16px;
+    }
+
+    .exercise-form-container .exercise-table th,
+    .exercise-form-container .exercise-table td {
+        padding: 10px;
+        font-size: 12px;
+    }
+ }

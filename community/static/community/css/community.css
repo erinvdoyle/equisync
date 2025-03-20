@@ -1,0 +1,732 @@
+/* --- General Styling ------------------------------------------------------------------------------------------------------------------------- */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-title h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.section-title p {
+    font-size: 1.1rem;
+    color: #77656d;
+}
+
+.community-btn {
+    background: #af7c87;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.community-btn:hover {
+    background: #905f6e;
+}
+
+
+/* --- Page Containers & Section Layout -------------------------------------------------------------------------------------------------------- */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+}
+
+.section-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.ads-section, .announcements-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+}
+
+.ads-section,
+.announcements-section,
+.weekly-events-section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 8px;
+    background: white;
+    position: relative;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ads-section .section-wrapper {
+    padding-top: 0 !important;
+    margin-top: -5px !important;
+}
+
+.ads-section .toolbar {
+    margin-top: 0 !important;
+    padding-top: 10px !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.announcements-section .section-header {
+    text-align: center;
+    background: linear-gradient(to right, #7d7e80, #af7c87, #343a40);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.weekly-events-section .section-header {
+    background: linear-gradient(to right, #af7c87, #7d7e80, #343a40);
+}
+
+.weekly-events-section .section-wrapper .section-header {
+    text-align: center;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: -25px;
+}
+
+.ads-section::before,
+.announcements-section::before,
+.weekly-events-section::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 12px;
+    z-index: -1;
+    box-shadow: 0px 0px 15px 5px rgba(60, 64, 67, 0.2);
+}
+
+.ads-section::before {
+    background: linear-gradient(135deg, #2c3e50, #6d6875);
+    opacity: 0.4;
+}
+
+.announcements-section::before {
+    background: linear-gradient(135deg, #8b6f83, #af7c87);
+    opacity: 0.4;
+}
+
+.weekly-events-section::before {
+    background: linear-gradient(135deg, #7b8d93, #5d6a6f);
+    opacity: 0.4;
+}
+
+.post-ad-btn:hover, 
+.edit-ad-btn:hover {
+    background: #905f6e;
+    box-shadow: 0 4px 8px rgba(144, 95, 110, 0.4);
+}
+
+/* --- Ads Toolbar ----------------------------------------------------------------------------------------------------------------------- */
+.toolbar {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #343a40, #7d7e80, #af7c87);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    gap: 10px;
+}
+
+.toolbar h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.toolbar-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.toolbar-form .community-btn {
+    padding: 9px 15px;
+    height: 38px;
+}
+
+.search-field, .category-field {
+    height: 35px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background: white;
+    color: #343a40;
+    font-weight: bold;
+    height: 38px;
+}
+
+.search-form,
+.filter-form {
+    display: flex;
+    align-items: center;
+    height: 38px !important;
+}
+
+.search-field {
+    width: 180px;
+    transition: all 0.3s ease;
+}
+
+.search-field:focus {
+    width: 220px;
+    outline: none;
+    box-shadow: 0 0 6px rgba(175, 124, 135, 0.6);
+}
+
+.category-field {
+    width: 140px;
+    cursor: pointer;
+    height: 38px;
+}
+
+/* .toolbar-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+} */
+
+/* .search-form {
+    flex-grow: 1;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-container input {
+    width: 150px;
+    height: 35px;
+    padding: 5px 10px;
+    border: none;
+    background: #ffffff;
+    border-radius: 5px;
+    color: #343a40;
+    font-weight: bold;
+}
+
+.search-field {
+    width: 200px;
+    height: 35px;
+    padding: 5px 10px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    color: #343a40;
+    font-weight: bold;
+}
+
+.category-field {
+    height: 35px;
+    border-radius: 5px;
+    padding: 5px;
+    background: white;
+    color: #343a40;
+    font-weight: bold;
+} */
+
+/* --- Ad & Announcement Cards ---------------------------------------------------------------------------------------------------------------- */
+.ad-card, .announcement-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 15px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.ad-card:hover, .announcement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ad-card img, .announcement-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.ad-card .p-3, .announcement-card .p-3 {
+    padding: 15px;
+    text-align: center;
+}
+
+.ad-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+}
+
+.ad-label.for-sale {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.ad-label.wanted {
+    background-color: #af7c87;
+    color: white;
+}
+
+.card-btn {
+    background: #af7c87;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.card-btn:hover {
+    background: #905f6e;
+}
+
+.ad-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* --- Weekly Events Section ----------------------------------------------------------------------------------------------------------------- */
+.calendar-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.calendar-table thead tr {
+    background: #343a40;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+ .calendar-table th, .calendar-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+} 
+
+.calendar-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.calendar-table th {
+    background-color: #343a40;
+    color: white;
+    font-weight: bold;
+}
+
+.weekly-events-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.weekly-events-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#recent-weeks {
+    width: 140px;
+}
+
+.weekly-events-controls .btn,
+.weekly-events-controls select {
+    height: 40px;
+    font-size: 1rem;
+}
+
+/* --- Pagination ----------------------------------------------------------------------------------------------------------------------------- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination .page-link {
+    background: #af7c87;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    transition: background 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background: #905f6e;
+}
+
+.cancel-btn {
+    background: #77656d;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: #5d4a50;
+}
+
+.ad-preview {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #444;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background: #fafafa;
+}
+
+.ad-preview-image {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- General Form Styles -------------------------------------------------------------------------------------- */
+.form-container, .preview-container {
+    max-width: 700px;
+    background: white;
+    margin: 40px auto;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-title, .preview-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #343a40;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.styled-form p {
+    margin-bottom: 15px;
+}
+
+.styled-form input, .styled-form select, .styled-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.styled-form input:focus, .styled-form select:focus, .styled-form textarea:focus {
+    border-color: #af7c87;
+    box-shadow: 0 0 6px rgba(175, 124, 135, 0.4);
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.announcement-form-container, 
+.announcement-preview-container,
+.announcement-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.announcement-form-title,
+.announcement-preview-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.announcement-form .form-group {
+    margin-bottom: 15px;
+}
+
+.announcement-form input,
+.announcement-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.preview-image {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 10px auto;
+    border-radius: 8px;
+}
+
+.comment-box {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.comment-actions {
+    margin-top: 5px;
+}
+
+.add-comment-section {
+    margin-top: 20px;
+}
+
+.delete-form {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/* --- Mobile Responsiveness ------------------------------------------------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+    .row .col-lg-4 {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+}
+
+@media (max-width: 991px) {
+    .row .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .row .col-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    /* .ads-section .row,
+    .announcements-section .row {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 15px; 
+    } */
+
+    .ad-card, .announcement-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .ad-card img, .announcement-card img  {
+        max-height: 150px;
+        object-fit: cover;
+    }
+}
+
+
+@media (min-width: 769px) {
+    .calendar-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .calendar-table thead {
+        display: table-header-group;
+    }
+
+    .calendar-table tbody {
+        display: table-row-group;
+    }
+
+    .calendar-table tr {
+        display: table-row;
+    }
+
+    .calendar-table th,
+    .calendar-table td {
+        display: table-cell;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        width: 14.28%;
+        vertical-align: top;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .toolbar, .ads-section, .announcements-section, .weekly-events-section {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+    }
+    
+    .ad-card, .announcement-card {
+        width: 100%;
+    }
+
+    .calendar-table th, .calendar-table td {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-field {
+        width: 100%;
+    }
+
+    .calendar-table thead {
+        display: none;
+    }
+
+    .calendar-table tbody {
+        display: block;
+    }
+
+    .calendar-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .calendar-table td {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .mobile-only {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .search-field {
+        width: 35px !important; 
+        padding: 8px 10px; 
+        text-indent: -9999px; 
+    }
+
+    .search-container::after {
+        right: 12px; 
+        font-size: 16px; 
+    }
+
+    .search-field:focus {
+        width: 140px; 
+        font-size: 14px; 
+        text-align: left;
+    }
+
+    /* .category-field {
+        width: 55px;
+    } */
+
+    .search-container input,
+    .category-field {
+        width: 100%;
+        margin-top: 5px;
+    }
+    
+    .full-text {
+        display: none;
+    }
+
+    .short-text {
+        display: inline;
+    }
+
+    .calendar-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .calendar-table th, .calendar-table td {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}

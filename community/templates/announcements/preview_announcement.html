@@ -1,20 +1,31 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Preview Your Announcement</h1>
-    
-    <p><strong>Description:</strong> {{ announcement.description }}</p>
-    <p><strong>Contact Info:</strong> {{ announcement.contact_info }}</p>
-    
-    {% if announcement.image %}
-        <img src="{{ announcement.image.url }}" alt="Announcement Image" />
-    {% endif %}
-    
-    <form method="post" action="{% url 'submit_announcement' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit Announcement</button>
-        <a href="{% url 'edit_announcement' announcement.id %}">Edit Announcement</a> 
-        <a href="{% url 'community_overview' %}">Cancel</a> 
-    </form>
+<div class="container announcement-preview-container">
+    <h1 class="announcement-preview-title">{{ announcement.title }}</h1>
+
+    <p class="approval-message">
+        <strong>Your announcement has been submitted for admin approval.</strong>
+    </p>
+
+    <div class="announcement-content">
+        <p><strong>Description:</strong> {{ announcement.description }}</p>
+        <p><strong>Contact Info:</strong> {{ announcement.contact_info }}</p>
+
+        {% if announcement.image %}
+            <img src="{{ announcement.image.url }}" alt="Announcement Image" class="preview-image" />
+        {% endif %}
+    </div>
+
+    <div class="form-buttons">
+        <a href="{% url 'community:community_overview' %}" class="btn btn-secondary">Back to Community</a>
+    </div>
+</div>
 {% endblock %}
+
+

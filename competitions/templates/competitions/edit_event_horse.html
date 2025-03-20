@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'competitions/css/competitions.css' %}">
+{% endblock %}
 {% block content %}
 <div class="container">
     <h1>Edit Competition Results for {{ event_horse.horse.name }}</h1>
@@ -9,15 +12,15 @@
         <!-- Class Details -->
         <div class="form-group">
             <label for="class_details">Class Details:</label>
-            <input type="text" class="form-control" id="class_details" name="class_details" value="{{ event_horse.class_details }}">
+            <input type="text" class="form-control" id="class_details" name="class_details" value="{{ event_horse.class_details|default_if_none:'' }}">
         </div>
         
         <!-- Notes Field -->
         <div class="form-group">
             <label for="notes">Notes:</label>
-            <textarea class="form-control" id="notes" name="notes">{{ event_horse.notes }}</textarea>
+            <textarea class="form-control" id="notes" name="notes">{{ event_horse.notes|default_if_none:'' }}</textarea>
         </div>
-         <!-- Jump Height -->
+        
          <!-- Jump Height -->
 <div class="form-group">
     <label for="jump_height">Jump Height:</label>
@@ -50,13 +53,17 @@
          <!-- Number of Faults -->
          <div class="form-group">
             <label for="number_of_faults">Faults:</label>
-            <input type="text" class="form-control" id="number_of_faults" name="number_of_faults" value="{{ event_horse.number_of_faults }}">
+            <input type="text" class="form-control" id="number_of_faults" name="number_of_faults" 
+                   value="{{ event_horse.number_of_faults|default_if_none:'' }}">
         </div>
+
          <!-- Results Field -->
          <div class="form-group">
-             <label for="results">Results:</label>
-             <input type="text" class="form-control" id="results" name="results" value="{{ event_horse.results }}">
-         </div>
+            <label for="results">Results:</label>
+            <input type="text" class="form-control" id="results" name="results" 
+                   value="{{ event_horse.results|default_if_none:'' }}">
+        </div>
+
          <!-- Star Rating System -->
          <div class="form-group">
              <label>Performance Rating:</label><br>
@@ -103,7 +110,7 @@
          </div>
 
          <button type="submit" class='btn btn-primary'>Save Changes</button>
-         <a href="{% url 'users:dashboard' %}" class='btn btn-secondary'>Cancel</a>
-     </form>
+    <a href="{% url 'competitions:event_detail' event_horse.event.id %}" class='btn btn-secondary'>Cancel</a>
+</form>
 </div>
 {% endblock %}

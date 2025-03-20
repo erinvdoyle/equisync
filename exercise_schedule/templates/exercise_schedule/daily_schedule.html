@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'exercise_schedule/css/exercise_schedule.css' %}">
+{% endblock %}
 
 {% block content %}
 <h1>Daily Exercise Schedule - {{ date }}</h1>

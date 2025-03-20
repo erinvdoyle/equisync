@@ -1,11 +1,30 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Submit an Announcement</h1>
-    <form method="post" enctype="multipart/form-data">
+<div class="container announcement-form-container">
+    <h1 class="announcement-form-title">Submit an Announcement</h1>
+
+    <!-- Ensure the form action is correct -->
+    <form method="post" enctype="multipart/form-data" action="{% url 'community:submit_announcement' %}" class="announcement-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+        
+        <!-- Styled form fields -->
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">Preview Announcement</button>
+            <a href="{% url 'community:community_overview' %}" class="btn btn-secondary">Cancel</a>
+        </div>
     </form>
-    <a href="{% url 'community_overview' %}">Cancel</a>
+</div>
 {% endblock %}
+
+

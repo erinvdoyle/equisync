@@ -1,50 +1,61 @@
 {% extends "base.html" %}
 {% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'competitions/css/competitions.css' %}">
+{% endblock %}
 
 {% block content %}
 
 <!-- Results Archive -->
-<div class="container">
-    <h1>Results Archive for {{ horse.name }}</h1>
+<div class="results-container">
+    <h2 class="results-title">Results Archive for {{ horse.name }}</h2>
 
     {% if results %}
-
-    <div class="filters">
-        <label for="sortResults">Sort by:</label>
-        <select id="sortResults">
-            <option value="date">Date (Newest First)</option>
-            <option value="date_asc">Date (Oldest First)</option>
-            <option value="title">Title (A-Z)</option>
-            <option value="title_desc">Title (Z-A)</option>
-            <option value="height">Jump Height (Highest First)</option>
-            <option value="height_asc">Jump Height (Lowest First)</option>
-        </select>
-    
-        <label for="filterMonth">Filter by:</label>
-        <select id="filterMonth">
-            <option value="all">All Time</option>
-            <option value="this_month">This Month</option>
-            <option value="this_year">This Year</option>
-            <option value="last_6">Last 6 Months</option>
-        </select>
+    <div class="filters-container">
+        <div class="filters">
+            <label for="sortResults">Sort by:</label>
+            <select id="sortResults" class="filter-dropdown">
+                <option value="date">Date (Newest First)</option>
+                <option value="date_asc">Date (Oldest First)</option>
+                <option value="title">Title (A-Z)</option>
+                <option value="title_desc">Title (Z-A)</option>
+                <option value="height">Jump Height (Highest First)</option>
+                <option value="height_asc">Jump Height (Lowest First)</option>
+            </select>
+        
+            <label for="filterMonth">Filter by:</label>
+            <select id="filterMonth" class="filter-dropdown">
+                <option value="all">All Time</option>
+                <option value="this_month">This Month</option>
+                <option value="this_year">This Year</option>
+                <option value="last_6">Last 6 Months</option>
+            </select>
+        </div>
     </div>
     
 
-        <ul id="resultsList">
-            {% for result in results %}
-    <li class="result-item"
-        data-date="{{ result.event.start_time|date:'Y-m-d' }}"
-        data-title="{{ result.event.title }}"
-        data-height="{{ result.jump_height|default:0 }}">
-        <strong>{{ result.event.title }}</strong><br>
-        Date: {{ result.event.start_time|date:"Y-m-d" }}<br>
-        Class Details: {{ result.class_details }}<br>
-        Height: {{ result.jump_height_str }}<br>
-        Faults: {{ result.number_of_faults }}<br>
-        Notes: {{ result.results|default:"No results yet" }}<br>
+    <ul id="resultsList" class="results-list">
+        {% for result in results %}
+        <li class="result-item"
+            data-date="{{ result.event.start_time|date:'Y-m-d' }}"
+            data-title="{{ result.event.title }}"
+            data-height="{{ result.jump_height|default:0 }}">
+            
+            <div class="result-header">
+                <h3 class="result-title">{{ result.event.title }}</h3>
+                <span class="result-date">{{ result.event.start_time|date:"M d, Y" }}</span>
+            </div>
+
+            <div class="result-details">
+                <p><strong>Class Details:</strong> {{ result.class_details }}</p>
+                <p><strong>Jump Height:</strong> {{ result.jump_height_str|default:"N/A" }}</p>
+                <p><strong>Faults:</strong> {{ result.number_of_faults|default:"N/A" }}</p>
+                <p><strong>Notes:</strong> {{ result.results|default:"No results yet" }}</p>
+            </div>
 
         <!-- Display Performance Rating with SVG Stars -->
-        Performance Rating:
+        <div class="performance-rating">
+        <strong>Performance Rating:</strong>
         {% if result.performance_rating %}
             {% with result.performance_rating|add:"0" as rating %}
                 {% for i in "12345" %}
@@ -62,12 +73,12 @@
 {% endif %} 
 
 </div>
+</div>
 
 <!-- Performance Tracking Data -->
-<div class="container">
-    <h1>Performance Archive for {{ horse.name }}</h1>
+<div class="performance-container">
+    <h2 class="performance-title">Performance Archive for {{ horse.name }}</h2>
 
-    <!-- Chart Filters -->
     <div class="chart-filters">
         <div class="filter-group">
             <label><input type="radio" name="chartType" value="all" checked> All Metrics</label>
@@ -78,7 +89,7 @@
 
         <div class="filter-group">
             <label>Time Range:
-                <select id="timeRange">
+                <select id="timeRange" class="filter-dropdown">
                     <option value="all">All Time</option>
                     <option value="1m">1 Month</option>
                     <option value="3m">3 Months</option>
@@ -88,9 +99,9 @@
         </div>
     </div>
 
-    <!-- Chart Canvas -->
     <canvas id="performanceChart" width="400" height="200"></canvas>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

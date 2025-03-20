@@ -1,0 +1,384 @@
+/* --- Exercise Schedule Table ------------------------------------------------------------------------------------------------------------ */
+.exercise-calendar-container {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.exercise-calendar-container .exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.exercise-calendar-container .exercise-table th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.exercise-calendar-container .exercise-table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+    vertical-align: top;
+    height: 100px;
+    width: 150px;
+    overflow: hidden;
+    font-size: 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+.green-icon {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: #19c37d;
+    cursor: pointer;
+}
+
+.exercise-calendar-container .exercise-table td:hover {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: clip;
+}
+
+.exercise-calendar-container .exercise-table .noday {
+    background-color: #f9f9f9;
+}
+
+.exercise-calendar-container .exercise-table .mon,
+.exercise-calendar-container .exercise-table .tue,
+.exercise-calendar-container .exercise-table .wed,
+.exercise-calendar-container .exercise-table .thu,
+.exercise-calendar-container .exercise-table .fri,
+.exercise-calendar-container .exercise-table .sat,
+.exercise-calendar-container .exercise-table .sun {
+    background-color: #fff;
+    color: #4CAF50;
+}
+
+.exercise-calendar-container .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.exercise-calendar-container .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 80%;
+    max-width: 500px;
+}
+
+.exercise-calendar-container .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.exercise-calendar-container .close:hover,
+.exercise-calendar-container .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.exercise-heading {
+    text-align: center;
+}
+
+#select-week-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 34px;
+    margin: 0 5px;
+    display: inline-block;
+    line-height: 1;
+}
+
+#select-week-button:hover {
+    background-color: #45a049;
+}
+
+ /* --- Background colors for exercise labels -------------------------------------------------------------------------------------------------*/
+ .exercise-calendar-container .exercise-table .label-walker {
+    background-color: #FFCCCB;
+}
+
+.exercise-calendar-container .exercise-table .label-lunge {
+    background-color: #FFFACD;
+}
+
+.exercise-calendar-container .exercise-table .label-hand_walk {
+    background-color: #E0FFFF;
+}
+
+.exercise-calendar-container .exercise-table .label-graze {
+    background-color: #D3D3D3;
+}
+
+.exercise-calendar-container .exercise-table .label-turnout {
+    background-color: #98FB98;
+}
+
+.exercise-calendar-container .exercise-table .label-ride {
+    background-color: #ADD8E6;
+}
+
+.exercise-calendar-container .exercise-table .label-groundwork {
+    background-color: #FFB6C1;
+}
+
+.exercise-calendar-container .exercise-table .label-other {
+    background-color: #F0E68C;
+}
+
+/* --- Legend Styles --------------------------------------------------------------------------------------------------------------------------*/
+.legend-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.exercise-legend {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.exercise-legend h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.legend-table {
+    border-collapse: collapse;
+    width: auto;
+    margin: 0 auto;
+}
+
+.legend-table td {
+    padding: 2px;
+    vertical-align: middle;
+}
+
+.legend-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.legend-box.walker {
+    background-color: #FFCCCB;
+}
+
+.legend-box.lunge {
+    background-color: #FFFACD;
+}
+
+.legend-box.hand_walk {
+    background-color: #E0FFFF;
+}
+
+.legend-box.graze {
+    background-color: #D3D3D3;
+}
+
+.legend-box.turnout {
+    background-color: #98FB98;
+}
+
+.legend-box.ride {
+    background-color: #ADD8E6;
+}
+
+.legend-box.groundwork {
+    background-color: #FFB6C1;
+}
+
+.legend-box.other {
+    background-color: #F0E68C;
+}
+
+/* --- Exercise Form Styles -------------------------------------------------------------------------------------------- */
+.exercise-form-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.exercise-form-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.exercise-form-container label {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.exercise-form-container input[type="text"],
+.exercise-form-container input[type="date"],
+.exercise-form-container select,
+.exercise-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.exercise-form-container button[type="submit"],
+.exercise-form-container .exercise-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.exercise-form-container button[type="submit"]:hover,
+.exercise-form-container .exercise-btn:hover {
+    background-color: #45a049;
+}
+
+.exercise-form-container .exercise-item {
+    margin-bottom: 20px;
+}
+
+.exercise-form-container .exercise-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.exercise-form-container .exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.exercise-form-container .exercise-table th,
+.exercise-form-container .exercise-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.exercise-form-container .exercise-table th {
+    background-color: #f0f0f0;
+}
+
+.exercise-form-container .exercise-btn-secondary,
+.exercise-form-container .exercise-btn-primary {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* --- Horse Exercise Schedule ------------------------------------------------------------------------------------------------------------ */
+.chart-and-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.weekly-schedule-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weekly-schedule-controls button {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: .5rem 1rem;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .15s ease-in-out;
+}
+
+.weekly-schedule-controls button:hover {
+    background-color: #f0f0f0;
+}
+
+.weekly-schedule-controls select {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: .5rem;
+    font-size: 14px;
+}
+
+.appointment-legend-box {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 5px;
+}
+
+.appointment-farrier {
+    outline: 3px solid rgba(128, 0, 128, 0.3);
+}
+
+.appointment-vet {
+    outline: 2px solid rgba(0, 128, 0, 0.5);
+}
+
+.appointment-physio {
+    outline: 2px solid rgba(255, 255, 0, 0.5);
+}
+
+.appointment-dentist {
+    outline: 2px solid rgba(255, 165, 0, 0.5);
+}
+
+.appointment-other {
+    outline: 2px solid rgba(0, 0, 255, 0.5);
+}
+
+/* --- Media Queries ------------------------------------------------------------------------------------------------------ */
+@media (max-width: 767px) {
+    .exercise-form-container {
+        flex-direction: column;
+    }
+}

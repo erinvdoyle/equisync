@@ -15,7 +15,7 @@ def submit_announcement(request):
             announcement = form.save(commit=False)
             announcement.user = request.user  
             announcement.save()
-            return render(request, 'announcements/preview_announcement.html', {'announcement': announcement, 'form': form})  
+            return redirect('community:preview_announcement', announcement_id=announcement.id)  
     else:
         form = AnnouncementForm()
 
@@ -23,14 +23,15 @@ def submit_announcement(request):
 
 @login_required
 def edit_announcement(request, announcement_id):
-    announcement = get_object_or_404(Announcement, id=announcement_id) 
+    announcement = get_object_or_404(Announcement, id=announcement_id)
+
     if request.method == 'POST':
         form = AnnouncementForm(request.POST, request.FILES, instance=announcement)  
         if form.is_valid():
-            form.save()  
-            return redirect('community_overview')  
+            form.save()
+            return redirect('community:announcement_detail', announcement_id=announcement.id)  
     else:
-        form = AnnouncementForm(instance=announcement) 
+        form = AnnouncementForm(instance=announcement)
 
     return render(request, 'announcements/edit_announcement.html', {'form': form, 'announcement': announcement})
 
@@ -48,8 +49,7 @@ def announcement_detail(request, announcement_id):
     announcement = get_object_or_404(Announcement, pk=announcement_id)
     content_type = ContentType.objects.get_for_model(Announcement)
     comments = Comment.objects.filter(content_type=content_type, object_id=announcement_id).order_by('-created_at')
-    # form = CommentForm()
-    
+
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -69,3 +69,20 @@ def announcement_detail(request, announcement_id):
         'form': form,
         'content_type': content_type,
     })
+    
+@login_required
+def delete_announcement(request, announcement_id):
+    announcement = get_object_or_404(Announcement, id=announcement_id, user=request.user)
+    
+    if request.method == "POST":
+        announcement.delete()
+        messages.success(request, "Your announcement has been successfully deleted.")
+        return redirect('community:community_overview')
+    
+    return render(request, "announcements/confirm_delete_announcement.html", {"announcement": announcement})
+
+@login_required
+def preview_announcement(request, announcement_id):
+    announcement = get_object_or_404(Announcement, id=announcement_id)
+    return render(request, 'announcements/preview_announcement.html', {'announcement': announcement})
+

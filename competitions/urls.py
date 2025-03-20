@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import event_detail, edit_event_horse, remove_event_horse, horse_results_archive
+from .views import event_detail, edit_event_horse, remove_event_horse, horse_results_archive, edit_event, favorite_event, get_event_details
 from competitions.views import mark_event_notification_as_read
 
 
@@ -10,7 +10,8 @@ urlpatterns = [
     path('', views.calendar_view, name='calendar_view'),
     path('add/', views.add_event, name='add_event'),
     path('favorite/<int:event_id>/', views.favorite_event, name='favorite_event'),
-    path('edit/<int:event_id>/', views.edit_event, name='edit_event'),
+    path('get_event_details/<int:event_id>/', get_event_details, name='get_event_details'),
+    path('edit/', edit_event, name='edit_event'),
     path('delete/<int:event_id>/', views.delete_event, name='delete_event'),
     path('month/<int:year>/<int:month>/', views.calendar_view, name='month_view'),
     path('week/<int:year>/<int:month>/<int:day>/', views.week_view, name='week_view'),

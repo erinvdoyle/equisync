@@ -1,24 +1,78 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'competitions/css/competitions.css' %}">
+    <script>
+        function updateEventFields(eventData) {
+            document.getElementById('title').value = eventData.title || '';
+            document.getElementById('description').value = eventData.description || '';
+            document.getElementById('start_time').value = eventData.start_time || '';
+            document.getElementById('end_time').value = eventData.end_time || '';
+        }
+
+        function fetchEventDetails(eventId) {
+            if (!eventId) return;
+            
+            fetch(`/competitions/get_event_details/${eventId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    updateEventFields(data);
+                })
+                .catch(error => console.error('Error fetching event details:', error));
+        }
+    </script>
+{% endblock %}
 
 {% block content %}
-<h2>Edit Event</h2>
-<form method="post">
-    {% csrf_token %}
-    
-    <label for="title">Title:</label>
-    <input type="text" name="title" value="{{ event.title }}" required><br>
+<div class="event-form-container">
+    <h2 class="event-form-title">Edit Event</h2>
 
-    <label for="description">Description:</label>
-    <textarea name="description">{{ event.description }}</textarea><br>
+    <!-- Dropdown to select an event -->
+    <form method="get" class="event-form">
+        <div class="form-group">
+            <label for="event_id">Select Event:</label>
+            <select name="event_id" id="event_id" class="form-control" onchange="fetchEventDetails(this.value)">
+                <option value="" selected>Select an event...</option>
+                {% for ev in upcoming_events %}
+                    <option value="{{ ev.id }}">{{ ev.title }} - {{ ev.start_time|date:"M d, Y H:i" }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
 
-    <label for="start_time">Start Time:</label>
-    <input type="datetime-local" name="start_time" value="{{ event.start_time|date:'Y-m-d\\TH:i' }}" required><br>
+    <!-- Event Edit Form -->
+    <form method="post" class="event-form">
+        {% csrf_token %}
 
-    <label for="end_time">End Time:</label>
-    <input type="datetime-local" name="end_time" value="{{ event.end_time|date:'Y-m-d\\TH:i' }}" required><br>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" class="form-control form-input" required>
+        </div>
 
-    <button type="submit">Save Changes</button>
-</form>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control form-input"></textarea>
+        </div>
 
-<a href="{% url 'competitions:event_detail' event.id %}" class="btn btn-secondary">Cancel</a>
+        <div class="form-group">
+            <label for="start_time">Start Time:</label>
+            <input type="datetime-local" id="start_time" name="start_time" class="form-control form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="end_time">End Time:</label>
+            <input type="datetime-local" id="end_time" name="end_time" class="form-control form-input" required>
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="{% url 'competitions:calendar_view' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}
+
+
+
+

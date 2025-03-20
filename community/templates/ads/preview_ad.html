@@ -1,20 +1,33 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2>Preview Your Ad</h2>
-<p><strong>Ad Type:</strong> {{ ad.ad_type }}</p>
-<p><strong>Description:</strong> {{ ad.description }}</p>
-<p><strong>Contact Info:</strong> {{ ad.contact_info }}</p>
-    
-{% if ad.image %}
-    <img src="{{ ad.image.url }}" alt="Ad Image" />
-{% endif %}
-    
-<form method="post" action="{% url 'community:submit_ad' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit Ad</button>
-    <a href="{% url 'community:edit_ad' ad.id %}">Edit Ad</a>
-    <a href="{% url 'community:community_overview' %}">Cancel</a>
-</form>
+<div class="preview-container">
+    <h2 class="preview-title">Preview Your Ad</h2>
+
+    <div class="ad-preview">
+        <p><strong>Ad Type:</strong> {{ ad.ad_type }}</p>
+        <p><strong>Description:</strong> {{ ad.description }}</p>
+        <p><strong>Contact Info:</strong> {{ ad.contact_info }}</p>
+        
+        {% if ad.image %}
+            <img src="{{ ad.image.url }}" alt="Ad Image" class="ad-preview-image"/>
+        {% endif %}
+    </div>
+
+    <form method="post" action="{% url 'community:submit_ad' %}" class="styled-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="form-buttons">
+            <button type="submit" class="community-btn">Submit Ad</button>
+            <!-- <a href="{% url 'community:edit_ad' ad.id %}" class="edit-btn">Edit Ad</a> -->
+            <a href="{% url 'community:community_overview' %}" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

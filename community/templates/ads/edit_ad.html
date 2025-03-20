@@ -1,11 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2>Edit Ad: {{ ad.description }}</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
-</form>
-<a href="{% url 'community:community_overview' %}">Cancel</a>
+<div class="form-container">
+    <h2 class="form-title">Edit Ad</h2>
+
+    <form method="post" enctype="multipart/form-data" class="styled-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="form-buttons">
+            <button type="submit" class="community-btn">Update</button>
+            <a href="{% url 'community:community_overview' %}" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

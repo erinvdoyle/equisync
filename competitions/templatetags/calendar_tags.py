@@ -22,12 +22,19 @@ class EventCalendar(calendar.HTMLCalendar):
         else:
             today = date(self.year, self.month, day)
             day_events = [event for event in self.events if event.start_time.date() <= today <= event.end_time.date()]
+            
             event_links = ''.join(
-                f'<div><a href="{event.get_absolute_url()}">{event.title}</a>' +
-                (f' <i class="fas fa-heart" style="color: red;"></i>' if getattr(event, 'is_favorited', False) else '') +
-                '</div>' for event in day_events
-            )
-            return f'<td class="{self.cssclasses[weekday]}">{day}{event_links}</td>'
+            f'<div class="month-view">'
+            f'<a href="{event.get_absolute_url()}" class="event-link">'
+            f'<span class="event-text">{event.title}</span>'
+            f'<i class="fas fa-trophy event-icon"></i>'
+            f'</a>'
+            + (f' <i class="fas fa-heart" style="color: red;"></i>' if getattr(event, 'is_favorited', False) else '')
+            + '</div>' 
+            for event in day_events
+        )
+
+        return f'<td class="{self.cssclasses[weekday]}">{day}{event_links}</td>'
 
     def formatweekheader(self):
         """
