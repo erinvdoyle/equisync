@@ -1,15 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'competitions/css/competitions.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2>Scheduled Competitions & Events</h2>
-<span>Click an event for details. Suggest an event (subject to approval) with the Add button</span>
+<div class="header-container">
+    <h2>Scheduled Competitions & Events</h2>
+    <span>Click an event to view details and add or remove your horse's attendance. Favorite an event to track it in your dashboard. Add or Edit an event (subject to approval)</span>
+</div>
 
-<h3 style="display: flex; justify-content: space-between; align-items: center;">
-    <span></span>
+<!-- Calendar Navigation -->
+<h3>
     {% include 'competitions/calendar_nav.html' %}
 </h3>
 
+
+<!-- Calendar Container -->
 <div class="custom-calendar-container">
     <table class="calendar">
         <thead>
@@ -23,23 +30,25 @@
                 <tr>
                     <td>{{ day_info.date|date:"D, M d" }}</td>
                     <td>
-                        {% for event in day_info.events %}
-                            <div>
-                                <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
-                                {% if event.is_favorited %}
-                                     <i class="fas fa-heart" style="color: red;"></i>
-                                {% endif %}
-                            </div>
-                        {% empty %}
+                        {% if day_info.events %}
+                            {% for event in day_info.events %}
+                                <div>
+                                    <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                                    {% if request.user.is_authenticated and event.is_favorited %}
+                                        <i class="fas fa-heart" style="color: red;"></i>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
                             No events scheduled for this day.
-                        {% endfor %}
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-
 {% endblock %}
+
 
 

@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'horses/css/horses.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="form-container">
@@ -7,7 +11,7 @@
     <form method="POST" enctype="multipart/form-data" action="/horse/edit/{{ horse.id }}/">
         {% csrf_token %}
 
-        <!-- Image Upload & Preview -->
+        <!-- Image Upload and Preview -->
         <div class="image-preview">
             <img id="horseImagePreview" 
                  src="{% if horse.image %}{{ horse.image.url }}{% endif %}" 
@@ -63,7 +67,7 @@
     </form>
 </div>
 
-<!-- JavaScript for Deleting Horse -->
+<!-- JS for Deleting Horse -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".delete-horse").addEventListener("click", function () {

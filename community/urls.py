@@ -2,7 +2,7 @@ from django.urls import path, include
 from . import views
 from .ads.views import submit_ad, edit_ad
 from .announcements.views import submit_announcement, edit_announcement  
-from .views import community_overview, create_event
+from .views import community_overview, create_event, edit_event, delete_event
 from .ads import views as ads_views
 from .announcements import views as announcement_views
 from . import views_reactions
@@ -33,6 +33,11 @@ urlpatterns = [
     path('week/<int:year>/<int:month>/<int:day>/', views.community_overview, name='community_overview_week'),
     path('event/<int:event_id>/', views.event_detail, name='event_detail'),
     path('get-weekly-events/<int:year>/<int:month>/<int:day>/', views.get_weekly_events, name='get_weekly_events'),
+    path('announcements/delete/<int:announcement_id>/', announcement_views.delete_announcement, name='delete_announcement'),
+    path('announcements/preview/<int:announcement_id>/', announcement_views.preview_announcement, name='preview_announcement'),
+    path('edit-event/', edit_event, name='edit_event'),
+    path('delete-event/', delete_event, name='delete_event'),
+
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,377 @@
+/* --- Competitions Events Calendar -------------------------------------------------------------------------------------------------------- */
+.custom-calendar-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.custom-calendar-container .calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-calendar-container .calendar th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.custom-calendar-container .calendar td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+    height: 100px;
+}
+
+.custom-calendar-container .calendar .noday {
+    background-color: #f9f9f9;
+}
+
+.custom-calendar-container .calendar .mon,
+.custom-calendar-container .calendar .tue,
+.custom-calendar-container .calendar .wed,
+.custom-calendar-container .calendar .thu,
+.custom-calendar-container .calendar .fri,
+.custom-calendar-container .calendar .sat,
+.custom-calendar-container .calendar .sun {
+    background-color: #fff;
+    color:#4CAF50;
+}
+
+.custom-calendar-container .calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-calendar-container .calendar td {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.custom-calendar-container .calendar th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+.custom-calendar-container .calendar td .event-link {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; 
+}
+
+.events-calendar .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.events-calendar .search-form {
+    display: inline-flex;
+    align-items: center;
+    box-shadow: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.events-calendar .search-form input[type="text"] {
+    padding: 5px;
+    width: 50px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.events-calendar .search-form button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0;
+}
+
+.events-calendar .search-form button i {
+    font-size: 14px;
+}
+
+
+/* --- Calendar Navigation --------------------------------------------------------------------------------------------------------------- */
+.events-calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    margin-bottom: 10px;
+}
+.events-calendar-nav .nav-button {
+    padding: 8px 12px; 
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    line-height: 1;
+}
+
+.events-calendar-nav .nav-button:hover {
+    background-color: #ddd;
+}
+
+.events-calendar-nav .search-form {
+    display: flex;
+    align-items: center;
+    box-shadow: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.events-calendar-nav .search-form input[type="text"] {
+    padding: 8px;
+    width: 80px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 14px;
+    height: 34px;
+}
+
+.events-calendar-nav .search-form button {
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0;
+    height: 34px;
+}
+
+.events-calendar-nav .search-form button i {
+    font-size: 14px;
+}
+
+.radio-inputs .radio a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 0;
+}
+
+/* --- Radio Buttons ---------------------------------------------------------------------------------------------------------------------- */
+/* Code Inspired by Uiverse.io, Yaya12085 */
+.radio-inputs {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #EEE;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 1px;
+    width: 200px;
+    font-size: 14px;
+  }
+
+  .radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .radio-inputs .radio input {
+    display: none;
+  }
+
+  .radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+  }
+
+  .radio-inputs .radio input:checked + .name {
+    background-color: #fff;
+    font-weight: 600;
+  }
+
+/* --- Event Details Section --------------------------------------------------------------------------------------------------------------- */
+.event-detail-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-details {
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 20px;
+}
+
+.event-title {
+    font-size: 24px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.attendees-section {
+    border-top: 2px solid #4CAF50;
+    padding-top: 20px;
+}
+
+.add-horse-title {
+    margin-top: 30px;
+}
+
+.add-horse-details-container {
+    border-top: 2px solid #ddd;
+    padding-top: 20px;
+}
+
+.class-detail-field {
+   margin-bottom: 10px;
+}
+
+.horse-select {
+   width: 100%;
+   padding: 8px;
+   margin-bottom: 10px;
+}
+
+.event-detail-button {
+    padding: 0%;
+}
+
+/* --- Performance Rating ------------------------------------------------------------------------------------------------------------------- */
+.rating > label {
+    margin-right: 4px;
+}
+  
+.rating:not(:checked) > input {
+    display: none;
+}
+  
+.rating:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+}
+  
+.rating:not(:checked) > label > svg {
+    fill: #666;
+    transition: fill 0.3s ease;
+}
+  
+.rating > input:checked ~ label > svg {
+    fill: #ffa723;
+}
+  
+.rating:not(:checked) > label:hover ~ label > svg,
+.rating:not(:checked) > label:hover > svg {
+    fill: #ff9e0b;
+}
+  
+#star1:hover ~ label > svg,
+#star1:hover > svg {
+    fill: #a23c3c !important;
+}
+  
+#star2:hover ~ label > svg,
+#star2:hover > svg {
+    fill: #99542d !important;
+}
+  
+#star3:hover ~ label > svg,
+#star3:hover > svg {
+    fill: #9f7e18 !important;
+}
+  
+#star4:hover ~ label > svg,
+#star4:hover > svg {
+    fill: #22885e !important;
+}
+  
+#star5:hover ~ label > svg,
+#star5:hover > svg {
+    fill: #7951ac !important;
+}
+  
+#star1:checked ~ label > svg {
+    fill: #ef4444;
+}
+  
+#star2:checked ~ label > svg {
+    fill: #e06c2b;
+}
+  
+#star3:checked ~ label > svg {
+    fill: #eab308;
+}
+  
+#star4:checked ~ label > svg {
+    fill: #19c37d;
+}
+  
+#star5:checked ~ label > svg {
+    fill: #ab68ff;
+}
+
+/* --- Performance Rating Stars ------------------------------------------------------------------------------------------------------------ */
+.star-1 {
+    fill: #ef4444;
+}
+.star-2 {
+    fill: #e06c2b;
+}
+.star-3 {
+    fill: #eab308;
+}
+.star-4 {
+    fill: #19c37d;
+}
+.star-5 {
+    fill: #ab68ff;
+}
+.star-empty {
+    fill: #d1d5db;
+}
+
+/* --- Results Performance Tracking ---------------------------------------------------------------------------------------------------------------------- */
+#performanceChart {
+    width: 100%;
+    height: 400px;
+}
+
+.chart-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.filter-group {
+    display: flex;
+    gap: 10px;
+}

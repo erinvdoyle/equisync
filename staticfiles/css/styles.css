@@ -1,138 +1,3 @@
-/* --- General Styles ------------------------------------------------------------------------------------------------------------------------ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-}
-
-h1, h2 {
-    color: #d8a7b1;
-}
- 
-/* --- Sidebar Styles -------------------------------------------------------------------------------------------------------------------------*/
-.sidebar {
-    background-color: #343a40;
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 250px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
-}
-
-.sidebar-header h3 {
-    margin-bottom: 20px;
-    font-size: 22px;
-    text-align: center;
-    border-bottom: 1px solid #6c757d;
-    padding-bottom: 10px;
-}
-
-.sidebar-menu ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar-menu ul li {
-    margin-bottom: 15px;
-}
-
-.sidebar-menu ul li a {
-    color: #fff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.sidebar-menu ul li a:hover, .sidebar-menu ul li a.active {
-    background-color: #34495e;
-}
-
-/* --- Sidebar Header --- */
-.sidebar-header {
-    text-align: center;
-    border-bottom: 1px solid #6c757d;
-    padding-bottom: 10px;
-    position: relative;
-}
-
-.sidebar-title {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.sidebar-welcome {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-/* --- Caret Toggle --- */
-.sidebar-toggle-caret {
-    cursor: pointer;
-    text-align: center;
-    font-size: 20px;
-    transition: transform 0.3s ease;
-}
-
-/* --- Main Content Styles ------------------------------------------------------------------------------------------------------------------- */
-.main-content {
-    margin-left: 260px;
-    padding: 20px;
-    transition: margin-left 0.3s;
-}
-
-.card {
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: auto;
-}
-
-.card-header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 15px;
-    border-radius: 15px 15px 0 0;
-}
-
-.card-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.card-text {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 15px;
-}
 
 /* .btn-primary {
     background-color: #007bff;
@@ -144,739 +9,10 @@ h1, h2 {
     border-color: #0056b3;
 } */
 
-.list-group-item {
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.list-group-item:hover {
-    background-color: #f1f1f1;
-}
-
-.text-muted {
-    color: #6c757d !important;
-}
-
-.flex-container {
-    display: flex;
-    gap: 20px;
-}
-
-.full-width-card {
-    width: 100%;
-}
-
-.management-card, .competition-card, .ad-card, .announcement-card {
-    margin-bottom: 20px;
-}
-
-/*--- Dashboard section headers ---*/
-#my-horses h2 {
-    background-color: #af7c87 !important;
-    color: #343a40 !important;
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-#notifications .card-header {
-    background-color: #343a40 !important;
-    color: #ffffff !important;
-}
-
-#appointments .card-header {
-    background-color: #f5cfd5 !important;
-    color: #343a40 !important;
-}
-
-#management .card-header {
-    background-color: #77656d !important;
-    color: #ffffff !important;
-}
-
-#competitions .card-header {
-    background-color: #7d7e80 !important;
-    color: #ffffff !important;
-}
-
-#ads-announcements .card-header {
-    background-color: #d8a7b1 !important;
-    color: #343a40 !important;
-}
-
-section {
-    background-color: #f7f7f7 !important;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-/* --- Utility Classes --- */
-.text-center {
-    text-align: center;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.section-title p {
-    font-size: 1rem;
-    color: #555;
-}
-
-.section-wrapper {
-    background-color: #fff6e5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: auto;
-    width: 100%;
-}
-
-.dashboard-container {
-    display: flex;
-    min-height: 100vh;
-}
-
-.sections-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-/* --- Form Styles ----------------------------------------------------------------------------------------------------------------------- */
-/* --- Form Container --- */
-.form-container {
-    max-width: 700px;
-    margin: auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* --- Form Title --- */
-.form-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #343a40;
-    margin-bottom: 20px;
-}
-
-/* --- Image Preview --- */
-.image-preview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.image-preview img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #af7c87;
-}
-
-.default-thumbnail {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    background: #f5cfd5;
-    color: #343a40;
-}
-
-/* --- Form Layout --- */
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #343a40;
-}
-
-/* --- Form Inputs & Selects --- */
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #d4d4d4;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-control:focus {
-    border-color: #af7c87;
-    outline: none;
-}
-
-.form-actions {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.btn-primary {
-    background: linear-gradient(120deg, #af7c87, #d8a7b1);
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.btn-primary:hover {
-    background: linear-gradient(120deg, #d8a7b1, #f5cfd5);
-    transform: scale(1.05);
-}
-
-.btn-secondary {
-    background: #7d7e80;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.btn-secondary:hover {
-    background: #343a40;
-    transform: scale(1.05);
-}
-
-.horse-action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.hidden-preview {
-    display: none;
-}
-
-.image-preview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.image-preview img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #af7c87;
-}
-
-.default-thumbnail {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    background: #f5cfd5;
-    color: #343a40;
-}
-
-/* --- Collapsible Form Sections --- */
-.collapsible-section {
-    margin-top: 20px;
-}
-
-.collapsible-header {
-    width: 100%;
-    background: linear-gradient(120deg, #af7c87, #d8a7b1);
-    color: white;
-    padding: 10px;
-    border: none;
-    text-align: left;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.collapsible-header:hover {
-    background: linear-gradient(120deg, #d8a7b1, #f5cfd5);
-}
-
-.collapsible-content {
-    display: none;
-    padding: 15px;
-    background: #f8f9fa;
-    border-left: 3px solid #af7c87;
-}
-
-/* --- Form Validation --- */
-.error-message {
-    color: red;
-    font-size: 0.85rem;
-    display: none;
-    margin-top: 5px;
-}
-
-/* --- Horse Profile Styles --------------------------------------------------------------------------------------------------------------- */
-/*  Horse List Styling */
-
-.custom-container {
-    max-width: 900px;
-    margin: auto;
-    padding: 30px;
-}
-
-.custom-page-title {
-    text-align: center;
-    color: #343a40;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    font-weight: bold;
-}
-
-.horse-list-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.horse-profile-card {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-}
-
-.horse-profile-card::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: linear-gradient(120deg, #7d7e80, #d8a7b1, #f5cfd5);
-    border-radius: inherit;
-    z-index: -1;
-    filter: blur(4px);
-    opacity: 0.3;
-    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out, background 0.3s ease-in-out;
-}
-
-.horse-profile-card:hover::before {
-    /* opacity: 1; */
-    filter: blur(6px);
-    background: linear-gradient(120deg, #fce4ec, #fadadd, #fde7f2);
-}
-
-
-.horse-profile-card:hover {
-    transform: scale(1.02);
-}
-
-.horse-profile-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    flex: 1;
-}
-
-.horse-thumbnail {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #ddd;
-    margin-right: 15px;
-}
-
-.horse-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.default-thumbnail {
-    font-size: 2rem;
-    color: #6c757d;
-}
-
-.horse-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #343a40;
-}
-
-.horse-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.horse-info p {
-    margin: 3px 0;
-    font-size: 1rem;
-    color: #555;
-}
-
-.horse-divider {
-    border: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #343a40, transparent);
-    margin: 15px 0;
-    /* color: #343a40; */
-    
-}
-
-/*  Horse Profile Page Styling */
-.horse-profile-container {
-    max-width: 900px;
-    margin: auto;
-    margin-top: 25px;
-    padding: 30px;
-    background: rgb(245, 207, 213, .3);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.horse-header {
-    display: flex;
-    align-items: center;
-    background: #77656d;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.horse-image {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #d8a7b1;
-    margin-right: 20px;
-}
-
-.horse-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.default-horse-icon {
-    font-size: 3rem;
-    color: #343a40;
-}
-
-.horse-details {
-    flex: 1;
-}
-
-.horse-name {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #77656d;
-}
-
-.horse-breed {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #d8a7b1;
-}
-
-.horse-age-gender {
-    font-size: 1rem;
-    color: #ddd;
-}
-
-.horse-info-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.horse-info-card {
-    flex: 1 1 calc(50% - 15px);
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-    color: white;
-}
-
-.horse-info-card h2 {
-    text-align: center;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #34495e;
-}
-
-.horse-info-card p {
-    font-size: 1rem;
-    color: #af7c87;
-    margin: 5px 0;
-}
-
-.info-link {
-    color: #f5cfd5;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.info-link:hover {
-    text-decoration: underline;
-}
-
-/* --- Horse Feeding Chart Styles ------------------------------------------------------------------------------------------------------------ */
-.feeding-chart-table {
-    border-collapse: collapse;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.feeding-chart-table th {
-    font-size: 1.1rem !important;
-    font-weight: bold !important;
-    text-transform: uppercase !important;
-    color: #343a40 !important;
-    background-color: #f5cfd5 !important;
-    border-bottom: 2px solid #af7c87 !important;
-    padding: 10px !important;
-}
-
-.horse-name-link {
-    text-decoration: none !important;
-    font-weight: bold !important;
-    color: #7d7e80 !important;
-    transition: color 0.3s ease !important;
-}
-
-.horse-name-link:hover {
-    color: #af7c87 !important;
-    text-decoration: underline !important;
-}
-
-.feeding-chart-container a {
-    text-decoration: none !important;
-    color: #7d7e80 !important;
-    transition: color 0.3s ease !important;
-}
-
-.feeding-chart-container a:hover {
-    color: #af7c87 !important;
-    text-decoration: underline !important;
-}
-
-.feeding-chart-table tr:nth-child(even) {
-    background-color: #fafafa !;
-}
-
-.feeding-chart-table a {
-    text-decoration: none !important;
-}
-
-.feeding-chart-table tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-.feeding-chart-container {
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.feeding-chart-container th {
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #343a40;
-    background-color: #f5cfd5;
-    border-bottom: 2px solid #af7c87;
-    padding: 10px;
-}
-
-.feeding-chart-table {
-    width: 100%;
-    min-width: 900px;
-}
-
-.feeding-card-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.feeding-card {
-    background: linear-gradient(to right, #f5cfd5, #af7c87);
-    color: #343a40;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: 1rem;
-    transition: transform 0.2s ease-in-out;
-}
-
-.feeding-card h2 {
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-.feeding-card p {
-    margin: 5px 0;
-    font-size: 1rem;
-    line-height: 1.4;
-}
-
-.feeding-card:hover {
-    transform: scale(1.02);
-}
-
-.feeding-container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.feeding-title {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #343a40;
-    margin-bottom: 20px;
-}
-
-.feeding-subtitle {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #77656d;
-    margin-bottom: 10px;
-}
-
-.feeding-card {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-}
-
-.feeding-card:hover {
-    transform: scale(1.02);
-}
-
-.feeding-form {
-    background: #fff6f8;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.feeding-form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.feed-btn-primary {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background: #af7c87;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.feed-btn-primary:hover {
-    background: #7d7e80;
-}
-
-.feed-btn-back {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    padding: 10px;
-    background: #7d7e80;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background 0.3s ease;
-}
-
-.feed-btn-back:hover {
-    background: #343a40;
-}
-
-.not-authorized {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #d9534f;
-    margin-top: 20px;
-}
-
-.feeding-table-wrapper {
-    overflow-x: auto;
-    padding: 10px;
-    border-radius: 8px;
-    background: #fafafa;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Ads and Announcement Sections ------------------------------------------------------------------------------------------------------ */
+/* --- Ads and Announcement Sections -- community.css---------------------------------------------------------------------------------------------------- */
 /*--- Ad Section Toolbar--------------------------------------------------------------------------------------------------------------------*/
 
-.toolbar {
+/* .toolbar {
     position: relative;
     width: calc(100% + 40px); 
     margin: -20px -20px 0 -20px; 
@@ -1005,10 +141,10 @@ section {
 
 .short-text {
     display: none;
-}
+} */
 
 /*--- Ads and Announcement Main Sections ----------------------------------------------------------------------------------------------------*/
-.ads-section,
+/* .ads-section,
 .announcements-section {
     margin-top: 20px;
 }
@@ -1040,51 +176,11 @@ section {
     margin-bottom: 15px;
     font-size: 22px;
     color: #905133;
-}
+} */
 
-/* --- Card Styling ------------------------------------------------------------------------------------------------------------------------ */
-.ad-card, .announcement-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+/** base.css --------------------------------------------------------------------------------------------------------------------------**/
 
-.ad-card:hover, .announcement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.ad-card img, .announcement-card img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px 8px 0 0;
-}
-
-
-.ad-label {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 3px;
-    color: white;
-    font-weight: bold;
-}
-
-.ad-label.for-sale {
-    background-color: green;
-}
-
-.ad-label.wanted {
-    background-color: red;
-}
-
-
-.card-title {
+/* .card-title {
     font-size: 1.2rem;
     font-weight: bold;
     color: #6a3e26;
@@ -1112,10 +208,10 @@ section {
 
 .card-btn:hover {
     background-color: #905133;
-}
+} */ */
 
-/* --- Modal Styling ------------------------------------------------------------------------------------------------------------- */
-.modal {
+/* --- Modal Styling --- base.css---------------------------------------------------------------------------------------------------------- */
+/* .modal {
     display: none;
     position: fixed;
     z-index: 1050;
@@ -1210,10 +306,10 @@ section {
 .modal-5 {
     color:rgb(129, 51, 51);
     font-weight: bold;
-}
+} */
 
-/* --- Emoji ---------------------------------------------------------------------------------------------------------------- */
-.emoji-btn {
+/* --- Emoji ---- community.css------------------------------------------------------------------------------------------------------------ */
+/* .emoji-btn {
     background-color: #f1f1f1;
     border: none;
     padding: 5px 10px;
@@ -1232,11 +328,11 @@ section {
 
 .emoji-btn:focus {
     outline: none;
-}
+} */
 
 
-/* --- Carousel ------------------------------------------------------------------------------------------------------------- */
-#homeCarousel {
+/* --- Carousel ----------users.css--------------------------------------------------------------------------------------------------- */
+/* #homeCarousel {
     width: 80%; 
     max-width: 1440px; 
     min-width: 320px; 
@@ -1270,11 +366,11 @@ section {
 
 .carousel-caption {
     margin-top: 15px;
-    position: relative;
+    position: relative; */
     /* bottom: 40px; */
-    left: 0;
+    /* left: 0; */
     /* transform: translateX(-50%); */
-    width: 100%;
+    /* width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -1294,10 +390,10 @@ section {
 .carousel-caption p,
 .carousel-caption h5 {
     max-width: 100%;  
-}
+} */
 
 /* --- Controls ------------------------------------------------------------------------------------- */
-.carousel-control-prev,
+/* .carousel-control-prev,
 .carousel-control-next {
     position: absolute;
     width: auto;
@@ -1323,11 +419,11 @@ section {
 .carousel-control-next {
     right: -80px;
 }
-
+ */
 
 
 /* --- Indicators ----------------------------------------------------------------------------------- */
-.carousel-indicators {
+/* .carousel-indicators {
     position: absolute;
     bottom: -50px; 
     left: 35%;
@@ -1348,11 +444,11 @@ section {
 
 .carousel-indicators .active {
     background-color: #905133; 
-}
+} */
 
 
-/* --- Collapse Section (For Read More) ------------------------------------------------------------------------------------------- */
-.announcement-collapse {
+/* --- Collapse Section (For Read More) ---community.css---------------------------------------------------------------------------------------- */
+/* .announcement-collapse {
     margin-top: 10px;
     background-color: #f9f9f9;
     padding: 10px;
@@ -1369,14 +465,14 @@ section {
 }
 
 /* --- Animation for Smooth Expanding --------------------------------------------------------------------------------------------- */
-.announcement-collapse.collapsing {
+/* .announcement-collapse.collapsing {
     height: 0;
     opacity: 0;
     transition: opacity 0.3s ease, height 0.3s ease-in-out;
-}
+} */
 
-/* --- Weekly Events Section ------------------------------------------------------------------------------------------------------------------*/
-.calendar-section {
+/* --- Weekly Events Section ----------community.css--------------------------------------------------------------------------------------------------------*/
+/* .calendar-section {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -1408,10 +504,10 @@ section {
 
 .event-link:hover {
     text-decoration: underline;
-}
+} */
 
-/* --- Gradient Navbar ---------------------------------------------------------------------------------------------------------------------- */
-.navbar-gradient {
+/* --- Gradient Navbar ---------users.css------------------------------------------------------------------------------------------------------------- */
+/* .navbar-gradient {
     background: linear-gradient(to right, 
         #343a40 350px,
         #50555a 500px,
@@ -1478,12 +574,12 @@ section {
     font-size: 12px;
     border-radius: 50%;
     padding: 5px 8px;
-}
+} */
 
 /* --- Footer Styles ---------------------------------------------------------------------------------------------------------------------- */
 /* --- Footer design credit: https://codepen.io/mkmllr/details/YmVeEP ---*/
 
-main {
+/* main {
     flex: 1;
 }
 
@@ -1525,9 +621,9 @@ main {
 
 .github-link i:hover {
     color: #adb5bd;
-}
+} */
 
-/* --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
+/* --- Typography and Buttons -------base.css----------------------------------------------------------------------------------------------------- */
 /* a {
     text-decoration: none;
     color: #6a3e26;
@@ -1552,8 +648,8 @@ button.primary:hover {
     background-color: #e66f00; 
 } */
 
-/* --- Competitions Events Calendar -------------------------------------------------------------------------------------------------------- */
-.custom-calendar-container {
+/* --- Competitions Events Calendar -----------competitions.css--------------------------------------------------------------------------------------------- */
+/* .custom-calendar-container {
     width: 100%;
     margin-bottom: 20px;
 }
@@ -1656,11 +752,11 @@ button.primary:hover {
 
 .events-calendar .search-form button i {
     font-size: 14px;
-}
+} */
 
 
-/* --- Calendar Navigation --------------------------------------------------------------------------------------------------------------- */
-.events-calendar-nav {
+/* --- Calendar Navigation ----------------competitions.css----------------------------------------------------------------------------------------------- */
+/* .events-calendar-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1723,11 +819,11 @@ button.primary:hover {
     color: inherit;
     display: block;
     padding: 0;
-}
+} */
 
-/* --- Radio Buttons ---------------------------------------------------------------------------------------------------------------------- */
+/* --- Radio Buttons -------------------base.css--------------------------------------------------------------------------------------------------- */
 /* Code Inspired by Uiverse.io, Yaya12085 */
-.radio-inputs {
+/* .radio-inputs {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -1764,10 +860,10 @@ button.primary:hover {
   .radio-inputs .radio input:checked + .name {
     background-color: #fff;
     font-weight: 600;
-  }
+  } */
 
-/* --- Event Details Section --------------------------------------------------------------------------------------------------------------- */
-.event-detail-container {
+/* --- Event Details Section -------------------competitions.css-------------------------------------------------------------------------------------------- */
+/* .event-detail-container {
     max-width: 800px;
     margin: auto;
     padding: 20px;
@@ -1817,10 +913,10 @@ button.primary:hover {
 
 .event-detail-button {
     padding: 0%;
-}
+} */
 
-/* --- Performance Rating ------------------------------------------------------------------------------------------------------------------- */
-.rating > label {
+/* --- Performance Rating ----------------competitions.css--------------------------------------------------------------------------------------------------- */
+/* .rating > label {
     margin-right: 4px;
 }
   
@@ -1891,10 +987,10 @@ button.primary:hover {
   
 #star5:checked ~ label > svg {
     fill: #ab68ff;
-}
+} */
 
-/* --- Dashboard Page ---------------------------------------------------------------------------------------------------------------------- */
-.dashboard-section {
+/* --- Dashboard Page ---------------------users.css------------------------------------------------------------------------------------------------- */
+/* .dashboard-section {
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -1930,10 +1026,10 @@ button.primary:hover {
     100% {
         text-shadow: 0 0 1.5px red;
     }
-}
+} */
 
-/* --- Performance Rating Stars ------------------------------------------------------------------------------------------------------------ */
-.star-1 {
+/* --- Performance Rating Stars ------------------------competitions.css------------------------------------------------------------------------------------ */
+/* .star-1 {
     fill: #ef4444;
 }
 .star-2 {
@@ -1950,10 +1046,10 @@ button.primary:hover {
 }
 .star-empty {
     fill: #d1d5db;
-}
+} */
 
-/* --- Results Performance Tracking ---------------------------------------------------------------------------------------------------------------------- */
-#performanceChart {
+/* --- Results Performance Tracking ----------------competitions.css------------------------------------------------------------------------------------------------------ */
+/* #performanceChart {
     width: 100%;
     height: 400px;
 }
@@ -1967,10 +1063,10 @@ button.primary:hover {
 .filter-group {
     display: flex;
     gap: 10px;
-}
+} */
 
-/* --- Exercise Schedule Table ------------------------------------------------------------------------------------------------------------ */
-.exercise-calendar-container {
+/* --- Exercise Schedule Table ---------------exercise_schedule.css--------------------------------------------------------------------------------------------- */
+/* .exercise-calendar-container {
     width: 100%;
     margin-bottom: 20px;
     overflow-x: auto;
@@ -2090,10 +1186,10 @@ button.primary:hover {
 
 #select-week-button:hover {
     background-color: #45a049;
-}
+} */
 
- /* --- Background colors for exercise labels -------------------------------------------------------------------------------------------------*/
- .exercise-calendar-container .exercise-table .label-walker {
+ /* --- Background colors for exercise labels --------------exercise_schedule.css-----------------------------------------------------------------------------------*/
+ /* .exercise-calendar-container .exercise-table .label-walker {
     background-color: #FFCCCB;
 }
 
@@ -2123,10 +1219,10 @@ button.primary:hover {
 
 .exercise-calendar-container .exercise-table .label-other {
     background-color: #F0E68C;
-}
+} */
 
-/* --- Legend Styles --------------------------------------------------------------------------------------------------------------------------*/
-.legend-container {
+/* --- Legend Styles -------------------------------------exercise_schedule.css-------------------------------------------------------------------------------------*/
+/* .legend-container {
     display: flex;
     justify-content: flex-end;
     gap: 20px;
@@ -2196,10 +1292,10 @@ button.primary:hover {
 
 .legend-box.other {
     background-color: #F0E68C;
-}
+} */
 
-/* --- Exercise Form Styles -------------------------------------------------------------------------------------------- */
-.exercise-form-container {
+/* --- Exercise Form Styles ---------------exercise_schedule.css----------------------------------------------------------------------------- */
+/* .exercise-form-container {
     width: 100%;
     margin: 0 auto;
     padding: 20px;
@@ -2284,10 +1380,10 @@ button.primary:hover {
     text-decoration: none;
     display: inline-block;
     margin-top: 20px;
-}
+} */
 
-/* --- Horse Exercise Schedule ------------------------------------------------------------------------------------------------------------ */
-.chart-and-breakdown {
+/* --- Horse Exercise Schedule ------------------------exercise_schedule.css------------------------------------------------------------------------------------ */
+/* .chart-and-breakdown {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -2345,45 +1441,14 @@ button.primary:hover {
 
 .appointment-other {
     outline: 2px solid rgba(0, 0, 255, 0.5);
-}
+} */
 
 
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
 /* --- For Larger Screens (Desktops and Tablets) --------------------------*/
-@media (min-width: 768px) {
-    form input[type="text"],
-    form input[type="email"],
-    form input[type="password"],
-    form textarea {
-        width: 66.6666%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .calendar-table th, .calendar-table td {
-        width: 14%;
-    }
-    
-    .ads-section .row,
-    .announcements-section .row {
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 15px; 
-    }
-
-    .ad-card, .announcement-card {
-        width: 100%;
-        max-width: 100%;
-    }
-
-
-    .ad-card img, .announcement-card img  {
-        max-height: 150px;
-        object-fit: cover;
-    }
-}
 
 @media (min-width: 577px) and (max-width: 768px) {
-    .ads-section .row,
+    /* .ads-section .row,
     .announcements-section .row {
         grid-template-columns: repeat(2, 1fr); 
     }
@@ -2395,35 +1460,23 @@ button.primary:hover {
     .ad-card img, .announcement-card img  {
         max-height: 150px;
         object-fit: cover;
-    }
+    } */
 }
 
-@media (max-width: 480px) { 
-    #homeCarousel {
-        height: 250px; 
-    }
-    
-    .carousel-control-prev {
-        left: -15px;
-    }
-    
-    .carousel-control-next {
-        right: -15px;
-    }
-
+/* @media (max-width: 480px) {    
     .feeding-chart-table th,
     .feeding-chart-table td {
         font-size: 0.8rem !important;
         padding: 6px !important;
     }
-}
+} */
 
 @media (max-width: 576px) {
-     .row {
+     /* .row {
         grid-template-columns: repeat(1, 1fr);
-    } 
+    }  */
 
-    .ad-card, .announcement-card {
+    /* .ad-card, .announcement-card {
         margin-bottom: 15px;
     }
 
@@ -2435,11 +1488,11 @@ button.primary:hover {
     .ads-section .row,
     .announcements-section .row {
         grid-template-columns: repeat(1, 1fr);
-    }
+    } */
 }
 
 @media (max-width: 768px) {
-    .horse-header {
+    /* .horse-header {
         flex-direction: column;
         text-align: center;
     }
@@ -2454,24 +1507,9 @@ button.primary:hover {
 
     .horse-info-card {
         width: 100%;
-    }
+    } */
     
-    .carousel-item img {
-        max-height: 250px; 
-    }
-
-    #homeCarousel {
-        height: 300px;
-    }
-
-    .carousel-control-prev {
-        left: -30px;
-    }
-    .carousel-control-next {
-        right: -30px;
-    }
-
-    .search-field {
+    /* .search-field {
         width: 35px !important; 
         padding: 8px 10px; 
         text-indent: -9999px; 
@@ -2498,131 +1536,18 @@ button.primary:hover {
 
     .short-text {
         display: inline;
-    }
+    } */
 
-    .exercise-calendar-container .exercise-table th,
-    .exercise-calendar-container .exercise-table td {
-        font-size: 10px;
-        padding: 2px;
-    }
-
-    .exercise-calendar-container .exercise-table td {
-        height: auto;
-        white-space: normal;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item span {
-        display: none;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item::before {
-        content: attr(data-time-category);
-        display: inline-block;
-        padding: 2px 4px;
-        border-radius: 3px;
-        color: white;
-        font-size: 10px;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item.label-walker::before {
-        background-color: #FFCCCB;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item.label-lunge::before {
-        background-color: #FFFACD;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item.label-hand_walk::before {
-        background-color: #E0FFFF;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item.label-graze::before {
-        background-color: #D3D3D3;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item.label-turnout::before {
-        background-color: #98FB98;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item.label-ride::before {
-        background-color: #ADD8E6;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item.label-groundwork::before {
-        background-color: #FFB6C1;
-    }
-
-    .exercise-calendar-container .exercise-table .exercise-item.label-other::before {
-        background-color: #F0E68C;
-    }
-
-    .exercise-legend {
-        display: block;
-    }
-
-    .exercise-legend h3 {
-        font-size: 14px;
-    }
-
-    .legend-table td {
-        padding: 1px;
-    }
-
-    .legend-box {
-        width: 10px;
-        height: 10px;
-    }
-
-   
-    .sections-container {
+    /* .sections-container {
         flex-direction: column;
         align-items: center;
     }
 
     .section-wrapper {
-        width: 90%;
+        width: 90%; */
     }
 
-    .main-content {
-        margin-left: 0;
-        padding: 10px;
-    }
-
-    .main-content-expanded {
-        margin-left: 0;
-    }
-
-    .sidebar {
-        height: 100%;
-    }
-
-    .sidebar-hidden {
-        height: 80px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 10px;
-    }
-
-    .sidebar-hidden .sidebar-menu {
-        display: none;
-    }
-
-    .sidebar-toggle-caret {
-        display: block !important;
-        cursor: pointer;
-        font-size: 22px;
-        margin-top: 5px;
-        transition: transform 0.3s ease;
-    }
-
-    .sidebar-hidden .sidebar-toggle-caret {
-        transform: rotate(180deg);
-    }
-
-    .navbar-gradient {
+    /* .navbar-gradient {
         background: linear-gradient(to right, 
             #343a40 250px,
             #50555a 350px,
@@ -2630,64 +1555,23 @@ button.primary:hover {
             #f5cfd5,
             #fdecef
         ); 
-    }
+    } */
 
-    .feeding-chart-table th,
-    .feeding-chart-table td {
-        font-size: 0.9rem !important;
-        padding: 8px !important;
-    }
-
-    .feeding-card {
-        padding: 12px;
-        font-size: 0.9rem;
-    }
-
-    .feeding-card h2 {
-        font-size: 1.1rem;
-    }
-
-    .feeding-card p {
-        font-size: 0.85rem;
-    }
-}
-
-        
-@media (min-width: 768px) {
-    .exercise-form-container {
-        flex-direction: row;
-        gap: 40px;
-    }
-
-    .exercise-form-container .form-section,
-    .exercise-form-container .schedule-section {
-        flex: 1;
-    }
-
-    .chart-and-breakdown {
-        flex-direction: row;
-    }
-
-    .time-breakdown {
-        flex: 1;
-    }
-}
-
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
     .exercise-form-container {
         flex-direction: column;
-    }  
+    }   */
 
-    .navbar-brand {
+    /* .navbar-brand {
         flex: 0 0 120px;
-    }
+    } */
 
-@media (max-width: 600px) {
-    .footer {
+/* @media (max-width: 600px) { */
+    /* .footer {
         clip-path: ellipse(180% 100% at 50% 100%);
-    }
+    } */
 
-    .horse-profile-card {
+    /* .horse-profile-card {
      flex-direction: column;
         align-items: center;
         text-align: center;
@@ -2700,47 +1584,13 @@ button.primary:hover {
      .horse-info {
         align-items: center;
     }
-}
+} */
 
-@media (max-width: 425px) {
-    .horse-profile-container {
+/* @media (max-width: 425px) { */
+    /* .horse-profile-container {
         margin: -5px;
-    }
-
-    .exercise-form-container {
-        padding: 10px;
-    }
-
-    .exercise-form-container h2 {
-        font-size: 20px;
-    }
-
-    .exercise-form-container label {
-        font-size: 12px;
-    }
-
-    .exercise-form-container input[type="text"],
-    .exercise-form-container input[type="date"],
-    .exercise-form-container select,
-    .exercise-form-container textarea {
-        font-size: 12px;
-    }
-
-    .exercise-form-container button[type="submit"],
-    .exercise-form-container .exercise-btn {
-        font-size: 12px;
-    }
-
-    .exercise-form-container .exercise-item h3 {
-        font-size: 16px;
-    }
-
-    .exercise-form-container .exercise-table th,
-    .exercise-form-container .exercise-table td {
-        padding: 10px;
-        font-size: 12px;
-    }
-
+    } */
+/* 
    .navbar-gradient {
         background: linear-gradient(to right, 
             #343a40 250px,
@@ -2750,4 +1600,4 @@ button.primary:hover {
             #fdecef
         ); 
      }
- }
+ } */

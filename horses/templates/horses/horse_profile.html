@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'horses/css/horses.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="horse-profile-container">
-    <!-- Horse Image & Basic Info -->
+    <!-- Horse Image and Basic Info -->
     <div class="horse-header">
         <div class="horse-image">
             {% if horse.image %}
@@ -58,7 +62,7 @@
         </div>
     </div>
 
-    <!-- Action Buttons -->
+    <!-- Buttons -->
     <div class="horse-action-buttons">
         <a href="{% url 'horses:edit_horse_profile' horse.id %}
         " class="btn-primary">Edit/Remove Profile</a>

@@ -1,0 +1,218 @@
+/* --- Horse Feeding Chart Styles ------------------------------------------------------------------------------------------------------------ */
+.feeding-chart-table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.feeding-chart-table th {
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    color: #343a40 !important;
+    background-color: #f5cfd5 !important;
+    border-bottom: 2px solid #af7c87 !important;
+    padding: 10px !important;
+}
+
+.horse-name-link {
+    text-decoration: none !important;
+    font-weight: bold !important;
+    color: #7d7e80 !important;
+    transition: color 0.3s ease !important;
+}
+
+.horse-name-link:hover {
+    color: #af7c87 !important;
+    text-decoration: underline !important;
+}
+
+.feeding-chart-container a {
+    text-decoration: none !important;
+    color: #7d7e80 !important;
+    transition: color 0.3s ease !important;
+}
+
+.feeding-chart-container a:hover {
+    color: #af7c87 !important;
+    text-decoration: underline !important;
+}
+
+.feeding-chart-table tr:nth-child(even) {
+    background-color: #fafafa !;
+}
+
+.feeding-chart-table a {
+    text-decoration: none !important;
+}
+
+.feeding-chart-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.feeding-chart-container {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feeding-chart-container th {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #343a40;
+    background-color: #f5cfd5;
+    border-bottom: 2px solid #af7c87;
+    padding: 10px;
+}
+
+.feeding-chart-table {
+    width: 100%;
+    min-width: 900px;
+}
+
+.feeding-card-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.feeding-card {
+    background: linear-gradient(to right, #f5cfd5, #af7c87);
+    color: #343a40;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.feeding-card h2 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.feeding-card p {
+    margin: 5px 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.feeding-card:hover {
+    transform: scale(1.02);
+}
+
+.feeding-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feeding-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.feeding-subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #77656d;
+    margin-bottom: 10px;
+}
+
+.feeding-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.feeding-card:hover {
+    transform: scale(1.02);
+}
+
+.feeding-form {
+    background: #fff6f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feeding-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.feed-btn-primary {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #af7c87;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.feed-btn-primary:hover {
+    background: #7d7e80;
+}
+
+.feed-btn-back {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background: #7d7e80;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.feed-btn-back:hover {
+    background: #343a40;
+}
+
+.not-authorized {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #d9534f;
+    margin-top: 20px;
+}
+
+.feeding-table-wrapper {
+    overflow-x: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fafafa;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Media Queries ------------------------------------------------------------------------------------------------------------ */
+@media (max-width: 480px) {    
+    .feeding-chart-table th,
+    .feeding-chart-table td {
+        font-size: 0.8rem !important;
+        padding: 6px !important;
+    }
+}

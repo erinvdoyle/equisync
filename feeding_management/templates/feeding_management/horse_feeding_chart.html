@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'feeding_management/css/feeding_management.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="feeding-container">

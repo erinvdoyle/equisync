@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'horses/css/horses.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="form-container">
@@ -7,7 +11,7 @@
     <form method="POST" enctype="multipart/form-data" action="/horses/add/">
         {% csrf_token %}
 
-        <!-- Image Upload & Preview -->
+        <!-- Image Upload and Preview -->
         <div class="image-preview">
             <img id="horseImagePreview" class="hidden-preview">
             <div class="default-thumbnail" id="defaultThumbnail">🐴</div>

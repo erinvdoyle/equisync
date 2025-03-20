@@ -1,0 +1,244 @@
+/* ======================= General Styling ======================= */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+/* ===== Page Title and Section Titles ===== */
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-title h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.section-title p {
+    font-size: 1.1rem;
+    color: #77656d;
+}
+
+/* ======================= Community Toolbar ======================= */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #343a40, #7d7e80, #af7c87);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+}
+
+.toolbar h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.toolbar-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-field {
+    width: 150px;
+    height: 35px;
+    padding: 5px 10px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    color: #343a40;
+    font-weight: bold;
+}
+
+.category-field {
+    height: 35px;
+    border-radius: 5px;
+    padding: 5px;
+    background: white;
+    color: #343a40;
+    font-weight: bold;
+}
+
+/* ======================= Cards: Ads & Announcements ======================= */
+.community-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.community-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.community-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.community-card .card-content {
+    text-align: center;
+    padding: 10px;
+}
+
+.ad-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* ======================= Buttons ======================= */
+.community-btn {
+    background: #af7c87;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.community-btn:hover {
+    background: #905f6e;
+}
+
+
+/* --- Weekly Events Section ------------------------------------------------------------------------------------------------------------------*/
+.calendar-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendar-table th, .calendar-table td {
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.calendar-table th {
+    background-color: #6a3e26;
+    color: white;
+    font-weight: bold;
+}
+
+.event-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.event-link:hover {
+    text-decoration: underline;
+}
+
+/* ======================= Ads & Announcements Layout ======================= */
+.ads-section,
+.announcements-section {
+    margin-top: 20px;
+}
+
+.ads-section .row,
+.announcements-section .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.ads-section .col-lg-4,
+.announcements-section .col-lg-4 {
+    flex: 1 1 30%;
+    max-width: 30%;
+}
+
+@media (max-width: 992px) {
+    .ads-section .col-lg-4,
+    .announcements-section .col-lg-4 {
+        flex: 1 1 48%;
+        max-width: 48%;
+    }
+}
+
+@media (max-width: 768px) {
+    .ads-section .col-lg-4,
+    .announcements-section .col-lg-4 {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+/* ======================= Modal Styling ======================= */
+.modal-content {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.modal-body img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal-body p {
+    text-align: left;
+}
+
+/* ======================= Pagination ======================= */
+.pagination {
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.pagination .page-link {
+    background: #af7c87;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    transition: background 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background: #905f6e;
+}

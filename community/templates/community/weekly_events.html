@@ -1,20 +1,29 @@
-<table class="table table-bordered text-center calendar-table">
+{% load dict_filters %}
+
+<table class="calendar-table">
     <thead>
-        <tr>
+        <tr class="desktop-only">  <!-- Ensures headers only show on large screens -->
             {% for day in days_of_week %}
                 <th>{{ day }}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr>  <!-- Single row for all days (Prevents vertical stacking) -->
             {% for day in days_of_week %}
-                <td>
-                    {% for event in community_events %}
-                        {% if event.date|date:"l" == day %}
-                            <a href="{% url 'community:event_detail' event.id %}" class="event-link">{{ event.title }}</a><br>
-                        {% endif %}
-                    {% endfor %}
+                <td data-day="{{ day }}">
+                    <span class="mobile-only">{{ day }}</span> <!-- Mobile-only labels -->
+
+                    {% with events=weekly_events|get_item:day %}
+                        {% for event in events %}
+                            <div class="event-item">
+                                <a href="{% url 'community:event_detail' event.id %}">{{ event.title }}</a>
+                                <p>{{ event.description }}</p>
+                            </div>
+                        {% empty %}
+                            <p>No events scheduled.</p>
+                        {% endfor %}
+                    {% endwith %}
                 </td>
             {% endfor %}
         </tr>

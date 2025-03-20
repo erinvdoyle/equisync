@@ -1,41 +1,49 @@
 {% extends "base.html" %}
 {% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'competitions/css/competitions.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2>Scheduled Competitions & Events</h2>
-<span>Click an event for details. Suggest an event (subject to approval) with the Add button</span>
+<div class="header-container">
+    <h2>Scheduled Competitions & Events</h2>
+    <span>Click an event to view details and add or remove your horse's attendance. Favorite an event to track it in your dashboard. Add or Edit an event (subject to approval)</span>
+</div>
 
-<h3 style="display: flex; justify-content: space-between; align-items: center;">
+<!-- Calendar Navigation -->
+<h3>
     <span></span>
     {% include 'competitions/calendar_nav.html' %}
-
 </h3>
 
+<!-- Calendar Container -->
 <div class="custom-calendar-container">
     <table class="calendar">
         <thead>
             <tr>
-                <th>{{ display_date|date:"j F, Y" }}</th>
+                <th>{{ display_date|date:"l, j F, Y" }}</th>
             </tr>
         </thead>
         <tbody>
-            {% for event in events %}
-                <tr>
-                    <td>
-                        <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+            {% if events %}
+                {% for event in events %}
+                    <tr>
+                        <td>
+                            <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
                             {% if request.user.is_authenticated and event.is_favorited %}
-                                 <i class="fas fa-heart" style="color: red;"></i>
+                                <i class="fas fa-heart" style="color: red;"></i>
                             {% endif %}
-                    </td>
-                </tr>
-            {% empty %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
                 <tr><td>No events scheduled for today.</td></tr> 
-            {% endfor %}
+            {% endif %}
         </tbody>
     </table>
 </div>
-
 {% endblock %}
+
 
 
 

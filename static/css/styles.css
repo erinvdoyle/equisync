@@ -79,7 +79,7 @@ form button:hover {
 /* --- Ads and Announcement Sections ------------------------------------------------------------------------------------------------------ */
 /*--- Ad Section Toolbar--------------------------------------------------------------------------------------------------------------------*/
 
-.toolbar {
+/* .toolbar {
     position: relative;
     width: calc(100% + 40px); 
     margin: -20px -20px 0 -20px; 
@@ -140,11 +140,11 @@ form button:hover {
     display: flex;
     align-items: center;
     margin-top: 15px !important;
-}
+} */
 
-.search-field::placeholder {
+/* .search-field::placeholder {
     font-size: 14px;
-    color: #6a3e26);
+    color: #6a3e26;
 }
 
 .category-field {
@@ -208,10 +208,10 @@ form button:hover {
 
 .short-text {
     display: none;
-}
+} */
 
 /*--- Ads and Announcement Main Sections ----------------------------------------------------------------------------------------------------*/
-.ads-section,
+/* .ads-section,
 .announcements-section {
     margin-top: 20px;
 }
@@ -243,10 +243,10 @@ form button:hover {
     margin-bottom: 15px;
     font-size: 22px;
     color: #905133;
-}
+} */
 
 /* --- Card Styling ------------------------------------------------------------------------------------------------------------------------ */
-.ad-card, .announcement-card {
+/* .ad-card, .announcement-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -284,7 +284,7 @@ form button:hover {
 
 .ad-label.wanted {
     background-color: red;
-}
+} */
 
 
 .card-title {
@@ -532,7 +532,7 @@ form button:hover {
 
 
 /* --- Collapse Section (For Read More) ------------------------------------------------------------------------------------------- */
-.announcement-collapse {
+/* .announcement-collapse {
     margin-top: 10px;
     background-color: #f9f9f9;
     padding: 10px;
@@ -546,14 +546,14 @@ form button:hover {
 .announcement-collapse.show {
     display: block;
     opacity: 1;
-}
+} */
 
 /* --- Animation for Smooth Expanding --------------------------------------------------------------------------------------------- */
-.announcement-collapse.collapsing {
+/* .announcement-collapse.collapsing {
     height: 0;
     opacity: 0;
     transition: opacity 0.3s ease, height 0.3s ease-in-out;
-}
+} */
 
 /* --- Weekly Events Section ------------------------------------------------------------------------------------------------------------------*/
 .calendar-section {
@@ -691,7 +691,7 @@ button.primary:hover {
         width: 14%;
     }
     
-    .ads-section .row,
+    /* .ads-section .row,
     .announcements-section .row {
         grid-template-columns: repeat(3, 1fr); 
         gap: 15px; 
@@ -706,11 +706,11 @@ button.primary:hover {
     .ad-card img, .announcement-card img  {
         max-height: 150px;
         object-fit: cover;
-    }
+    } */
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
-    .ads-section .row,
+    /* .ads-section .row,
     .announcements-section .row {
         grid-template-columns: repeat(2, 1fr); 
     }
@@ -722,7 +722,7 @@ button.primary:hover {
     .ad-card img, .announcement-card img  {
         max-height: 150px;
         object-fit: cover;
-    }
+    } */
 }
 
 @media (max-width: 480px) { 
@@ -744,7 +744,7 @@ button.primary:hover {
         grid-template-columns: repeat(1, 1fr);
     } 
 
-    .ad-card, .announcement-card {
+    /* .ad-card, .announcement-card {
         margin-bottom: 15px;
     }
 
@@ -756,7 +756,7 @@ button.primary:hover {
     .ads-section .row,
     .announcements-section .row {
         grid-template-columns: repeat(1, 1fr);
-    }
+    } */
 }
 
 @media (max-width: 768px) {

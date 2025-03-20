@@ -11,6 +11,7 @@ from django.utils import timezone
 from horses.models import HorseProfile
 from competitions.utils import create_notifications_for_past_events
 from notifications.models import Notification
+from django.http import JsonResponse
 
 def calendar_view(request, year=None, month=None):
     today = timezone.now().date()
@@ -267,22 +268,61 @@ def event_detail(request, event_id):
     return render(request, 'competitions/event_detail.html', context)
 
 @login_required
-def edit_event(request, event_id):
-    event = get_object_or_404(Event, id=event_id, created_by=request.user)
+def edit_event(request):
+    """
+    Allows the user to select an event from a dropdown and edit its details.
+    """
+    upcoming_events = Event.objects.filter(start_time__gte=timezone.now(), created_by=request.user)
 
-    if request.method == 'POST':
+    event = None
+
+    event_id = request.GET.get('event_id')
+    if event_id:
+        event = get_object_or_404(Event, id=event_id, created_by=request.user)
+
+    if request.method == 'POST' and event:
         event.title = request.POST.get('title')
         event.description = request.POST.get('description')
         event.start_time = request.POST.get('start_time')
         event.end_time = request.POST.get('end_time')
         event.approved = False
         event.save()
+
         return redirect('competitions:event_detail', event_id=event.id)
 
     context = {
         'event': event,
+        'upcoming_events': upcoming_events,
     }
     return render(request, 'competitions/edit_event.html', context)
+
+# @login_required
+# def edit_event(request, event_id):
+#     event = get_object_or_404(Event, id=event_id, created_by=request.user)
+
+#     if request.method == 'POST':
+#         event.title = request.POST.get('title')
+#         event.description = request.POST.get('description')
+#         event.start_time = request.POST.get('start_time')
+#         event.end_time = request.POST.get('end_time')
+#         event.approved = False
+#         event.save()
+#         return redirect('competitions:event_detail', event_id=event.id)
+
+#     context = {
+#         'event': event,
+#     }
+#     return render(request, 'competitions/edit_event.html', context)
+
+def get_event_details(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    event_data = {
+        "title": event.title,
+        "description": event.description,
+        "start_time": event.start_time.strftime("%Y-%m-%dT%H:%M"),
+        "end_time": event.end_time.strftime("%Y-%m-%dT%H:%M"),
+    }
+    return JsonResponse(event_data)
 
 @login_required
 def delete_event(request, event_id):
@@ -302,13 +342,62 @@ def events_json(request):
     
     return JsonResponse(data, safe=False)
 
+# @login_required
+# def edit_event_horse(request, event_horse_id, source='event_detail'):
+#     event_horse = get_object_or_404(EventHorse, id=event_horse_id)
+
+#     if request.method == 'POST':
+#         event_horse.class_details = request.POST.get('class_details')
+#         event_horse.notes = request.POST.get('notes')
+#         jump_height_value = request.POST.get('jump_height')
+
+#         if jump_height_value and jump_height_value != "Other":
+#             try:
+#                 event_horse.jump_height = float(jump_height_value.replace('m', '').replace('cm', '').strip())
+#                 event_horse.jump_height_str = jump_height_value
+#             except ValueError:
+#                 event_horse.jump_height = None
+#                 event_horse.jump_height_str = None
+
+#         number_of_faults_value = request.POST.get('number_of_faults')
+        
+#         if number_of_faults_value.isdigit():
+#             event_horse.number_of_faults = int(number_of_faults_value)
+#         else:
+#             event_horse.number_of_faults = None
+
+#         if source == 'dashboard':
+#             event_horse.results = request.POST.get('results')
+#             event_horse.performance_rating = request.POST.get('performance_rating')
+
+#         event_horse.save()
+        
+#         if source == 'dashboard':
+#             notifications = Notification.objects.filter(event_horse=event_horse, user=request.user)
+#             for notification in notifications:
+#                 notification.read = True
+#                 notification.save()
+
+#         if source == 'dashboard':
+#             return redirect('users:dashboard')
+#         else:
+#             return redirect('competitions:event_detail', event_id=event_horse.event.id)
+
+#     context = {
+#         'event_horse': event_horse,
+#     }
+#     return render(request, 'competitions/edit_event_horse.html', context)
+
 @login_required
-def edit_event_horse(request, event_horse_id, source='event_detail'):
+def edit_event_horse(request, event_horse_id):
     event_horse = get_object_or_404(EventHorse, id=event_horse_id)
 
     if request.method == 'POST':
-        event_horse.class_details = request.POST.get('class_details')
-        event_horse.notes = request.POST.get('notes')
+        event_horse.class_details = request.POST.get('class_details', event_horse.class_details)
+        event_horse.notes = request.POST.get('notes', event_horse.notes)
+        event_horse.results = request.POST.get('results', event_horse.results)
+        event_horse.performance_rating = request.POST.get('performance_rating', event_horse.performance_rating)
+
         jump_height_value = request.POST.get('jump_height')
 
         if jump_height_value and jump_height_value != "Other":
@@ -320,28 +409,12 @@ def edit_event_horse(request, event_horse_id, source='event_detail'):
                 event_horse.jump_height_str = None
 
         number_of_faults_value = request.POST.get('number_of_faults')
-        
-        if number_of_faults_value.isdigit():
+        if number_of_faults_value and number_of_faults_value.isdigit():
             event_horse.number_of_faults = int(number_of_faults_value)
-        else:
-            event_horse.number_of_faults = None
-
-        if source == 'dashboard':
-            event_horse.results = request.POST.get('results')
-            event_horse.performance_rating = request.POST.get('performance_rating')
 
         event_horse.save()
-        
-        if source == 'dashboard':
-            notifications = Notification.objects.filter(event_horse=event_horse, user=request.user)
-            for notification in notifications:
-                notification.read = True
-                notification.save()
 
-        if source == 'dashboard':
-            return redirect('users:dashboard')
-        else:
-            return redirect('competitions:event_detail', event_id=event_horse.event.id)
+        return redirect('competitions:event_detail', event_id=event_horse.event.id)
 
     context = {
         'event_horse': event_horse,
