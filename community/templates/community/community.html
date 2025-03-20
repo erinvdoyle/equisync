@@ -15,6 +15,17 @@
         <h1>Stable Community</h1>
         <p>Welcome to the Stable Community! Browse sales ads and announcements, or post your own.</p>
     </div>
+    <!-- Success Messages -->
+    {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
 </div>
 
 <!-- Sales Ads Section -->
@@ -28,7 +39,7 @@
             <div class="toolbar-form d-flex align-items-center gap-2 justify-content-end">
                 {% if user.is_authenticated %}
                     <a href="{% url 'community:submit_ad' %}" class="community-btn">Post Ad</a>
-                    <a href="{% url 'community:edit_ad' ad_id=1 %}" class="community-btn">Edit Ad</a>  
+                    <a href="{% url 'community:edit_ad' %}" class="community-btn">Edit Ad</a>  
                 {% endif %}
 
                 <!-- Search Form -->
