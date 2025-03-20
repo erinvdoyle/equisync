@@ -18,6 +18,8 @@ if os.path.isfile('env.py'):
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import ssl
+import certifi
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -168,6 +170,7 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+ssl._create_default_https_context = ssl._create_unverified_context
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

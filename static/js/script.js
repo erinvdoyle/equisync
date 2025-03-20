@@ -32,9 +32,18 @@ function openModal(title, description, imageUrl) {
 }
 
 // Function to open Announcements Modal
-function openAnnouncementModal(title, content) {
+function openAnnouncementModal(title, content, imageUrl) {
     document.getElementById('announcementModalLabel').textContent = title;
     document.getElementById('modalAnnouncementContent').textContent = content;
+
+    const imageElement = document.getElementById('modalAnnouncementImage');
+
+    if (imageUrl) {
+        imageElement.src = imageUrl;
+        imageElement.style.display = 'block';
+    } else {
+        imageElement.style.display = 'none';
+    }
 
     announcementModal.show();
 }

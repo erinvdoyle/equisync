@@ -199,6 +199,12 @@
 
                         <!-- Collapsible Content for Full Description -->
                         <div id="announcement{{ forloop.counter }}" class="collapse announcement-collapse mt-2">
+                            <!-- Show Image in Expanded Content -->
+                            {% if announcement.image %}
+                                <img src="{{ announcement.image.url }}" alt="Announcement Image" class="img-fluid rounded mb-3 announcement-collapsible-image">
+                            {% endif %}
+                            
+                            
                             <p>{{ announcement.description }}</p>
                             <p><strong>Contact Info:</strong> {{ announcement.contact_info }}</p>
                         </div>
