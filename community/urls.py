@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from .ads.views import submit_ad, edit_ad
+from .ads.views import submit_ad, edit_ad, delete_ad
 from .announcements.views import submit_announcement, edit_announcement  
 from .views import community_overview, create_event, edit_event, delete_event
 from .ads import views as ads_views
@@ -15,7 +15,7 @@ app_name = 'community'
 urlpatterns = [
     path('ads/', include([
         path('submit/', ads_views.submit_ad, name='submit_ad'),
-        path('edit/<int:ad_id>/', ads_views.edit_ad, name='edit_ad'),
+        # path('edit/<int:ad_id>/', ads_views.edit_ad, name='edit_ad'),
         path('<int:ad_id>/', ads_views.ad_detail, name='ad_detail'),
     ])),
     path('announcements/', include([
@@ -37,7 +37,9 @@ urlpatterns = [
     path('announcements/preview/<int:announcement_id>/', announcement_views.preview_announcement, name='preview_announcement'),
     path('edit-event/', edit_event, name='edit_event'),
     path('delete-event/', delete_event, name='delete_event'),
-
+    path('ads/edit/', ads_views.edit_ad, name='edit_ad'),
+    path('ads/edit/<int:ad_id>/', ads_views.edit_ad, name='edit_ad_with_id'), 
+    path('ads/delete/<int:ad_id>/', ads_views.delete_ad, name='delete_ad'),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

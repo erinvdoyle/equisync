@@ -6,9 +6,9 @@ from django.urls import reverse
 from community.forms import CommentForm
 from django.contrib.contenttypes.models import ContentType
 from community.models import Comment
+from django.contrib import messages
 
 
-# Create your views here.
 def community(request):
     return render(request, 'community/community.html')
 
@@ -29,17 +29,39 @@ def submit_ad(request):
 
 
 @login_required
-def edit_ad(request, ad_id):
-    ad = get_object_or_404(Ad, id=ad_id)
-    if request.method == 'POST':
-        form = AdForm(request.POST, request.FILES, instance=ad)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('community:community_overview'))
-    else:
-        form = AdForm(instance=ad)
+def edit_ad(request, ad_id=None):
+    user_ads = Ad.objects.filter(user=request.user)
+    selected_ad = None
 
-    return render(request, 'ads/edit_ad.html', {'form': form, 'ad': ad})
+    if ad_id:
+        selected_ad = get_object_or_404(Ad, id=ad_id, user=request.user)
+        form = AdForm(instance=selected_ad)
+    else:
+        form = AdForm()
+
+    if request.method == 'POST':
+        ad_id = request.POST.get("ad_id")
+        if ad_id:
+            selected_ad = get_object_or_404(Ad, id=ad_id, user=request.user)  
+            form = AdForm(request.POST, request.FILES, instance=selected_ad)
+            if form.is_valid():
+                form.save()
+                return redirect('community:community_overview')
+        else:
+            form = AdForm()
+
+    return render(request, 'ads/edit_ad.html', {
+        'form': form,
+        'user_ads': user_ads,
+        'selected_ad': selected_ad
+    })
+   
+@login_required
+def delete_ad(request, ad_id):
+    ad = get_object_or_404(Ad, id=ad_id, user=request.user)  # Ensure user can only delete their own ads
+    ad.delete()
+    messages.success(request, "Your ad has been successfully deleted.")
+    return redirect('community:community_overview')
 
 @login_required
 def ad_detail(request, ad_id):
