@@ -59,7 +59,12 @@
             {% for ad in page_obj %}
             <div class="col-lg-4 col-md-6 col-12 mb-4">
                 <div class="ad-card">
-                    <img src="{{ ad.image_url }}" class="card-img-top" alt="{{ ad.description }}">
+                    {% if ad.image %}
+                        <img src="{{ ad.image.url }}" class="card-img-top" alt="{{ ad.description }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="No image available">
+                    {% endif %}
+
                     <div class="p-3">
                         <h5 class="card-title">
                             <span class="ad-label {% if ad.ad_type == 'for_sale' %}for-sale{% elif ad.ad_type == 'wanted' %}wanted{% endif %}">
@@ -67,12 +72,17 @@
                             </span>
                         </h5>
                         <p class="card-text">{{ ad.description|truncatechars:50 }}</p>
+                        
                         <button class="card-btn"
-                            onclick="openModal('{{ ad.get_ad_type_display|title }}', '{{ ad.description|escapejs }}', '{{ ad.image_url }}')"
+                            onclick="openModal('{{ ad.get_ad_type_display|title }}', '{{ ad.description|escapejs }}', 
+                            {% if ad.image %}'{{ ad.image.url }}'{% else %}'https://via.placeholder.com/300x150'{% endif %})"
                             data-bs-toggle="modal"
                             data-bs-target="#adModal">
-                            View Details
-                        </button>
+                        View Details
+                    </button>
+
+
+
                     </div>
                     <a href="{% url 'community:ad_detail' ad_id=ad.id %}">
                         Comments ({{ ad_comment_counts|get_item:ad.id }})
@@ -240,7 +250,7 @@
             <a href="{% url 'community:edit_event' %}" class="community-btn">Edit</a>
         </div>
     </div>
-    
+
         <div class="week-nav-controls d-flex align-items-center">
             <button id="previous-week-button" class="btn btn-secondary">&lt;</button>
 

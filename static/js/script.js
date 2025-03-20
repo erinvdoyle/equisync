@@ -17,7 +17,11 @@ function openModal(title, description, imageUrl) {
     document.getElementById('modalDescription').innerHTML = description;
 
     const image = document.getElementById('modalImage');
-    if (imageUrl) {
+
+    if (imageUrl && imageUrl !== "None") {  
+        if (!imageUrl.startsWith("http")) {
+            imageUrl = `https://res.cloudinary.com/dxpbpx72q/image/upload/v1/${imageUrl}`;
+        }
         image.src = imageUrl;
         image.style.display = 'block';
     } else {
@@ -26,7 +30,6 @@ function openModal(title, description, imageUrl) {
 
     adModal.show();
 }
-
 
 // Function to open Announcements Modal
 function openAnnouncementModal(title, content) {
