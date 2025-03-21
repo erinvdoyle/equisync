@@ -214,51 +214,6 @@ body {
     height: 38px;
 }
 
-/* .toolbar-form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-} */
-
-/* .search-form {
-    flex-grow: 1;
-}
-
-.search-container {
-    position: relative;
-}
-
-.search-container input {
-    width: 150px;
-    height: 35px;
-    padding: 5px 10px;
-    border: none;
-    background: #ffffff;
-    border-radius: 5px;
-    color: #343a40;
-    font-weight: bold;
-}
-
-.search-field {
-    width: 200px;
-    height: 35px;
-    padding: 5px 10px;
-    border: none;
-    background: white;
-    border-radius: 5px;
-    color: #343a40;
-    font-weight: bold;
-}
-
-.category-field {
-    height: 35px;
-    border-radius: 5px;
-    padding: 5px;
-    background: white;
-    color: #343a40;
-    font-weight: bold;
-} */
-
 /* --- Ad & Announcement Cards ---------------------------------------------------------------------------------------------------------------- */
 .ad-card, .announcement-card {
     background: white;
@@ -391,6 +346,28 @@ body {
     color: #155724;
 }
 
+.alert-dismissible .btn-close {
+    padding: 0.75rem 1rem !important;
+    align-self: center !important;
+}
+
+.btn-close {
+    padding: 0.75rem 1rem !important;
+    align-self: center !important;
+}
+
+.edit-announcement-form-container .form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.edit-announcement-form-container .form-buttons button,
+.edit-announcement-form-container .form-buttons a {
+    margin: 0;
+}
+
 
 /* --- Weekly Events Section ----------------------------------------------------------------------------------------------------------------- */
 .calendar-section {
@@ -491,6 +468,8 @@ body {
     background: #5d4a50;
 }
 
+/* --- Preview Ads and Announcements ---------------------------------------------------------------------------------------------------------- */
+
 .ad-preview {
     text-align: center;
     font-size: 1.1rem;
@@ -508,6 +487,27 @@ body {
     margin-top: 15px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.announcement-preview-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.preview-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.preview-details p {
+    font-size: 16px;
+    margin-bottom: 12px;
 }
 
 /* --- General Form Styles -------------------------------------------------------------------------------------- */

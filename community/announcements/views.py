@@ -5,6 +5,7 @@ from .forms import AnnouncementForm
 from community.forms import CommentForm
 from django.contrib.contenttypes.models import ContentType
 from community.models import Comment
+from django.contrib import messages
 
 
 @login_required
@@ -22,18 +23,33 @@ def submit_announcement(request):
     return render(request, 'announcements/submit_announcement.html', {'form': form})
 
 @login_required
-def edit_announcement(request, announcement_id):
-    announcement = get_object_or_404(Announcement, id=announcement_id)
+def edit_announcement(request, announcement_id=None):
+    user_announcements = Announcement.objects.filter(user=request.user)
+    selected_announcement = None
+
+    if announcement_id:
+        selected_announcement = get_object_or_404(Announcement, id=announcement_id, user=request.user)
+        form = AnnouncementForm(instance=selected_announcement)
+    else:
+        form = AnnouncementForm()
 
     if request.method == 'POST':
-        form = AnnouncementForm(request.POST, request.FILES, instance=announcement)  
-        if form.is_valid():
-            form.save()
-            return redirect('community:announcement_detail', announcement_id=announcement.id)  
-    else:
-        form = AnnouncementForm(instance=announcement)
+        announcement_id = request.POST.get("announcement_id")
+        if announcement_id:
+            selected_announcement = get_object_or_404(Announcement, id=announcement_id, user=request.user)
+            form = AnnouncementForm(request.POST, request.FILES, instance=selected_announcement)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Your announcement has been updated")
+                return redirect('community:community_overview')
+        else:
+            form = AnnouncementForm()
 
-    return render(request, 'announcements/edit_announcement.html', {'form': form, 'announcement': announcement})
+    return render(request, 'announcements/edit_announcement.html', {
+        'form': form,
+        'user_announcements': user_announcements,
+        'selected_announcement': selected_announcement
+    })
 
 def community_overview(request):
     ads = Ad.objects.filter(approved=True)  
@@ -76,7 +92,7 @@ def delete_announcement(request, announcement_id):
     
     if request.method == "POST":
         announcement.delete()
-        messages.success(request, "Your announcement has been successfully deleted.")
+        messages.success(request, "Your announcement has been deleted")
         return redirect('community:community_overview')
     
     return render(request, "announcements/confirm_delete_announcement.html", {"announcement": announcement})
@@ -84,5 +100,12 @@ def delete_announcement(request, announcement_id):
 @login_required
 def preview_announcement(request, announcement_id):
     announcement = get_object_or_404(Announcement, id=announcement_id)
-    return render(request, 'announcements/preview_announcement.html', {'announcement': announcement})
+
+    if request.method == "POST":
+        messages.success(request, "Your announcement has been submitted for approval")
+        return redirect("community:community_overview")
+
+    return render(request, "announcements/preview_announcement.html", {
+        "announcement": announcement
+    })
 

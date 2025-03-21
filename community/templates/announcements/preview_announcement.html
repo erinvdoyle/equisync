@@ -6,25 +6,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="container announcement-preview-container">
-    <h1 class="announcement-preview-title">{{ announcement.title }}</h1>
+<div class="announcement-preview-container">
+    <h1 class="preview-title">{{ announcement.title|default:"Your Announcement" }}</h1>
 
-    <p class="approval-message">
-        <strong>Your announcement has been submitted for admin approval.</strong>
-    </p>
-
-    <div class="announcement-content">
+    <div class="preview-details">
         <p><strong>Description:</strong> {{ announcement.description }}</p>
         <p><strong>Contact Info:</strong> {{ announcement.contact_info }}</p>
 
         {% if announcement.image %}
-            <img src="{{ announcement.image.url }}" alt="Announcement Image" class="preview-image" />
+            <img src="{{ announcement.image.url }}" alt="Announcement Image" class="ad-preview-image" />
         {% endif %}
     </div>
 
-    <div class="form-buttons">
-        <a href="{% url 'community:community_overview' %}" class="btn btn-secondary">Back to Community</a>
-    </div>
+    <form method="post" class="styled-form">
+        {% csrf_token %}
+        <div class="form-buttons">
+            <button type="submit" class="community-btn">Submit</button>
+            <a href="{% url 'community:edit_announcement' %}" class="cancel-btn">Edit</a>
+            <a href="{% url 'community:community_overview' %}" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
 </div>
 {% endblock %}
 
