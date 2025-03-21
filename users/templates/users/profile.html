@@ -2,22 +2,22 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'users/dashboard.css' %}">
+  <link rel="stylesheet" href="{% static 'users/css/users.css' %}">
 {% endblock %}
 
 {% block content %}
+<div class="profile-container">
+  <h2 class="profile-header">{{ profile.user.username }}'s Profile</h2>
 
-<!-- profile.html content starts here -->
-  <h2>{{ profile.user.username }}'s Profile</h2>
-
-  <ul>
+  <ul class="profile-details">
     <li><strong>Role:</strong> {{ profile.get_role_display }}</li>
-    <!-- <li><strong>Horse:</strong> {{ profile.get_horse_display }}</li> -->
     <li><strong>Contact:</strong> {{ profile.contact }}</li>
-    <li><strong>Notes:</strong> {{ profile.notes }}</li>
+    <li><strong>Notes:</strong> {{ profile.notes|default:"No notes provided." }}</li>
   </ul>
 
-  <a href="{% url 'edit_profile' %}">Edit Profile</a> 
-
-<!-- profile.html content ends here -->
+  <div class="button-group">
+    <a href="{% url 'edit_profile' %}" class="profile-btn">Edit Profile</a>
+  </div>
+</div>
 {% endblock %}
+

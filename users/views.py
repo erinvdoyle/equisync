@@ -14,6 +14,7 @@ from notifications.models import Notification
 from django.http import JsonResponse
 from django.utils import timezone
 from datetime import timedelta, datetime
+from django.contrib import messages
 
 
 @login_required
@@ -24,17 +25,15 @@ def view_profile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     return render(request, 'users/profile.html', {'profile': profile})
 
+@login_required
 def edit_profile(request):
-    """
-    allows the logged in user to edit profile
-    """
-    profile = get_object_or_404(Profile, user=request.user)
-
+    profile = request.user.profile
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('view_profile')  
+            messages.success(request, "Your profile was updated successfully.")
+            return redirect('view_profile')
     else:
         form = ProfileForm(instance=profile)
 

@@ -2,18 +2,43 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'users/dashboard.css' %}">
+  <link rel="stylesheet" href="{% static 'users/css/users.css' %}">
 {% endblock %}
 
 {% block content %}
-  <h2>Edit Profile</h2>
+<div class="profile-container">
+
+  {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} fade-message">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <h2 class="profile-header">Edit Profile</h2>
 
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save Changes</button>
+    <div class="button-group">
+      <button type="submit" class="profile-btn">Save Changes</button>
+      <a href="{% url 'view_profile' %}" class="cancel-link">Cancel</a>
+    </div>
   </form>
 
-  <a href="{% url 'view_profile' %}">Cancel</a>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const messages = document.querySelectorAll(".fade-message");
+    messages.forEach(msg => {
+      setTimeout(() => {
+        msg.style.opacity = "0";
+      }, 3500);
+    });
+  });
+</script>
 
 {% endblock %}
+
