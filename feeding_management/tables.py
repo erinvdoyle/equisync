@@ -5,8 +5,8 @@ from .models import FeedingChart
 
 class HorseLinkColumn(tables.Column):
     def render(self, value, record):
-        url = reverse('horses:horse_profile', kwargs={'horse_id': record.horse.id})
-        return format_html('<a href="{}">{}</a>', url, value)
+        url = reverse('feeding_management:horse_feeding_chart_readonly', kwargs={'horse_id': record.horse.id})
+        return format_html('<a href="{}" class="horse-name-link">{}</a>', url, value)
 
 class FeedingChartTable(tables.Table):
     horse = HorseLinkColumn(verbose_name="Horse", accessor='horse.name', orderable=False)

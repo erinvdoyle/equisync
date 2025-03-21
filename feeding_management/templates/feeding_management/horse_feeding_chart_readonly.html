@@ -6,6 +6,17 @@
 
 {% block content %}
 <div class="feeding-container">
+    
+    {% if messages %}
+    <div class="message-container messages-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} fade-message text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <h1 class="feeding-title">Feeding Chart for {{ horse.name }}</h1>
 
     <div class="feeding-card">
@@ -27,7 +38,29 @@
         <p>{{ feeding_chart.notes|default:"No notes provided." }}</p>
     </div>
 
-    <a href="{% url 'horses:horse_profile' horse.id %}" class="feed-btn-back">⬅ Back to Horse Profile</a>
+    <div class="button-row">
+        <a href="{% url 'horses:horse_profile' horse.id %}" class="half-button back-button">Back to Horse Profile</a>
+    
+        {% if user == horse.owner or user.is_staff %}
+            <a href="{% url 'feeding_management:horse_feeding_chart' horse.id %}" class="half-button edit-button">
+                Edit Chart
+            </a>
+        {% endif %}
+    </div>    
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const messages = document.querySelectorAll(".fade-message");
+  
+      messages.forEach((msg) => {
+        setTimeout(() => {
+          msg.style.opacity = "0";
+        }, 3000);
+      });
+    });
+  </script>
+  
+
 {% endblock %}
 

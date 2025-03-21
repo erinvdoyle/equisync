@@ -9,6 +9,24 @@
 {% block content %}
 <div class="feeding-container">
     <h1 class="feeding-title">Daily Feeding Overview</h1>
+    
+    {% if messages %}
+    <div class="message-container messages-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} fade-message text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if user.is_staff and pending_charts %}
+        <div class="text-end mb-3">
+            <a href="{% url 'feeding_management:pending_feeding_approvals' %}" class="btn btn-warning">
+                View Pending Feeding Plan Approvals
+            </a>
+        </div>
+    {% endif %}
 
     <!-- Table Layout for Large Screens-->
     <div class="feeding-table-wrapper">
@@ -33,4 +51,17 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const messages = document.querySelectorAll(".fade-message");
+  
+      messages.forEach((msg) => {
+        setTimeout(() => {
+          msg.style.opacity = "0";
+        }, 3000);
+      });
+    });
+  </script>
+  
 {% endblock %}

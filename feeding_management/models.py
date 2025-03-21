@@ -16,6 +16,8 @@ class FeedingChart(models.Model):
     medicines = models.CharField(max_length=200, blank=True, null=True)
     notes = models.TextField(blank=True)
     approved_users = models.ManyToManyField(User, related_name='feeding_charts', blank=True)
+    approved = models.BooleanField(default=False)
+    last_updated_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
 
     def get_hay_info(self):
         if self.hay and self.hay_quantity:
