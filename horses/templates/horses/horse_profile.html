@@ -6,6 +6,17 @@
 
 {% block content %}
 <div class="horse-profile-container">
+
+    {% if messages %}
+    <div class="message-container messages-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} fade-message text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- Horse Image and Basic Info -->
     <div class="horse-header">
         <div class="horse-image">
@@ -65,7 +76,7 @@
     <!-- Buttons -->
     <div class="horse-action-buttons">
         <a href="{% url 'horses:edit_horse_profile' horse.id %}
-        " class="btn-primary">Edit/Remove Profile</a>
+        " class="btn-primary">Edit Profile</a>
         <a href="{% url 'horses:horse_list' %}" class="btn-secondary">Back</a>
     </div>
 

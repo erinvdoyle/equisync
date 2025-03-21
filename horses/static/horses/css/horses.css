@@ -166,6 +166,41 @@
     color: #343a40;
 }
 
+.add-horse-btn {
+    background-color: #2d2d35;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-horse-btn:hover {
+    background-color: #4b4b55;
+  }
+
+  .messages-container {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    max-width: 600px;
+  }
+  
+  .fade-message {
+    background-color: #f8e1ec;
+    color: #3c2f3c;
+    border: 1px solid #e5b9c5;
+    border-radius: 6px;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+  }
+  
+
 /* --- Collapsible Form Sections --- */
 .collapsible-section {
     margin-top: 20px;
@@ -235,8 +270,9 @@
     text-align: center;
     color: #343a40;
     font-size: 2rem;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-weight: bold;
+    font-family: Lato, sans-serif;
 }
 
 .horse-list-container {

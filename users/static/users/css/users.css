@@ -115,9 +115,17 @@ section {
 }
 
 /* --- Main Content Styles ------------------------------------------------------------------------------------------------------------------- */
+.lato-header {
+    text-align: center;
+    font-weight: bold;
+}
+
+
 .main-content {
-    margin-left: 260px;
+    flex: 1;
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
     transition: margin-left 0.3s;
 }
 
@@ -600,5 +608,12 @@ section {
 
     .sidebar-hidden .sidebar-toggle-caret {
         transform: rotate(180deg);
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        margin-left: 260px;
+        margin-right: 20px;
     }
 }
