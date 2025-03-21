@@ -6,44 +6,55 @@
 {% endblock %}
 
 {% block content %}
-<div class="container event-form-container">
-    <h1 class="event-form-title">Edit an Event</h1>
+<div class="container my-5 p-4 rounded shadow-sm bg-light">
+
+    <!-- Success Messages -->
+    {% if messages %}
+        <div class="alert-container mb-4">
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <h2 class="section-header mb-3">Edit an Event</h2>
 
     {% if user_events %}
         <p>Select an event you wish to edit:</p>
 
-        <form method="post" class="event-form">
-            {% csrf_token %}
-            
-            <div class="form-group">
+        <form method="get" class="mb-4">
+            <div class="mb-3">
                 <label for="event_id">Your Events:</label>
                 <select name="event_id" id="event_id" class="form-control" onchange="this.form.submit()">
-                    <option value="" disabled selected>-- Select Event --</option>
+                    <option value="" disabled {% if not selected_event %}selected{% endif %}>-- Select Event --</option>
                     {% for event in user_events %}
-                        <option value="{{ event.id }}">{{ event.title }} - {{ event.date }}</option>
+                        <option value="{{ event.id }}" {% if selected_event and event.id == selected_event.id %}selected{% endif %}>
+                            {{ event.title }} - {{ event.date }}
+                        </option>
                     {% endfor %}
                 </select>
             </div>
         </form>
-
+        
         {% if form %}
-            <form method="post" class="event-form mt-4">
-                {% csrf_token %}
-                {{ form.as_p }}
-                
-                <div class="form-buttons">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    
-                    <!-- Delete Event Button -->
-                    <a href="{% url 'community:delete_event' %}?event_id={{ form.instance.id }}" class="btn btn-danger">Delete Event</a>
-
-                    <a href="{% url 'community:community_overview' %}" class="btn btn-secondary">Cancel</a>
-                </div>
-            </form>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="event_id" value="{{ selected_event.id }}">
+        
+            <div class="form-buttons d-flex flex-wrap gap-2 mt-3">
+                <button type="submit" class="community-btn">Save Changes</button>
+                <a href="{% url 'community:delete_event' %}?event_id={{ selected_event.id }}" class="btn btn-danger">Delete Event</a>
+                <a href="{% url 'community:community_overview' %}" class="cancel-btn">Cancel</a>
+            </div>
+        </form>        
         {% endif %}
-
     {% else %}
-        <p>You have no events to edit.</p>
+        <p class="text-muted">You have no events to edit.</p>
     {% endif %}
 </div>
 {% endblock %}
+

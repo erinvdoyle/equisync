@@ -205,16 +205,17 @@ def create_event(request):
         date = request.POST.get('date')
         time = request.POST.get('time')
 
-        event = CommunityEvent.objects.create(
+        CommunityEvent.objects.create(
             title=title,
             description=description,
             date=date,
             time=time if time else None,
             created_by=request.user
         )
+        messages.success(request, "Your event has been submitted for approval.")
         return redirect('community:community_overview')
-    else:
-        return render(request, 'community/create_event.html')
+
+    return render(request, 'community/create_event.html')
     
 def event_detail(request, event_id):
     event = get_object_or_404(CommunityEvent, pk=event_id)
@@ -222,23 +223,29 @@ def event_detail(request, event_id):
 
 @login_required
 def edit_event(request):
-    """ Allows users to select and edit an event they've created. """
     user_events = CommunityEvent.objects.filter(created_by=request.user)
 
-    if request.method == 'POST':
-        event_id = request.POST.get('event_id')
-        event = get_object_or_404(CommunityEvent, id=event_id, created_by=request.user)
+    event_id = request.GET.get("event_id") or request.POST.get("event_id")
+    selected_event = None
+    form = None
 
-        form = EventForm(request.POST, instance=event)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Event updated successfully.")
-            return redirect('community:community_overview')
+    if event_id:
+        selected_event = get_object_or_404(CommunityEvent, id=event_id, created_by=request.user)
 
-    else:
-        form = EventForm()
+        if request.method == 'POST':
+            form = EventForm(request.POST, instance=selected_event)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Event updated")
+                return redirect('community:community_overview')
+        else:
+            form = EventForm(instance=selected_event)
 
-    return render(request, 'community/edit_event.html', {'user_events': user_events, 'form': form})
+    return render(request, 'community/edit_event.html', {
+        'user_events': user_events,
+        'form': form,
+        'selected_event': selected_event,
+    })
 
 @login_required
 def delete_event(request):
@@ -248,7 +255,7 @@ def delete_event(request):
 
     if request.method == 'POST':
         event.delete()
-        messages.success(request, "Event successfully removed.")
+        messages.success(request, "Event removed")
         return redirect('community:community_overview')
 
     return render(request, 'community/delete_event.html', {'event': event})

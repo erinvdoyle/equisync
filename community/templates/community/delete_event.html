@@ -6,17 +6,32 @@
 {% endblock %}
 
 {% block content %}
-<div class="container event-form-container">
-    <h1 class="event-form-title">Delete Event</h1>
-    <p>Are you sure you want to delete the event <strong>{{ event.title }}</strong>?</p>
+<div class="container my-5 p-4 rounded shadow-sm bg-light">
+
+    <!-- Success Messages -->
+    {% if messages %}
+        <div class="alert-container mb-4">
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <h2 class="section-header mb-3">Delete Event</h2>
+
+    <p>Are you sure you want to delete the event <strong>{{ event.title }}</strong> scheduled for <strong>{{ event.date }}</strong>?</p>
 
     <form method="post">
         {% csrf_token %}
-        <div class="form-buttons">
+        <div class="form-buttons d-flex gap-2 mt-4">
             <button type="submit" class="btn btn-danger">Confirm Delete</button>
             <a href="{% url 'community:edit_event' %}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
 {% endblock %}
+
 
