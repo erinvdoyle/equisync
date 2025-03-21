@@ -105,6 +105,17 @@
                                         {% endif %}
                                         <span style="font-size: 0.9rem;">{{ notification.message }}</span>
                                     </div>
+
+                                    <div class="d-flex align-items-center gap-2">
+                                        {% if "feeding plan" in notification.message %}
+                                            {% with horse_name=notification.message|cut:" submitted feeding plan updates for " %}
+                                                {% for horse in horses %}
+                                                    {% if horse.name == horse_name %}
+                                                        <a href="{% url 'feeding_management:horse_feeding_chart' horse.id %}" class="btn btn-sm btn-outline-primary">Review</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endwith %}
+                                        {% endif %}
             
                                     <div>
                                         <button class="btn btn-sm btn-outline-secondary mark-read-btn" 
