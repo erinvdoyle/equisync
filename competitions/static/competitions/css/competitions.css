@@ -45,6 +45,29 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     opacity: 1;
     transition: opacity 0.5s ease-out;
   }
+
+  .feeding-banner {
+    background-color: #f0f4f8;
+    border: 1px solid #d1e3f0;
+    color: #334e68;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1rem;
+    margin: 0 auto 20px auto;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .feeding-banner .banner-icon {
+    color: #2c7be5;
+    font-size: 1.2rem;
+  }
+  
   
 /* --- Competitions Events Calendar -------------------------------------------------------------------------------------------------------- */
 .header-container {

@@ -272,7 +272,15 @@
     color: #1e3545;
 }
 
-
+.feeding-subtext {
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #666;
+    font-style: italic;
+  }
+  
 /* --- Media Queries ------------------------------------------------------------------------------------------------------------ */
 @media (max-width: 480px) { 
     .feeding-chart-table th,
