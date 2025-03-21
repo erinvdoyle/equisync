@@ -294,13 +294,13 @@
         <div class="week-nav-controls d-flex align-items-center">
             <button id="previous-week-button" class="btn btn-secondary">&lt;</button>
 
-            <select id="recent-weeks" class="form-control mx-2" onchange="updateWeeklyEvents('select', this.value)">
+            <select id="recent-weeks" class="form-control mx-2">
                 <option value="" disabled selected>--Recent Weeks--</option>
                 {% for week in recent_weeks %}
                     <option value="{{ week|date:'Y-m-d' }}">Week of {{ week|date:'M d, Y' }}</option>
                 {% endfor %}
             </select>
-
+            
             <button id="next-week-button" class="btn btn-secondary">&gt;</button>
         </div>
     </div>
@@ -313,12 +313,9 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM is fully loaded");
-
     let currentDate = new Date();
 
-    window.updateWeeklyEvents = function(direction, selectedDate = null) {
+    function updateWeeklyEvents(direction, selectedDate = null) {
         if (direction === 'previous') {
             currentDate.setDate(currentDate.getDate() - 7);
             document.getElementById('recent-weeks').selectedIndex = 0;
@@ -334,48 +331,37 @@ document.addEventListener('DOMContentLoaded', function() {
         const day = currentDate.getDate();
 
         const url = `/community/get-weekly-events/${year}/${month}/${day}/`;
-        console.log("Fetching URL:", url);
 
         fetch(url)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Fetch failed');
                 return response.json();
             })
             .then(data => {
-                if (data.html) {
-                    document.getElementById("weekly-events-container").innerHTML = "";
-                    document.getElementById("weekly-events-container").innerHTML = data.html;
-                    console.log("Weekly events updated");
-                } else {
-                    console.error('Received data does not contain HTML');
-                }
+                document.getElementById("weekly-events-container").innerHTML = data.html;
             })
-            .catch(error => {
-                console.error('Error fetching weekly events:', error);
-            });
-    };
+            .catch(error => console.error('Error fetching weekly events:', error));
+    }
 
-    // Event listeners for navigation buttons
-    document.getElementById('previous-week-button').addEventListener('click', () => {
-        console.log("Previous week button clicked");
-        updateWeeklyEvents('previous');
+    document.addEventListener('DOMContentLoaded', function () {
+        // Load current week 
+        updateWeeklyEvents('select', currentDate.toISOString().split('T')[0]);
+
+        // navigation button listeners
+        document.getElementById('previous-week-button').addEventListener('click', function () {
+            updateWeeklyEvents('previous');
+        });
+
+        document.getElementById('next-week-button').addEventListener('click', function () {
+            updateWeeklyEvents('next');
+        });
+
+        // dropdown listener
+        document.getElementById('recent-weeks').addEventListener('change', function () {
+            const selectedDate = this.value;
+            updateWeeklyEvents('select', selectedDate);
+        });
     });
-
-    document.getElementById('next-week-button').addEventListener('click', () => {
-        console.log("Next week button clicked");
-        updateWeeklyEvents('next');
-    });
-
-    // Dropdown event listener
-    document.getElementById('recent-weeks').addEventListener('change', function() {
-        const selectedDate = this.value;
-        updateWeeklyEvents('select', selectedDate);
-    });
-});
-
-
 </script>
 
 {% endblock %}

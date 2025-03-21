@@ -13,6 +13,8 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.contrib import messages
+from collections import defaultdict
+
 
 def community_overview(request, year=None, month=None, day=None):
     ads = Ad.objects.filter(approved=True).order_by('-date_posted')
@@ -75,14 +77,15 @@ def community_overview(request, year=None, month=None, day=None):
     community_events = CommunityEvent.objects.filter(date__range=[start_of_week, end_of_week], approved=True)
 
     days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    weekly_events = {}
 
-    weekly_events = []
     for day in days_of_week:
-        events_for_day = community_events.filter(date__week_day=days_of_week.index(day) + 2)
-        weekly_events.append({
-            "day": day,
-            "events": events_for_day
-        })
+        events_for_day = CommunityEvent.objects.filter(
+            date__week_day=days_of_week.index(day) + 2,
+            approved=True,
+            date__range=[start_of_week, end_of_week]
+        )
+        weekly_events[day] = events_for_day
 
     previous_week = start_of_week - timezone.timedelta(days=7)
     next_week = start_of_week + timezone.timedelta(days=7)
@@ -187,13 +190,21 @@ def this_weeks_events(request):
     today = timezone.now().date()
     start_of_week = today - timezone.timedelta(days=today.weekday())
     end_of_week = start_of_week + timezone.timedelta(days=6)
-    
-    community_events = CommunityEvent.objects.filter(date__range=[start_of_week, end_of_week], approved=True)
+
+    community_events = CommunityEvent.objects.filter(
+        date__range=[start_of_week, end_of_week],
+        approved=True
+    )
+
     days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
+    weekly_events = defaultdict(list)
+    for event in community_events:
+        day_name = event.date.strftime('%A')
+        weekly_events[day_name].append(event)
 
     return render(request, 'community/this_weeks_events.html', {
-        'community_events': community_events,
+        'weekly_events': dict(weekly_events),
         'days_of_week': days_of_week,
     })
 
