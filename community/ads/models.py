@@ -15,6 +15,7 @@ class Ad(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ad_type = models.CharField(max_length=10, choices=AD_TYPE_CHOICES)
+    title = models.CharField(max_length=100, blank=True, null=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="Other")
     image = models.ImageField(upload_to='ads/images', blank=True, null=True)
     description = models.TextField()

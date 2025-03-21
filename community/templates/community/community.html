@@ -86,15 +86,15 @@
                         <p class="card-text">{{ ad.description|truncatechars:50 }}</p>
                         
                         <button class="card-btn"
-                            onclick="openModal('{{ ad.get_ad_type_display|title }}', '{{ ad.description|escapejs }}', 
-                            {% if ad.image %}'{{ ad.image.url }}'{% else %}'https://via.placeholder.com/300x150'{% endif %})"
+                            onclick="openModal(
+                                '{{ ad.get_ad_type_display|title }}',
+                                '{{ ad.description|escapejs }}',
+                                {% if ad.image %}'{{ ad.image.url }}'{% else %}'https://via.placeholder.com/300x150'{% endif %},
+                                '{{ ad.title|default_if_none:"" }}')"
                             data-bs-toggle="modal"
                             data-bs-target="#adModal">
-                        View Details
-                    </button>
-
-
-
+                            View Details
+                        </button>
                     </div>
                     <a href="{% url 'community:ad_detail' ad_id=ad.id %}">
                         Comments ({{ ad_comment_counts|get_item:ad.id }})

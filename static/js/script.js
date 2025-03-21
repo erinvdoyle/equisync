@@ -12,13 +12,15 @@ const adModal = new bootstrap.Modal(document.getElementById('adModal'), { backdr
 const announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'), { backdrop: true });
 
 // Function to open Ads Modal
-function openModal(title, description, imageUrl) {
-    document.getElementById('adModalLabel').textContent = title;
-    document.getElementById('modalDescription').innerHTML = description;
-
+function openModal(type, description, imageUrl, adTitle = '') {
+    const modalTitle = document.getElementById('adModalLabel');
     const image = document.getElementById('modalImage');
+    const desc = document.getElementById('modalDescription');
 
-    if (imageUrl && imageUrl !== "None") {  
+    modalTitle.textContent = adTitle ? adTitle : type;
+    desc.innerHTML = description;
+
+    if (imageUrl && imageUrl !== "None") {
         if (!imageUrl.startsWith("http")) {
             imageUrl = `https://res.cloudinary.com/dxpbpx72q/image/upload/v1/${imageUrl}`;
         }
@@ -30,6 +32,7 @@ function openModal(title, description, imageUrl) {
 
     adModal.show();
 }
+
 
 // Function to open Announcements Modal
 function openAnnouncementModal(title, content, imageUrl) {

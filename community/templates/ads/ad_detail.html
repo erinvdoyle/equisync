@@ -1,42 +1,84 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block head %}
-    <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
+<link rel="stylesheet" href="{% static 'community/css/community.css' %}">
 {% endblock %}
 
 {% block content %}
-  <h1>Ad Detail</h1>
-  <h2>{{ ad.get_ad_type_display }}</h2>
-  <p><strong>Title:</strong> {{ ad.title }}</p>
-  <p><strong>Description:</strong> {{ ad.description }}</p>
-  <p><strong>Price:</strong> {{ ad.price }}</p>
-  <p><strong>Contact:</strong> {{ ad.contact_information }}</p>
-  <p><strong>Posted Date:</strong> {{ ad.date_posted }}</p>
+<div class="container ad-detail-container my-4 p-4 rounded shadow-sm bg-light">
 
-  <h2>Comments</h2>
-  {% for comment in comments %}
-    <p>
-        {{ comment.text }}<br>
-        Posted by: <a href="mailto:{{ comment.user.email }}">{{ comment.user.username }}</a> at {{ comment.created_at|date:"M. d, Y, g:i a" }}
-        {% if comment.user == request.user %}
-            | <a href="{% url 'community:edit_comment' comment_id=comment.id %}">Edit</a>
-            | <a href="{% url 'community:delete_comment' comment_id=comment.id %}">Delete</a>
-        {% else %}
-            | <a href="{% url 'community:add_comment' content_type_id=content_type.id object_id=ad.id %}">Add Comment</a>
-        {% endif %}
-    </p>
-{% endfor %}
+    <!--  Success Messages -->
+    {% if messages %}
+        <div class="alert-container mb-3">
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add Comment</button>
-  </form>
+    <!-- Ad Info -->
+    {% if ad.title %}
+      <h2 class="mb-3 text-center">{{ ad.title }}</h2>
+    {% else %}
+      <h2 class="mb-3 text-center">{{ ad.get_ad_type_display }}</h2>
+    {% endif %}
 
-  {% if ad.image %}
-    <img src="{{ ad.image.url }}" alt="Ad Image">
-  {% endif %}
+    <p><strong>Description:</strong> {{ ad.description }}</p>
+    <p><strong>Price:</strong> {{ ad.price }}</p>
+    <p><strong>Category:</strong> {{ ad.category }}</p>
+    <p><strong>Contact Info:</strong> {{ ad.contact_info }}</p>
+    <p><strong>Posted On:</strong> {{ ad.date_posted|date:"F d, Y" }}</p>
 
-  <a href="{% url 'community:community_overview' %}">Back to Community</a>
-  
+    {% if ad.image %}
+        <div class="my-3">
+            <img src="{{ ad.image.url }}" alt="Ad Image" class="img-fluid rounded shadow-sm">
+        </div>
+    {% endif %}
+
+    <hr class="my-4">
+
+    <!-- Comments Section -->
+    <h4 class="mb-3">Comments</h4>
+
+    {% for comment in comments %}
+        <div class="comment-box border rounded p-3 mb-3 bg-white shadow-sm">
+            <p class="mb-1">{{ comment.text }}</p>
+            <small class="text-muted">
+                Posted by <a href="mailto:{{ comment.user.email }}">{{ comment.user.username }}</a> 
+                on {{ comment.created_at|date:"M d, Y, g:i a" }}
+            </small>
+
+            {% if comment.user == request.user %}
+                <div class="comment-actions mt-2">
+                    <a href="{% url 'community:edit_comment' comment_id=comment.id %}" class="btn btn-sm btn-outline-secondary me-2">Edit</a>
+                    <a href="{% url 'community:delete_comment' comment_id=comment.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p class="text-muted">No comments yet. Be the first to comment!</p>
+    {% endfor %}
+
+    <!-- Add Comment Form -->
+    <div class="add-comment-section mt-5">
+        <h5>Add a Comment</h5>
+        <form method="post" class="mt-3">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <textarea name="text" id="comment-text" class="form-control custom-textarea" rows="4" placeholder="Write your comment here..."></textarea>
+            </div>
+
+            <div class="form-buttons d-flex flex-wrap gap-2 mt-2">
+                <button type="submit" class="community-btn">Add Comment</button>
+                <a href="{% url 'community:community_overview' %}" class="cancel-btn">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
+

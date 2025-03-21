@@ -32,8 +32,6 @@ def submit_ad(request):
 
     return render(request, 'ads/submit_ad.html', {'form': form})
 
-
-
 @login_required
 def edit_ad(request, ad_id=None):
     user_ads = Ad.objects.filter(user=request.user)
@@ -85,6 +83,9 @@ def ad_detail(request, ad_id):
             comment.user = request.user
             comment.content_object = ad
             comment.save()
+            
+            messages.success(request, "Your comment was added")
+            
             return redirect('community:ad_detail', ad_id=ad_id)
     else:
         form = CommentForm()
