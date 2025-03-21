@@ -486,11 +486,15 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     font-weight: bold;
     color: #2c3e50;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .action-buttons {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
     margin: 15px auto;
@@ -637,8 +641,8 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 
 .trophy-icon {
     color: #FFD700;
-    font-size: 24px;
-    margin-right: 8px;
+    /* font-size: 24px; */
+    font-size: 1.25em;
 }
 
 .btn-back {
@@ -725,6 +729,26 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     font-size: 0.875rem;
 }
 
+.add-horse-section {
+    background-color: #fdfdfd;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.class-detail-field input,
+.class-detail-field textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.class-detail-field label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+#addHorseDetailsContainer {
+    margin-top: 1rem;
+}
 
 /* --- Horse Results Archive --------------------------------------------------------------------------------------------------------------- */
 .results-container, .performance-container {
