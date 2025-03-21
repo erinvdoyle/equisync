@@ -2,15 +2,29 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
+  <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
 {% endblock %}
 
 {% block content %}
+<div class="container my-5 p-4 rounded shadow-sm bg-light">
 
-<div class="container-fluid section-wrapper my-4">
-    <h2 class="section-header">Create New Event</h2>
+    <!-- Success Messages -->
+    {% if messages %}
+      <div class="alert-container mb-4">
+          {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          {% endfor %}
+      </div>
+    {% endif %}
+
+    <h2 class="mb-4 section-header">Create New Event</h2>
+
     <form method="post" action="{% url 'community:create_event' %}">
         {% csrf_token %}
+
         <div class="mb-3">
             <label for="title" class="form-label">Event Title</label>
             <input type="text" class="form-control" id="title" name="title" required>
@@ -31,14 +45,10 @@
             <input type="time" class="form-control" id="time" name="time">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit Event</button>
+        <div class="form-buttons d-flex gap-2">
+            <button type="submit" class="community-btn">Submit Event</button>
+            <a href="{% url 'community:community_overview' %}" class="cancel-btn">Cancel</a>
+        </div>
     </form>
-
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-info mt-3">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
 </div>
-
 {% endblock %}

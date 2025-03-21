@@ -1,16 +1,35 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block head %}
-    <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
+  <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>{{ event.title }}</h1>
-    <p>{{ event.description }}</p>
-    <p>Date: {{ event.date }}</p>
-    {% if event.time %}
-        <p>Time: {{ event.time }}</p>
-    {% endif %}
+<div class="container my-5 p-4 rounded shadow-sm bg-light">
+
+  <!-- Success Messages -->
+  {% if messages %}
+    <div class="alert-container mb-4">
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+  {% endif %}
+
+  <h2 class="text-center mb-4">{{ event.title }}</h2>
+
+  <p><strong>Description:</strong> {{ event.description }}</p>
+  <p><strong>Date:</strong> {{ event.date|date:"F d, Y" }}</p>
+  {% if event.time %}
+    <p><strong>Time:</strong> {{ event.time|time:"g:i A" }}</p>
+  {% endif %}
+
+  <div class="form-buttons mt-4 d-flex gap-2">
+    <a href="{% url 'community:community_overview' %}" class="cancel-btn">Back to Community</a>
+  </div>
 </div>
 {% endblock %}
