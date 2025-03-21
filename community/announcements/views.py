@@ -75,6 +75,9 @@ def announcement_detail(request, announcement_id):
             comment.user = request.user
             comment.content_object = announcement
             comment.save()
+            
+            messages.success(request, "Your comment has been added")
+            
             return redirect('community:announcement_detail', announcement_id=announcement_id)
     else:
         form = CommentForm()

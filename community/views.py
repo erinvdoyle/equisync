@@ -12,6 +12,7 @@ from .forms import CommentForm, EventForm
 from django.utils import timezone
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.contrib import messages
 
 def community_overview(request, year=None, month=None, day=None):
     ads = Ad.objects.filter(approved=True).order_by('-date_posted')
@@ -50,9 +51,17 @@ def community_overview(request, year=None, month=None, day=None):
         ad_comment_counts[ad.id] = Comment.objects.filter(content_type=content_type, object_id=ad.id).count()
 
     announcement_comment_counts = {}
+    announcement_comments = {}
+    announcement_content_type = ContentType.objects.get_for_model(Announcement)
+
     for announcement in announcements:
-        content_type = ContentType.objects.get_for_model(Announcement)
-        announcement_comment_counts[announcement.id] = Comment.objects.filter(content_type=content_type, object_id=announcement.id).count()
+        comments = Comment.objects.filter(
+            content_type=announcement_content_type,
+            object_id=announcement.id
+        ).order_by('-created_at')
+
+        announcement_comment_counts[announcement.id] = comments.count()
+        announcement_comments[announcement.id] = comments
         
     today = timezone.now().date()
     if year and month and day:
@@ -91,6 +100,7 @@ def community_overview(request, year=None, month=None, day=None):
         'content_type_announcement': content_type_announcement,
         'ad_comment_counts': ad_comment_counts,
         'announcement_comment_counts': announcement_comment_counts,
+        'announcement_comments': announcement_comments,
         'weekly_events': weekly_events,
         "days_of_week": days_of_week,
         'previous_week': previous_week,
@@ -139,6 +149,7 @@ def add_comment(request, content_type_id, object_id):
                 text=form.cleaned_data['text']
             )
             comment.save()
+            messages.success(request, "Your comment was added")
             return redirect(obj.get_absolute_url())
     else:
         form = CommentForm()
@@ -153,11 +164,13 @@ def edit_comment(request, comment_id):
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
+            messages.success(request, "Your comment was updated")
             return redirect(comment.content_object.get_absolute_url())
     else:
         form = CommentForm(instance=comment)
 
     return render(request, 'community/edit_comment.html', {'form': form, 'comment': comment})
+
 
 @login_required
 def delete_comment(request, comment_id):
@@ -165,6 +178,9 @@ def delete_comment(request, comment_id):
     content_object_url = comment.content_object.get_absolute_url()
 
     comment.delete()
+
+    messages.success(request, "Your comment has been deleted")
+
     return redirect(content_object_url)
 
 def this_weeks_events(request):
@@ -180,7 +196,6 @@ def this_weeks_events(request):
         'community_events': community_events,
         'days_of_week': days_of_week,
     })
-
 
 @login_required
 def create_event(request):

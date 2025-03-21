@@ -209,22 +209,44 @@
                             Read More
                         </button>
 
-                        <!-- Collapsible Content for Full Description -->
+                        <!-- Collapsible Content -->
                         <div id="announcement{{ forloop.counter }}" class="collapse announcement-collapse mt-2">
-                            <!-- Show Image in Expanded Content -->
                             {% if announcement.image %}
                                 <img src="{{ announcement.image.url }}" alt="Announcement Image" class="img-fluid rounded mb-3 announcement-collapsible-image">
                             {% endif %}
-                            
-                            
+                        
                             <p>{{ announcement.description }}</p>
                             <p><strong>Contact Info:</strong> {{ announcement.contact_info }}</p>
+                        
+                            <!-- Inline Comments Section -->
+                            <div class="announcement-comments mt-3">
+                                <h6 class="fw-semibold">Recent Comments</h6>
+                                {% with comments=announcement_comments|get_item:announcement.id %}
+                                    {% if comments %}
+                                        <ul class="list-unstyled">
+                                            {% for comment in comments|slice:":3" %}
+                                                <li class="mb-2">
+                                                    <strong>{{ comment.user.username }}:</strong>
+                                                    {{ comment.text|truncatechars:80 }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <p class="text-muted">No comments yet.</p>
+                                    {% endif %}
+                                {% endwith %}
+                                <a href="{% url 'community:announcement_detail' announcement_id=announcement.id %}" class="view-all-comments">
+                                    View All / Add Comment
+                                </a>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Comments Link (now outside the collapsible and below the card body) -->
+                    <a href="{% url 'community:announcement_detail' announcement_id=announcement.id %}" class="comment-link">
+                        Comments ({{ announcement_comment_counts|get_item:announcement.id }})
+                    </a>
                 </div>
-                <a href="{% url 'community:announcement_detail' announcement_id=announcement.id %}">
-                    Comments ({{ announcement_comment_counts|get_item:announcement.id }})
-                </a>
             </div>
             {% endfor %}
         </div>
