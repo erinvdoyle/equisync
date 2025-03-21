@@ -16,6 +16,22 @@ h1, h2 {
     color: #d8a7b1;
 }
 
+.lato-header {
+    font-family: 'Lato', sans-serif;
+    font-size: 32px;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.header-subtext {
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #666;
+    font-style: italic;
+  }
+
 /* --- Utility Classes --- base.css */
 .text-center {
     text-align: center;

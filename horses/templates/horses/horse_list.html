@@ -6,8 +6,17 @@
 
 {% block content %}
 <div class="custom-container">
-    <h1 class="custom-page-title">Horses</h1>
+    <h1 class="custom-page-title">Our Horses</h1>
+    <div class="header-subtext">
+        <span>Click a horse's name to view or edit their profile</span>
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="text-end mb-3">
+        <a href="{% url 'horses:add_horse' %}" class="btn btn-primary add-horse-btn">+ Add Horse</a>
+    </div>
+    {% endif %}
 
+    
     <div class="horse-list-container">
         {% for horse in horses %}
             <div class="horse-profile-card">

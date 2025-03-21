@@ -11,6 +11,7 @@ class HorseProfile(models.Model):
     staff = models.ManyToManyField(User, related_name='horse_staff')
     barn_manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='horse_barn_manager')
     rider = models.ForeignKey(User, on_delete=models.CASCADE, related_name='horse_rider')
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} ({self.breed}) - {self.gender} ({self.age})"

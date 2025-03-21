@@ -14,6 +14,16 @@ class HorseProfileAdmin(admin.ModelAdmin):
     form = HorseProfileAdminForm 
     raw_id_fields = ('owner', 'barn_manager', 'rider')
     filter_horizontal = ('staff',)
+    list_display = ('name', 'owner', 'approved')
+    list_filter = ('approved',)
+    
+    actions = ['approve_selected_horses']
+
+    def approve_selected_horses(self, request, queryset):
+        updated = queryset.update(approved=True)
+        self.message_user(request, f"{updated} horse(s) approved.")
+    approve_selected_horses.short_description = "Approve selected horses"
+    
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         """
         Override this method to prevent the "+" button from appearing.
@@ -23,4 +33,5 @@ class HorseProfileAdmin(admin.ModelAdmin):
                 attrs={'style': 'width:300px'}  
             ))
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 admin.site.register(HorseProfile, HorseProfileAdmin)

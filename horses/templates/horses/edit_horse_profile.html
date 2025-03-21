@@ -6,9 +6,19 @@
 
 {% block content %}
 <div class="form-container">
+    {% if messages %}
+    <div class="message-container messages-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} fade-message text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <h1 class="form-title">Edit Horse</h1>
 
-    <form method="POST" enctype="multipart/form-data" action="/horse/edit/{{ horse.id }}/">
+    <form method="POST" enctype="multipart/form-data" action="/horses/edit/{{ horse.id }}/">
         {% csrf_token %}
 
         <!-- Image Upload and Preview -->
@@ -69,55 +79,70 @@
 
 <!-- JS for Deleting Horse -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector(".delete-horse").addEventListener("click", function () {
-        let horseId = this.getAttribute("data-horse-id");
-        let confirmDelete = confirm("Are you sure you want to remove this horse?");
-        if (confirmDelete) {
-            fetch(`/horse/delete/${horseId}/`, {
-                method: "POST",
-                headers: { "X-CSRFToken": "{{ csrf_token }}" }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Horse removed successfully.");
-                    window.location.href = "{% url 'horses:horse_list' %}";
-                } else {
-                    alert("Error: Unable to remove horse.");
+    document.addEventListener("DOMContentLoaded", function () {
+        // Delete horse button
+        const deleteBtn = document.querySelector(".delete-horse");
+        if (deleteBtn) {
+            deleteBtn.addEventListener("click", function () {
+                let horseId = this.getAttribute("data-horse-id");
+                let confirmDelete = confirm("Are you sure you want to remove this horse?");
+                if (confirmDelete) {
+                    fetch(`/horses/delete/${horseId}/`, {
+                        method: "POST",
+                        headers: { "X-CSRFToken": "{{ csrf_token }}" }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Horse removed successfully.");
+                            window.location.href = "{% url 'horses:horse_list' %}";
+                        } else {
+                            alert("Error: Unable to remove horse.");
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
                 }
-            })
-            .catch(error => console.error("Error:", error));
+            });
         }
-    });
-});
-// Function for horse profile image preview
-document.addEventListener("DOMContentLoaded", function () {
-    const imageInput = document.getElementById("imageUpload");
-    const imagePreview = document.getElementById("horseImagePreview");
-    const defaultThumbnail = document.getElementById("defaultThumbnail");
-
-    imageInput.addEventListener("change", function () {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = "block";
-                defaultThumbnail.style.display = "none";
-            };
-            reader.readAsDataURL(file);
+    
+        // Image preview
+        const imageInput = document.getElementById("imageUpload");
+        const imagePreview = document.getElementById("horseImagePreview");
+        const defaultThumbnail = document.getElementById("defaultThumbnail");
+    
+        if (imageInput) {
+            imageInput.addEventListener("change", function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = "block";
+                        defaultThumbnail.style.display = "none";
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
         }
-    });
-
-    // Collapsible Sections
-    document.querySelectorAll(".collapsible-header").forEach(header => {
-        header.addEventListener("click", function () {
-            this.nextElementSibling.classList.toggle("active");
-            this.nextElementSibling.style.display =
-                this.nextElementSibling.style.display === "block" ? "none" : "block";
+    
+        // Collapsible sections
+        document.querySelectorAll(".collapsible-header").forEach(header => {
+            header.addEventListener("click", function () {
+                const content = this.nextElementSibling;
+                content.classList.toggle("active");
+                content.style.display = content.style.display === "block" ? "none" : "block";
+            });
+        });
+    
+        // Success message fade-out
+        const messages = document.querySelectorAll(".fade-message");
+        messages.forEach((msg) => {
+            setTimeout(() => {
+                msg.style.transition = "opacity 0.8s ease";
+                msg.style.opacity = "0";
+                setTimeout(() => msg.remove(), 800); // optional cleanup
+            }, 3000);
         });
     });
-});
-</script>
-{% endblock %}
+    </script>
+{% endblock %}    
