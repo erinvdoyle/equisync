@@ -20,12 +20,18 @@ def submit_ad(request):
         if form.is_valid():
             ad = form.save(commit=False)
             ad.user = request.user  
+            
+            if 'preview' in request.POST:
+                return render(request, 'ads/preview_ad.html', {'ad': ad, 'form': form})
+            
             ad.save()
-            return render(request, 'ads/preview_ad.html', {'ad': ad, 'form': form}) 
+            messages.success(request, "Your ad has been submitted for admin approval")
+            return redirect('community:community_overview')
     else:
         form = AdForm()
 
     return render(request, 'ads/submit_ad.html', {'form': form})
+
 
 
 @login_required
@@ -58,9 +64,9 @@ def edit_ad(request, ad_id=None):
    
 @login_required
 def delete_ad(request, ad_id):
-    ad = get_object_or_404(Ad, id=ad_id, user=request.user)  # Ensure user can only delete their own ads
+    ad = get_object_or_404(Ad, id=ad_id, user=request.user)
     ad.delete()
-    messages.success(request, "Your ad has been successfully deleted.")
+    messages.success(request, "Your ad has been deleted")
     return redirect('community:community_overview')
 
 @login_required
