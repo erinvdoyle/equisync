@@ -2,13 +2,11 @@
 
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'users/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/users.css' %}">
 {% endblock %}
 
 {% block content %}
-
-<!-- index.html content starts here -->
-<!-- Introduction Modal -->
+<!-- Modal -->
 <div id="introModal" class="modal show fade" tabindex="-1" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -17,18 +15,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <!-- <img src="" alt="Equisync Logo" class="img-fluid mb-3" style="max-width: 200px;"> -->
                 <p>
-                    Experienced equestrians know it takes a village to run a successful stable. From barn managers and horse owners to yard staff and riders, organization and effective communication is essential. Equisync serves as your comprehensive stable management application: <br>
-                    <ul>
-                        <li><span class="modal-1">Exercise Tracking:</span> Log and monitor routines to optimize horse performance</li>
-                        <li><span class="modal-2">Activity Management:</span> Keep detailed records for veterinary consultations and event preparations</li>
-                        <li><span class="modal-3">Feeding Routines:</span> Organize and oversee feeding times and dietary needs</li>
-                        <li><span class="modal-4">Appointment Scheduling:</span> Plan and track essential care appointments, including farrier and veterinary visits</li>
-                        <li><span class="modal-5">Community Engagement:</span> Stay connected through announcements, a weekly events calendar, and our mini online marketplace</li>
-                    </ul>
+                    Experienced equestrians know it takes a village to run a successful stable...
                 </p>
-                <p></p>
+                <ul class="text-start mx-auto" style="max-width: 700px;">
+                    <li><strong>Exercise Tracking:</strong> Log and monitor routines to optimize horse performance</li>
+                    <li><strong>Activity Management:</strong> Keep detailed records for veterinary consultations and event preparations</li>
+                    <li><strong>Feeding Routines:</strong> Organize and oversee feeding times and dietary needs</li>
+                    <li><strong>Appointment Scheduling:</strong> Plan and track essential care appointments</li>
+                    <li><strong>Community Engagement:</strong> Stay connected through announcements, a weekly events calendar, and our mini online marketplace</li>
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Enter EquiSync</button>
@@ -36,66 +32,55 @@
         </div>
     </div>
 </div>
-<!-- End of Introduction Modal -->
-<div class="container mt-5">
-    <!-- Welcome Header -->
-    <div class="text-center">
-        <h1>EquiSync</h1>
-        <p class="lead">
-            Streamlined Stable Management for Equestrians
-        </p>
-    </div>
 
-<!-- Bootstrap Carousel -->
-<div id="homeCarousel" class="carousel slide mt-4" data-bs-ride="false" data-bs-interval="false">
+<!-- Heading -->
+<div class="container text-center mt-5">
+    <h1 class="lato-header">EquiSync</h1>
+    <p class="header-subtext">Streamlined Stable Management for Equestrians</p>
+</div>
+
+<!-- Carousel -->
+<div id="homeCarousel" class="carousel slide custom-carousel" data-bs-ride="carousel" data-bs-interval="8000">
     <div class="carousel-inner">
 
         <!-- Slide 1 -->
         <div class="carousel-item active">
-            <div class="carousel-content">
-                <img src="{% static 'images/admin.png' %}" class="carousel-img" alt="Profiles">
-                <div class="carousel-caption">
-                    <h5>Custom Profiles</h5>
-                    <p>Manage user profiles and access permissions to streamline stable operations</p>
-                </div>
+            <img src="{% static 'images/admin.png' %}" class="carousel-img" alt="Profiles">
+            <div class="carousel-caption-static">
+                <h5>Custom Profiles</h5>
+                <p>Manage user profiles and permissions for seamless coordination.</p>
             </div>
         </div>
 
         <!-- Slide 2 -->
         <div class="carousel-item">
-            <div class="carousel-content">
-                <img src="{% static 'images/horse-feed.png' %}" class="carousel-img" alt="Schedules Trackers">
-                <div class="carousel-caption">
-                    <h5>Track Your Horses' Schedules</h5>
-                    <p>Monitor exercise, feeding routines, and appointments.</p>
-                </div>
+            <img src="{% static 'images/admin.png' %}" class="carousel-img" alt="Profiles">
+            <div class="carousel-caption-static">
+                <h5>Feeding & Exercise</h5>
+                <p>Monitor feeding plans and fitness routines with ease.</p>
             </div>
         </div>
 
         <!-- Slide 3 -->
         <div class="carousel-item">
-            <div class="carousel-content">
-                <img src="{% static 'images/show.png' %}" class="carousel-img" alt="Competition Calendar">
-                <div class="carousel-caption">
-                    <h5>Show Schedules</h5>
-                    <p>Track upcoming competitions and events.</p>
-                </div>
+            <img src="{% static 'images/admin.png' %}" class="carousel-img" alt="Profiles">
+            <div class="carousel-caption-static">
+                <h5>Event Calendar</h5>
+                <p>Plan shows, clinics, and essential dates in one place.</p>
             </div>
         </div>
 
         <!-- Slide 4 -->
         <div class="carousel-item">
-            <div class="carousel-content">
-                <img src="{% static 'images/our-community.png' %}" class="carousel-img" alt="Equestrian Community">
-                <div class="carousel-caption">
-                    <h5>Community Page</h5>
-                    <p>Connect with the stable community and post sales, wanted ads, and announcements.</p>
-                </div>
+            <img src="{% static 'images/admin.png' %}" class="carousel-img" alt="Profiles">
+            <div class="carousel-caption-static">
+                <h5>Community & Marketplace</h5>
+                <p>Buy, sell, announce, and connect with your stable circle.</p>
             </div>
         </div>
     </div>
 
-    <!-- Carousel Controls -->
+    <!-- Controls -->
     <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
@@ -105,19 +90,18 @@
         <span class="visually-hidden">Next</span>
     </button>
 
-    <!-- Carousel Indicators -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+    <!-- Indicators (Placed after carousel items & below captions) -->
+    <div class="carousel-indicators fixed-indicators">
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
         <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
         <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="3"></button>
     </div>
 </div>
-
-<!-- index.html content ends here -->
 {% endblock %}
+
 {% block copyright %}
-    Copyright 2025 Erin Doyle
+Copyright 2025 Erin Doyle
 {% endblock %}
 
 <script src="{% static 'js/script.js' %}"></script>
