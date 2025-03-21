@@ -3,6 +3,7 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'competitions/css/competitions.css' %}">
+    <script src="{% static 'competitions/js/competitions.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -10,6 +11,16 @@
     <h2>Scheduled Competitions & Events</h2>
     <span>Click an event to view details and add or remove your horse's attendance. Favorite an event to track it in your dashboard. Add or Edit an event (subject to approval)</span>
 </div>
+
+{% if messages %}
+  <div class="messages-container">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} fade-message">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
 {% if view_type == 'month' %}
     <h3 class="calendar-header">

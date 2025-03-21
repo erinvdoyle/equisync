@@ -12,6 +12,40 @@ html, body {
     max-width: 100%;
 }
 
+a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn) {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn):hover {
+    text-decoration: underline;
+    color: #1a2533;
+    font-weight: bolder;
+}
+
+.messages-container {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: auto;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .fade-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+  }
+  
 /* --- Competitions Events Calendar -------------------------------------------------------------------------------------------------------- */
 .header-container {
     max-width: 1200px;
@@ -639,6 +673,58 @@ html, body {
 .btn-edit-horse:hover {
     background-color: #6c5c6f;
 }
+
+.event-form-container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #fdfdfd;
+    border: 1px solid #e0e0e0;
+}
+
+.event-form-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2e3c50;
+}
+
+.community-btn {
+    background: #af7c87;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.community-btn:hover {
+    background: #905f6e;
+    color: #fff;
+}
+
+.cancel-btn {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 8px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cancel-btn:hover {
+    background-color: #ccc;
+    color: #111;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.1rem rgba(220, 53, 69, 0.25);
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+}
+
 
 /* --- Horse Results Archive --------------------------------------------------------------------------------------------------------------- */
 .results-container, .performance-container {
