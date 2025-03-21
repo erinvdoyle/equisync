@@ -1,34 +1,50 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'competitions/css/competitions.css' %}">
+<script src="{% static 'competitions/js/competitions.js' %}" defer></script>
+{% endblock %}
 
 {% block content %}
-<div class="event-form-container">
-    <h2 class="event-form-title">Add Event</h2>
+<div class="container event-form-container my-4 p-4 rounded shadow-sm bg-light">
+
+    <!-- Page Header -->
+    <h2 class="event-form-title mb-4 text-center">
+        <i class="fas fa-trophy trophy-icon me-2"></i> Add a New Event
+    </h2>
+
     <form method="POST" class="event-form">
         {% csrf_token %}
 
-        <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" name="title" class="form-control form-input" required>
+        <!-- Title -->
+        <div class="form-group mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" id="title" class="form-control" required>
         </div>
 
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" class="form-control form-input"></textarea>
+        <!-- Description -->
+        <div class="form-group mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" rows="3"></textarea>
         </div>
 
-        <div class="form-group">
-            <label for="start_time">Start Time:</label>
-            <input type="datetime-local" name="start_time" class="form-control form-input" required>
+        <!-- Start Time -->
+        <div class="form-group mb-3">
+            <label for="start_time" class="form-label">Start Time</label>
+            <input type="datetime-local" name="start_time" id="start_time" class="form-control" required>
         </div>
 
-        <div class="form-group">
-            <label for="end_time">End Time:</label>
-            <input type="datetime-local" name="end_time" class="form-control form-input" required>
+        <!-- End Time -->
+        <div class="form-group mb-4">
+            <label for="end_time" class="form-label">End Time</label>
+            <input type="datetime-local" name="end_time" id="end_time" class="form-control" required>
         </div>
 
-        <div class="form-buttons">
-            <button type="submit" class="btn btn-primary">Add Event</button>
-            <a href="{% url 'competitions:calendar_view' %}" class="btn btn-secondary">Cancel</a>
+        <!-- Buttons -->
+        <div class="form-buttons d-flex flex-wrap gap-2 justify-content-center">
+            <button type="submit" class="community-btn">Add Event</button>
+            <a href="{% url 'competitions:calendar_view' %}" class="cancel-btn">Cancel</a>
         </div>
     </form>
 </div>

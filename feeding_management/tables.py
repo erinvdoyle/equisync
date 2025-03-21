@@ -9,7 +9,7 @@ class HorseLinkColumn(tables.Column):
         return format_html('<a href="{}">{}</a>', url, value)
 
 class FeedingChartTable(tables.Table):
-    horse = HorseLinkColumn(verbose_name="Horse Name", accessor='horse.name', orderable=False)
+    horse = HorseLinkColumn(verbose_name="Horse", accessor='horse.name', orderable=False)
     breakfast = tables.Column(accessor='get_breakfast_info', verbose_name="Breakfast", orderable=False)
     lunch = tables.Column(accessor='get_lunch_info', verbose_name="Lunch", orderable=False)
     dinner = tables.Column(accessor='get_dinner_info', verbose_name="Dinner", orderable=False)

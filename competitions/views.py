@@ -12,6 +12,7 @@ from horses.models import HorseProfile
 from competitions.utils import create_notifications_for_past_events
 from notifications.models import Notification
 from django.http import JsonResponse
+from django.contrib import messages
 
 def calendar_view(request, year=None, month=None):
     today = timezone.now().date()
@@ -215,6 +216,9 @@ def add_event(request):
             end_time=end_time,
             created_by=request.user
         )
+        
+        messages.success(request, "Your event has been submitted for approval")
+        
         return redirect('competitions:calendar_view')
 
     return render(request, 'competitions/add_event.html')
@@ -269,14 +273,10 @@ def event_detail(request, event_id):
 
 @login_required
 def edit_event(request):
-    """
-    Allows the user to select an event from a dropdown and edit its details.
-    """
     upcoming_events = Event.objects.filter(start_time__gte=timezone.now(), created_by=request.user)
-
     event = None
 
-    event_id = request.GET.get('event_id')
+    event_id = request.POST.get('event_id') or request.GET.get('event_id')
     if event_id:
         event = get_object_or_404(Event, id=event_id, created_by=request.user)
 
@@ -288,6 +288,7 @@ def edit_event(request):
         event.approved = False
         event.save()
 
+        messages.success(request, "Your event has been edited")
         return redirect('competitions:event_detail', event_id=event.id)
 
     context = {
@@ -295,24 +296,6 @@ def edit_event(request):
         'upcoming_events': upcoming_events,
     }
     return render(request, 'competitions/edit_event.html', context)
-
-# @login_required
-# def edit_event(request, event_id):
-#     event = get_object_or_404(Event, id=event_id, created_by=request.user)
-
-#     if request.method == 'POST':
-#         event.title = request.POST.get('title')
-#         event.description = request.POST.get('description')
-#         event.start_time = request.POST.get('start_time')
-#         event.end_time = request.POST.get('end_time')
-#         event.approved = False
-#         event.save()
-#         return redirect('competitions:event_detail', event_id=event.id)
-
-#     context = {
-#         'event': event,
-#     }
-#     return render(request, 'competitions/edit_event.html', context)
 
 def get_event_details(request, event_id):
     event = get_object_or_404(Event, id=event_id)
@@ -329,9 +312,10 @@ def delete_event(request, event_id):
     event = get_object_or_404(Event, id=event_id, created_by=request.user)
     if request.method == 'POST':
         event.delete()
+        messages.success(request, "Your event was deleted")
         return redirect('competitions:calendar_view')
 
-    return render(request, 'competitions/calendar_view')
+    return redirect('competitions:edit_event') 
 
 def events_json(request):
     events = Event.objects.filter(approved=True)

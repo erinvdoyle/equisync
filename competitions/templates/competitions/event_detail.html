@@ -2,9 +2,21 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'competitions/css/competitions.css' %}">
+    <script src="{% static 'competitions/js/competitions.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
+
+{% if messages %}
+  <div class="messages-container">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} fade-message">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
 <div class="event-detail-container">
     <div class="event-details">
         <h2 class="event-title">
@@ -46,7 +58,7 @@
                       <a href="{% url 'horses:horse_profile' event_horse.horse.id %}">{{ event_horse.horse.name }}</a>: 
                       {{ event_horse.class_details }}
                       <!-- Edit and Remove buttons for each horse -->
-                      <a href="{% url 'competitions:edit_event_horse' event_horse.id %}" class="btn btn-edit-horse">Edit Horse</a>
+                      <a href="{% url 'competitions:edit_event_horse' event_horse.id %}" class="btn btn-edit-horse">Edit Results</a>
                       <form class="event-detail-button" method="post" action="{% url 'competitions:remove_event_horse' event_horse.id %}" style="display:inline;" onsubmit="return confirm('Are you sure you want to remove this horse from the event?');">
                           {% csrf_token %}
                           <button type="submit" class="btn">Remove Horse</button>
@@ -84,8 +96,8 @@
                     </div>
                 </div>
 
-                <button type="button" id="addAnotherClass" class="btn">+</button>
-                <button type="submit" class="btn">Add Horse</button>
+                <button type="button" id="addAnotherClass" class="community-btn">+ Add Another Class</button>
+                <button type="submit" class="btn">Submit</button>
             </form>
         </div>
 
@@ -93,27 +105,6 @@
 
 </div>
 
-<script>
-// JavaScript to toggle visibility of the add horse details container
-document.getElementById("toggleAddHorseDetails").addEventListener("click", function() {
-    var container = document.getElementById("addHorseDetailsContainer");
-    container.style.display = (container.style.display === "none") ? "block" : "none";
-});
 
-// JavaScript to add more class detail fields
-document.getElementById("addAnotherClass").addEventListener("click", function() {
-    var classDetailsContainer = document.getElementById("classDetailsContainer");
-    var newClassDiv = document.createElement("div");
-    newClassDiv.classList.add("class-detail-field");
-    
-    newClassDiv.innerHTML = `
-        <label>Class Details:</label>
-        <input type="text" name="class_details[]">
-        <label>Notes:</label>
-        <textarea name="notes[]"></textarea>`;
-    
-    classDetailsContainer.appendChild(newClassDiv);
-});
-</script>
 
 {% endblock %}
