@@ -194,6 +194,7 @@ body {
 .filter-form {
     display: flex;
     align-items: center;
+    margin-top: 8px;
     height: 38px !important;
 }
 
@@ -368,6 +369,56 @@ body {
     margin: 0;
 }
 
+.announcement-card .p-3 {
+    flex: 1;
+}
+
+.announcement-card .comment-link {
+    margin-top: auto !important;
+    font-weight: 500 !important;
+    color: #4CAF50 !important;
+    text-align: left;
+    padding: 0.75rem 1rem;
+}
+
+.announcement-comments {
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.announcement-comments h6 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.announcement-comments ul {
+    padding-left: 0;
+    margin: 0;
+}
+
+.announcement-comments li {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.view-all-comments {
+    display: inline-block;
+    font-size: 0.9rem;
+    margin-top: 8px;
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.announcement-detail-container {
+    max-width: 800px;
+    background-color: #f9f9f9;
+}
+
+.comment-box {
+    background-color: #ffffff;
+}
 
 /* --- Weekly Events Section ----------------------------------------------------------------------------------------------------------------- */
 .calendar-section {
@@ -445,6 +496,7 @@ body {
     border: none;
     border-radius: 5px;
     padding: 8px 12px;
+    margin-right: 8px;
     transition: background 0.3s ease;
 }
 

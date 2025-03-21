@@ -1,15 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block head %}
     <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1>Edit Comment</h1>
-    <form method="post">
+<div class="form-container">
+    <h2 class="form-title">Edit Comment</h2>
+
+    <form method="post" class="styled-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save Changes</button>
+
+        <div class="form-buttons d-flex gap-2">
+            <button type="submit" class="community-btn">Save Changes</button>
+            <a href="{{ comment.content_object.get_absolute_url }}" class="cancel-btn">Cancel</a>
+        </div>
     </form>
-    <a href="{{ comment.content_object.get_absolute_url }}">Cancel</a>
+</div>
 {% endblock %}
