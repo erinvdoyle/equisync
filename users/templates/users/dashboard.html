@@ -366,15 +366,17 @@
                             {% if ads %}
                                 <ul class="list-group">
                                     {% for ad in ads %}
-                                    <li class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
-                                        <div class="flex-grow-1 me-sm-3 w-100">
+                                    <li class="list-group-item d-flex flex-wrap justify-content-between align-items-start">
+                                        <div class="flex-grow-1 me-2">
                                             <a href="{% url 'community:ad_detail' ad.id %}" class="text-decoration-none d-block">
                                                 <strong>{{ ad.get_ad_type_display }}</strong><br>
                                                 <span class="text-muted">{{ ad.description|truncatechars:50 }}</span>
                                             </a>
                                         </div>
-                                        <span class="badge bg-secondary text-nowrap">{{ ad.date_posted|date:"M d, Y" }}</span>
-                                    </li>                                                                       
+                                        <div class="mt-2 mt-sm-0 text-end w-100 w-sm-auto">
+                                            <span class="badge bg-secondary text-nowrap">{{ ad.date_posted|date:"M d, Y" }}</span>
+                                        </div>
+                                    </li>                                                                                            
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -442,11 +444,13 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("resize", function () {
         if (window.innerWidth >= 768) {
             sidebar.classList.remove("sidebar-hidden");
+            sidebar.style.transform = "none";
             caretToggle.style.display = "none";
         } else {
             caretToggle.style.display = "block";
         }
     });
+
 
     // Navbar Toggle Functionality
     const navbarToggler = document.querySelector(".navbar-toggler");

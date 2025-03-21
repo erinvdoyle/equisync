@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none !important;
+    color: #343a40 !important;
+    transition: color 0.3s ease;
+}
+
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -168,20 +174,21 @@ main {
 }
 
 .github-link {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #d8a7b1 !important;
 }
 
 .github-link i {
-    font-size: 24px;
-    color: white;
-    transition: color 0.3s ease;
+    font-size: 24px !important;
+    color: white !important;
+    transition: color 0.3s ease !important;
 }
 
 .github-link i:hover {
-    color: #adb5bd;
+    color: #adb5bd !important;
 }
 
 * --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
