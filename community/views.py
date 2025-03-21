@@ -127,10 +127,13 @@ def get_weekly_events(request, year, month, day):
     for event in community_events:
         event_day = event.date.strftime("%A")
         weekly_events_dict[event_day].append(event)
+        
+    today_day_name = datetime.date.today().strftime('%A')
 
     html = render_to_string('community/weekly_events.html', {
         'weekly_events': weekly_events_dict,
-        'days_of_week': days_of_week
+        'days_of_week': days_of_week,
+        'today_day_name': today_day_name
     })
 
     return JsonResponse({'html': html})

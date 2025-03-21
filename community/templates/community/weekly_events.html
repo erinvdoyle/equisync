@@ -2,17 +2,18 @@
 
 <table class="calendar-table">
     <thead>
-        <tr class="desktop-only">  <!-- Ensures headers only show on large screens -->
+        <tr class="desktop-only">
             {% for day in days_of_week %}
                 <th>{{ day }}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        <tr>  <!-- Single row for all days (Prevents vertical stacking) -->
+        <tr>
             {% for day in days_of_week %}
-                <td data-day="{{ day }}">
-                    <span class="mobile-only">{{ day }}</span> <!-- Mobile-only labels -->
+                {% comment %} Add 'today' class to today's cell {% endcomment %}
+                <td class="{% if day == today_day_name %}highlight-today{% endif %}" data-day="{{ day }}">
+                    <span class="mobile-only">{{ day }}</span>
 
                     {% with events=weekly_events|get_item:day %}
                         {% for event in events %}
@@ -29,3 +30,4 @@
         </tr>
     </tbody>
 </table>
+
