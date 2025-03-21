@@ -55,8 +55,9 @@
           <ul class="attendees-list">
               {% for event_horse in event_horses_data %}
                   <li>
-                      <a href="{% url 'horses:horse_profile' event_horse.horse.id %}">{{ event_horse.horse.name }}</a>: 
-                      {{ event_horse.class_details }}
+                    <a href="{% url 'horses:horse_profile' event_horse.horse.id %}">{{ event_horse.horse.name }}</a>
+                    {{ event_horse.class_details|default:"No class assigned" }}
+                    
                       <!-- Edit and Remove buttons for each horse -->
                       <a href="{% url 'competitions:edit_event_horse' event_horse.id %}" class="btn btn-edit-horse">Edit Results</a>
                       <form class="event-detail-button" method="post" action="{% url 'competitions:remove_event_horse' event_horse.id %}" style="display:inline;" onsubmit="return confirm('Are you sure you want to remove this horse from the event?');">
@@ -72,36 +73,47 @@
   </div>
   
     <!-- Add Horse Section -->
-    <div class="add-horse-buttons">
-        <button id="toggleAddHorseDetails" class="btn">Add Horse</button>
-        <a href="{% url 'competitions:calendar_view' %}" class="btn btn-back">← Back</a>
+<div class="add-horse-section mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button id="toggleAddHorseDetails" class="btn btn-primary">Add Horse</button>
+        <a href="{% url 'competitions:calendar_view' %}" class="btn btn-outline-secondary">← Back</a>
+    </div>
 
-        <div id="addHorseDetailsContainer" style="display: none;" class="add-horse-details-container">
-            <form method="post">
-                {% csrf_token %}
-                <label>Select Horses:</label><br>
-                <select id="horseSelect" name="horses" class="horse-select">
+    <div id="addHorseDetailsContainer" style="display: none;" class="card p-4 shadow-sm">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="horseSelect" class="form-label">Select Horse:</label>
+                <select id="horseSelect" name="horses" class="form-select">
                     {% for horse in user_horses %}
                         <option value="{{ horse.id }}">{{ horse.name }} ({{ horse.breed }})</option>
                     {% endfor %}
                 </select>
+            </div>
 
-                <div id="classDetailsContainer" class="class-details-container">
-                    <!-- Class details field -->
-                    <div class="class-detail-field">
-                        <label>Class Details:</label>
-                        <input type="text" name="class_details[]">
-                        <label>Notes:</label>
-                        <textarea name="notes[]"></textarea>
+            <div id="classDetailsContainer">
+                <!-- Class details field -->
+                <div class="class-detail-field border rounded p-3 mb-3 bg-light">
+                    <div class="mb-2">
+                        <label class="form-label">Class Details:</label>
+                        <input type="text" name="class_details[]" class="form-control" placeholder="Enter class name/details">
+                    </div>
+                    <div>
+                        <label class="form-label">Notes:</label>
+                        <textarea name="notes[]" class="form-control" placeholder="Additional notes..."></textarea>
                     </div>
                 </div>
+            </div>
 
-                <button type="button" id="addAnotherClass" class="community-btn">+ Add Another Class</button>
-                <button type="submit" class="btn">Submit</button>
-            </form>
-        </div>
-
+            <div class="d-flex gap-2 flex-wrap">
+                <button type="button" id="addAnotherClass" class="btn btn-outline-primary">+ Add Another Class</button>
+                <button type="submit" class="btn community-btn">Submit</button>
+            </div>
+        </form>
     </div>
+</div>
+
 
 </div>
 
