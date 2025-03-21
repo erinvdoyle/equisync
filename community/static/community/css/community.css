@@ -38,6 +38,19 @@ body {
     background: #905f6e;
 }
 
+a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn) {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn):hover {
+    text-decoration: underline;
+    color: #1a2533;
+    font-weight: bolder;
+}
+
+
 
 /* --- Page Containers & Section Layout -------------------------------------------------------------------------------------------------------- */
 .container {
@@ -375,8 +388,9 @@ body {
 
 .announcement-card .comment-link {
     margin-top: auto !important;
-    font-weight: 500 !important;
-    color: #4CAF50 !important;
+    font-weight: bolder !important;
+    color: #2c3e50;
+    text-decoration: none;
     text-align: left;
     padding: 0.75rem 1rem;
 }
@@ -407,8 +421,9 @@ body {
     display: inline-block;
     font-size: 0.9rem;
     margin-top: 8px;
-    color: #4CAF50;
+    color: #2c3e50;
     text-decoration: none;
+    font-weight: bolder;
 }
 
 .announcement-detail-container {
@@ -482,6 +497,13 @@ body {
     height: 40px;
     font-size: 1rem;
 }
+
+.highlight-today {
+    background-color: #ffe6ec;
+    border: 2px solid #f9c5d1;
+    border-radius: 6px;
+}
+
 
 /* --- Pagination ----------------------------------------------------------------------------------------------------------------------------- */
 .pagination {
