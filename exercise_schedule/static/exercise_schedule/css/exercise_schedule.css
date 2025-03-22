@@ -18,7 +18,7 @@
 }
 
 .exercise-calendar-container .exercise-table th {
-    background-color: darkslategrey;
+    background-color: #2c3e50;
     color: white;
     padding: 12px;
     text-align: center;
@@ -82,7 +82,7 @@
     color: #4CAF50;
 }
 
-.exercise-calendar-container .modal {
+/* .exercise-calendar-container .modal {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -92,16 +92,16 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-}
+} */
 
-.exercise-calendar-container .modal-content {
+/* .exercise-calendar-container .modal-content {
     background-color: #fff;
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #ddd;
     width: 80%;
     max-width: 500px;
-}
+} */
 
 .exercise-calendar-container .close {
     color: #aaa;
@@ -639,7 +639,7 @@
     max-width: 700px;
     margin: 2rem auto;
     border-radius: 16px;
-    box-shadow: 0 0 20px rgba(238, 93, 121, 0.15); /* Rose pink glow */
+    box-shadow: 0 0 20px rgba(238, 93, 121, 0.15);
 }
 
 .appt-title {
@@ -707,7 +707,7 @@
     padding: 2rem;
     background-color: #fff;
     border-radius: 16px;
-    box-shadow: 0 0 12px rgba(237, 100, 166, 0.25); /* soft rose pink */
+    box-shadow: 0 0 12px rgba(237, 100, 166, 0.25);
     font-family: 'Lato', sans-serif;
 }
 
@@ -789,8 +789,6 @@
     background-color: #c98b98;
 }
 
-/* Chart and Breakdown */
-
 .ex-bd-chart-and-breakdown {
     display: flex;
     flex-wrap: wrap;
@@ -807,6 +805,7 @@
     font-size: 1.25rem;
     text-decoration: underline;
     margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
 .ex-bd-breakdown ul {
@@ -814,8 +813,6 @@
     font-size: 0.95rem;
     line-height: 1.6;
 }
-
-/* Weekly Controls */
 
 .ex-bd-weekly-controls {
     display: flex;
@@ -838,19 +835,12 @@
     background-color: #ececec;
 }
 
-/* Weekly Table */
-
 .ex-bd-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
     margin-top: 1rem;
 }
-
-/* .ex-bd-table thead {
-        background-color: #af7c87;
-        color: white;   
-} */
 
 .ex-bd-table thead tr {
     background-color: #af7c87 !important;
@@ -916,6 +906,194 @@
     background-color: #c98b98;
 }
 
+/* main-ex calendar styles */
+
+.main-ex-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(175, 124, 135, 0.2);
+  }
+  
+  .main-ex-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .main-ex-table thead {
+    background-color: #2c2e3a !important;
+    color: white !important;
+  }
+  
+  .main-ex-legend-wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .main-ex-legend {
+    flex: 1 1 45%;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .main-ex-legend h3 {
+    font-size: 1rem;
+    text-decoration: underline;
+    margin-bottom: 0.5rem;
+  }
+  
+  .main-ex-legend .legend-table td {
+    padding: 2px 6px;
+    font-size: 0.9rem;
+  }
+  
+  .main-ex-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .main-ex-date-input {
+    padding: 6px 10px;
+    border: 2px solid #af7c87;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    color: #333;
+    width: 140px;
+    text-align: center;
+  }
+  
+  .main-ex-btn {
+    padding: 6px 12px !important;
+    background: #af7c87 !important;
+    color: white !important;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .main-ex-btn:hover {
+    background: #905f6e;
+    transform: translateY(-2px);
+  }
+    
+  .main-ex-modal-overlay {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(175, 124, 135, 0.2); /* Soft rose overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.main-ex-modal-content {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'Lato', sans-serif;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.main-ex-modal-title {
+  font-size: 1.6rem;
+  color: #af7c87;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.main-ex-modal-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  padding-top: 0.5rem;
+}
+
+.main-ex-modal-body li,
+.main-ex-modal-body div {
+  padding: 6px 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.main-ex-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.5rem;
+  color: #af7c87;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.main-ex-modal-close:hover {
+  transform: scale(1.2);
+}
+
+.main-ex-modal-body h3,
+.main-ex-modal-body h4 {
+    color: #af7c87;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-ex-horse-name {
+    color: #af7c87 !important;
+    font-weight: 550;
+}
+
+.main-ex-subtext {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #343a40;
+    margin-top: -10px;
+    margin-bottom: 25px;
+    font-family: 'Lato', sans-serif;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+
 /* --- Media Queries ------------------------------------------------------------------------------------------------------------ */
 @media (max-width: 374px) {
     .exercise-calendar-container {
@@ -947,11 +1125,25 @@
         text-align: center;
         max-width: 150px;
     }
+}
 
-    /* #select-week-button {
-        margin: 0 5px 0 0;
-        width: 90%;
-    } */
+@media (max-width: 425px) {
+    .main-ex-container {
+        padding: 1rem;
+    }
+
+    .main-ex-title {
+        font-size: 1.5rem;
+    }
+
+    .main-ex-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-ex-date-input {
+        width: 100%;
+    }
 }
 
 @media (max-width: 433px) {
@@ -1034,10 +1226,6 @@
         background-color: #F0E68C;
     }
 
-    /* .exercise-legend {
-        display: block;
-    } */
-
     .legend-container {
         flex-direction: column;
         align-items: center;
@@ -1073,6 +1261,19 @@
     #prev-week, #next-week {
         display: none;
     }
+
+    .main-ex-legend-wrap {
+        flex-direction: column;
+      }
+    
+      .main-ex-legend {
+        width: 100%;
+      }
+    
+      .main-ex-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 }
 
 @media (min-width: 768px) {
