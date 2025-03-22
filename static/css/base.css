@@ -316,6 +316,39 @@ button.primary:hover {
     transform: scale(1.05);
 }
 
+.alternate-btn {
+    background-color: #fff !important;
+    color: #333 !important;
+    border: 1px solid #444 !important;
+    border-radius: 6px !important;
+    /* padding: 10px 10px !important; */
+    font-weight: 400 !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    width: 100% !important;
+    min-width: 180px !important;
+  }
+  
+  .alternate-btn:hover {
+    background-color: #af7c87 !important;
+    color: #fff !important;
+  }
+
+  .profile-btn {
+    background-color: #af7c87 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 10px 10px !important;
+    transition: background-color 0.3s ease !important;
+    font-weight: 600 !important;
+}
+
+.profile-btn:hover {
+    background-color: #4a3d59 !important;
+}
+
 /*--- User registration forms ----------------------------------------------- */
 .auth-container {
     max-width: 500px;
@@ -323,14 +356,14 @@ button.primary:hover {
     padding: 30px 40px;
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.45);
 }
 
 .auth-container h2.lato-header {
     font-size: 2rem;
     font-family: 'Lato', sans-serif;
     font-weight: 700;
-    color: #5a4e69; /* primary header color */
+    color: #5a4e69;
     text-align: center;
     margin-bottom: 10px;
 }
@@ -339,7 +372,7 @@ button.primary:hover {
     font-family: 'Lato', sans-serif;
     text-align: center;
     font-size: 1rem;
-    color: #6c757d; /* muted subtext */
+    color: #6c757d;
     margin-bottom: 30px;
 }
 
@@ -351,7 +384,7 @@ button.primary:hover {
 }
 
 .auth-container .btn-primary {
-    background-color: #5a4e69; /* primary */
+    background-color: #5a4e69;
     border: none;
     color: #ffffff;
     border-radius: 6px;
@@ -359,7 +392,7 @@ button.primary:hover {
 }
 
 .auth-container .btn-primary:hover {
-    background-color: #4a3d59; /* darker mauve on hover */
+    background-color: #4a3d59;
 }
 
 .auth-container .btn-outline-primary {

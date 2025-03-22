@@ -6,8 +6,21 @@
 {% endblock %}
 
 {% block content %}
-<div class="profile-container">
-  <h2 class="profile-header">{{ profile.user.username }}'s Profile</h2>
+<div class="auth-container profile-form-container">
+  <h1 class="brand-header">EquiSync</h1>
+
+  <h2 class="lato-header">{{ profile.user.username }}'s Profile</h2>
+  <p class="header-subtext">Here's the info you’ve shared with EquiSync</p>
+
+  {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} text-center fade-message">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 
   <ul class="profile-details">
     <li><strong>Role:</strong> {{ profile.get_role_display }}</li>
@@ -15,9 +28,12 @@
     <li><strong>Notes:</strong> {{ profile.notes|default:"No notes provided." }}</li>
   </ul>
 
-  <div class="button-group">
-    <a href="{% url 'edit_profile' %}" class="profile-btn">Edit Profile</a>
-  </div>
+  <div class="button-group mt-4 d-flex flex-column flex-md-row justify-content-center gap-3">
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary w-100">Edit Profile</a>
+    <a href="{% url 'users:dashboard' %}" class="btn btn-primary w-100">Dashboard</a>
+  </div>  
 </div>
 {% endblock %}
+
+
 
