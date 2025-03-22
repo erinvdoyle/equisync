@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% load exercise_tags %}
 {% load static %}
+
 {% block head %}
     <link rel="stylesheet" href="{% static 'exercise_schedule/css/exercise_schedule.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1>{{ horse.name }}'s Exercise Schedule</h1>
-    <span>Exposition goes here</span>
+<div class="ex-bd-container">
+    <h1 class="ex-bd-header">{{ horse.name }}'s Exercise Schedule</h1>
+    <p class="ex-bd-subtext">Select a timespan to view your horse's exercise breakdown</p>
 
-    <div class="controls">
+    <div class="ex-bd-controls">
         <form method="get" id="timeframe-form">
-            <div class="radio-inputs">
+            <div class="ex-bd-radio-inputs">
                 <label>
                     <input type="radio" name="timeframe" value="week" {% if timeframe == 'week' %}checked{% endif %}>
                     <span class="name">Week</span>
@@ -29,7 +31,8 @@
                     <span class="name">Custom</span>
                 </label>
             </div>
-            <div class="date-inputs">
+
+            <div class="ex-bd-date-inputs">
                 <label for="start_date">Start Date:</label>
                 <input type="date" id="start_date" name="start_date" value="{{ start_date|date:'Y-m-d' }}">
                 <label for="end_date">End Date:</label>
@@ -39,33 +42,42 @@
         </form>
     </div>
 
-    <div class="chart-and-breakdown">
+    <div class="ex-bd-chart-and-breakdown">
         <div style="width:400px; height:400px;">
             <canvas id="exerciseChart"></canvas>
         </div>
 
-        <div class="time-breakdown">
-            <h2 style="text-decoration: underline; font-size: 1.5em;">Total Exercise Time</h2>
-            <ul style="font-size: 1em;" id="time-breakdown-minutes">
-                {% for item in exercise_breakdown_minutes %}
-                <li>{{ item.exercise_type }}: {{ item.total_minutes }} minutes ({{ item.total_hours }} hours)</li>
-                {% endfor %}
-            </ul>
+        <div class="ex-bd-breakdown">
+            <div class="ex-card">
+                <h2>Total Exercise Time</h2>
+                <ul id="time-breakdown-minutes">
+                    {% for item in exercise_breakdown_minutes %}
+                    <li>{{ item.exercise_type|pretty_exercise }}: {{ item.total_minutes }} minutes ({{ item.total_hours|format_hours }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
             {% if timeframe != 'day' %}
-            <h2 style="text-decoration: underline; font-size: 1.5em;">Average Exercise Time</h2>
-            <p>In this period, {{ horse.name }} spent an average of:</p>
-            <ul style="font-size: 1em;" id="average-exercise-time">
-                {% for item in average_exercise_time %}
-                <li>{{ item.exercise_type }}: {{ item.average_hours }} hours</li>
-                {% endfor %}
-            </ul>
+            <div class="ex-card">
+                <h2>Average Exercise Time</h2>
+                <p>In this period, {{ horse.name }} spent an average of:</p>
+                <ul id="average-exercise-time">
+                    {% for item in average_exercise_time %}
+                    <li>{{ item.exercise_type|pretty_exercise }}: {{ item.average_hours }} hours</li>
+                    {% endfor %}
+                </ul>
+            </div>
             {% endif %}
         </div>
     </div>
 
-    <div class="weekly-schedule-controls">
-        <button id="prev-week">Previous Week</button>
+    <h2 class="ex-bd-header" style="margin-top: 3rem;">Weekly Exercise Schedule</h2>
+
+    <div class="ex-bd-weekly-controls">
+        <button id="prev-week">
+            <span class="label-full">Previous Week</span>
+            <span class="label-icon">&lt;</span>
+        </button>
         <select id="week-select">
             {% for week in previous_weeks %}
             <option value="{{ week.start_date|date:'Y-m-d' }}" {% if week.start_date == start_week %}selected{% endif %}>
@@ -73,14 +85,15 @@
             </option>
             {% endfor %}
         </select>
-        <button id="next-week">Next Week</button>
+        <button id="next-week">
+            <span class="label-full">Next Week</span>
+            <span class="label-icon">&gt;</span>
+        </button>
         <button id="update-button">Update</button>
     </div>
-    
 
-    <h2>Weekly Exercise Schedule</h2>
-    <table class="table table-bordered">
-        <thead>
+    <table class="ex-bd-table">
+        <thead style="background-color: #fce8f0;">
             <tr>
                 <th>Date</th>
                 <th>Exercise Type</th>

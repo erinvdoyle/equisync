@@ -3,11 +3,34 @@
 {% block head %}
     <link rel="stylesheet" href="{% static 'exercise_schedule/css/exercise_schedule.css' %}">
 {% endblock %}
+
 {% block content %}
-<h2>Add Appointment</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Appointment</button>
-</form>
+<div class="appt-form-container">
+    <h1 class="appt-title">Add an Appointment</h1>
+    <p class="appt-subtext">Fill out the form below to schedule a new appointment for your horse</p>
+
+    <form method="post" class="appt-form">
+        {% csrf_token %}
+
+        <div class="appt-form-grid">
+            {% for field in form.visible_fields %}
+                <div class="appt-form-field">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="appt-button-group">
+            <button type="submit" class="exercise-btn-primary">Save Appointment</button>
+            <a href="{% url 'exercise_schedule:weekly_schedule_view' %}" class="exercise-btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

@@ -11,7 +11,16 @@
     width: 250px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 100;
-    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, padding 0.3s;
+}
+
+.sidebar a {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.sidebar a:hover {
+    color: #f5cfd5 !important;
 }
 
 .sidebar-header h3 {
@@ -64,12 +73,28 @@
     margin-bottom: 10px;
 }
 
-/* --- Caret Toggle --- */
+.sidebar.sidebar-hidden {
+    height: 58px;
+    overflow: hidden;
+    padding: 10px 20px;
+}
+
+.sidebar.sidebar-hidden .sidebar-title,
+.sidebar.sidebar-hidden .sidebar-menu {
+    display: none;
+}
+
+.sidebar.sidebar-hidden .sidebar-welcome {
+    font-size: 24px;
+    text-align: center;
+    margin: 0;
+}
+
 .sidebar-toggle-caret {
+    display: none;
     cursor: pointer;
     text-align: center;
-    font-size: 20px;
-    transition: transform 0.3s ease;
+    font-size: 18px;
 }
 
 /*--- Dashboard section headers ---*/
@@ -79,6 +104,7 @@
     padding: 12px;
     border-radius: 8px;
     text-align: center;
+    font-size: 1.35rem;
 }
 
 #notifications .card-header {
@@ -106,6 +132,19 @@
     color: #343a40 !important;
 }
 
+.unstyled-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: inline-block !important;
+    width: 100% !important;
+}
+
+.unstyled-link:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+
 section {
     background-color: #f7f7f7 !important;
     padding: 15px;
@@ -115,9 +154,17 @@ section {
 }
 
 /* --- Main Content Styles ------------------------------------------------------------------------------------------------------------------- */
+.lato-header {
+    text-align: center;
+    font-weight: bold;
+}
+
+
 .main-content {
-    margin-left: 260px;
+    flex: 1;
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
     transition: margin-left 0.3s;
 }
 
@@ -258,6 +305,332 @@ section {
     }
 }
 
+/* --- Carousel ------------------------------------------------------------------------------------------------------------- */
+.index-header {
+    font-family: 'Lato', sans-serif;
+    font-size: 2.5rem;
+    color: #4c3a3a;
+    margin-bottom: 0.5rem;
+}
 
+.index-subtext {
+    font-size: 1.1rem;
+    color: #6a5d5d;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
 
+.custom-carousel {
+    max-width: 960px;
+    margin: 40px auto;
+    position: relative;
+}
 
+.carousel-img {
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.carousel-caption-static {
+    padding: 20px 15px 10px;
+    text-align: center;
+}
+
+.carousel-caption-static h5 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4c3a3a;
+    margin-bottom: 0.25rem;
+}
+
+.carousel-caption-static p {
+    font-size: 1rem;
+    color: #5a5a5a;
+    margin-bottom: 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #af7c87 !important;
+    /* border-radius: 50% !important;
+    z-index: 10 !important; */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #af7c87 !important;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.carousel-indicators.fixed-indicators {
+    position: relative;
+    margin-top: 10px;
+    justify-content: center;
+    display: flex;
+    gap: 8px;
+}
+
+.carousel-indicators.fixed-indicators button {
+    background-color: #af7c87 !important;
+    width: 16px !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+    border: none !important;
+    opacity: 0.7 !important;
+}
+
+.fixed-indicators .active {
+    background-color: #77656d !important;
+    opacity: 1 !important;
+}
+
+.modal-header h2 {
+    color: #4c3a3a;
+}
+
+.modal-content {
+    border-radius: 12px;
+    border: none;
+}
+
+.modal-title {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+
+/*--- User Profile Syles ---------------------------------------------------------------------------------*/
+.profile-form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.45);
+}
+
+.profile-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #5a4e69;
+    font-family: 'Lato', sans-serif;
+}
+
+.profile-form-container input,
+.profile-form-container textarea,
+.profile-form-container select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.profile-form-container textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.profile-btn {
+    background-color: #af7c87;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+}
+
+.profile-btn:hover {
+    background-color: #4a3d59;
+}
+
+.cancel-btn {
+    border: 1px solid #6c757d;
+    color: #6c757d;
+    background-color: transparent;
+    border-radius: 6px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-outline-dark:hover {
+    background-color: #af7c87 !important;
+}
+
+.btn-outline-primary {
+    color: #2d2d35 !important;
+    border-color: #2d2d35 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #af7c87 !important;
+}
+
+.errorlist {
+  color: #d9534f;
+  font-size: 0.95rem;
+  margin-top: 5px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.messages-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.fade-message {
+  background-color: #fbeff2;
+  color: #5a2a41;
+  padding: 12px 20px;
+  border: 1px solid #f3c6d2;
+  border-radius: 6px;
+  margin: 0 auto 20px;
+  max-width: 500px;
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.fade-out.fade {
+    opacity: 0;
+}
+
+.button-group {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .profile-btn,
+  .cancel-link {
+    background-color: #77656d !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 25px !important;
+    margin: 10px 5px !important;
+    border-radius: 6px !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+    transition: background 0.3s ease !important;
+  }
+  
+  .profile-btn:hover {
+    background-color: #d6bcc5 !important;
+  }
+  
+  .cancel-link {
+    background-color: #e4d0d6;
+    color: #2d2d35;
+    border: 1px solid #ccc;
+  }
+  
+  .cancel-link:hover {
+    background-color: #d6bcc5 !important;
+  }
+
+/*--- Media Queries ---------------------------------------------------------------------------------*/
+@media (max-width: 576px) {
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-btn,
+    .cancel-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 767.99px) {
+    .sidebar-toggle-caret {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-caption-static h5 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-caption-static p {
+        font-size: 0.95rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .main-content-expanded {
+        margin-left: 0;
+    }
+
+    .sidebar {
+        height: 100%;
+    }
+
+    .sidebar-hidden {
+        height: 80px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+
+    .sidebar-hidden .sidebar-menu {
+        display: none;
+    }
+
+    .sidebar-toggle-caret {
+        display: block !important;
+        cursor: pointer;
+        font-size: 22px;
+        margin-top: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-hidden .sidebar-toggle-caret {
+        transform: rotate(180deg);
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        margin-left: 260px;
+        margin-right: 20px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 800px) {
+    .list-group-item a span {
+      font-size: 0.85rem;
+    }
+    .list-group-item a strong {
+      font-size: 0.9rem;
+    }
+  }
