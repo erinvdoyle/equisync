@@ -3,6 +3,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'horses/css/horses.css' %}">
+<script src="{% static 'horses/js/horses.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -56,26 +57,4 @@
     </form>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Collapsible Sections
-        document.querySelectorAll(".collapsible-header").forEach(header => {
-            header.addEventListener("click", function () {
-                const content = this.nextElementSibling;
-                content.classList.toggle("active");
-                content.style.display = content.style.display === "block" ? "none" : "block";
-            });
-        });
-
-        // Fade out messages
-        const messages = document.querySelectorAll(".fade-message");
-        messages.forEach((msg) => {
-            setTimeout(() => {
-                msg.style.transition = "opacity 0.8s ease";
-                msg.style.opacity = "0";
-                setTimeout(() => msg.remove(), 800);
-            }, 3000);
-        });
-    });
-</script>
 {% endblock %}

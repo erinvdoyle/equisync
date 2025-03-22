@@ -9,6 +9,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from notifications.models import Notification
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.db.models import Q
 
 
 User = get_user_model()

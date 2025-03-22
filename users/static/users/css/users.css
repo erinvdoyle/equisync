@@ -104,6 +104,7 @@
     padding: 12px;
     border-radius: 8px;
     text-align: center;
+    font-size: 1.35rem;
 }
 
 #notifications .card-header {
@@ -130,6 +131,19 @@
     background-color: #d8a7b1 !important;
     color: #343a40 !important;
 }
+
+.unstyled-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: inline-block !important;
+    width: 100% !important;
+}
+
+.unstyled-link:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
 
 section {
     background-color: #f7f7f7 !important;
