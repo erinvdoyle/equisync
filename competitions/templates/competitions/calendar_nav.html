@@ -5,18 +5,18 @@
 {% endblock %}
 {% block content %}
 
-<div class="events-calendar-nav" style="display: flex; align-items: center; height: 50px;">
+<div class="events-calendar-nav" style="display: flex; align-items: center; height: 50px; gap: 10px; flex-wrap: wrap;">
     <div style="display: flex; align-items: center;">
         {% if view_type == 'day' %}
-            <a href="{% url 'competitions:day_view' year=prev_year month=prev_month day=prev_day %}" class="nav-button">&lt;</a>
+            <a href="{% url 'competitions:day_view' year=prev_year month=prev_month day=prev_day %}" class="nav-button small-btn">&lt;</a>
         {% elif view_type == 'week' %}
-            <a href="{% url 'competitions:week_view' year=prev_year month=prev_month day=prev_day %}" class="nav-button">&lt;</a>
+            <a href="{% url 'competitions:week_view' year=prev_year month=prev_month day=prev_day %}" class="nav-button small-btn">&lt;</a>
         {% elif view_type == 'month' %}
-            <a href="{% url 'competitions:month_view' year=prev_year month=prev_month %}" class="nav-button">&lt;</a>
+            <a href="{% url 'competitions:month_view' year=prev_year month=prev_month %}" class="nav-button small-btn">&lt;</a>
         {% endif %}
     </div>
 
-    <div class="radio-inputs">
+    <div id="calendar-toggle-view" class="radio-inputs">
         <label class="radio">
             <a href="{% url 'competitions:month_view' year=year month=month %}" class="nav-link">
                 <input type="radio" name="calendar_view" value="month" {% if view_type == 'month' %}checked{% endif %}>
@@ -37,30 +37,32 @@
         </label>
     </div>
 
-    <div style="display: flex; align-items: center;">
+    <div style="display: flex; align-items: center; gap: 5px;">
         {% if view_type == 'day' %}
-            <a href="{% url 'competitions:day_view' year=next_year month=next_month day=next_day %}" class="nav-button">&gt;</a>
+            <a href="{% url 'competitions:day_view' year=next_year month=next_month day=next_day %}" class="nav-button small-btn">&gt;</a>
         {% elif view_type == 'week' %}
-            <a href="{% url 'competitions:week_view' year=next_year month=next_month day=next_day %}" class="nav-button">&gt;</a>
+            <a href="{% url 'competitions:week_view' year=next_year month=next_month day=next_day %}" class="nav-button small-btn">&gt;</a>
         {% elif view_type == 'month' %}
-            <a href="{% url 'competitions:month_view' year=next_year month=next_month %}" class="nav-button">&gt;</a>
+            <a href="{% url 'competitions:month_view' year=next_year month=next_month %}" class="nav-button small-btn">&gt;</a>
         {% endif %}
-        
+
         {% if user.is_authenticated %}
-    <a href="{% url 'competitions:add_event' %}" class="btn btn-primary add-event-btn">Add Event</a>
-{% endif %}
+            <a href="{% url 'competitions:add_event' %}" class="btn btn-primary small-btn">Add Event</a>
+        {% endif %}
 
-{% if user_has_events and user_event %}
-<a href="{% url 'competitions:edit_event' %}" class="btn btn-secondary edit-event-btn">Edit Event</a>
-{% endif %}
+        {% if user_has_events and user_event %}
+            <a href="{% url 'competitions:edit_event' %}" class="btn btn-secondary small-btn">Edit Event</a>
+        {% endif %}
 
-<!-- Search Button (Triggers Overlay) -->
-<button class="btn btn-secondary search-toggle" onclick="toggleSearch()">
-    <i class="fas fa-search"></i>
-</button>
+        <!-- Search Button  -->
+        <button class="btn btn-secondary search-toggle small-btn" onclick="toggleSearch()">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</div>
 
-<!-- Search Overlay (Appears Over Calendar) -->
-<div class="search-overlay">
+<!-- Search Overlay -->
+<div class="search-overlay" style="margin-top: 10px;">
     <!-- Close Button (X) -->
     <button class="close-btn" onclick="closeSearch()">✖</button>
 
@@ -75,19 +77,19 @@
 
 <script>
     function toggleSearch() {
-    let searchOverlay = document.querySelector('.search-overlay');
-    searchOverlay.classList.toggle('active');
+        let searchOverlay = document.querySelector('.search-overlay');
+        searchOverlay.classList.toggle('active');
 
-    // Auto-focus when opened
-    if (searchOverlay.classList.contains('active')) {
-        searchOverlay.querySelector('input').focus();
+        if (searchOverlay.classList.contains('active')) {
+            searchOverlay.querySelector('input').focus();
+        }
     }
-}
 
-// Close overlay when clicking "X"
-function closeSearch() {
-    document.querySelector('.search-overlay').classList.remove('active');
-}
+    function closeSearch() {
+        document.querySelector('.search-overlay').classList.remove('active');
+    }
 </script>
 
 {% endblock %}
+
+
