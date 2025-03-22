@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 {% load exercise_tags %}
 {% load static %}
+
 {% block head %}
-    <link rel="stylesheet" href="{% static 'exercise_schedule/css/exercise_schedule.css' %}">
+<link rel="stylesheet" href="{% static 'exercise_schedule/css/exercise_schedule.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1 class="exercise-heading">Weekly Exercise Schedule</h1>
-
-    
-    
-    <div class="legend-container">
+<div class="main-ex-container">
+    <h1 class="main-ex-title">Weekly Exercise Schedule</h1>
+    <p class="main-ex-subtext">
+        Welcome to your horse's weekly exercise and appointment schedule.
+        Click the green icon for details or your horse's name for a full breakdown
+    </p>
+    <div class="main-ex-legend-wrap">
         <div class="exercise-legend">
             <h3>Exercise Key</h3>
             <table class="legend-table">
@@ -40,7 +43,7 @@
                 </tr>
             </table>
         </div>
-    
+
         <div class="exercise-legend">
             <h3>Appointment Key</h3>
             <table class="legend-table">
@@ -65,17 +68,16 @@
             </table>
         </div>
     </div>
-    
+
     <div class="events-calendar-nav">
         <form method="get" class="search-form">
             <input type="date" id="date" name="date" class="date-input">
-            <button type="submit" class="nav-button" id="select-week-button">Select Week</button>
+            <button type="submit" class="main-ex-btn" id="select-week-button">Select Week</button>
         </form>
-        
+
         <button type="button" id="add-exercise-button" class="nav-button">Add Exercise</button>
-        <a href="{% url 'exercise_schedule:add_appointment' %}" class="nav-button">Add Appointment</a>
+        <a href="{% url 'exercise_schedule:add_appointment' %}" class="main-ex-btn">Add Appointment</a>
     </div>
-    
 
     <div class="exercise-calendar-container">
         <table class="exercise-table">
@@ -83,7 +85,7 @@
                 <tr>
                     <th>Horse</th>
                     {% for day in days_of_week %}
-                        <th class="{{ day|date:'l'|lower }}">{{ day|date:"M d" }}</th>
+                    <th class="{{ day|date:'l'|lower }}">{{ day|date:"M d" }}</th>
                     {% endfor %}
                 </tr>
             </thead>
@@ -91,135 +93,139 @@
                 {% for horse in horses %}
                 <tr>
                     <td>
-                        <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="horse-link">{{ horse.name }}</a>
+                        <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="horse-link main-ex-horse-name">{{ horse.name }}</a>
                     </td>
                     {% for day in days_of_week %}
-                        {% with schedule_data=weekly_schedule|get_item:horse|get_item:day %}
-                        <td 
-                            {% if schedule_data.appointments %}
-                                class="{% get_appointment_classes schedule_data.appointments %}"
-                            {% endif %}
-                        >
+                    {% with schedule_data=weekly_schedule|get_item:horse|get_item:day %}
+                    <td {% if schedule_data.appointments %}class="{% get_appointment_classes schedule_data.appointments %}"{% endif %}>
 
                         {% if schedule_data %}
                         {% if schedule_data.schedules %}
-                            {# Display exercise details if present #}
-                            {% for schedule in schedule_data.schedules %}
-                                {% for item in schedule.schedule_items.all %}
-                                    <div class="exercise-item label-{{ item.exercise_type }}" data-time-category="{{ item.time_category|capfirst }}">
-                                        <span>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span>
-                                    </div>
-                                {% endfor %}
-                            {% endfor %}
+                        {% for schedule in schedule_data.schedules %}
+                        {% for item in schedule.schedule_items.all %}
+                        <div class="exercise-item label-{{ item.exercise_type }}" data-time-category="{{ item.time_category|capfirst }}">
+                            <span>{{ item.get_exercise_type_display }} {{ item.duration }}</span>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
                         {% elif schedule_data.appointments %}
-                            {# If there is no exercise, display appointment type #}
-                            {% for appointment in schedule_data.appointments %}
-                                <span class="appointment-text">{{ appointment.get_appointment_type_display }}</span>
-                            {% endfor %}
+                        {% for appointment in schedule_data.appointments %}
+                        <span class="appointment-text">{{ appointment.get_appointment_type_display }}</span>
+                        {% endfor %}
                         {% endif %}
-                        
-                        {# Display the green icon only if there are exercises or appointments #}
-                        {% if schedule_data.schedules or schedule_data.appointments %}
-                            <div class="details-link" data-schedule-id="{% if schedule_data.schedules %}{{ schedule_data.schedules.0.id }}{% endif %}" data-horse-name="{{ horse.name }}" data-date="{{ day|date:'M d' }}">
-                                <div class="green-icon">      
-                                    <i class="fas fa-info-circle"></i>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% else %}
-                        <span>N/A</span>
-                    {% endif %}
 
-                    
-                        </td>
-                        {% endwith %}
+                        {% if schedule_data.schedules or schedule_data.appointments %}
+                        <div class="details-link" data-schedule-id="{% if schedule_data.schedules %}{{ schedule_data.schedules.0.id }}{% endif %}" data-horse-name="{{ horse.name }}" data-date="{{ day|date:'M d' }}">
+                            <div class="green-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        <span>N/A</span>
+                        {% endif %}
+
+                    </td>
+                    {% endwith %}
                     {% endfor %}
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+</div>
 
     <!-- Modal Structure -->
-    <div id="exerciseModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="exercise-close">&times;</span>
-            <h2 class="modal-title"></h2>
-            <div id="exercise-modal-details"></div>
+    <div id="exerciseModal" class="main-ex-modal-overlay" style="display: none;">
+        <div class="main-ex-modal-content">
+          <span class="main-ex-modal-close">&times;</span>
+          <h2 class="main-ex-modal-title modal-title"></h2>
+          <div id="exercise-modal-details" class="main-ex-modal-body"></div>
         </div>
-    </div>
-
-    <script>
-       document.addEventListener("DOMContentLoaded", function () {
-    const exerciseModal = document.getElementById("exerciseModal");
-    const closeModalButton = document.querySelector(".exercise-close");
-
-    // Function to open the modal
-    function openModal(scheduleId, horseName, date) {
-        document.querySelector("#exerciseModal .modal-title").textContent = `${horseName}'s Schedule, ${date}`;
-        document.getElementById("exercise-modal-details").innerHTML = 'Loading...';
-
-        // Fetch exercise details
-        fetch(`/exercise_schedule/details/${scheduleId}/`)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById("exercise-modal-details").innerHTML = html;
-            })
-            .catch(error => {
-                console.error("Error fetching exercise details:", error);
-            });
-
-        exerciseModal.style.display = 'block';
-    }
-
-    // Event listener for modal close
-    closeModalButton.addEventListener("click", function () {
-        exerciseModal.style.display = 'none';
-    });
-
-    // Event listener to close modal when clicking outside
-    window.addEventListener("click", function (event) {
-        if (event.target == exerciseModal) {
-            exerciseModal.style.display = 'none';
-        }
-    });
-
-    // Add event listeners to all "Details" links
-    document.querySelectorAll(".details-link").forEach(function (link) {
-        link.addEventListener("click", function () {
-            const scheduleId = this.getAttribute("data-schedule-id");
-            const horseName = this.getAttribute("data-horse-name");
-            const date = this.getAttribute("data-date");
-
-            if (scheduleId) {
-                openModal(scheduleId, horseName, date);
-            } else {
-                // Handle case where there is no schedule ID (only appointments)
+      </div>
+      
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modalOverlay = document.getElementById("exerciseModal");
+            const modalClose = document.querySelector(".main-ex-modal-close");
+            const modalTitle = document.querySelector(".modal-title");
+            const modalDetails = document.getElementById("exercise-modal-details");
+    
+            // Open Modal with Exercise or Appointment Info
+            function openModalWithSchedule(scheduleId, horseName, date) {
+                modalTitle.textContent = `${horseName}'s Schedule, ${date}`;
+                modalDetails.innerHTML = 'Loading...';
+    
+                fetch(`/exercise_schedule/details/${scheduleId}/`)
+                    .then(response => response.text())
+                    .then(html => {
+                        modalDetails.innerHTML = html;
+                        modalOverlay.style.display = "flex";
+                    })
+                    .catch(error => {
+                        console.error("Error fetching exercise details:", error);
+                    });
+            }
+    
+            function openModalWithAppointment(horseName, date) {
+                modalTitle.textContent = `${horseName}'s Appointments, ${date}`;
+                modalDetails.innerHTML = 'Loading...';
+    
                 fetch(`/exercise_schedule/appointments/${horseName}/${date}/`)
                     .then(response => response.text())
                     .then(html => {
-                        document.getElementById("exercise-modal-details").innerHTML = html;
-                        document.querySelector("#exerciseModal .modal-title").textContent = `${horseName}'s Appointments, ${date}`;
-                        exerciseModal.style.display = 'block';
+                        modalDetails.innerHTML = html;
+                        modalOverlay.style.display = "flex";
                     })
                     .catch(error => {
                         console.error("Error fetching appointment details:", error);
                     });
             }
+    
+            // Close Modal Events
+            modalClose.addEventListener("click", () => {
+                modalOverlay.style.display = "none";
+            });
+    
+            window.addEventListener("click", event => {
+                if (event.target === modalOverlay) {
+                    modalOverlay.style.display = "none";
+                }
+            });
+    
+            // Click listeners on calendar icons
+            document.querySelectorAll(".details-link").forEach(link => {
+                link.addEventListener("click", function () {
+                    const scheduleId = this.getAttribute("data-schedule-id");
+                    const horseName = this.getAttribute("data-horse-name");
+                    const date = this.getAttribute("data-date");
+    
+                    if (scheduleId) {
+                        openModalWithSchedule(scheduleId, horseName, date);
+                    } else {
+                        openModalWithAppointment(horseName, date);
+                    }
+                });
+            });
+    
+            // Add Exercise Button Redirect
+            const addExerciseBtn = document.getElementById("add-exercise-button");
+            if (addExerciseBtn) {
+                addExerciseBtn.addEventListener("click", function () {
+                    window.location.href = `{% url 'exercise_schedule:daily_schedule_view' %}`;
+                });
+            }
+    
+            // Add Appointment Button Redirect (optional)
+            const addAppointmentBtn = document.getElementById("add-appointment-button");
+            if (addAppointmentBtn) {
+                addAppointmentBtn.addEventListener("click", function () {
+                    window.location.href = "{% url 'exercise_schedule:add_appointment' %}";
+                });
+            }
         });
-    });
-});
-
-            // Add event listener to the "Add Exercise" button
-            document.getElementById("add-exercise-button").addEventListener("click", function () {
-                window.location.href = `{% url 'exercise_schedule:daily_schedule_view' %}`;
-            });
-
-             // Correct add_appointment_button JavaScript
-            document.getElementById("add-appointment-button").addEventListener("click", function () {
-                window.location.href = "{% url 'exercise_schedule:add_appointment' %}";
-            });
     </script>
+    
 {% endblock %}
 
 
