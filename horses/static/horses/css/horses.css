@@ -376,6 +376,16 @@
     /* color: #343a40; */  
 }
 
+.card-img-top {
+    object-fit: cover;
+    object-position: top;
+    height: 150px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+
 /*  Horse Profile Page Styling */
 .horse-profile-container {
     max-width: 900px;
