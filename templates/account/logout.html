@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container text-center">
+    <h1 class="brand-header">EquiSync</h1>
+    <h2 class="lato-header">You've Been Logged Out</h2>
+    <p class="header-subtext">Thanks for using EquiSync. Come back soon!</p>
+
+    <div class="alert alert-success text-center fade-out">
+        You've been logged out successfully.
+    </div>
+
+    <a href="{% url 'account_login' %}" class="btn btn-outline-primary mt-3">Log In Again</a>
+</div>
+
+{% endblock %}
+
+
+

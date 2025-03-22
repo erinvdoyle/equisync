@@ -65,7 +65,6 @@ INSTALLED_APPS = [
     'django_tables2',
     'exercise_schedule',
     'competitions',
-    # 'django_celery_beat',
     'notifications',
     'cloudinary',
     'cloudinary_storage',
@@ -185,3 +184,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_REDIRECT_URL = '/dashboard/'
+
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+LOGIN_URL = 'account_login'
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'EquiSync Support <support@equisync.local>'
