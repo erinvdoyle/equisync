@@ -176,6 +176,16 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     box-shadow: 0 4px 8px rgba(144, 95, 110, 0.4);
 }
 
+.card-img-top {
+    object-fit: cover;
+    object-position: top;
+    height: 150px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+
 /* --- Ads Toolbar ----------------------------------------------------------------------------------------------------------------------- */
 .toolbar {
     display: flex;
