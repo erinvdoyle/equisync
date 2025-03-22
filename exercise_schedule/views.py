@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import JsonResponse
 import logging
+from django.contrib import messages
 
 
 @login_required
@@ -78,6 +79,17 @@ def daily_schedule_view(request, date=None, horse_id=None):
 
 @login_required
 def weekly_schedule_view(request, selected_date=None):
+    from_profile = request.GET.get('from') == 'horse_profile'
+
+    user_horses = HorseProfile.objects.filter(
+        Q(owner=request.user) | Q(staff=request.user) | Q(barn_manager=request.user) | Q(rider=request.user)
+    ).distinct()
+
+    if from_profile:
+        has_any_schedule = ExerciseSchedule.objects.filter(horse__in=user_horses).exists()
+        if not has_any_schedule:
+            messages.success(request, "Register your horse here.")
+
     date_str = request.GET.get('date')
     if date_str:
         try:
@@ -91,10 +103,6 @@ def weekly_schedule_view(request, selected_date=None):
     end_week = start_week + timedelta(days=6)
 
     all_horses = HorseProfile.objects.all()
-    user_horses = HorseProfile.objects.filter(
-        Q(owner=request.user) | Q(staff=request.user) | Q(barn_manager=request.user) | Q(rider=request.user)
-    ).distinct()
-
     weekly_schedule = {}
     days_of_week = [start_week + timedelta(days=i) for i in range(7)]
 
@@ -108,9 +116,12 @@ def weekly_schedule_view(request, selected_date=None):
                 'schedules': schedules if schedules.exists() else None,
                 'appointments': list(appointments)
             }
-            
-    template_name = 'exercise_schedule/weekly_schedule.html' if request.user.is_staff or request.user.has_perm('exercise_schedule.change_exerciseschedule') else 'exercise_schedule/weekly_schedule_readonly.html'
 
+    template_name = (
+        'exercise_schedule/weekly_schedule.html'
+        if request.user.is_staff or request.user.has_perm('exercise_schedule.change_exerciseschedule')
+        else 'exercise_schedule/weekly_schedule_readonly.html'
+    )
 
     context = {
         'weekly_schedule': weekly_schedule,

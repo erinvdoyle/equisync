@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'horses/css/horses.css' %}">
 {% endblock %}
@@ -19,16 +20,19 @@
 
     <h1 class="form-title">Add a New Horse</h1>
 
-    <form method="POST" enctype="multipart/form-data" action="/horses/add/">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <!-- Image Upload and Preview -->
-        <div class="image-preview">
-            <img id="horseImagePreview" class="hidden-preview">
-            <div class="default-thumbnail" id="defaultThumbnail">🐴</div>
+        <!-- Image Preview if Existing -->
+        <div class="form-group image-preview text-center mb-3">
+            {% if form.image.value %}
+                <img src="{{ form.image.value.url }}" class="img-fluid rounded" alt="Horse Preview" style="max-height: 200px;">
+            {% else %}
+                <div class="default-thumbnail" id="defaultThumbnail">🐴</div>
+            {% endif %}
         </div>
 
-        <!-- Collapsible Sections -->
+        <!-- Collapsible Section: Basic Info -->
         <div class="collapsible-section">
             <button type="button" class="collapsible-header">Basic Info</button>
             <div class="collapsible-content">
@@ -43,44 +47,18 @@
                 {% endfor %}
             </div>
         </div>
-        
 
-        <!-- Image Upload -->
-        <div class="form-group">
-            <label for="image">Upload Image</label>
-            <input type="file" name="image" class="form-control" accept="image/*" id="imageUpload">
-        </div>
-
-        <div class="form-actions">
-            <button type="submit" class="btn-primary">Save Horse</button>
-            <a href="{% url 'horses:horse_list' %}" class="btn-secondary">Cancel</a>
+        <!-- Submit Buttons -->
+        <div class="form-actions d-flex flex-column flex-sm-row gap-2 mt-4">
+            <button type="submit" class="btn btn-primary w-100">Save Horse</button>
+            <a href="{% url 'horses:horse_list' %}" class="btn btn-outline-secondary w-100">Cancel</a>
         </div>
     </form>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Image preview
-        const imageInput = document.getElementById("imageUpload");
-        const imagePreview = document.getElementById("horseImagePreview");
-        const defaultThumbnail = document.getElementById("defaultThumbnail");
-    
-        if (imageInput) {
-            imageInput.addEventListener("change", function () {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = "block";
-                        defaultThumbnail.style.display = "none";
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        }
-    
-        // Collapsible sections
+        // Collapsible Sections
         document.querySelectorAll(".collapsible-header").forEach(header => {
             header.addEventListener("click", function () {
                 const content = this.nextElementSibling;
@@ -88,17 +66,16 @@
                 content.style.display = content.style.display === "block" ? "none" : "block";
             });
         });
-    
-        // Success message fade-out
+
+        // Fade out messages
         const messages = document.querySelectorAll(".fade-message");
         messages.forEach((msg) => {
             setTimeout(() => {
                 msg.style.transition = "opacity 0.8s ease";
                 msg.style.opacity = "0";
-                setTimeout(() => msg.remove(), 800); // optional cleanup
+                setTimeout(() => msg.remove(), 800);
             }, 3000);
         });
     });
-    </script>
-    
+</script>
 {% endblock %}

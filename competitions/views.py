@@ -14,36 +14,41 @@ from notifications.models import Notification
 from django.http import JsonResponse
 from django.contrib import messages
 
+
+@login_required
 def calendar_view(request, year=None, month=None):
+    if request.GET.get('from') == 'horse_profile':
+        user_horses = HorseProfile.objects.filter(
+            Q(owner=request.user) | Q(staff=request.user) | Q(barn_manager=request.user) | Q(rider=request.user)
+        ).distinct()
+        has_event_results = EventHorse.objects.filter(horse__in=user_horses).exists()
+        if not has_event_results:
+            messages.success(request, "Register your horse here.")
+
     today = timezone.now().date()
     year = int(year) if year else today.year
     month = int(month) if month else today.month
-    
+
     show_archived = request.GET.get('archived', False) == 'true'
     search_term = request.GET.get('search', '')
 
     if month == 1:
-        prev_year = year - 1
-        prev_month = 12
+        prev_year, prev_month = year - 1, 12
     else:
-        prev_year = year
-        prev_month = month - 1
+        prev_year, prev_month = year, month - 1
 
     if month == 12:
-        next_year = year + 1
-        next_month = 1
+        next_year, next_month = year + 1, 1
     else:
-        next_year = year
-        next_month = month + 1
-    
+        next_year, next_month = year, month + 1
+
+    events = Event.objects.filter(start_time__year=year, start_time__month=month, approved=True, is_archived=False)
     if show_archived:
         events = Event.objects.filter(is_archived=True)
-    else:
-        events = Event.objects.filter(start_time__year=year, start_time__month=month, approved=True, is_archived=False)
 
     if search_term:
         events = events.filter(Q(title__icontains=search_term) | Q(description__icontains=search_term))
-        
+
     paginator = Paginator(events, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -51,7 +56,7 @@ def calendar_view(request, year=None, month=None):
     if request.user.is_authenticated:
         for event in events:
             event.is_favorited = request.user in event.favorited_by.all()
-    
+
     context = {
         'year': year,
         'month': month,
@@ -70,11 +75,9 @@ def calendar_view(request, year=None, month=None):
 
     if request.user.is_authenticated:
         user_event = Event.objects.filter(created_by=request.user).first()
+        context['user_has_events'] = bool(user_event)
         if user_event:
-            context['user_has_events'] = True
             context['user_event'] = user_event
-        else:
-            context['user_has_events'] = False
 
     return render(request, 'competitions/calendar.html', context)
 

@@ -53,33 +53,45 @@
             <p><strong>Primary Rider:</strong> {{ horse.rider.get_full_name|default:horse.rider.username }}</p>
             <p><strong>Last Ridden By:</strong> {{ horse.most_recent_ride.name }}</p>
             <p><strong>Exercise Schedule:</strong> 
-                <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="info-link">View</a>
-            </p>
+                {% if has_exercise_schedule %}
+                  <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="info-link">View</a>
+                {% else %}
+                  <a href="{% url 'exercise_schedule:weekly_schedule_view' %}?from=horse_profile" class="info-link">Register your horse</a>
+                {% endif %}
+              </p>              
         </div>
 
         <div class="horse-info-card">
             <h2>Health & Nutrition</h2>
             <p><strong>Last Cared For By:</strong> {{ horse.most_recent_staff.name }}</p>
             <p><strong>Feeding Chart:</strong> 
-                <a href="{% url 'feeding_management:horse_feeding_chart_readonly' horse.id %}" class="info-link">View</a>
+                {% if horse.feeding_chart %}
+                    <a href="{% url 'feeding_management:horse_feeding_chart_readonly' horse.id %}" class="info-link">View</a>
+                {% else %}
+                    <a href="{% url 'feeding_management:all_horses_feeding' %}?from=horse_profile" class="info-link">Register your horse</a>
+                {% endif %}
             </p>
         </div>
 
         <div class="horse-info-card">
             <h2>Competitions</h2>
             <p><strong>Competition Results:</strong> 
-                <a href="{% url 'competitions:horse_results_archive' horse.id %}" class="info-link">View</a>
+                {% if horse.eventhorse_set.exists %}
+                    <a href="{% url 'competitions:horse_results_archive' horse.id %}" class="info-link">View</a>
+                {% else %}
+                    <a href="{% url 'competitions:calendar_view' %}?from=horse_profile" class="info-link">Register your horse</a>
+                {% endif %}
             </p>
         </div>
     </div>
 
     <!-- Buttons -->
     <div class="horse-action-buttons">
-        <a href="{% url 'horses:edit_horse_profile' horse.id %}
-        " class="btn-primary">Edit Profile</a>
+        <a href="{% url 'horses:edit_horse_profile' horse.id %}" class="btn-primary">Edit Profile</a>
         <a href="{% url 'horses:horse_list' %}" class="btn-secondary">Back</a>
     </div>
 
 </div>
 {% endblock %}
+
 

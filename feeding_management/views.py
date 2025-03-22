@@ -70,6 +70,15 @@ def horse_feeding_chart(request, horse_id):
 
 @login_required
 def all_horses_feeding(request):
+    user_horses = HorseProfile.objects.filter(
+        Q(owner=request.user) | Q(staff=request.user) | Q(barn_manager=request.user) | Q(rider=request.user)
+    ).distinct()
+
+    if request.GET.get('from') == 'horse_profile':
+        has_chart = FeedingChart.objects.filter(horse__in=user_horses).exists()
+        if not has_chart:
+            messages.success(request, "Register your horse here.")
+
     horses = HorseProfile.objects.all()
     table_data = []
     pending_charts = []
