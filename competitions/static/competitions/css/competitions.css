@@ -237,7 +237,7 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 }
 
 
-.search-overlay {
+/* .search-overlay {
     position: absolute;
     top: 100%;
     left: 50%;
@@ -255,9 +255,9 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 
 .search-overlay.active {
     display: block;
-}
+} */
 
-.close-btn {
+/* .close-btn {
     position: absolute;
     top: 5px;
     right: 10px;
@@ -270,7 +270,7 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 
 .close-btn:hover {
     color: #af7c87;
-}
+} */
 
 .search-form {
     display: flex;
@@ -307,6 +307,7 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 65px;
 }
 
 .search-form button[type="submit"]:hover {
@@ -551,6 +552,10 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     align-items: center;
     justify-content: space-between;
     font-size: 15px;
+}
+
+.attendees-list li a {
+    margin-right: 15px;
 }
 
 .add-horse-title {
@@ -1031,12 +1036,147 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     margin-top: 20px;
 }
 
+/* new calendar styles -- */
+.comp-calendar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-arrow {
+    display: flex;
+    align-items: center;
+}
+
+.nav-btn {
+    padding: 6px 12px;
+    background-color: #af7c87;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #905f6e;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 1rem;
+}
+
+.view-option input[type="radio"] {
+    display: none;
+}
+
+.view-option span {
+    background-color: #eee;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #444;
+    transition: background 0.2s ease;
+}
+
+.view-option input:checked + span,
+.view-option span:hover {
+    background-color: #af7c87;
+    color: white;
+}
+
+.comp-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.small-btn {
+    padding: 4px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-left: 6px;
+    height: 32px;
+  }
+  
+  .search-toggle.small-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-overlay {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 999;
+  }
+  
+  .search-overlay.active {
+    display: block;
+  }
+  
+  .search-form input[type="text"] {
+    width: 80%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .search-form button {
+    background-color: #af7c87;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+  }
+  
+  .search-form button:hover {
+    background-color: #905f6e;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    float: right;
+    cursor: pointer;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------- */
 @media (min-width: 1200px) {
     .header-container, .calendar-navigation, .custom-calendar-container {
         max-width: 1200px;
     }
 }
+
+@media (max-width: 443px) {
+    #calendar-toggle-view {
+        display: none;
+      }
+  }
+  
 
 @media (max-width: 768px) {
     .calendar-table {
@@ -1100,30 +1240,41 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
         justify-content: center;
     }
 
-    .search-overlay {
-        width: 90%;
-        left: 5%;
-        right: 5%;
-        max-width: 280px;
-    }
-    
-    .search-form input[type="text"] {
-        width: 100%;
-    }
-    
-    .search-form {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+    .events-calendar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    z-index: 2;
+    position: relative;
+    background-color: #fff;
+    padding: 10px 0;
+    border-radius: 6px;
+  }
 
-    .search-form button[type="submit"] {
-        width: 100%;
-        margin-top: 5px;
-    }
+  .events-calendar-nav .nav-button,
+  .events-calendar-nav .btn,
+  .events-calendar-nav .search-toggle {
+    width: 100%;
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
 
-    .search-overlay .close-btn {
-        font-size: 18px;
-    }
+  .search-overlay {
+    top: 100%;
+    width: 100%;
+    left: 0;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .search-form input {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .search-form button {
+    width: 100%;
+  }
 
     .month-view .event-text {
         display: none;
