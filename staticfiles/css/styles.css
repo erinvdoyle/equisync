@@ -1,15 +1,82 @@
-
-/* .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+/* --- General Styles ------------------------------------------------------------------------------------------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-} */
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    background-color: #f4f1eb;
+    color: #4a4a4a;
+}
 
-/* --- Ads and Announcement Sections -- community.css---------------------------------------------------------------------------------------------------- */
+h1, h2 {
+    color: #6a3e26;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.section-wrapper {
+    background-color: #fff6e5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    width: 80%;
+}
+
+
+.section-header {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* --- Form Styles ----------------------------------------------------------------------------------------------------------------------- */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #4a4a4a;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d4d4d4;
+    border-radius: 6px;
+}
+
+form button {
+    background-color: #6a3e26;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #905133;
+}
+
+/* --- Ads and Announcement Sections ------------------------------------------------------------------------------------------------------ */
 /*--- Ad Section Toolbar--------------------------------------------------------------------------------------------------------------------*/
 
 /* .toolbar {
@@ -73,9 +140,9 @@
     display: flex;
     align-items: center;
     margin-top: 15px !important;
-}
+} */
 
-.search-field::placeholder {
+/* .search-field::placeholder {
     font-size: 14px;
     color: #6a3e26;
 }
@@ -178,9 +245,49 @@
     color: #905133;
 } */
 
-/** base.css --------------------------------------------------------------------------------------------------------------------------**/
+/* --- Card Styling ------------------------------------------------------------------------------------------------------------------------ */
+/* .ad-card, .announcement-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
-/* .card-title {
+.ad-card:hover, .announcement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ad-card img, .announcement-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+
+.ad-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+}
+
+.ad-label.for-sale {
+    background-color: green;
+}
+
+.ad-label.wanted {
+    background-color: red;
+} */
+
+
+.card-title {
     font-size: 1.2rem;
     font-weight: bold;
     color: #6a3e26;
@@ -208,10 +315,10 @@
 
 .card-btn:hover {
     background-color: #905133;
-} */ */
+}
 
-/* --- Modal Styling --- base.css---------------------------------------------------------------------------------------------------------- */
-/* .modal {
+/* --- Modal Styling ------------------------------------------------------------------------------------------------------------- */
+.modal {
     display: none;
     position: fixed;
     z-index: 1050;
@@ -306,33 +413,10 @@
 .modal-5 {
     color:rgb(129, 51, 51);
     font-weight: bold;
-} */
-
-/* --- Emoji ---- community.css------------------------------------------------------------------------------------------------------------ */
-/* .emoji-btn {
-    background-color: #f1f1f1;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    color: black;
 }
 
-.emoji-btn:hover {
-    background-color: #ddd;
-}
-
-.emoji-btn.active {
-    background-color: #32bacf;
-    color: white;
-}
-
-.emoji-btn:focus {
-    outline: none;
-} */
-
-
-/* --- Carousel ----------users.css--------------------------------------------------------------------------------------------------- */
-/* #homeCarousel {
+/* --- Carousel ------------------------------------------------------------------------------------------------------------- */
+#homeCarousel {
     width: 80%; 
     max-width: 1440px; 
     min-width: 320px; 
@@ -366,11 +450,11 @@
 
 .carousel-caption {
     margin-top: 15px;
-    position: relative; */
+    position: relative;
     /* bottom: 40px; */
-    /* left: 0; */
+    left: 0;
     /* transform: translateX(-50%); */
-    /* width: 100%;
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -390,10 +474,10 @@
 .carousel-caption p,
 .carousel-caption h5 {
     max-width: 100%;  
-} */
+}
 
 /* --- Controls ------------------------------------------------------------------------------------- */
-/* .carousel-control-prev,
+.carousel-control-prev,
 .carousel-control-next {
     position: absolute;
     width: auto;
@@ -419,11 +503,11 @@
 .carousel-control-next {
     right: -80px;
 }
- */
+
 
 
 /* --- Indicators ----------------------------------------------------------------------------------- */
-/* .carousel-indicators {
+.carousel-indicators {
     position: absolute;
     bottom: -50px; 
     left: 35%;
@@ -444,10 +528,10 @@
 
 .carousel-indicators .active {
     background-color: #905133; 
-} */
+}
 
 
-/* --- Collapse Section (For Read More) ---community.css---------------------------------------------------------------------------------------- */
+/* --- Collapse Section (For Read More) ------------------------------------------------------------------------------------------- */
 /* .announcement-collapse {
     margin-top: 10px;
     background-color: #f9f9f9;
@@ -462,7 +546,7 @@
 .announcement-collapse.show {
     display: block;
     opacity: 1;
-}
+} */
 
 /* --- Animation for Smooth Expanding --------------------------------------------------------------------------------------------- */
 /* .announcement-collapse.collapsing {
@@ -471,8 +555,8 @@
     transition: opacity 0.3s ease, height 0.3s ease-in-out;
 } */
 
-/* --- Weekly Events Section ----------community.css--------------------------------------------------------------------------------------------------------*/
-/* .calendar-section {
+/* --- Weekly Events Section ------------------------------------------------------------------------------------------------------------------*/
+.calendar-section {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -504,18 +588,12 @@
 
 .event-link:hover {
     text-decoration: underline;
-} */
+}
 
-/* --- Gradient Navbar ---------users.css------------------------------------------------------------------------------------------------------------- */
-/* .navbar-gradient {
-    background: linear-gradient(to right, 
-        #343a40 350px,
-        #50555a 500px,
-        #af7c87 700px,
-        #f5cfd5,
-        #fdecef
-    ); 
-    background-size: 100%; 
+/* --- Gradient Navbar ---------------------------------------------------------------------------------------------------------------------- */
+.navbar-gradient {
+    background: linear-gradient(to right, #6a3e26, #905133, #f4a261); 
+    background-size: 200%; 
     background-position: center;
     color: white !important;
     transition: background 0.5s ease-in-out;
@@ -548,83 +626,30 @@
     font-style: italic;
 }
 
-.navbar .container-fluid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 15px;
-}
-
-.navbar-brand {
-    flex: 0 0 250px;
-    text-align: center;
-    white-space: nowrap;
-    padding: 10px 0; 
-}
-
-.navbar-collapse {
-    flex-grow: 1;
-}
-
-.badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 12px;
-    border-radius: 50%;
-    padding: 5px 8px;
-} */
-
 /* --- Footer Styles ---------------------------------------------------------------------------------------------------------------------- */
-/* --- Footer design credit: https://codepen.io/mkmllr/details/YmVeEP ---*/
-
-/* main {
-    flex: 1;
-}
-
 .footer {
-    position: relative;
-    height: 130px;
-    min-height: 130px;
-    background: #343a40;
+    background-color: #6a3e26; 
     color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    clip-path: ellipse(100% 80% at 50% 100%);
-    transition: clip-path 0.5s ease-in-out;
-    gap: 5px;
+    padding: 15px 0;
 }
 
-.footer-text {
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    margin: 0;
-    text-align: center;
+.footer p {
+    margin: 5px 0;
+    font-size: 14px;
 }
 
-.github-link {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.github-link i {
-    font-size: 24px;
+.footer i {
+    font-size: 20px;
     color: white;
     transition: color 0.3s ease;
 }
 
-.github-link i:hover {
-    color: #adb5bd;
-} */
+.footer i:hover {
+    color: #f4a261; 
+}
 
-/* --- Typography and Buttons -------base.css----------------------------------------------------------------------------------------------------- */
-/* a {
+/* --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
+a {
     text-decoration: none;
     color: #6a3e26;
     transition: color 0.3s ease;
@@ -646,806 +671,43 @@ button.primary {
 
 button.primary:hover {
     background-color: #e66f00; 
-} */
-
-/* --- Competitions Events Calendar -----------competitions.css--------------------------------------------------------------------------------------------- */
-/* .custom-calendar-container {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.custom-calendar-container .calendar {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.custom-calendar-container .calendar th {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
-.custom-calendar-container .calendar td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-    vertical-align: top;
-    height: 100px;
-}
-
-.custom-calendar-container .calendar .noday {
-    background-color: #f9f9f9;
-}
-
-.custom-calendar-container .calendar .mon,
-.custom-calendar-container .calendar .tue,
-.custom-calendar-container .calendar .wed,
-.custom-calendar-container .calendar .thu,
-.custom-calendar-container .calendar .fri,
-.custom-calendar-container .calendar .sat,
-.custom-calendar-container .calendar .sun {
-    background-color: #fff;
-    color:#4CAF50;
-}
-
-.custom-calendar-container .calendar {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.custom-calendar-container .calendar td {
-    width: 100px;
-    height: 100px;
-    border: 1px solid #ddd;
-    text-align: center;
-    vertical-align: top;
-    overflow: hidden;
-}
-
-.custom-calendar-container .calendar th {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-}
-
-.custom-calendar-container .calendar td .event-link {
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%; 
-}
-
-.events-calendar .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.events-calendar .search-form {
-    display: inline-flex;
-    align-items: center;
-    box-shadow: none;
-    padding: 0;
-    background-color: transparent;
-}
-
-.events-calendar .search-form input[type="text"] {
-    padding: 5px;
-    width: 50px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 5px;
-}
-
-.events-calendar .search-form button {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0;
-}
-
-.events-calendar .search-form button i {
-    font-size: 14px;
-} */
-
-
-/* --- Calendar Navigation ----------------competitions.css----------------------------------------------------------------------------------------------- */
-/* .events-calendar-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 50px;
-    margin-bottom: 10px;
-}
-.events-calendar-nav .nav-button {
-    padding: 8px 12px; 
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-decoration: none;
-    margin: 0 5px;
-    cursor: pointer;
-    font-size: 14px;
-    display: inline-block;
-    line-height: 1;
-}
-
-.events-calendar-nav .nav-button:hover {
-    background-color: #ddd;
-}
-
-.events-calendar-nav .search-form {
-    display: flex;
-    align-items: center;
-    box-shadow: none;
-    padding: 0;
-    background-color: transparent;
-}
-
-.events-calendar-nav .search-form input[type="text"] {
-    padding: 8px;
-    width: 80px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 5px;
-    font-size: 14px;
-    height: 34px;
-}
-
-.events-calendar-nav .search-form button {
-    padding: 8px 12px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0;
-    height: 34px;
-}
-
-.events-calendar-nav .search-form button i {
-    font-size: 14px;
-}
-
-.radio-inputs .radio a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    padding: 0;
-} */
-
-/* --- Radio Buttons -------------------base.css--------------------------------------------------------------------------------------------------- */
-/* Code Inspired by Uiverse.io, Yaya12085 */
-/* .radio-inputs {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    border-radius: 0.5rem;
-    background-color: #EEE;
-    box-sizing: border-box;
-    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
-    padding: 1px;
-    width: 200px;
-    font-size: 14px;
-  }
-
-  .radio-inputs .radio {
-    flex: 1 1 auto;
-    text-align: center;
-  }
-
-  .radio-inputs .radio input {
-    display: none;
-  }
-
-  .radio-inputs .radio .name {
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
-    border: none;
-    padding: .5rem 0;
-    color: rgba(51, 65, 85, 1);
-    transition: all .15s ease-in-out;
-  }
-
-  .radio-inputs .radio input:checked + .name {
-    background-color: #fff;
-    font-weight: 600;
-  } */
-
-/* --- Event Details Section -------------------competitions.css-------------------------------------------------------------------------------------------- */
-/* .event-detail-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.event-details {
-    border-bottom: 2px solid #4CAF50;
-    padding-bottom: 20px;
-}
-
-.event-title {
-    font-size: 24px;
-}
-
-.action-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.attendees-section {
-    border-top: 2px solid #4CAF50;
-    padding-top: 20px;
-}
-
-.add-horse-title {
-    margin-top: 30px;
-}
-
-.add-horse-details-container {
-    border-top: 2px solid #ddd;
-    padding-top: 20px;
-}
-
-.class-detail-field {
-   margin-bottom: 10px;
-}
-
-.horse-select {
-   width: 100%;
-   padding: 8px;
-   margin-bottom: 10px;
-}
-
-.event-detail-button {
-    padding: 0%;
-} */
-
-/* --- Performance Rating ----------------competitions.css--------------------------------------------------------------------------------------------------- */
-/* .rating > label {
-    margin-right: 4px;
-}
-  
-.rating:not(:checked) > input {
-    display: none;
-}
-  
-.rating:not(:checked) > label {
-    float: right;
-    cursor: pointer;
-    font-size: 30px;
-}
-  
-.rating:not(:checked) > label > svg {
-    fill: #666;
-    transition: fill 0.3s ease;
-}
-  
-.rating > input:checked ~ label > svg {
-    fill: #ffa723;
-}
-  
-.rating:not(:checked) > label:hover ~ label > svg,
-.rating:not(:checked) > label:hover > svg {
-    fill: #ff9e0b;
-}
-  
-#star1:hover ~ label > svg,
-#star1:hover > svg {
-    fill: #a23c3c !important;
-}
-  
-#star2:hover ~ label > svg,
-#star2:hover > svg {
-    fill: #99542d !important;
-}
-  
-#star3:hover ~ label > svg,
-#star3:hover > svg {
-    fill: #9f7e18 !important;
-}
-  
-#star4:hover ~ label > svg,
-#star4:hover > svg {
-    fill: #22885e !important;
-}
-  
-#star5:hover ~ label > svg,
-#star5:hover > svg {
-    fill: #7951ac !important;
-}
-  
-#star1:checked ~ label > svg {
-    fill: #ef4444;
-}
-  
-#star2:checked ~ label > svg {
-    fill: #e06c2b;
-}
-  
-#star3:checked ~ label > svg {
-    fill: #eab308;
-}
-  
-#star4:checked ~ label > svg {
-    fill: #19c37d;
-}
-  
-#star5:checked ~ label > svg {
-    fill: #ab68ff;
-} */
-
-/* --- Dashboard Page ---------------------users.css------------------------------------------------------------------------------------------------- */
-/* .dashboard-section {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.dashboard-section h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.dashboard-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.dashboard-section li {
-    margin-bottom: 5px;
-}
-
-.notification-bell {
-    font-size: 1.25 rem;
-    color: red;
-    animation: glow 1s infinite alternate;
-}
-
-@keyframes glow {
-    0% {
-        text-shadow: 0 0 5px red;
-    }
-    100% {
-        text-shadow: 0 0 1.5px red;
-    }
-} */
-
-/* --- Performance Rating Stars ------------------------competitions.css------------------------------------------------------------------------------------ */
-/* .star-1 {
-    fill: #ef4444;
-}
-.star-2 {
-    fill: #e06c2b;
-}
-.star-3 {
-    fill: #eab308;
-}
-.star-4 {
-    fill: #19c37d;
-}
-.star-5 {
-    fill: #ab68ff;
-}
-.star-empty {
-    fill: #d1d5db;
-} */
-
-/* --- Results Performance Tracking ----------------competitions.css------------------------------------------------------------------------------------------------------ */
-/* #performanceChart {
-    width: 100%;
-    height: 400px;
-}
-
-.chart-filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.filter-group {
-    display: flex;
-    gap: 10px;
-} */
-
-/* --- Exercise Schedule Table ---------------exercise_schedule.css--------------------------------------------------------------------------------------------- */
-/* .exercise-calendar-container {
-    width: 100%;
-    margin-bottom: 20px;
-    overflow-x: auto;
-}
-
-.exercise-calendar-container .exercise-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-.exercise-calendar-container .exercise-table th {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
-.exercise-calendar-container .exercise-table td {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: left;
-    vertical-align: top;
-    height: 100px;
-    width: 150px;
-    overflow: hidden;
-    font-size: 16px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    position: relative;
-}
-
-.green-icon {
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 16px;
-    color: #19c37d;
-    cursor: pointer;
-}
-
-.exercise-calendar-container .exercise-table td:hover {
-    overflow: visible;
-    white-space: normal;
-    text-overflow: clip;
-}
-
-.exercise-calendar-container .exercise-table .noday {
-    background-color: #f9f9f9;
-}
-
-.exercise-calendar-container .exercise-table .mon,
-.exercise-calendar-container .exercise-table .tue,
-.exercise-calendar-container .exercise-table .wed,
-.exercise-calendar-container .exercise-table .thu,
-.exercise-calendar-container .exercise-table .fri,
-.exercise-calendar-container .exercise-table .sat,
-.exercise-calendar-container .exercise-table .sun {
-    background-color: #fff;
-    color: #4CAF50;
-}
-
-.exercise-calendar-container .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.exercise-calendar-container .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    width: 80%;
-    max-width: 500px;
-}
-
-.exercise-calendar-container .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.exercise-calendar-container .close:hover,
-.exercise-calendar-container .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.exercise-heading {
-    text-align: center;
-}
-
-#select-week-button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    height: 34px;
-    margin: 0 5px;
-    display: inline-block;
-    line-height: 1;
-}
-
-#select-week-button:hover {
-    background-color: #45a049;
-} */
-
- /* --- Background colors for exercise labels --------------exercise_schedule.css-----------------------------------------------------------------------------------*/
- /* .exercise-calendar-container .exercise-table .label-walker {
-    background-color: #FFCCCB;
-}
-
-.exercise-calendar-container .exercise-table .label-lunge {
-    background-color: #FFFACD;
-}
-
-.exercise-calendar-container .exercise-table .label-hand_walk {
-    background-color: #E0FFFF;
-}
-
-.exercise-calendar-container .exercise-table .label-graze {
-    background-color: #D3D3D3;
-}
-
-.exercise-calendar-container .exercise-table .label-turnout {
-    background-color: #98FB98;
-}
-
-.exercise-calendar-container .exercise-table .label-ride {
-    background-color: #ADD8E6;
-}
-
-.exercise-calendar-container .exercise-table .label-groundwork {
-    background-color: #FFB6C1;
-}
-
-.exercise-calendar-container .exercise-table .label-other {
-    background-color: #F0E68C;
-} */
-
-/* --- Legend Styles -------------------------------------exercise_schedule.css-------------------------------------------------------------------------------------*/
-/* .legend-container {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-}
-
-.exercise-legend {
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-}
-
-.exercise-legend h3 {
-    font-size: 12px;
-    margin-bottom: 5px;
-    text-decoration: underline;
-    text-align: center;
-}
-
-.legend-table {
-    border-collapse: collapse;
-    width: auto;
-    margin: 0 auto;
-}
-
-.legend-table td {
-    padding: 2px;
-    vertical-align: middle;
-}
-
-.legend-box {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-}
-
-.legend-box.walker {
-    background-color: #FFCCCB;
-}
-
-.legend-box.lunge {
-    background-color: #FFFACD;
 }
-
-.legend-box.hand_walk {
-    background-color: #E0FFFF;
-}
-
-.legend-box.graze {
-    background-color: #D3D3D3;
-}
-
-.legend-box.turnout {
-    background-color: #98FB98;
-}
-
-.legend-box.ride {
-    background-color: #ADD8E6;
-}
-
-.legend-box.groundwork {
-    background-color: #FFB6C1;
-}
-
-.legend-box.other {
-    background-color: #F0E68C;
-} */
-
-/* --- Exercise Form Styles ---------------exercise_schedule.css----------------------------------------------------------------------------- */
-/* .exercise-form-container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.exercise-form-container h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.exercise-form-container label {
-    font-size: 14px;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.exercise-form-container input[type="text"],
-.exercise-form-container input[type="date"],
-.exercise-form-container select,
-.exercise-form-container textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-.exercise-form-container button[type="submit"],
-.exercise-form-container .exercise-btn {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 20px;
-}
-
-.exercise-form-container button[type="submit"]:hover,
-.exercise-form-container .exercise-btn:hover {
-    background-color: #45a049;
-}
-
-.exercise-form-container .exercise-item {
-    margin-bottom: 20px;
-}
-
-.exercise-form-container .exercise-item h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.exercise-form-container .exercise-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.exercise-form-container .exercise-table th,
-.exercise-form-container .exercise-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.exercise-form-container .exercise-table th {
-    background-color: #f0f0f0;
-}
-
-.exercise-form-container .exercise-btn-secondary,
-.exercise-form-container .exercise-btn-primary {
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-} */
-
-/* --- Horse Exercise Schedule ------------------------exercise_schedule.css------------------------------------------------------------------------------------ */
-/* .chart-and-breakdown {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.weekly-schedule-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.weekly-schedule-controls button {
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    padding: .5rem 1rem;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all .15s ease-in-out;
-}
-
-.weekly-schedule-controls button:hover {
-    background-color: #f0f0f0;
-}
-
-.weekly-schedule-controls select {
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    padding: .5rem;
-    font-size: 14px;
-}
-
-.appointment-legend-box {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    margin-right: 5px;
-}
-
-.appointment-farrier {
-    outline: 3px solid rgba(128, 0, 128, 0.3);
-}
-
-.appointment-vet {
-    outline: 2px solid rgba(0, 128, 0, 0.5);
-}
-
-.appointment-physio {
-    outline: 2px solid rgba(255, 255, 0, 0.5);
-}
-
-.appointment-dentist {
-    outline: 2px solid rgba(255, 165, 0, 0.5);
-}
-
-.appointment-other {
-    outline: 2px solid rgba(0, 0, 255, 0.5);
-} */
 
+/* --- Django Tables ---------------------------------------------------------------------------------------------------------------------- */
 
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
 /* --- For Larger Screens (Desktops and Tablets) --------------------------*/
+@media (min-width: 768px) {
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form textarea {
+        width: 66.6666%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .calendar-table th, .calendar-table td {
+        width: 14%;
+    }
+    
+    /* .ads-section .row,
+    .announcements-section .row {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 15px; 
+    }
+
+    .ad-card, .announcement-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    .ad-card img, .announcement-card img  {
+        max-height: 150px;
+        object-fit: cover;
+    } */
+}
 
 @media (min-width: 577px) and (max-width: 768px) {
     /* .ads-section .row,
@@ -1463,18 +725,24 @@ button.primary:hover {
     } */
 }
 
-/* @media (max-width: 480px) {    
-    .feeding-chart-table th,
-    .feeding-chart-table td {
-        font-size: 0.8rem !important;
-        padding: 6px !important;
+@media (max-width: 480px) { 
+    #homeCarousel {
+        height: 250px; 
     }
-} */
+    
+    .carousel-control-prev {
+        left: -15px;
+    }
+    
+    .carousel-control-next {
+        right: -15px;
+    }
+}
 
 @media (max-width: 576px) {
-     /* .row {
+     .row {
         grid-template-columns: repeat(1, 1fr);
-    }  */
+    } 
 
     /* .ad-card, .announcement-card {
         margin-bottom: 15px;
@@ -1492,24 +760,22 @@ button.primary:hover {
 }
 
 @media (max-width: 768px) {
-    /* .horse-header {
-        flex-direction: column;
-        text-align: center;
+    .carousel-item img {
+        max-height: 250px; 
     }
 
-    .horse-image {
-        margin-bottom: 15px;
+    #homeCarousel {
+        height: 300px;
     }
 
-    .horse-info-container {
-        flex-direction: column;
+    .carousel-control-prev {
+        left: -30px;
+    }
+    .carousel-control-next {
+        right: -30px;
     }
 
-    .horse-info-card {
-        width: 100%;
-    } */
-    
-    /* .search-field {
+    .search-field {
         width: 35px !important; 
         padding: 8px 10px; 
         text-indent: -9999px; 
@@ -1536,68 +802,5 @@ button.primary:hover {
 
     .short-text {
         display: inline;
-    } */
-
-    /* .sections-container {
-        flex-direction: column;
-        align-items: center;
     }
-
-    .section-wrapper {
-        width: 90%; */
-    }
-
-    /* .navbar-gradient {
-        background: linear-gradient(to right, 
-            #343a40 250px,
-            #50555a 350px,
-            #d8a7b1 500px,
-            #f5cfd5,
-            #fdecef
-        ); 
-    } */
-
-/* @media (max-width: 767px) {
-    .exercise-form-container {
-        flex-direction: column;
-    }   */
-
-    /* .navbar-brand {
-        flex: 0 0 120px;
-    } */
-
-/* @media (max-width: 600px) { */
-    /* .footer {
-        clip-path: ellipse(180% 100% at 50% 100%);
-    } */
-
-    /* .horse-profile-card {
-     flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .horse-thumbnail {
-        margin-bottom: 10px;
-    }
-    
-     .horse-info {
-        align-items: center;
-    }
-} */
-
-/* @media (max-width: 425px) { */
-    /* .horse-profile-container {
-        margin: -5px;
-    } */
-/* 
-   .navbar-gradient {
-        background: linear-gradient(to right, 
-            #343a40 250px,
-            #50555a 320px,
-            #d8a7b1 420px,
-            #f5cfd5,
-            #fdecef
-        ); 
-     }
- } */
+}

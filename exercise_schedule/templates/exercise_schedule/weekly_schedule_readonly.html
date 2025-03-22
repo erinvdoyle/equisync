@@ -1,88 +1,111 @@
 {% extends "base.html" %}
 {% load exercise_tags %}
 {% load static %}
+
 {% block head %}
-    <link rel="stylesheet" href="{% static 'exercise_schedule/css/exercise_schedule.css' %}">
+<link rel="stylesheet" href="{% static 'exercise_schedule/css/exercise_schedule.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1 class="exercise-heading">Weekly Exercise Schedule</h1>
+<h1 class="exercise-heading">Weekly Exercise Schedule</h1>
 
-    <div class="events-calendar-nav">
-        <form method="get" class="search-form">
-            <label for="date"></label>
-            <input type="date" id="date" name="date" class="date-input" disabled>
-            <button type="submit" class="select-week-button" id="select-week-button" disabled>Select Week</button>
-        </form>
-    </div>
+<!-- Week selector (disabled) -->
+<div class="events-calendar-nav">
+    <form method="get" class="search-form">
+        <input type="date" id="date" name="date" class="date-input" disabled>
+        <button type="submit" class="select-week-button" id="select-week-button" disabled>Select Week</button>
+    </form>
+</div>
 
+<!-- ✅ Add BOTH legends -->
+<div class="legend-container">
     <div class="exercise-legend">
         <h3>Exercise Key</h3>
         <table class="legend-table">
             <tr>
-                <td><span class="legend-box walker"></span></td>
-                <td>Walker</td>
-                <td><span class="legend-box turnout"></span></td>
-                <td>Turnout</td>
+                <td><span class="legend-box walker"></span></td><td>Walker</td>
+                <td><span class="legend-box turnout"></span></td><td>Turnout</td>
             </tr>
             <tr>
-                <td><span class="legend-box lunge"></span></td>
-                <td>Lunge</td>
-                <td><span class="legend-box ride"></span></td>
-                <td>Ride</td>
+                <td><span class="legend-box lunge"></span></td><td>Lunge</td>
+                <td><span class="legend-box ride"></span></td><td>Ride</td>
             </tr>
             <tr>
-                <td><span class="legend-box hand_walk"></span></td>
-                <td>Hand Walk</td>
-                <td><span class="legend-box groundwork"></span></td>
-                <td>Groundwork</td>
+                <td><span class="legend-box hand_walk"></span></td><td>Hand Walk</td>
+                <td><span class="legend-box groundwork"></span></td><td>Groundwork</td>
             </tr>
             <tr>
-                <td><span class="legend-box graze"></span></td>
-                <td>Graze</td>
-                <td><span class="legend-box other"></span></td>
-                <td>Other</td>
+                <td><span class="legend-box graze"></span></td><td>Graze</td>
+                <td><span class="legend-box other"></span></td><td>Other</td>
             </tr>
         </table>
     </div>
 
-    <div class="exercise-calendar-container">
-        <table class="exercise-table">
-            <thead>
-                <tr>
-                    <th>Horse</th>
-                    {% for day in days_of_week %}
-                        <th class="{{ day|date:'l'|lower }}">{{ day|date:"M d" }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for horse in horses %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="horse-link">{{ horse.name }}</a>
-                        </td>
-                        {% for day in days_of_week %}
-                            {% with schedules=weekly_schedule|get_item:horse|get_item:day %}
-                                <td>
-                                    {% if schedules %}
-                                        {% for schedule in schedules %}
-                                            {% for item in schedule.schedule_items.all %}
-                                                <div class="exercise-item label-{{ item.exercise_type }}" data-time-category="{{ item.time_category|capfirst }}">
-                                                    <span>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span>
-                                                </div>
-                                            {% endfor %}
-                                        {% endfor %}
-                                    {% else %}
-                                        <span>N/A</span>
-                                    {% endif %}
-                                </td>
-                            {% endwith %}
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </tbody>
+    <div class="exercise-legend">
+        <h3>Appointment Key</h3>
+        <table class="legend-table">
+            <tr>
+                <td><span class="appointment-legend-box appointment-farrier"></span></td><td>Farrier</td>
+                <td><span class="appointment-legend-box appointment-vet"></span></td><td>Vet</td>
+            </tr>
+            <tr>
+                <td><span class="appointment-legend-box appointment-physio"></span></td><td>Physio</td>
+                <td><span class="appointment-legend-box appointment-dentist"></span></td><td>Dentist</td>
+            </tr>
+            <tr>
+                <td><span class="appointment-legend-box appointment-other"></span></td><td>Other</td>
+                <td></td><td></td>
+            </tr>
         </table>
     </div>
+</div>
+
+<!-- Main calendar -->
+<div class="exercise-calendar-container">
+    <table class="exercise-table">
+        <thead>
+            <tr>
+                <th>Horse</th>
+                {% for day in days_of_week %}
+                    <th class="{{ day|date:'l'|lower }}">{{ day|date:"M d" }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for horse in horses %}
+            <tr>
+                <td>
+                    <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="horse-link">{{ horse.name }}</a>
+                </td>
+                {% for day in days_of_week %}
+                {% with schedule_data=weekly_schedule|get_item:horse|get_item:day %}
+                <td {% if schedule_data.appointments %} class="{% get_appointment_classes schedule_data.appointments %}" {% endif %}>
+                    {% if schedule_data %}
+                        {% if schedule_data.schedules %}
+                            {% for schedule in schedule_data.schedules %}
+                                {% for item in schedule.schedule_items.all %}
+                                    <div class="exercise-item label-{{ item.exercise_type }}" data-time-category="{{ item.time_category|capfirst }}">
+                                        <span>{{ item.get_exercise_type_display }} ({{ item.duration }} mins)</span>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if schedule_data.appointments %}
+                            {% for appointment in schedule_data.appointments %}
+                                <span class="appointment-text">{{ appointment.get_appointment_type_display }}</span><br>
+                            {% endfor %}
+                        {% endif %}
+                    {% else %}
+                        <span>N/A</span>
+                    {% endif %}
+                </td>
+                {% endwith %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
+
 
