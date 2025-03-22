@@ -3,6 +3,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'users/css/users.css' %}">
+    <script src="{% static 'users/js/users.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +16,7 @@
         <div class="sidebar-toggle-caret">
             <i class="fas fa-caret-down"></i>
         </div>
-        <h3 class="sidebar-welcome">Welcome, {{ user.username }}</h3> <!-- Moved below the caret -->
+        <h3 class="sidebar-welcome">Welcome, {{ user.username }}</h3>
     </div>
     <div class="sidebar-menu">
         <ul>
@@ -38,21 +39,31 @@
             <!-- My Horses Section -->
             <section id="my-horses">
                 <h2>Your Horses</h2>
-                <div class="row">
+              
+                {% if horses %}
+                  <div class="row">
                     {% for horse in horses %}
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ horse.name }}</h5>
-                                    <p class="card-text">Breed: {{ horse.breed }} | Age: {{ horse.age }}</p>
-                                    <a href="{% url 'horses:horse_profile' horse.id %}" class="btn btn-outline-dark">View Profile</a>
-                                </div>
-                            </div>
+                      <div class="col-md-4">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ horse.name }}</h5>
+                            <p class="card-text">Breed: {{ horse.breed }} | Age: {{ horse.age }}</p>
+                            <a href="{% url 'horses:horse_profile' horse.id %}" class="btn btn-outline-dark">View Profile</a>
+                          </div>
                         </div>
+                      </div>
                     {% endfor %}
-                </div>
-            </section>
-
+                  </div>
+                {% else %}
+                  <div class="text-center mt-4">
+                    <p class="text-muted mb-3">
+                      You haven’t registered any horses yet. Let’s get started!
+                    </p>
+                    <a href="{% url 'horses:add_horse' %}" class="btn profile-btn">Register Your Horse</a>
+                  </div>
+                {% endif %}
+              </section>
+              
             <!-- Notifications & Appointments Section -->
 <section id="notifications-appointments">
     <div class="row">
@@ -419,152 +430,5 @@
     </div>
 </div>
 </div>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM loaded");
-
-    // Sidebar Functionality
-    const sidebar = document.querySelector(".sidebar");
-    const caretToggle = document.querySelector(".sidebar-toggle-caret");
-
-    function toggleSidebar() {
-        if (window.innerWidth < 768) {
-            sidebar.classList.toggle("sidebar-hidden");
-            caretToggle.style.display = sidebar.classList.contains("sidebar-hidden") ? "block" : "none";
-        }
-    }
-
-    caretToggle.addEventListener("click", function (event) {
-        event.stopPropagation();
-        toggleSidebar();
-    });
-
-    window.addEventListener("resize", function () {
-        if (window.innerWidth >= 768) {
-            sidebar.classList.remove("sidebar-hidden");
-            sidebar.style.transform = "none";
-            caretToggle.style.display = "none";
-        } else {
-            caretToggle.style.display = "block";
-        }
-    });
-
-
-    // Navbar Toggle Functionality
-    const navbarToggler = document.querySelector(".navbar-toggler");
-    const navbarMenu = document.querySelector(".navbar-collapse");
-    const profileDropdown = document.querySelector("#userDropdown");
-    const profileMenu = profileDropdown?.nextElementSibling;
-
-    // Bootstrap Collapse
-    const bsNavbar = new bootstrap.Collapse(navbarMenu, { toggle: false });
-
-    navbarToggler.addEventListener("click", function (event) {
-        event.stopPropagation();
-
-        if (navbarMenu.classList.contains("show")) {
-            bsNavbar.hide();
-        } else {
-            bsNavbar.show();
-        }
-    });
-
-    // Prevent profile dropdown from collapsing navbar
-    profileDropdown?.addEventListener("click", function (event) {
-        event.stopPropagation();
-
-        let isDropdownOpen = profileMenu.classList.contains("show");
-
-        // Close all other dropdowns
-        document.querySelectorAll(".navbar .dropdown-menu.show").forEach(menu => {
-            menu.classList.remove("show");
-        });
-
-        // Toggle the clicked dropdown
-        if (!isDropdownOpen) {
-            profileMenu.classList.add("show");
-        }
-    });
-
-    // Close Navbar and Profile Dropdown When Clicking Outside
-    document.addEventListener("click", function (event) {
-        // Close navbar if clicking outside it
-        if (!navbarMenu.contains(event.target) && !navbarToggler.contains(event.target)) {
-            bsNavbar.hide();
-        }
-
-        // Close profile dropdown if clicking outside
-        if (!profileDropdown.contains(event.target) && !profileMenu.contains(event.target)) {
-            profileMenu.classList.remove("show");
-        }
-    });
-
-    // Fix Profile Dropdown Conflict
-    document.querySelectorAll(".navbar .dropdown-toggle").forEach(function (dropdown) {
-        dropdown.addEventListener("click", function (event) {
-            event.stopPropagation();
-            let dropdownMenu = this.nextElementSibling;
-
-            document.querySelectorAll(".navbar .dropdown-menu.show").forEach(menu => {
-                if (menu !== dropdownMenu) menu.classList.remove("show");
-            });
-
-            dropdownMenu.classList.toggle("show");
-        });
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener("click", function (event) {
-        document.querySelectorAll(".navbar .dropdown-menu.show").forEach(menu => {
-            if (!menu.contains(event.target)) {
-                menu.classList.remove("show");
-            }
-        });
-    });
-});
-
-// Scrolling for sidebar menu
-document.querySelectorAll(".sidebar-menu a").forEach(link => {
-    link.addEventListener("click", function (event) {
-        event.preventDefault();
-        const targetId = this.getAttribute("href").substring(1);
-        document.getElementById(targetId).scrollIntoView({ behavior: "smooth" });
-    });
-});
-
-// Notification Handling
-function markNotificationAsRead(button, type) {
-    const notificationId = button.getAttribute("data-notification-id");
-    fetch(`/notifications/mark-as-read/${notificationId}/`, {
-        method: "POST",
-        headers: { "X-CSRFToken": "{{ csrf_token }}" }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const listItem = document.getElementById(`${type}-notification-${notificationId}`);
-            if (listItem) {
-                listItem.remove();
-            }
-            updateNavbarNotificationBadge();
-        }
-    })
-    .catch(error => console.error("Error:", error));
-}
-
-function updateNavbarNotificationBadge() {
-    const unreadCount = document.querySelectorAll('.notification-bell').length;
-    const badge = document.querySelector('.navbar-nav .badge');
-
-    if (badge) {
-        badge.textContent = unreadCount > 0 ? unreadCount : "";
-        badge.style.display = unreadCount > 0 ? "block" : "none";
-    }
-}
-
-updateNavbarNotificationBadge();
-</script>
         
 {% endblock %} 

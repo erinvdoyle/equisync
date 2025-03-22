@@ -393,105 +393,82 @@ section {
 }
 
 /*--- User Profile Syles ---------------------------------------------------------------------------------*/
-.profile-container,
-.edit-profile-container {
-    max-width: 600px;
-    margin: 40px auto 20px;
-    padding: 20px;
-    border-radius: 8px;
-    border: 4px solid #fdf7f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+.profile-form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.45);
 }
 
-.profile-header {
-    text-align: center;
-    font-size: 1.8rem;
-    color: #2d2d35;
+.profile-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #5a4e69;
+    font-family: 'Lato', sans-serif;
+}
+
+.profile-form-container input,
+.profile-form-container textarea,
+.profile-form-container select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
     margin-bottom: 20px;
 }
 
-.profile-details {
-    list-style: none;
-    padding: 0;
-    font-size: 1.1rem;
-    color: #3a3a3a;
+.profile-form-container textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
-.profile-details li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-  
-.profile-details li:last-child {
-    border-bottom: none;
-}
-
-.profile-container h2,
-.edit-profile-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #2c3e50;
+.profile-btn {
+    background-color: #af7c87;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
 }
 
-.profile-container ul {
-  list-style: none;
-  padding: 0;
-}
-.profile-container li {
-  margin-bottom: 12px;
-  font-size: 1rem;
-  line-height: 1.5;
+.profile-btn:hover {
+    background-color: #4a3d59;
 }
 
-.profile-container a,
-.edit-profile-container a,
-.edit-profile-container button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 1rem;
-  text-decoration: none;
+.cancel-btn {
+    border: 1px solid #6c757d;
+    color: #6c757d;
+    background-color: transparent;
+    border-radius: 6px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.profile-container a,
-.edit-profile-container a {
-  background-color: #2c7be5;
-  color: white;
+.cancel-btn:hover {
+    background-color: #6c757d;
+    color: #fff;
 }
 
-.profile-container a:hover,
-.edit-profile-container a:hover {
-  background-color: #1a5dbb;
+.btn-outline-dark:hover {
+    background-color: #af7c87 !important;
 }
 
-.edit-profile-container a.cancel-link {
-  background: none;
-  color: #2c7be5;
-  margin-left: 10px;
-}
-.edit-profile-container a.cancel-link:hover {
-  text-decoration: underline;
+.btn-outline-primary {
+    color: #2d2d35 !important;
+    border-color: #2d2d35 !important;
 }
 
-.edit-profile-container form {
-  display: flex;
-  flex-direction: column;
-}
-
-.edit-profile-container form p {
-  margin-bottom: 15px;
-}
-
-.edit-profile-container input,
-.edit-profile-container textarea,
-.edit-profile-container select {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.btn-outline-primary:hover {
+    background-color: #af7c87 !important;
 }
 
 .errorlist {
@@ -516,6 +493,15 @@ section {
   margin: 0 auto 20px;
   max-width: 500px;
   transition: opacity 0.5s ease-out;
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.fade-out.fade {
+    opacity: 0;
 }
 
 .button-group {
@@ -551,6 +537,18 @@ section {
   }
 
 /*--- Media Queries ---------------------------------------------------------------------------------*/
+@media (max-width: 576px) {
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-btn,
+    .cancel-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
 
 @media (max-width: 767.99px) {
     .sidebar-toggle-caret {

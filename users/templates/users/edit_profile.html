@@ -6,39 +6,40 @@
 {% endblock %}
 
 {% block content %}
-<div class="profile-container">
+<div class="auth-container profile-form-container">
+  <h1 class="brand-header">EquiSync</h1>
+
+  <h2 class="lato-header">Edit Profile</h2>
+  <p class="header-subtext">Add your contact details and any notes you'd like to share</p>
 
   {% if messages %}
     <div class="messages-container">
       {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} fade-message">{{ message }}</div>
+        <div class="alert alert-{{ message.tags }} text-center fade-message">
+          {{ message }}
+        </div>
       {% endfor %}
     </div>
   {% endif %}
 
-  <h2 class="profile-header">Edit Profile</h2>
-
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <div class="button-group">
-      <button type="submit" class="profile-btn">Save Changes</button>
-      <a href="{% url 'view_profile' %}" class="cancel-link">Cancel</a>
-    </div>
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <div class="text-danger small">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <div class="button-group mt-4 d-flex flex-column flex-md-row justify-content-center gap-3">
+      <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+      <a href="{% url 'view_profile' %}" class="btn btn-primary w-100">Cancel</a>
+    </div>    
   </form>
-
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const messages = document.querySelectorAll(".fade-message");
-    messages.forEach(msg => {
-      setTimeout(() => {
-        msg.style.opacity = "0";
-      }, 3500);
-    });
-  });
-</script>
-
 {% endblock %}
+
 

@@ -37,13 +37,13 @@
         {% endfor %}
 
         <button type="submit" class="btn btn-primary w-100">Log In</button>
-    </form>
+        </form>
 
-    <div class="text-center mt-3 text-muted">
-        <a href="{% url 'account_reset_password' %}">Forgot password?</a><br>
-        <a href="{% url 'account_signup' %}">Need an account? Sign up</a>
-    </div>
-</div>
+        <div class="button-group mt-4 d-flex flex-column flex-md-row justify-content-center gap-3">
+        <a href="{% url 'account_reset_password' %}" class="btn alternate-btn">Forgot Password</a>
+        <a href="{% url 'account_signup' %}" class="btn alternate-btn">Join EquiSync</a>
+        </div>
+
 
 {% endblock %}
 
