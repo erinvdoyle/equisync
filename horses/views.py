@@ -9,13 +9,28 @@ from django.contrib import messages
 from notifications.models import Notification
 from django.contrib.auth.models import User
 from django.contrib.admin.views.decorators import staff_member_required
+import cloudinary
+from feeding_management.models import FeedingChart
+from exercise_schedule.models import ExerciseSchedule
+from competitions.models import EventHorse
 
 
 @login_required
 def horse_profile(request, horse_id):
     horse = get_object_or_404(HorseProfile, id=horse_id)
     profiles = Profile.objects.filter(user=horse.owner)
-    context = {'horse': horse, 'profiles': profiles}
+
+    has_feeding_chart = FeedingChart.objects.filter(horse=horse).exists()
+    has_exercise_schedule = ExerciseSchedule.objects.filter(horse=horse).exists()
+    has_competition_results = EventHorse.objects.filter(horse=horse).exists()
+
+    context = {
+        'horse': horse,
+        'profiles': profiles,
+        'has_feeding_chart': has_feeding_chart,
+        'has_exercise_schedule': has_exercise_schedule,
+        'has_competition_results': has_competition_results,
+    }
     return render(request, 'horses/horse_profile.html', context)
 
 @login_required
@@ -39,8 +54,10 @@ def edit_horse_profile(request, horse_id):
 
 @login_required
 def add_horse(request):
+
     if request.method == 'POST':
         form = HorseForm(request.POST, request.FILES)
+
         if form.is_valid():
             horse = form.save(commit=False)
             horse.owner = request.user
@@ -50,13 +67,16 @@ def add_horse(request):
             form.save_m2m()
             horse.staff.add(request.user)
 
-            messages.success(request, "Your horse has been submitted for admin approval.")
+            messages.success(request, "Your horse has been submitted for admin approval")
             return redirect('horses:horse_profile', horse_id=horse.id)
+        else:
+            print("Form is invalid:")
+            print(form.errors)
+            messages.error(request, "There was an error saving your horse. Please check the form")
     else:
         form = HorseForm()
 
     return render(request, 'horses/add_horse.html', {'form': form})
-
 
 @login_required
 def delete_horse(request, horse_id):
