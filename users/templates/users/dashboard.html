@@ -33,12 +33,14 @@
     <div class="main-content">
         <h1 class="lato-header">Dashboard Navigation</h1>
         <div class="header-subtext">
-            <span>Use the sidebar to navigate to your tailored information</span>
+            <span>Use the sidebar to navigate to your tailored information. Click the section headers to go directly to those pages</span>
         </div>
     
             <!-- My Horses Section -->
             <section id="my-horses">
-                <h2>Your Horses</h2>
+                <a href="{% url 'horses:horse_list' %}" class="text-decoration-none text-reset">
+                    <h2><i class="fas fa-horse"></i>Your Horses</h2>
+                </a>
               
                 {% if horses %}
                   <div class="row">
@@ -73,8 +75,8 @@
         <section id="notifications">
           <div class="card notifications-card h-100">
             <div class="card-header bg-primary text-white text-center">
-              <h5><i class="fas fa-bell"></i> Notifications</h5>
-            </div>
+                <h5><a href="{% url 'notifications_list' %}" class="unstyled-link"><i class="fas fa-bell"></i> Notifications</a></h5>
+            </div>                   
             <div class="card-body" style="max-height: 350px; overflow-y: auto;">
               <!-- Event Notifications Section -->
               <h6 class="text-muted">Event Notifications</h6>
@@ -153,7 +155,7 @@
         <section id="appointments">
           <div class="card appointments-card h-100">
             <div class="card-header bg-primary text-white text-center">
-              <h5><i class="fas fa-calendar-alt"></i> Appointments</h5>
+                <h5><a href="{% url 'exercise_schedule:weekly_schedule_view' %}" class="unstyled-link"><i class="fas fa-calendar-alt"></i> Appointments</a></h5>
             </div>
             <div class="card-body" style="max-height: 400px; overflow-y: auto;">
               <!-- Upcoming Appointments Section -->
@@ -215,7 +217,7 @@
     <!-- Feeding Schedule Card -->
     <div class="card management-card full-width-card">
         <div class="card-header bg-success text-white">
-            <h5><i class="fas fa-utensils"></i> Feeding Schedule</h5>
+            <h5><a href="{% url 'feeding_management:all_horses_feeding' %}" class="unstyled-link"><i class="fas fa-utensils"></i> Feeding Schedule</a></h5>
         </div>
         <div class="card-body">
             {% if feeding_charts %}
@@ -237,7 +239,7 @@
     <!-- Exercise Schedule Card -->
     <div class="card management-card full-width-card">
         <div class="card-header bg-info text-white">
-            <h5><i class="fas fa-dumbbell"></i> Exercise Schedule</h5>
+            <h5><a href="{% url 'exercise_schedule:weekly_schedule_view' %}" class="unstyled-link"><i class="fas fa-dumbbell"></i> Exercise Schedule</a></h5>
         </div>
         <div class="card-body" style="max-height: 400px; overflow-y: auto;">
             {% if weekly_schedule_items %}
@@ -288,7 +290,7 @@
                 <div class="col-md-6">
                     <div class="card competition-card">
                         <div class="card-header bg-warning text-dark">
-                            <h5><i class="fas fa-star"></i> Favorited Events</h5>
+                            <h5><a href="{% url 'competitions:calendar_view' %}" class="unstyled-link"><i class="fas fa-star"></i> Favorited Events</a></h5>
                         </div>
                         <div class="card-body">
                             {% if favorite_events %}
@@ -311,7 +313,7 @@
                 <div class="col-md-6">
                     <div class="card competition-card">
                         <div class="card-header bg-primary text-white">
-                            <h5><i class="fas fa-trophy"></i> Competition Results</h5>
+                            <h5><a href="{% url 'competitions:calendar_view' %}" class="unstyled-link"><i class="fas fa-trophy"></i> Competition Results</a></h5>
                         </div>
                         <div class="card-body" style="max-height: 400px; overflow-y: auto;">
                             {% if paginated_results %}
@@ -371,7 +373,7 @@
                 <div class="col-md-6">
                     <div class="card ad-card">
                         <div class="card-header bg-info text-white">
-                            <h5><i class="fas fa-bullhorn"></i> Your Ads</h5>
+                            <h5><a href="{% url 'community:community_overview' %}" class="unstyled-link"><i class="fas fa-bullhorn"></i> Your Ads</a></h5>
                         </div>
                         <div class="card-body" style="max-height: 300px; overflow-y: auto;">
                             {% if ads %}
@@ -401,7 +403,7 @@
                 <div class="col-md-6">
                     <div class="card announcement-card">
                         <div class="card-header bg-success text-white">
-                            <h5><i class="fas fa-bell"></i> Your Announcements</h5>
+                            <h5><a href="{% url 'community:community_overview' %}" class="unstyled-link"><i class="fas fa-bell"></i> Your Announcements</a></h5>
                         </div>
                         <div class="card-body" style="max-height: 300px; overflow-y: auto;">
                             {% if announcements %}
