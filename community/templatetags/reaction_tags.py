@@ -2,6 +2,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter(name='is_user_reaction')
 def is_user_reaction(user_reactions, announcement_id, emoji):
     """
@@ -12,9 +13,11 @@ def is_user_reaction(user_reactions, announcement_id, emoji):
         return ""
 
     for reaction in user_reactions.all():
-        if str(reaction.announcement_id) == str(announcement_id) and reaction.emoji == emoji:
+        if str(reaction.announcement_id) == str(
+                announcement_id) and reaction.emoji == emoji:
             return "active"
     return ""
+
 
 @register.filter(name='get_item')
 def get_item(dictionary, key):

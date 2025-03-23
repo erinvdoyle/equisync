@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .announcements.models import Announcement 
+from .announcements.models import Announcement
 from .ads.models import Ad
 from .models import CommunityEvent
+
 
 class AdAdmin(admin.ModelAdmin):
     list_display = ('ad_type', 'user', 'date_posted', 'approved')
@@ -13,6 +14,7 @@ class AdAdmin(admin.ModelAdmin):
     def approve_ads(self, request, queryset):
         queryset.update(approved=True)
 
+
 class AnnouncementAdmin(admin.ModelAdmin):
     list_display = ('user', 'description', 'date_posted', 'approved')
     list_filter = ('approved', 'date_posted')
@@ -22,6 +24,7 @@ class AnnouncementAdmin(admin.ModelAdmin):
     @admin.action(description='Approve selected announcements')
     def approve_announcements(self, request, queryset):
         queryset.update(approved=True)
+
 
 @admin.register(CommunityEvent)
 class CommunityEventAdmin(admin.ModelAdmin):
@@ -33,6 +36,7 @@ class CommunityEventAdmin(admin.ModelAdmin):
     @admin.action(description='Approve selected events')
     def approve_events(self, request, queryset):
         queryset.update(approved=True)
+
 
 admin.site.register(Ad, AdAdmin)
 admin.site.register(Announcement, AnnouncementAdmin)

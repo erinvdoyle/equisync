@@ -469,6 +469,24 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     font-size: 1.1rem;
   }
   
+  .ad-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #af7c87;
+}
+
+.ad-price .price-label {
+    font-weight: 600;
+    color: #333;
+    margin-right: 5px;
+}
+
+.ad-price .price-amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #af7c87;
+}
+
 /* --- Weekly Events Section ----------------------------------------------------------------------------------------------------------------- */
 .calendar-section {
     background: #fff;

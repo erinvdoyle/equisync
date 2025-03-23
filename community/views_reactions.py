@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .announcements.models import Announcement, Reaction
 from django.db.models import Count
 
+
 @login_required
 def react_to_announcement(request):
     if request.method == 'POST':
@@ -14,9 +15,13 @@ def react_to_announcement(request):
         user = request.user
 
         try:
-            reaction, created = Reaction.objects.get_or_create(user=user, announcement=announcement, emoji=emoji)
+            reaction, created = Reaction.objects.get_or_create(
+                user=user,
+                announcement=announcement,
+                emoji=emoji
+            )
             status = 'added' if created else 'removed'
-            
+
             if not created:
                 reaction.delete()
 
@@ -27,7 +32,10 @@ def react_to_announcement(request):
                 .order_by('-emoji_count')
                 .first()
             )
-            most_clicked_emoji = most_clicked['emoji'] if most_clicked else None
+
+            most_clicked_emoji = (
+                most_clicked['emoji'] if most_clicked else None
+            )
 
             return JsonResponse({
                 'status': status,
@@ -35,6 +43,7 @@ def react_to_announcement(request):
                 'announcement_id': announcement_id,
                 'most_clicked_emoji': most_clicked_emoji
             })
+
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
 
