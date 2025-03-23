@@ -109,7 +109,7 @@ h1, h2 {
 }
 
 .navbar-gradient .nav-link {
-    color: white !important;
+    /* color: white !important; */
     padding: 10px 15px;
     transition: color 0.3s ease;
 }
