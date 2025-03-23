@@ -86,15 +86,23 @@
                             {{ ad.get_ad_type_display }}
                             </span>
                         </h5>
-                        <p class="card-text">{{ ad.description|truncatechars:50 }}</p>
-                        
+                        <p class="card-text">
+                            {% if ad.title %}
+                              {{ ad.title|truncatechars:50 }}
+                            {% else %}
+                              {{ ad.description|truncatechars:50 }}
+                            {% endif %}
+                          </p>
+                                                  
                         <button class="card-btn"
-                            onclick="openModal(
-                                '{{ ad.get_ad_type_display|title }}',
-                                '{{ ad.description|escapejs }}',
-                                {% if ad.image %}'{{ ad.image.url }}'{% else %}'https://via.placeholder.com/300x150'{% endif %},
-                                '{{ ad.title|default_if_none:"" }}',
-                                '{{ ad.price|default_if_none:"Not listed" }}')"
+                        onclick="openModal(
+                            '{{ ad.get_ad_type_display|title }}',
+                            '{{ ad.description|escapejs }}',
+                            {% if ad.image %}'{{ ad.image.url }}'{% else %}'https://via.placeholder.com/300x150'{% endif %},
+                            '{{ ad.title|default_if_none:"" }}',
+                            '{{ ad.price|default_if_none:"Not listed" }}',
+                            '{{ ad.user.email }}'
+                          )"                          
                             data-bs-toggle="modal"
                             data-bs-target="#adModal">
                             View Details
@@ -143,21 +151,26 @@
 <!-- Modal for Ad Details -->
 <div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="adModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <img id="modalImage" src="" alt="Ad Image" class="img-fluid rounded mb-3">
-                <p id="modalDescription"></p>
-                <p id="modalPrice" class="modal-price mt-3 fw-bold"></p>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center w-100" id="adModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <img id="modalImage" src="" alt="Ad Image" class="img-fluid rounded mb-3">
+          <p id="modalDescription"></p>
+  
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <p id="modalPrice" class="modal-price fw-bold mb-0"></p>
+            <a id="modalContactLink" href="#" target="_blank" class="email-link text-decoration-none">
+              <i class="fas fa-envelope"></i> Contact Seller
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-</div>
-
+  </div>
+  
 <!-- Announcements Section -->
 <div class="container-fluid section-wrapper my-4 announcements-section">
     <!-- Existing Header with Buttons Inside -->

@@ -55,30 +55,53 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Ad Modal
-    window.openModal = function (type, description, imageUrl, adTitle = '', price = '') {
+    window.openModal = function (
+        type,
+        description,
+        imageUrl,
+        adTitle = '',
+        price = '',
+        contactEmail = ''
+      ) {
         if (!adModal) return;
-    
+      
         const modalTitle = document.getElementById('adModalLabel');
         const image = document.getElementById('modalImage');
         const desc = document.getElementById('modalDescription');
         const priceEl = document.getElementById('modalPrice');
-    
+        const contactLink = document.getElementById('modalContactLink');
+      
+        // Title fallback
         modalTitle.textContent = adTitle || type;
         desc.innerHTML = description;
         priceEl.textContent = price ? `Price: ${price}` : '';
-    
+      
+        // Handle image
         if (imageUrl && imageUrl !== "None") {
-            if (!imageUrl.startsWith("http")) {
-                imageUrl = `https://res.cloudinary.com/dxpbpx72q/image/upload/v1/${imageUrl}`;
-            }
-            image.src = imageUrl;
-            image.style.display = 'block';
+          if (!imageUrl.startsWith("http")) {
+            imageUrl = `https://res.cloudinary.com/dxpbpx72q/image/upload/v1/${imageUrl}`;
+          }
+          image.src = imageUrl;
+          image.style.display = 'block';
         } else {
-            image.style.display = 'none';
+          image.style.display = 'none';
         }
-    
+      
+        // Handle contact email link
+        if (contactEmail) {
+          const subject = encodeURIComponent('Interested in your ad');
+          const body = encodeURIComponent(
+            `Hi, I'm interested in your listing: ${adTitle || type}`
+          );
+          contactLink.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+          contactLink.style.display = 'inline-block';
+        } else {
+          contactLink.style.display = 'none';
+        }
+      
         adModal.show();
-    };
+      };
+      
     
 
     // Announcements Modal
