@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container my-5 p-4 rounded shadow-sm bg-light">
+<div id="event-prev-cont-a" class="container my-5 p-4 rounded shadow-sm bg-light">
 
     <!-- Success Messages -->
     {% if messages %}
@@ -20,7 +20,7 @@
         </div>
     {% endif %}
 
-    <h2 class="section-header mb-3">Edit an Event</h2>
+    <h2 class="section-header mb-3 event-prev">Edit an Event</h2>
 
     {% if user_events %}
         <p>Select an event you wish to edit:</p>
@@ -46,7 +46,7 @@
             <input type="hidden" name="event_id" value="{{ selected_event.id }}">
         
             <div class="form-buttons d-flex flex-wrap gap-2 mt-3">
-                <button type="submit" class="community-btn">Save Changes</button>
+                <button type="submit" id="sav-btn" class="community-btn">Save Changes</button>
                 <a href="{% url 'community:delete_event' %}?event_id={{ selected_event.id }}" class="btn btn-danger">Delete Event</a>
                 <a href="{% url 'community:community_overview' %}" class="cancel-btn">Cancel</a>
             </div>
