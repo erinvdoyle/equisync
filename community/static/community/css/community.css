@@ -615,8 +615,29 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     background-color: #905f6e;
     transform: translateY(-2px);
   }
-  
 
+  .toolbar-buttons-an {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+   
+/* --- Emoji Reactions ----------------------------------------------------------------------------------------------------------------------- */
+.emoji-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    padding: 2px;
+    border-radius: 50%;
+  }
+  
+  .emoji-btn:hover {
+    transform: scale(1.2);
+    background-color: #af7c87;
+  }
+  
 /* --- Pagination ----------------------------------------------------------------------------------------------------------------------------- */
 .pagination {
     display: flex;
@@ -863,18 +884,20 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     }
 }
 
+@media (max-width: 425px) {
+    .post-btn-1 {
+      padding: 6px 10px !important;
+      min-width: auto;
+      font-size: 1.1rem;
+    }
+  }
+
 @media (min-width: 768px) {
 
     .ad-card, .announcement-card {
         width: 100%;
         max-width: 100%;
     }
-
-
-    /* .ad-card img, .announcement-card img  {
-        max-height: 150px;
-        object-fit: cover;
-    } */
 }
 
 
@@ -982,10 +1005,6 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
         font-size: 14px; 
         text-align: left;
     }
-
-    /* .category-field {
-        width: 55px;
-    } */
 
     .search-container input,
     .category-field {
