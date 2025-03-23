@@ -172,30 +172,86 @@ main {
     color: #adb5bd !important;
 }
 
-* --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
-/* a {
-    text-decoration: none;
-    color: #6a3e26;
-    transition: color 0.3s ease;
+/* --- Notifications ------------------------------------------------------------------------------------------------------------ */
+.noti-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(175, 124, 135, 0.2);
 }
 
-a:hover {
-    color: #905133;
+.noti-title {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
 }
 
-button.primary {
-    background-color: #f4a261; 
-    border: none;
+.noti-card {
+    background-color: #fafafa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(175, 124, 135, 0.1);
+}
+
+.noti-message {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.noti-timestamp {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.noti-btn,
+.noti-btn-outline {
+    background-color: #af7c87;
     color: white;
-    padding: 10px 20px;
+    border: none;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s ease;
 }
 
-button.primary:hover {
-    background-color: #e66f00; 
-} */
+.noti-btn:hover,
+.noti-btn-outline:hover {
+    background-color: #905f6e;
+}
+
+.noti-btn-outline {
+    background-color: transparent;
+    border: 2px solid #af7c87;
+    color: #af7c87;
+}
+
+.noti-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.noti-list-item {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.noti-list-item.unread {
+    background-color: #fceef2;
+}
+
 
 /* --- Form Styles ---base.css-------------------------------------------------------------------------------------------------------------------- */
 /* --- Form Container --- */
@@ -348,6 +404,14 @@ button.primary:hover {
 .profile-btn:hover {
     background-color: #4a3d59 !important;
 }
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:active {
+    background-color: #af7c87 !important;
+    color: white !important;
+}
+
 
 /*--- User registration forms ----------------------------------------------- */
 .auth-container {

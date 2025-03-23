@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Notification</h2>
-    <div class="card">
-        <div class="card-body">
-            <p>{{ notification.message }}</p>
-            <p class="text-muted">Received: {{ notification.timestamp|date:"M d, Y H:i" }}</p>
-            <a href="{% url 'notifications_list' %}" class="btn btn-primary">Back to Notifications</a>
-        </div>
+<div class="noti-container">
+    <h2 class="noti-title"><i class="fas fa-bell"></i> Notification</h2>
+    <div class="noti-card">
+        <p class="noti-message">{{ notification.message }}</p>
+        <p class="noti-timestamp">Received: {{ notification.timestamp|date:"M d, Y H:i" }}</p>
+        <a href="{% url 'notifications_list' %}" class="noti-btn">Back to Notifications</a>
     </div>
 </div>
 {% endblock %}
+
