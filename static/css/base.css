@@ -109,7 +109,7 @@ h1, h2 {
 }
 
 .navbar-gradient .nav-link {
-    /* color: white !important; */
+    font-weight: 500;
     padding: 10px 15px;
     transition: color 0.3s ease;
 }
@@ -569,6 +569,61 @@ main {
     font-family: 'Lato', sans-serif;
 }
 
+/* --- Error Page Styling ---------------------------------------------------------------------------------------------------------------- */
+#equisync-error-container,
+#equisync-error-container-2,
+#equisync-error-container-3 {
+    max-width: 700px !important;
+    margin: 80px auto !important;
+    padding: 40px !important;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(175, 124, 135, 0.25) !important;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.equisync-error-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    width: 100%;
+    height: 320px;
+    pointer-events: none;
+}
+  
+  .equisync-error-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #af7c87;
+    margin-bottom: 20px;
+  }
+  
+  .equisync-error-subtext {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .equisync-error-btn {
+    display: inline-block;
+    padding: 12px 26px;
+    font-size: 1rem;
+    background-color: #af7c87;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .equisync-error-btn:hover {
+    background-color: #8e5d6e;
+  }
+  
+  
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
 @media (max-width: 325px) {
     .navbar .container-fluid {
