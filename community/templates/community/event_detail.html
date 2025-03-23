@@ -3,33 +3,39 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 {% endblock %}
 
 {% block content %}
-<div class="container my-5 p-4 rounded shadow-sm bg-light">
+<div class="event-detail-container my-5 p-4 rounded">
 
   <!-- Success Messages -->
   {% if messages %}
     <div class="alert-container mb-4">
-        {% for message in messages %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
+      {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
     </div>
   {% endif %}
 
-  <h2 class="text-center mb-4">{{ event.title }}</h2>
+  <h2 class="event-detail-title text-center mb-4">
+    <i class="fa-solid fa-calendar-days me-2"></i> {{ event.title }}
+  </h2>
 
-  <p><strong>Description:</strong> {{ event.description }}</p>
-  <p><strong>Date:</strong> {{ event.date|date:"F d, Y" }}</p>
-  {% if event.time %}
-    <p><strong>Time:</strong> {{ event.time|time:"g:i A" }}</p>
-  {% endif %}
-
-  <div class="form-buttons mt-4 d-flex gap-2">
-    <a href="{% url 'community:community_overview' %}" class="cancel-btn">Back to Community</a>
+  <div class="event-detail-body">
+    <p><strong>Description:</strong> {{ event.description }}</p>
+    <p><strong>Date:</strong> {{ event.date|date:"F d, Y" }}</p>
+    {% if event.time %}
+      <p><strong>Time:</strong> {{ event.time|time:"g:i A" }}</p>
+    {% endif %}
   </div>
+
+  <div class="mt-4 d-flex justify-content-center">
+    <a href="{% url 'community:community_overview' %}" class="community-btn">Back to Community</a>
+  </div>
+
 </div>
 {% endblock %}
