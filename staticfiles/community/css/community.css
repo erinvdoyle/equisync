@@ -41,7 +41,6 @@ body {
 a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn) {
     color: #2c3e50;
     text-decoration: none;
-    font-weight: bolder;
 }
 
 a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn):hover {
@@ -50,7 +49,9 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     font-weight: bolder;
 }
 
-
+.btn-secondary {
+    color: white !important;
+}
 
 /* --- Page Containers & Section Layout -------------------------------------------------------------------------------------------------------- */
 .container {
@@ -90,39 +91,47 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 }
 
 .ads-section .toolbar {
-    margin-top: 0 !important;
+    margin-top: -20px !important;
     padding-top: 10px !important;
-    border-radius: 8px 8px 0 0 !important;
+    border-radius: 8px !important;
 }
 
 .announcements-section .section-header {
     text-align: center;
-    background: linear-gradient(to right, #7d7e80, #af7c87, #343a40);
+    /* background: linear-gradient(to right, #7d7e80, #af7c87, #343a40); */
+    background-color: #7d7e80;
     color: white;
     padding: 12px 20px;
     border-radius: 8px;
     display: inline-block;
     width: 100%;
     max-width: 100%;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
+    margin-top: -18px;
 }
 
 .weekly-events-section .section-header {
-    background: linear-gradient(to right, #af7c87, #7d7e80, #343a40);
+    /* background: linear-gradient(to right, #af7c87, #7d7e80, #343a40); */
+    background-color: #77656d;
 }
 
 .weekly-events-section .section-wrapper .section-header {
     text-align: center;
     color: white;
-    padding: 12px 20px;
+    padding: 8px 20px;
     border-radius: 8px;
     display: inline-block;
     width: 100%;
     max-width: 100%;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
-    margin-top: -25px;
+    margin-top: -40px;
+    margin-bottom: 10px;
+}
+
+.weekly-events-section .section-wrapper .section-header a.community-btn {
+    margin-left: 8px;
 }
 
 .ads-section::before,
@@ -136,22 +145,30 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     bottom: -5px;
     border-radius: 12px;
     z-index: -1;
-    box-shadow: 0px 0px 15px 5px rgba(60, 64, 67, 0.2);
+    box-shadow: 0px 0px 15px 5px rgba(60, 64, 67, 0.15);
+}
+
+.calendar-table td a {
+    color: #af7c87 !important;
+    font-weight: bold !important;
 }
 
 .ads-section::before {
-    background: linear-gradient(135deg, #2c3e50, #6d6875);
-    opacity: 0.4;
+    /* background: linear-gradient(135deg, #2c3e50, #6d6875);
+    opacity: 0.4; */
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.65);
 }
 
 .announcements-section::before {
-    background: linear-gradient(135deg, #8b6f83, #af7c87);
-    opacity: 0.4;
+    /* background: linear-gradient(135deg, #8b6f83, #af7c87);
+    opacity: 0.4; */
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.65);
 }
 
 .weekly-events-section::before {
-    background: linear-gradient(135deg, #7b8d93, #5d6a6f);
-    opacity: 0.4;
+    /* background: linear-gradient(135deg, #7b8d93, #5d6a6f);
+    opacity: 0.4; */
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.65);
 }
 
 .post-ad-btn:hover, 
@@ -160,15 +177,26 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     box-shadow: 0 4px 8px rgba(144, 95, 110, 0.4);
 }
 
+.card-img-top {
+    object-fit: cover;
+    object-position: top;
+    height: 150px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+
 /* --- Ads Toolbar ----------------------------------------------------------------------------------------------------------------------- */
 .toolbar {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(to right, #343a40, #7d7e80, #af7c87);
+    /* background: linear-gradient(to right, #343a40, #7d7e80, #af7c87); */
+    background-color: #343a40 !important;
     color: white;
-    padding: 15px 20px;
+    padding: 12px 20px;
     border-radius: 8px;
     gap: 10px;
 }
@@ -190,6 +218,7 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 .toolbar-form .community-btn {
     padding: 9px 15px;
     height: 38px;
+    font-weight: bolder;
 }
 
 .search-field, .category-field {
@@ -435,6 +464,29 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     background-color: #ffffff;
 }
 
+.modal-price {
+    color: #af7c87;
+    font-size: 1.1rem;
+  }
+  
+  .ad-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #af7c87;
+}
+
+.ad-price .price-label {
+    font-weight: 600;
+    color: #333;
+    margin-right: 5px;
+}
+
+.ad-price .price-amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #af7c87;
+}
+
 /* --- Weekly Events Section ----------------------------------------------------------------------------------------------------------------- */
 .calendar-section {
     background: #fff;
@@ -499,17 +551,57 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 }
 
 .highlight-today {
-    background-color: #ffe6ec;
+    background-color: rgba(230, 198, 205, 0.45);
     border: 2px solid #f9c5d1;
     border-radius: 6px;
 }
 
+
+.event-detail-container {
+    background-color: #fff;
+    box-shadow: 0 0 12px 4px rgba(175, 124, 135, 0.25);
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  .event-detail-title {
+    font-family: 'Lato', sans-serif;
+    color: #af7c87;
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .event-detail-body p {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .community-btn {
+    background-color: #af7c87;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .community-btn:hover {
+    background-color: #905f6e;
+    transform: translateY(-2px);
+  }
+  
 
 /* --- Pagination ----------------------------------------------------------------------------------------------------------------------------- */
 .pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    font-weight: 600;
 }
 
 .pagination .page-link {
@@ -527,8 +619,8 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 }
 
 .cancel-btn {
-    background: #77656d;
-    color: white;
+    background: #7d7e80 !important;
+    color: white !important;
     padding: 10px 18px;
     border-radius: 5px;
     font-size: 1rem;
@@ -584,6 +676,47 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     margin-bottom: 12px;
 }
 
+#event-prev-cont {
+    max-width: 600px;
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.45) !important;
+}
+
+#event-prev-cont-a {
+    max-width: 600px;
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.45) !important;
+}
+
+.event-prev {
+    text-align: center;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white !important;
+    padding: 10px 18px !important;
+}
+
+#sav-btn {
+    margin-bottom: 10px;
+    padding: 10px 18px !important;
+}
+
+#event-prev-cont-b {
+    max-width: 600px;
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.45) !important;
+}
+
+#event-prev-cont-b .form-buttons {
+    display: flex;
+    justify-content: center !important;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#event-prev-cont-b .form-buttons .btn-secondary {
+    padding: 10px 18px !important;
+}
+
 /* --- General Form Styles -------------------------------------------------------------------------------------- */
 .form-container, .preview-container {
     max-width: 700px;
@@ -591,7 +724,7 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     margin: 40px auto;
     padding: 20px 30px;
     border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.45);
 }
 
 .form-title, .preview-title {
@@ -632,10 +765,11 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 .announcement-detail-container {
     max-width: 800px;
     margin: 0 auto;
+    margin-top: 10px;
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(230, 198, 205, 0.45);
 }
 
 .announcement-form-title,

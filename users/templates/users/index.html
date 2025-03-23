@@ -33,9 +33,39 @@
     </div>
 </div>
 
+<!-- SVG Background -->
+<svg class="equisync-error-bg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <path fill="#fdebee" fill-opacity="1"
+      d="M0,280L60,260C120,240,240,200,360,170.7C480,141,600,123,720,126.7C840,130,960,154,1080,165.3C1200,176,1320,176,1380,176L1440,176L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
+    </path>
+  </svg>
+  
+  
 <!-- Heading -->
 <div class="container text-center mt-5">
-    <h1 class="lato-header">EquiSync</h1>
+    <svg width="100%" height="100" viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" class="equisync-svg-header">
+        <defs>
+            <filter id="textShadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#333" flood-opacity="0.3"/>
+              </filter>
+              
+            <linearGradient id="equisyncIndexGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#101c2b" />
+                <stop offset="50%" stop-color="#1e1e1e" />
+                <stop offset="100%" stop-color="#a0a0a0" />
+              </linearGradient>              
+        </defs>
+        <text x="50%" y="60%" text-anchor="middle" dominant-baseline="middle"
+            font-family="'Lato', sans-serif"
+            font-size="48"
+            font-weight="900"
+            fill="url(#equisyncIndexGradient)"
+            filter="url(#textShadow)">
+        EquiSync
+        </text>
+
+      </svg>
+      
     <p class="header-subtext">Streamlined Stable Management for Equestrians</p>
 </div>
 

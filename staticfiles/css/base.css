@@ -69,6 +69,34 @@ h1, h2 {
     transition: background 0.5s ease-in-out;
 }
 
+.navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: 60px;
+  }
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,0.85)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22' /%3E%3C/svg%3E");
+  }
+  
+.navbar-toggler {
+    margin-left: auto;
+    padding: 6px 10px;
+    align-self: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  outline: none;
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+  
+/* check styles below */ 
+
 .navbar-gradient .navbar-brand {
     font-family: 'Lato', sans-serif;
     font-weight: 700;
@@ -77,17 +105,17 @@ h1, h2 {
 }
 
 .navbar-gradient .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);   
 }
 
 .navbar-gradient .nav-link {
-    color: white !important;
+    /* color: white !important; */
     padding: 10px 15px;
     transition: color 0.3s ease;
 }
 
 .navbar-gradient .nav-link:hover {
-    color: #f4a261 !important; 
+    color: #af7c87 !important; 
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -113,6 +141,7 @@ h1, h2 {
 
 .navbar-collapse {
     flex-grow: 1;
+    margin-left: 55px;
 }
 
 .badge {
@@ -124,6 +153,17 @@ h1, h2 {
     padding: 5px 8px;
 }
 
+  .equisync-logo-svg {
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .equisync-svg-text {
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  
 /* --- Footer Styles ---------------------------------------------------------------------------------------------------------------------- */
 /* --- Footer design credit: https://codepen.io/mkmllr/details/YmVeEP ---*/
 
@@ -172,30 +212,86 @@ main {
     color: #adb5bd !important;
 }
 
-* --- Typography and Buttons ------------------------------------------------------------------------------------------------------------ */
-/* a {
-    text-decoration: none;
-    color: #6a3e26;
-    transition: color 0.3s ease;
+/* --- Notifications ------------------------------------------------------------------------------------------------------------ */
+.noti-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(175, 124, 135, 0.2);
 }
 
-a:hover {
-    color: #905133;
+.noti-title {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
 }
 
-button.primary {
-    background-color: #f4a261; 
-    border: none;
+.noti-card {
+    background-color: #fafafa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(175, 124, 135, 0.1);
+}
+
+.noti-message {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.noti-timestamp {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.noti-btn,
+.noti-btn-outline {
+    background-color: #af7c87;
     color: white;
-    padding: 10px 20px;
+    border: none;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s ease;
 }
 
-button.primary:hover {
-    background-color: #e66f00; 
-} */
+.noti-btn:hover,
+.noti-btn-outline:hover {
+    background-color: #905f6e;
+}
+
+.noti-btn-outline {
+    background-color: transparent;
+    border: 2px solid #af7c87;
+    color: #af7c87;
+}
+
+.noti-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.noti-list-item {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.noti-list-item.unread {
+    background-color: #fceef2;
+}
+
 
 /* --- Form Styles ---base.css-------------------------------------------------------------------------------------------------------------------- */
 /* --- Form Container --- */
@@ -349,6 +445,14 @@ button.primary:hover {
     background-color: #4a3d59 !important;
 }
 
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:active {
+    background-color: #af7c87 !important;
+    color: white !important;
+}
+
+
 /*--- User registration forms ----------------------------------------------- */
 .auth-container {
     max-width: 500px;
@@ -465,7 +569,121 @@ button.primary:hover {
     font-family: 'Lato', sans-serif;
 }
 
+/* --- Error Page Styling ---------------------------------------------------------------------------------------------------------------- */
+#equisync-error-container {
+    max-width: 700px !important;
+    margin: 80px auto !important;
+    padding: 40px !important;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(175, 124, 135, 0.25) !important;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.equisync-error-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    width: 100%;
+    height: 320px;
+    pointer-events: none;
+}
+  
+  .equisync-error-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #af7c87;
+    margin-bottom: 20px;
+  }
+  
+  .equisync-error-subtext {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .equisync-error-btn {
+    display: inline-block;
+    padding: 12px 26px;
+    font-size: 1rem;
+    background-color: #af7c87;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .equisync-error-btn:hover {
+    background-color: #8e5d6e;
+  }
+  
+  
 /* --- Media Queries --------------------------------------------------------------------------------------------------------------------- */
+@media (max-width: 325px) {
+    .navbar .container-fluid {
+      padding: 0 0.5rem;
+      height: 56px;
+    }
+  
+    .navbar-toggler {
+      padding: 4px 8px;
+      font-size: 0.9rem;
+      align-self: center;
+      margin-top: -25px;
+      margin-right: -5px;
+    }
+  
+    .equisync-logo-svg {
+      height: 38px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .navbar-nav {
+      flex-direction: row;
+      gap: 12px;
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .navbar-collapse {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 250px;
+      z-index: 999;
+      padding: 1rem;
+      background-color: #343a40;
+      border-radius: 0 0 0 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  
+    @media (min-width: 600px) and (max-width: 768px) {
+      .navbar-collapse {
+        background-color: #af7c87;
+      }
+    }
+  
+    .navbar-collapse .nav-link {
+      color: #fff !important;
+      text-align: right;
+      padding: 10px;
+      display: block;
+      width: 100%;
+    }
+  
+    .navbar-collapse .nav-link:hover {
+      color: #fff !important;
+      background-color: transparent;
+      text-shadow: 0 0 1px #fff;
+    }
+  }
+
+
 /* --- For Larger Screens (Desktops and Tablets) --------------------------*/
 @media (min-width: 768px) {
     form input[type="text"],
