@@ -47,7 +47,39 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-gradient">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'users:home' %}">EquiSync</a>
+        <!-- <a href="{% url 'users:home' %}" class="equisync-logo" aria-label="EquiSync Home">
+            <span class="equisync-icon-wrapper">
+              <i class="fas fa-horse equisync-icon"></i>
+            </span>
+            <svg width="0" height="0">
+              <linearGradient id="equisyncGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#af7c87" />
+                <stop offset="50%" stop-color="#fce8f0" />
+                <stop offset="100%" stop-color="#dcdcdc" />
+              </linearGradient>
+            </svg>
+            <span class="equisync-text">EquiSync</span>
+          </a> -->
+          <a href="{% url 'users:home' %}" class="equisync-logo-svg" aria-label="EquiSync Home">
+            <svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg" class="equisync-svg-text">
+              <defs>
+                <linearGradient id="equisyncTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#af7c87" />
+                  <stop offset="50%" stop-color="#fce8f0" />
+                  <stop offset="100%" stop-color="#dcdcdc" />
+                </linearGradient>
+              </defs>
+          
+              <text x="0" y="40"
+                    font-family="'Lato', sans-serif"
+                    font-size="38"
+                    font-weight="900"
+                    fill="url(#equisyncTextGradient)">
+                EquiSync
+              </text>
+            </svg>
+          </a>
+                                    
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

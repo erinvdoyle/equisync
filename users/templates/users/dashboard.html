@@ -11,11 +11,30 @@
     <!-- Sidebar -->
 <div class="sidebar">
     <div class="sidebar-header">
-        <h2 class="sidebar-title">EquiSync</h2>
+        <a href="{% url 'users:home' %}" class="equisync-logo-svg" aria-label="EquiSync Home">
+            <svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg" class="equisync-svg-text">
+              <defs>
+                <linearGradient id="equisyncTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#af7c87" />
+                  <stop offset="50%" stop-color="#fce8f0" />
+                  <stop offset="100%" stop-color="#dcdcdc" />
+                </linearGradient>
+              </defs>
+          
+              <text x="0" y="40"
+                    font-family="'Lato', sans-serif"
+                    font-size="38"
+                    font-weight="900"
+                    fill="url(#equisyncTextGradient)">
+                EquiSync
+              </text>
+            </svg>
+          </a>
+          
         <div class="sidebar-toggle-caret">
             <i class="fas fa-caret-down"></i>
         </div>
-        <h3 class="sidebar-welcome">Welcome, {{ user.username }}</h3>
+        <h3 class="sidebar-welcome">Welcome, {{ user.username }}!</h3>
     </div>
     <div class="sidebar-menu">
         <ul>

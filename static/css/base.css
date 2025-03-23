@@ -113,6 +113,7 @@ h1, h2 {
 
 .navbar-collapse {
     flex-grow: 1;
+    margin-left: 55px;
 }
 
 .badge {
@@ -124,6 +125,66 @@ h1, h2 {
     padding: 5px 8px;
 }
 
+/* .equisync-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 0.15rem;
+  }
+  
+  .equisync-icon-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .equisync-icon {
+    font-size: 2rem;
+    color: #af7c87;
+    transition: transform 0.3s ease;
+  }
+  
+  .equisync-text {
+    font-size: 2.1rem;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, #af7c87, #fce8f0, #dcdcdc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: glow-fade 4s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow-fade {
+    0% {
+      filter: brightness(1);
+      letter-spacing: normal;
+    }
+    100% {
+      filter: brightness(1.05);
+      letter-spacing: 0.5px;
+    }
+  }
+  
+  .equisync-logo:hover .equisync-icon {
+    transform: scale(1.1);
+  } */
+
+  .equisync-logo-svg {
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .equisync-svg-text {
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  .equisync-logo-svg:hover .equisync-svg-text {
+    transform: scale(1.03);
+  }
+  
+  
 /* --- Footer Styles ---------------------------------------------------------------------------------------------------------------------- */
 /* --- Footer design credit: https://codepen.io/mkmllr/details/YmVeEP ---*/
 
