@@ -46,20 +46,7 @@
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-gradient">
-    <div class="container-fluid">
-        <!-- <a href="{% url 'users:home' %}" class="equisync-logo" aria-label="EquiSync Home">
-            <span class="equisync-icon-wrapper">
-              <i class="fas fa-horse equisync-icon"></i>
-            </span>
-            <svg width="0" height="0">
-              <linearGradient id="equisyncGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#af7c87" />
-                <stop offset="50%" stop-color="#fce8f0" />
-                <stop offset="100%" stop-color="#dcdcdc" />
-              </linearGradient>
-            </svg>
-            <span class="equisync-text">EquiSync</span>
-          </a> -->
+    <div class="container-fluid navbar-inner">
           <a href="{% url 'users:home' %}" class="equisync-logo-svg" aria-label="EquiSync Home">
             <svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg" class="equisync-svg-text">
               <defs>
@@ -79,14 +66,15 @@
               </text>
             </svg>
           </a>
-                                    
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+
+          <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarText" aria-controls="navbarText"
+                aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse custom-dropdown" id="navbarText">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:dashboard' %}">Dashboard</a>
