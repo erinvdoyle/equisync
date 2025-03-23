@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+
 {% block content %}
-<div class="container mt-4">
-    <h2>Notifications</h2>
-    <ul class="list-group" id="notifications-list">
+<div class="noti-container">
+    <h2 class="noti-title"><i class="fas fa-bell"></i> Notifications</h2>
+    <ul class="noti-list" id="notifications-list">
         {% for notification in notifications %}
-            <li id="notification-{{ notification.id }}" class="list-group-item d-flex justify-content-between align-items-center {% if not notification.is_read %}bg-light{% endif %}">
+            <li id="notification-{{ notification.id }}" class="noti-list-item {% if not notification.is_read %}unread{% endif %}">
                 <span>{{ notification.message }}</span>
-                <button class="btn btn-sm btn-outline-primary mark-read-btn" onclick="markAsRead(this)" data-notification-id="{{ notification.id }}">
-                    <i class="fas fa-check d-none"></i> Mark as Read
+                <button class="noti-btn-outline mark-read-btn" onclick="markAsRead(this)" data-notification-id="{{ notification.id }}">
+                    <i class="fas fa-check"></i> Mark as Read
                 </button>
             </li>
         {% empty %}
@@ -19,16 +20,16 @@
 <script>
     function markAsRead(button) {
         const notificationId = button.getAttribute("data-notification-id");
-        fetch(`/notifications/mark-as-read/${notificationId}/`, { 
-            method: "POST", 
-            headers: { "X-CSRFToken": "{{ csrf_token }}" } 
+        fetch(`/notifications/mark-as-read/${notificationId}/`, {
+            method: "POST",
+            headers: { "X-CSRFToken": "{{ csrf_token }}" }
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 const listItem = document.getElementById(`notification-${notificationId}`);
                 if (listItem) {
-                    listItem.remove(); // Remove from list
+                    listItem.remove();
                 }
             }
         })
@@ -36,4 +37,5 @@
     }
 </script>
 {% endblock %}
+
 
