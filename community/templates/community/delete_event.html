@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container my-5 p-4 rounded shadow-sm bg-light">
+<div id="event-prev-cont-b" class="container my-5 p-4 rounded shadow-sm bg-light">
 
     <!-- Success Messages -->
     {% if messages %}
@@ -20,7 +20,7 @@
         </div>
     {% endif %}
 
-    <h2 class="section-header mb-3">Delete Event</h2>
+    <h2 class="event-prev mb-3">Delete Event</h2>
 
     <p>Are you sure you want to delete the event <strong>{{ event.title }}</strong> scheduled for <strong>{{ event.date }}</strong>?</p>
 

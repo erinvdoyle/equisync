@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container my-5 p-4 rounded shadow-sm bg-light">
+<div id="event-prev-cont" class="container my-5 p-4 rounded shadow-sm bg-light">
 
     <!-- Success Messages -->
     {% if messages %}
@@ -20,7 +20,7 @@
       </div>
     {% endif %}
 
-    <h2 class="mb-4 section-header">Create New Event</h2>
+    <h2 class="mb-4 section-header event-prev">Create New Event</h2>
 
     <form method="post" action="{% url 'community:create_event' %}">
         {% csrf_token %}

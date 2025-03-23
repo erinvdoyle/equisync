@@ -54,20 +54,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Ads Modal 
-    const adModalEl = document.getElementById('adModal');
-    const adModal = adModalEl ? new bootstrap.Modal(adModalEl, { backdrop: true }) : null;
-
-    window.openModal = function (type, description, imageUrl, adTitle = '') {
+    // Ad Modal
+    window.openModal = function (type, description, imageUrl, adTitle = '', price = '') {
         if (!adModal) return;
-
+    
         const modalTitle = document.getElementById('adModalLabel');
         const image = document.getElementById('modalImage');
         const desc = document.getElementById('modalDescription');
-
+        const priceEl = document.getElementById('modalPrice');
+    
         modalTitle.textContent = adTitle || type;
         desc.innerHTML = description;
-
+        priceEl.textContent = price ? `Price: ${price}` : '';
+    
         if (imageUrl && imageUrl !== "None") {
             if (!imageUrl.startsWith("http")) {
                 imageUrl = `https://res.cloudinary.com/dxpbpx72q/image/upload/v1/${imageUrl}`;
@@ -77,9 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             image.style.display = 'none';
         }
-
+    
         adModal.show();
     };
+    
 
     // Announcements Modal
     const announcementModalEl = document.getElementById('announcementModal');
