@@ -8,7 +8,7 @@
 {% block content %}
 <div class="container ad-detail-container my-4 p-4 rounded shadow-sm bg-light">
 
-    <!--  Success Messages -->
+    <!-- Success Messages -->
     {% if messages %}
         <div class="alert-container mb-3">
             {% for message in messages %}
@@ -20,24 +20,29 @@
         </div>
     {% endif %}
 
-    <!-- Ad Info -->
+    <!-- Ad Title -->
     {% if ad.title %}
       <h2 class="mb-3 text-center">{{ ad.title }}</h2>
     {% else %}
       <h2 class="mb-3 text-center">{{ ad.get_ad_type_display }}</h2>
     {% endif %}
 
+    <!-- Ad Image Centered -->
+    {% if ad.image %}
+        <div class="d-flex justify-content-center mb-4">
+            <img src="{{ ad.image.url }}" alt="Ad Image" class="img-fluid rounded shadow-sm" style="max-height: 400px;">
+        </div>
+    {% endif %}
+
+    <!-- Ad Info -->
     <p><strong>Description:</strong> {{ ad.description }}</p>
-    <p><strong>Price:</strong> {{ ad.price }}</p>
+    <p class="ad-price mb-4 text-center">
+        <span class="price-label">Price:</span>
+        <span class="price-amount">${{ ad.price }}</span>
+    </p>
     <p><strong>Category:</strong> {{ ad.category }}</p>
     <p><strong>Contact Info:</strong> {{ ad.contact_info }}</p>
     <p><strong>Posted On:</strong> {{ ad.date_posted|date:"F d, Y" }}</p>
-
-    {% if ad.image %}
-        <div class="my-3">
-            <img src="{{ ad.image.url }}" alt="Ad Image" class="img-fluid rounded shadow-sm">
-        </div>
-    {% endif %}
 
     <hr class="my-4">
 
@@ -81,4 +86,5 @@
     </div>
 </div>
 {% endblock %}
+
 
