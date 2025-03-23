@@ -159,15 +159,34 @@ The scope of this project includes:
 
 ## Agile Methodology
 
-### Overview
+### Agile Development Approach
 
-### Epics
+#### Overview  
+This project followed agile principles throughout the development process. As my first full-stack build, there were a lot of moving parts, and the agile framework helped break everything down into manageable steps. Planning features around user stories with clear acceptance criteria and task lists gave the project structure and ensured each feature had a clear purpose and outcome. I spent the first week establishing my wireframes, user stories, and Kanban board, which was very much not my usual workflow and initially felt counterintuitive, but in the end, I think it paid off
 
-### User Story Issues
+#### Epics & Milestones  
+User stories were grouped into nine key milestones (or "epics"), each representing a major feature or theme of the project
+<br>
+![Milestones](./assets/readme-images/agile-milestones.PNG)
 
-### MoSCoW
+#### User Story Structure  
+Each issue was framed as a user story, complete with its acceptance criteria and task list to break the work into smaller chunks  
+<br>
+![User Story](./assets/readme-images/user-story-agile.PNG)  
+Whenever possible, commits were linked to their corresponding user stories for clear traceability 
+<br>
+![User Story](./assets/readme-images/user-story-commits.PNG)
 
-### GitHub Projects
+#### ✅ MoSCoW Prioritization  
+To keep development focused and efficient, the MoSCoW method was used to prioritize features. This technique sorts requirements into four buckets:  
+**Must have**, **Should have**, **Could have**, and **Won’t have** helping ensure the most essential functionality made it into the final product  
+<br>
+![User Story](./assets/readme-images/user-story-moscow.PNG)
+
+####  GitHub Projects  
+A simple Kanban-style board was used via GitHub Projects to track progress. Tasks moved through stages like **To Do**, **In Progress**, and **Done**— keeping the workflow organized and easy to manage at a glance 
+<br>
+![User Story](./assets/readme-images/github-projects.PNG)
 
 
 ## Design
@@ -253,20 +272,6 @@ Represents the show and competition schedule for a horse, including dates, event
 The UI for this project was planned with Balsamiq Wireframes
 
 <details>
-  <summary>Sunny Side Stable Website (click)</summary>
-  
-  - **Home**  
-    ![Home](./assets/readme-images/wireframes/home.png)
-  - **Our Horses**  
-    ![Our Horses](./assets/readme-images/wireframes/our-horses.png)
-  - **Our Community**  
-    ![Our Community](./assets/readme-images/wireframes/our-community.png)
-  - **Error 404**  
-    ![404](./assets/readme-images/wireframes/404.png)
-
-</details>
-
-<details>
   <summary>Login, Dashboard, and Profiles (click)</summary>
   
   - **Login**  
@@ -321,6 +326,139 @@ The UI for this project was planned with Balsamiq Wireframes
 ### Troubleshooting, errors, and bugs
 
 ### Events Calendar Section
+
+## Future Features
+
+## Testing
+
+Please see my testing documentation [here.](./TESTING.md)
+
+## Bugs
+
+## Languages & Technology
+
+### Languages
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- Python
+- Django
+
+### Python Modules
+
+| Package | Description |
+|---------|-------------|
+| **certifi** | Up-to-date root certificates for secure HTTP requests. |
+| **charset-normalizer** | Detects character encodings for text data. |
+| **cloudinary** | Upload/manage images via Cloudinary API. |
+| **colorama** | Adds colored output support in the terminal. |
+| **dj-database-url** | Configures Django DB using a URL (Heroku-friendly). |
+| **Django** | Full-stack Python web framework. |
+| **django-allauth** | Integrated authentication system (email/social login). |
+| **django-cloudinary-storage** | Media file storage via Cloudinary. |
+| **django-dbbackup** | Back up and restore Django DB/media. |
+| **django-filter** | Filtering support for Django views or DRF. |
+| **django-scheduler** | Calendar-based event scheduling for Django. |
+| **django-storages** | Pluggable storage backends for Django. |
+| **django-tables2** | HTML tables from Django models with features. |
+| **django-timezone-field** | Time zone field support in Django models. |
+| **gunicorn** | WSGI HTTP server for production Django apps. | |
+| **oauthlib** | OAuth 1/2 authentication framework. |
+| **pillow** | Image processing in Python (PIL fork). |
+| **platformdirs** | Determines paths for config/cache/data storage. |
+| **psycopg2-binary** | PostgreSQL database adapter for Python. |
+| **PyJWT** | JSON Web Token auth encoding/decoding. |
+| **python3-openid** | OpenID authentication library. |
+| **pytz** | World timezone support for datetime objects. |
+| **requests** | Simple, elegant HTTP library. |
+| **requests-oauthlib** | OAuth support for requests. |
+| **tzdata** | IANA timezone database. |
+| **whitenoise** | Serve static files efficiently in Django |
+
+## Deployment
+
+###  Before Deployment
+
+Before deploying to Heroku, you’ll want to update your `requirements.txt` file — this ensures Heroku knows which dependencies to install.
+
+To generate or update it, run:
+
+```bash
+pip3 freeze > requirements.txt
+```
+
+Once updated, commit and push your changes to GitHub.
+
+> 🔐 **Important:** Make sure any sensitive credentials (like API keys or passwords) are stored in an `env.py` or `.env` file. Add this file to `.gitignore` so it doesn’t get pushed to GitHub and exposed publicly.
+
+---
+
+###  Deploying to Heroku
+
+1. [Create a Heroku account](https://heroku.com) if you don’t already have one.
+2. Once logged in, click **Create new app**.
+3. Give your app a unique name, select your region, and click **Create App**.
+
+#### Config Vars (Environment Variables)
+
+In the Heroku app dashboard:
+
+- Navigate to **Settings** → **Reveal Config Vars**.
+- Add any environment variables your project needs, such as:
+
+```
+DJANGO_SECRET_KEY=your-secret-key
+DATABASE_URL=your-database-url
+AWS_ACCESS_KEY_ID=your-aws-key
+AWS_SECRET_ACCESS_KEY=your-aws-secret
+EMAIL_HOST_PASSWORD=your-email-password
+```
+
+####  Buildpacks
+
+Scroll to **Buildpacks** and add:
+
+- `Python` (for Django apps)
+
+---
+
+###  GitHub Integration & Deployment
+
+1. Go to the **Deploy** tab.
+2. Under **Deployment method**, choose **GitHub**.
+3. Search for your repository name and click **Connect**.
+4. Scroll down and optionally enable **Automatic Deploys**.
+5. Finally, click **Deploy Branch**.
+
+Once deployed, you’ll see a **“View App”** button to open your live site.
+
+---
+
+###  Forking This Repository
+
+If you'd like to contribute or create your own version of the project:
+
+1. Navigate to the original repository on GitHub.
+2. Click the **Fork** button in the top-right.
+3. Name your fork and optionally add a description.
+4. Choose to copy the main branch or all branches.
+5. Click **Create Fork**.
+
+---
+
+###  Cloning the Repository
+
+To work locally:
+
+1. On your fork, click the green **Code** button and copy the link.
+2. In your terminal:
+
+```bash
+git clone https://github.com/your-username/your-fork-name.git
+```
+
+3. Navigate into the project folder and start building!
 
 ## Credits
 [Extending the User Model](https://docs.djangoproject.com/en/5.1/topics/auth/customizing/#extending-user)  
