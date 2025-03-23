@@ -48,6 +48,7 @@
                     None Assigned
                 {% endfor %}
             </p>
+            <p><strong>Last Cared For By:</strong> {{ horse.most_recent_staff.name }}</p>
         </div>
 
         <div class="horse-info-card">
@@ -65,7 +66,6 @@
 
         <div class="horse-info-card">
             <h2>Health & Nutrition</h2>
-            <p><strong>Last Cared For By:</strong> {{ horse.most_recent_staff.name }}</p>
             <p><strong>Feeding Chart:</strong> 
                 {% if horse.feeding_chart %}
                     <a href="{% url 'feeding_management:horse_feeding_chart_readonly' horse.id %}" class="info-link">View</a>
