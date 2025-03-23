@@ -533,6 +533,45 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
 }
 
 
+.event-detail-container {
+    background-color: #fff;
+    box-shadow: 0 0 12px 4px rgba(175, 124, 135, 0.25); /* soft rose glow */
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  .event-detail-title {
+    font-family: 'Lato', sans-serif;
+    color: #af7c87;
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .event-detail-body p {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .community-btn {
+    background-color: #af7c87;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .community-btn:hover {
+    background-color: #905f6e;
+    transform: translateY(-2px);
+  }
+  
+
 /* --- Pagination ----------------------------------------------------------------------------------------------------------------------------- */
 .pagination {
     display: flex;
