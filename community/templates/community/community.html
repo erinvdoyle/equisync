@@ -177,15 +177,22 @@
     <!-- Existing Header with Buttons Inside -->
     <div class="section-header d-flex justify-content-between align-items-center">
         <span>Announcements</span>
-        <div class="toolbar-buttons">
+        <div class="toolbar-buttons-an">
             {% if user.is_authenticated %}
                 <!-- Post Announcement Button -->
-                <a href="{% url 'community:submit_announcement' %}" class="community-btn">Post</a>
+                <a href="{% url 'community:submit_announcement' %}" class="community-btn post-btn post-btn-1">
+                    <span class="d-none d-sm-inline">Post</span>
+                    <span class="d-inline d-sm-none">+</span>
+                  </a>
+                  
 
         
                 <!-- Edit Announcement Button (Only if Announcement Exists) -->
                 {% if announcements %}
-                <a href="{% url 'community:edit_announcement' %}" class="community-btn">Edit</a>
+                <a href="{% url 'community:edit_announcement' %}" class="community-btn post-btn post-btn-1">
+                    <span class="d-none d-sm-inline">Edit</span>
+                    <span class="d-inline d-sm-none">--</span>
+                </a>
                 {% endif %}
             {% endif %}
         </div>        
@@ -213,7 +220,7 @@
                         <div class="emoji-reactions">
                             {% with reactions='👍 ❤️ 😂 😮 😢 😡' %}
                                 {% for emoji in reactions.split %}
-                                    <button class="emoji-btn"
+                                    <button class="emoji-btn {% if user_reactions|get_item:announcement.id and emoji in user_reactions|get_item:announcement.id %}active{% endif %}"
                                             type="button"
                                             data-announcement-id="{{ announcement.id }}"
                                             data-emoji="{{ emoji }}">
@@ -221,8 +228,7 @@
                                     </button>
                                 {% endfor %}
                             {% endwith %}
-                        </div>
-
+                        </div>                        
                         <button class="card-btn"
                             data-bs-toggle="collapse"
                             data-bs-target="#announcement{{ forloop.counter }}">
