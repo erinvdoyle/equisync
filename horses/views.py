@@ -81,8 +81,10 @@ def add_horse(request):
 @login_required
 def delete_horse(request, horse_id):
     horse = get_object_or_404(HorseProfile, id=horse_id)
+    horse_name = horse.name
     horse.delete()
-    return redirect('community_overview')
+    messages.success(request, f"{horse_name} has been deleted")
+    return redirect('horses:horse_list')
 
 def horse_list(request):
     horses = HorseProfile.objects.filter(approved=True)
