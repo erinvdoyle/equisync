@@ -4,9 +4,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 
-
-
-
 # Create your models here.
 class ExerciseSchedule(models.Model):
     horse = models.ForeignKey(HorseProfile, on_delete=models.CASCADE, related_name='exercise_schedules')
