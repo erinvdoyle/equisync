@@ -2,6 +2,12 @@ from django.contrib import admin
 from .announcements.models import Announcement
 from .ads.models import Ad
 from .models import CommunityEvent
+try:
+    from PIL import Image
+except ImportError as e:
+    import logging
+    logging.error(f"PIL could not be imported: {e}")
+
 
 
 class AdAdmin(admin.ModelAdmin):

@@ -14,10 +14,11 @@ Go back to [README.md](/README.md)
 
 ## Code Validation
 ### HTML
-|Page|Validator|Result|
-| --- | --- | --- |
-| Home |![home](./assets/testing/html-validator/home.PNG) | <mark>PASS<mark> |
 
+All html was checked for commented out code. Unfortunately my w3 schools validation check returned issues with my django tags, which I was not anticipating and did not have the time to rewrite within my entire codebase:
+
+
+![html-validator](/equisync/docs/images/valid-html.png)
 
 
 ### CSS
@@ -28,14 +29,29 @@ Due to the validator seemingly taking a dislike to preloaded css via bootstrap, 
 ![css-validator](/equisync/docs/images/valid-css.png)
 
 ### JavaScript
-1. listing_form.js <mark>PASS<mark> 
+1. community.js
 
-![listing_form](./assets/testing/listing_form.PNG)
+![community](/equisync/docs/images/js-comm-1.png)
 
-2. search.js <mark>PASS<mark>
+2. reactions.js 
 
-The initial test showed variable not declared. This was fixed.
-![search](./assets/testing/search.PNG)
+![community reactions](/equisync/docs/images/js-comm-2.png)
+
+3. competitions.js 
+
+![competitions](/equisync/docs/images/js-comp.png)
+
+4. script.js 
+
+![script.js](/equisync/docs/images/js-scriptjs.png.png)
+
+5. horses.js 
+
+![horses.js](/equisync/docs/images/js-horses.png)
+
+5. users.js 
+
+![users.js](/equisync/docs/images/js-users.png)
 
 ### Python
 1. community App
