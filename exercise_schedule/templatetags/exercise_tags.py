@@ -2,9 +2,11 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter(name='get_item')
 def get_item(dictionary, key):
     return dictionary.get(key)
+
 
 @register.simple_tag
 def get_appointment_classes(appointments):
@@ -22,12 +24,14 @@ def get_appointment_classes(appointments):
             classes.add('appointment-other')
     return ' '.join(classes)
 
+
 @register.filter
 def pretty_exercise(value):
     """ converts exercise types with underscores to title case """
     if isinstance(value, str):
         return value.replace('_', ' ').title()
     return value
+
 
 @register.filter
 def format_hours(value):

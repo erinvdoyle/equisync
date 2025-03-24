@@ -42,7 +42,7 @@
 }
 
 .feeding-chart-table tr:nth-child(even) {
-    background-color: #fafafa !;
+    background-color: #fafafa;
 }
 
 .feeding-chart-table a {

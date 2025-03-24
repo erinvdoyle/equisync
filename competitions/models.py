@@ -11,26 +11,36 @@ class Event(models.Model):
     end_time = models.DateTimeField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
-    favorited_by = models.ManyToManyField(User, related_name='favorite_events', blank=True)
+    favorited_by = models.ManyToManyField(
+        User, related_name='favorite_events', blank=True
+    )
     is_archived = models.BooleanField(default=False)
-    horses = models.ManyToManyField(HorseProfile, related_name='events', blank=True)
+    horses = models.ManyToManyField(
+        HorseProfile, related_name='events', blank=True
+    )
 
     def __str__(self):
         return self.title
-    
+
     def get_absolute_url(self):
         return reverse('competitions:event_detail', args=[self.id])
-    
+
+
 class EventHorse(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     horse = models.ForeignKey(HorseProfile, on_delete=models.CASCADE)
     class_details = models.CharField(max_length=200, blank=True, null=True)
     results = models.CharField(max_length=200, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
-    performance_rating = models.CharField(max_length=20, blank=True, null=True)
+    performance_rating = models.CharField(
+        max_length=20, blank=True, null=True
+    )
     jump_height = models.FloatField(blank=True, null=True)
     jump_height_str = models.CharField(max_length=20, blank=True, null=True)
     number_of_faults = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.horse.name} at {self.event.title} - {self.class_details or 'No Class'}"
+        return (
+            f"{self.horse.name} at {self.event.title} - "
+            f"{self.class_details or 'No Class'}"
+        )
