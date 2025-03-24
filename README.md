@@ -3,7 +3,7 @@
 <hr>
 Introduction to EquiSync project
 
-![EquiSync Image](./assets/...)
+![EquiSync Image](./static/images/index-img-1.webp)
 
 # Table Of Contents
 
@@ -167,26 +167,26 @@ This project followed agile principles throughout the development process. As my
 #### Epics & Milestones  
 User stories were grouped into nine key milestones (or "epics"), each representing a major feature or theme of the project
 <br>
-![Milestones](./assets/readme-images/agile-milestones.PNG)
+![Milestones](equisync/docs/images/agile-milestones.png)
 
 #### User Story Structure  
 Each issue was framed as a user story, complete with its acceptance criteria and task list to break the work into smaller chunks  
 <br>
-![User Story](./assets/readme-images/user-story-agile.PNG)  
+![User Story](equisync/docs/images/agile-user.png)  
 Whenever possible, commits were linked to their corresponding user stories for clear traceability 
 <br>
-![User Story](./assets/readme-images/user-story-commits.PNG)
+![User Story Commits](equisync/docs/images/agile-commits.png)
 
 #### ✅ MoSCoW Prioritization  
 To keep development focused and efficient, the MoSCoW method was used to prioritize features. This technique sorts requirements into four buckets:  
 **Must have**, **Should have**, **Could have**, and **Won’t have** helping ensure the most essential functionality made it into the final product  
 <br>
-![User Story](./assets/readme-images/user-story-moscow.PNG)
+![MoSCoW](equisync/docs/images/agile-issues.png)
 
 ####  GitHub Projects  
 A simple Kanban-style board was used via GitHub Projects to track progress. Tasks moved through stages like **To Do**, **In Progress**, and **Done**— keeping the workflow organized and easy to manage at a glance 
 <br>
-![User Story](./assets/readme-images/github-projects.PNG)
+![Github Projects](equisync/docs/images/agile-project.png)
 
 
 ## Design
