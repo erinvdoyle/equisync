@@ -1,6 +1,7 @@
 from django import forms
 from .models import FeedingChart
 
+
 class FeedingChartForm(forms.ModelForm):
     class Meta:
         model = FeedingChart

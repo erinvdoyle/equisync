@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from horses.models import HorseProfile 
+from horses.models import HorseProfile
 from feeding_management.models import FeedingChart
 from .tables import FeedingChartTable
 from .models import FeedingChart
@@ -11,8 +11,8 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.db.models import Q
 
-
 User = get_user_model()
+
 
 @login_required
 def horse_feeding_chart(request, horse_id):
@@ -25,10 +25,16 @@ def horse_feeding_chart(request, horse_id):
 
     if not feeding_chart:
         if is_staff:
-            feeding_chart = FeedingChart.objects.create(horse=horse, approved=True, last_updated_by=request.user)
+            feeding_chart = FeedingChart.objects.create(
+                horse=horse,
+                approved=True,
+                last_updated_by=request.user
+            )
             messages.success(request, "New feeding chart created")
         else:
-            messages.warning(request, "Only admins can create a feeding plan for this horse")
+            messages.warning(
+                request, "Only admins can create a feeding plan for this horse"
+            )
             return redirect('horses:horse_profile', horse_id=horse.id)
 
     if request.method == 'POST' and can_edit:
@@ -44,17 +50,25 @@ def horse_feeding_chart(request, horse_id):
                 return redirect('feeding_management:all_horses_feeding')
             else:
                 feeding_plan.approved = False
-                messages.success(request, "Your updates have been submitted for admin approval")
+                messages.success(
+                    request,
+                    "Your updates have been submitted for admin approval"
+                )
 
                 staff_users = User.objects.filter(is_staff=True)
                 for admin in staff_users:
                     Notification.objects.create(
                         user=admin,
-                        message=f"{request.user.username} submitted feeding plan updates for {horse.name}."
+                        message=(
+                            f"{request.user.username} submitted feeding plan "
+                            f"updates for {horse.name}."
+                        )
                     )
                 feeding_plan.save()
-                return redirect('feeding_management:horse_feeding_chart_readonly', horse_id=horse.id)
-
+                return redirect(
+                    'feeding_management:horse_feeding_chart_readonly',
+                    horse_id=horse.id
+                )
     else:
         form = FeedingChartForm(instance=feeding_chart)
 
@@ -67,12 +81,20 @@ def horse_feeding_chart(request, horse_id):
         'feeding_chart': feeding_chart,
     }
 
-    return render(request, 'feeding_management/horse_feeding_chart.html', context)
+    return render(
+        request,
+        'feeding_management/horse_feeding_chart.html',
+        context
+    )
+
 
 @login_required
 def all_horses_feeding(request):
     user_horses = HorseProfile.objects.filter(
-        Q(owner=request.user) | Q(staff=request.user) | Q(barn_manager=request.user) | Q(rider=request.user)
+        Q(owner=request.user) |
+        Q(staff=request.user) |
+        Q(barn_manager=request.user) |
+        Q(rider=request.user)
     ).distinct()
 
     if request.GET.get('from') == 'horse_profile':
@@ -97,7 +119,13 @@ def all_horses_feeding(request):
         'table': table,
         'pending_charts': pending_charts
     }
-    return render(request, 'feeding_management/all_horses_feeding.html', context)
+
+    return render(
+        request,
+        'feeding_management/all_horses_feeding.html',
+        context
+    )
+
 
 @login_required
 def horse_feeding_chart_readonly(request, horse_id):
@@ -108,7 +136,13 @@ def horse_feeding_chart_readonly(request, horse_id):
         'horse': horse,
         'feeding_chart': feeding_chart,
     }
-    return render(request, 'feeding_management/horse_feeding_chart_readonly.html', context)
+
+    return render(
+        request,
+        'feeding_management/horse_feeding_chart_readonly.html',
+        context
+    )
+
 
 @staff_member_required
 def pending_feeding_approvals(request):
@@ -118,4 +152,8 @@ def pending_feeding_approvals(request):
         'pending_charts': pending_charts
     }
 
-    return render(request, 'feeding_management/pending_approvals.html', context)
+    return render(
+        request,
+        'feeding_management/pending_approvals.html',
+        context
+    )

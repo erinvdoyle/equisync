@@ -23,7 +23,9 @@ Go back to [README.md](/README.md)
 ### CSS
 Test Results CSS  <mark>PASS<mark> 
 
-![css-validator](./assets/testing/css-validator.PNG)
+Due to the validator seemingly taking a dislike to preloaded css via bootstrap, I was unable to run the site without having multiple errors outside of my code. However, I passed each of my app's css files through with no errors. This was my first tango with separating css into dedicated files for each app and the organization of these files and my classes would have improved with more time
+
+![css-validator](/equisync/docs/images/valid-css.png)
 
 ### JavaScript
 1. listing_form.js <mark>PASS<mark> 
@@ -106,42 +108,178 @@ The initial test showed variable not declared. This was fixed.
 ![views.py](/equisync/docs/images/comm-pep-17.png)
 
 2. competitions app
-- settings.py <mark>PASS<mark> 
+- calendar_tags.py <mark>PASS<mark> 
 
-![settings](./assets/testing/automarket-settings.PNG)
+![calendar_tags](/equisync/docs/images/comp-pep-1.png)
+
+- admin.py <mark>PASS<mark>
+
+![admin.py](/equisync/docs/images/comp-pep-2.png)
+
+- apps.py <mark>PASS<mark>
+
+![apps.py](/equisync/docs/images/comp-pep-3.png)
+
+- models.py <mark>PASS<mark>
+
+![models.py](/equisync/docs/images/comp-pep-4.png)
 
 - urls.py <mark>PASS<mark>
 
-![urls](./assets/testing/automarket-urls.PNG)
+![urls.py](/equisync/docs/images/comp-pep-5.png)
+
+- utils.py <mark>PASS<mark>
+
+![utils.py](/equisync/docs/images/comp-pep-6.png)
 
 - views.py <mark>PASS<mark>
 
-![views](./assets/testing/automarket-views.PNG)
+![views.py](/equisync/docs/images/comp-pep-7.png)
 
 3.  equisync project main
-- settings.py <mark>PASS<mark> 
+- asgi.py <mark>PASS<mark>
 
-![settings](./assets/testing/automarket-settings.PNG)
+![asgi.py](/equisync/docs/images/eq-pep-1.png)
+
+- InstallCertificates.py <mark>PASS<mark>
+
+![InstallCertificates.py](/equisync/docs/images/eq-pep-2.png)
+
+- settings.py <mark>PASS<mark>
+
+![settings.py](/equisync/docs/images/eq-pep-3.png)
+
+- urls.py <mark>PASS<mark>
+
+![urls.py](/equisync/docs/images/eq-pep-4.png)
+
+- wsgi.py <mark>PASS<mark>
+
+![wsgi.py](/equisync/docs/images/eq-pep-5.png)
+
+- manage.py <mark>PASS<mark>
+
+![manage.py](/equisync/docs/images/eq-pep-6.png)
+
+- models.py <mark>PASS<mark>
+
+![models.py](/equisync/docs/images/eq-pep-7.png)
 
 4. exercise_schedule app
-- settings.py <mark>PASS<mark> 
+- exercise_tags.py <mark>PASS<mark>
 
-![settings](./assets/testing/automarket-settings.PNG)
+![exercise_tags.py](/equisync/docs/images/ex-pep-1.png)
+
+- admin.py <mark>PASS<mark>
+
+![admin](/equisync/docs/images/ex-pep-2.png)
+
+- apps.py <mark>PASS<mark>
+
+![apps.py](/equisync/docs/images/ex-pep-3.png)
+
+- forms.py <mark>PASS<mark>
+
+![forms.py](/equisync/docs/images/ex-pep-4.png)
+
+- models.py <mark>PASS<mark>
+
+![models](/equisync/docs/images/ex-pep-5.png)
+
+- urls.py <mark>PASS<mark>
+
+![urls](/equisync/docs/images/ex-pep-6.png)
+
+- views.py <mark>PASS<mark>
+
+![views](/equisync/docs/images/ex-pep-7.png)
 
 5. feeding_management app
-- settings.py <mark>PASS<mark> 
+- admin.py <mark>PASS<mark>
 
-![settings](./assets/testing/automarket-settings.PNG)
+![admin.py](/equisync/docs/images/fm-pep-1.png)
+
+- apps.py <mark>PASS<mark>
+
+![apps.py](/equisync/docs/images/fm-pep-2.png)
+
+- forms.py <mark>PASS<mark>
+
+![forms](/equisync/docs/images/fm-pep-3.png)
+
+- models.py <mark>PASS<mark>
+
+![models](/equisync/docs/images/fm-pep-4.png)
+
+- tables.py <mark>PASS<mark>
+
+![tables](/equisync/docs/images/fm-pep-5.png)
+
+- urls.py <mark>PASS<mark>
+
+![urls](/equisync/docs/images/fm-pep-6.png)
+
+- views.py <mark>PASS<mark>
+
+![views](/equisync/docs/images/fm-pep-7.png)
 
 6. horses app
-- settings.py <mark>PASS<mark> 
+- admin.py <mark>PASS<mark>
 
-![settings](./assets/testing/automarket-settings.PNG)
+![admin.py](/equisync/docs/images/h-pep-1.png)
+
+- apps.py <mark>PASS<mark>
+
+![apps.py](/equisync/docs/images/h-pep-2.png)
+
+- forms.py <mark>PASS<mark>
+
+![forms](/equisync/docs/images/h-pep-3.png)
+
+- models.py <mark>PASS<mark>
+
+![models](/equisync/docs/images/h-pep-4.png)
+
+- urls.py <mark>PASS<mark>
+
+![urls](/equisync/docs/images/h-pep-5.png)
+
+- views.py <mark>PASS<mark>
+
+![views](/equisync/docs/images/h-pep-6.png)
 
 7. users app
-- settings.py <mark>PASS<mark> 
+- admin.py <mark>PASS<mark>
 
-![settings](./assets/testing/automarket-settings.PNG)
+![admin.py](/equisync/docs/images/u-pep-1.png)
+
+- apps.py <mark>PASS<mark>
+
+![apps.py](/equisync/docs/images/u-pep-2.png)
+
+- context-processors.py <mark>PASS<mark>
+
+![context-processors](/equisync/docs/images/u-pep-3.png)
+
+- forms.py <mark>PASS<mark>
+
+![forms](/equisync/docs/images/u-pep-4.png)
+
+- models.py <mark>PASS<mark>
+
+![models](/equisync/docs/images/u-pep-5.png)
+
+- signals.py <mark>PASS<mark>
+
+![signals](/equisync/docs/images/u-pep-6.png)
+
+- urls.py <mark>PASS<mark>
+
+![urls](/equisync/docs/images/u-pep-7.png)
+
+- views.py <mark>PASS<mark>
+
+![views](/equisync/docs/images/u-pep-8.png)
 
 ## Responsiveness
 During development each page was tested using dev tools in Google Chrome. The strategy involved ensuring that every page would adapt to various screen sizes beyond a width of 320px, as opposed to relying on fixed device-specific widths.
@@ -154,7 +292,7 @@ Further testing was done on mobile to confirm all is working as expected.
 
 
 
-### Galaxy S20 Ultra
+### iPhone 13 Pro
 <details><summary>Home</summary><img src="./assets/testing/responsiveness/Home.jpg"> </details>
 <details><summary>Listings</summary> <img src="./assets/testing/responsiveness/Listings.jpg"></details>
 <details><summary>Single Listing</summary><img src="./assets/testing/responsiveness/single-listing-page.jpg"></details>
@@ -193,45 +331,42 @@ Further testing was done on mobile to confirm all is working as expected.
 
 
 ## User Story Testing
-| User Story | Screenshot | Result |
+| User Story | Result |
 | --- | --- | --- |
-| As a developer I want to organize my project with milestones and a Kanban board of issues |  |  |
-| As a developer I want to create user stories for different user roles |  |  |
-| As a developer I want to design a database schema for my project |  |  |
-| As a developer I want to create wireframes for the application |  |  |
-| As a developer I want to create a README file with documentation |  |  |
-| As a developer I want to set up a Django project |  |  |
-| As a developer I want to create and configure a database |  |  |
-| As a developer I want to deploy the app early and often |  |  |
-| As a site user I want to register an account |  |  |
-| As a site user I want to log in and log out of my account |  |  |
-| As a site user I want to have a profile created after registration |  |  |
-| As a visitor I want to learn about the stable, its owner, and its horses |  |  |
-| As a visitor I want to contact the manager |  |  |
-| As a visitor I want to view the calendar of upcoming horseshows |  |  |
-| As a visitor I want to view the stable's previous events and search by name or date |  |  |
-| As a visitor I want to view the stable community page |  |  |
-| As a visitor I want a responsive site design across all devices |  |  |
-| As the Barn Manager I want an admin dashboard to manage user updates |  |  |
-| As the Barn Manager I want full access while others have role-based access |  |  |
-| As the Barn Manager I want a simple data collection system for horse care |  |  |
-| As the Barn Manager I want to view each horse's exercise schedule in detail and overviews |  |  |
-| As the Barn Manager I want to quickly share horse data via email or text |  |  |
-| As the Barn Manager I want approval rights over community posts |  |  |
-| As the Barn Manager I want each horse to have a stored profile |  |  |
-| As the Barn Manager I want a show schedule for all horses and individuals |  |  |
-| As the Barn Manager I want a calendar for show schedules |  |  |
-| As the Barn Manager I want horse schedules manageable by all roles |  |  |
-| As the Barn Manager I want to see the full week's schedule for all horses |  |  |
-| As the Barn Manager I want feeding schedules stored and visible to all |  |  |
-| As the Barn Manager I want to update and group feeding schedules |  |  |
-| As an owner I want a community page to view and create posts |  |  |
-| As an owner I want clear displays of my horse's routines and schedules |  |  |
-| As an owner I want to receive schedule updates by email or sms |  |  |
-| As an owner I want weekly/monthly calendar views for competitions |  |  |
-| As a rider I want to track performance and stay consistent with horse routines |  |  |
-| As a rider I want to interact and trade on the community page |  |  |
-| As a staff member I want shared storage of routines to avoid confusion |  |  |
-| As a staff member I want a record of my care activities |  |  |
-| As a staff member I want to engage and trade on the community page |  |  |
+| As a developer I want to organize my project with milestones and a Kanban board of issues |  | Pass |
+| As a developer I want to create user stories for different user roles |  | Pass  |
+| As a developer I want to design a database schema for my project |  | Pass  |
+| As a developer I want to create wireframes for the application |  | Pass |
+| As a developer I want to create a README file with documentation |  | Pass |
+| As a developer I want to set up a Django project |  | Pass |
+| As a developer I want to create and configure a database |  | Pass |
+| As a developer I want to deploy the app early and often |  | Pass |
+| As a site user I want to register an account |  |  Pass |
+| As a site user I want to log in and log out of my account |  | Pass |
+| As a site user I want to have a profile created after registration |  | Pass |
+| As a visitor I want to learn about the stable, its owner, and its horses |  | Pass |
+| As a visitor I want to view the calendar of upcoming horseshows |  | Pass |
+| As a visitor I want to view the stable's previous events and search by name or date |  | Pass  |
+| As a visitor I want to view the stable community page |  | Pass |
+| As a visitor I want a responsive site design across all devices |  | Pass  |
+| As the Barn Manager I want full access while others have role-based access |  | Pass  |
+| As the Barn Manager I want a simple data collection system for horse care |  |  Pass |
+| As the Barn Manager I want to view each horse's exercise schedule in detail and overviews |  | Pass |
+| As the Barn Manager I want approval rights over community posts |  | Pass |
+| As the Barn Manager I want each horse to have a stored profile |  | Pass |
+| As the Barn Manager I want a show schedule for all horses and individuals |  | Pass  |
+| As the Barn Manager I want a calendar for show schedules |  | Pass |
+| As the Barn Manager I want horse schedules manageable by all roles |  | Pass  |
+| As the Barn Manager I want to see the full week's schedule for all horses |  | Pass |
+| As the Barn Manager I want feeding schedules stored and visible to all |  | Pass |
+| As the Barn Manager I want to update and group feeding schedules |  | Pass |
+| As an owner I want a community page to view and create posts |  | Pass |
+| As an owner I want clear displays of my horse's routines and schedules |  | Pass  |
+| As an owner I want to receive schedule updates by email or sms |  | Pass |
+| As an owner I want weekly/monthly calendar views for competitions |  | Pass |
+| As a rider I want to track performance and stay consistent with horse routines |  | Pass |
+| As a rider I want to interact and trade on the community page |  | Pass |
+| As a staff member I want shared storage of routines to avoid confusion |  | Pass |
+| As a staff member I want a record of my care activities |  | Pass  |
+| As a staff member I want to engage and trade on the community page |  | Pass |
 

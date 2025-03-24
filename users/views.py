@@ -4,7 +4,11 @@ from .models import Profile
 from .forms import ProfileForm
 from horses.models import HorseProfile
 from feeding_management.models import FeedingChart
-from exercise_schedule.models import ExerciseSchedule, Appointment, ExerciseScheduleItem
+from exercise_schedule.models import (
+    ExerciseSchedule,
+    Appointment,
+    ExerciseScheduleItem
+)
 from community.ads.models import Ad
 from community.announcements.models import Announcement
 from competitions.models import Event, EventHorse
@@ -20,10 +24,11 @@ from django.contrib import messages
 @login_required
 def view_profile(request):
     """
-    gets the profile for the logged in user
+    Gets the profile for the logged in user.
     """
-    profile, created = Profile.objects.get_or_create(user=request.user)
+    profile, _ = Profile.objects.get_or_create(user=request.user)
     return render(request, 'users/profile.html', {'profile': profile})
+
 
 @login_required
 def edit_profile(request):
@@ -39,19 +44,22 @@ def edit_profile(request):
 
     return render(request, 'users/edit_profile.html', {'form': form})
 
+
 def index(request):
     """
-    renders the index template
+    Renders the index template.
     """
     return render(request, 'users/index.html')
+
 
 def get_days_of_week(start_date=None):
     if not start_date:
         start_date = datetime.now()
-    
+
     start_of_week = start_date - timedelta(days=start_date.weekday())
     days_of_week = [start_of_week + timedelta(days=i) for i in range(7)]
     return days_of_week
+
 
 @login_required
 def dashboard(request):
@@ -64,58 +72,77 @@ def dashboard(request):
     announcements = Announcement.objects.filter(user=user)
     favorite_events = Event.objects.filter(favorited_by=request.user)
     create_notifications_for_past_events()
-    
-    unread_notifications_count = Notification.objects.filter(user=request.user, is_read=False).count()
-    notifications = Notification.objects.filter(user=request.user, is_read=False)
-    event_notifications = Notification.objects.filter(user=request.user, event_horse__isnull=False, is_read=False)
-    user_notifications = Notification.objects.filter(user=request.user, event_horse__isnull=True, is_read=False)
-    
+
+    unread_notifications_count = Notification.objects.filter(
+        user=request.user,
+        is_read=False
+    ).count()
+
+    notifications = Notification.objects.filter(
+        user=request.user,
+        is_read=False
+    )
+    event_notifications = notifications.filter(event_horse__isnull=False)
+    user_notifications = notifications.filter(event_horse__isnull=True)
+
     competition_results = {}
     for horse in horses:
-        results = EventHorse.objects.filter(horse=horse).order_by('-event__start_time')
+        results = EventHorse.objects.filter(
+            horse=horse
+        ).order_by('-event__start_time')
         competition_results[horse] = results
-    
+
     paginated_results = {}
     for horse, results in competition_results.items():
         paginator = Paginator(results, 4)
         page_number = request.GET.get(f'page_{horse.id}')
         page_obj = paginator.get_page(page_number)
         paginated_results[horse] = page_obj
-        
+
     weekly_schedule_items = []
     for horse in horses:
         schedule_for_horse = []
         for day in range(7):
             day_date = timezone.now().date() + timedelta(days=day)
-            schedule_items = ExerciseScheduleItem.objects.filter(schedule__horse=horse, schedule__date=day_date)
+            schedule_items = ExerciseScheduleItem.objects.filter(
+                schedule__horse=horse,
+                schedule__date=day_date
+            )
             schedule_for_horse.append({
                 'horse': horse,
                 'day': day_date,
                 'schedule_items': schedule_items
             })
         weekly_schedule_items.append(schedule_for_horse)
- 
-    horses_with_upcoming_appointments = []
+
     horses_with_appointments = []
+    horses_with_upcoming_appointments = []
 
+    current_time = timezone.now()
     for horse in horses:
-        current_time = timezone.now()
+        appointments = Appointment.objects.filter(
+            horse=horse,
+            date__lte=current_time.date()
+        ).order_by('-date')
 
-        appointments = Appointment.objects.filter(horse=horse, date__lte=current_time.date()).order_by('-date')
+        upcoming_appointments = Appointment.objects.filter(
+            horse=horse,
+            date__gte=current_time.date()
+        ).order_by('date')
+
         horses_with_appointments.append({
             'horse': horse,
             'appointments': appointments
         })
-
-        upcoming_appointments = Appointment.objects.filter(horse=horse, date__gte=current_time.date()).order_by('date')
         horses_with_upcoming_appointments.append({
             'horse': horse,
             'upcoming_appointments': upcoming_appointments
         })
 
-    days_of_week = get_days_of_week()  
+    days_of_week = get_days_of_week()
+
     print(f"Notifications count: {notifications.count()} for {user.username}")
-    
+
     context = {
         'user': user,
         'profile': profile,
@@ -136,13 +163,14 @@ def dashboard(request):
         'horses_with_upcoming_appointments': horses_with_upcoming_appointments,
         'days_of_week': days_of_week,
     }
-    
+
     return render(request, 'users/dashboard.html', context)
+
 
 @login_required
 def mark_notification_as_read(request, notification_id):
-    notification = Notification.objects.get(id=notification_id, user=request.user)
+    notification = Notification.objects.get(
+        id=notification_id, user=request.user)
     notification.is_read = True
     notification.save()
     return JsonResponse({'success': True})
-

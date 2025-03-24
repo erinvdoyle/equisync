@@ -33,6 +33,7 @@ def horse_profile(request, horse_id):
     }
     return render(request, 'horses/horse_profile.html', context)
 
+
 @login_required
 def edit_horse_profile(request, horse_id):
     horse = get_object_or_404(HorseProfile, id=horse_id)
@@ -50,11 +51,15 @@ def edit_horse_profile(request, horse_id):
     else:
         form = HorseForm(instance=horse)
 
-    return render(request, 'horses/edit_horse_profile.html', {'form': form, 'horse': horse})
+    return render(
+        request,
+        'horses/edit_horse_profile.html',
+        {'form': form, 'horse': horse}
+    )
+
 
 @login_required
 def add_horse(request):
-
     if request.method == 'POST':
         form = HorseForm(request.POST, request.FILES)
 
@@ -67,16 +72,23 @@ def add_horse(request):
             form.save_m2m()
             horse.staff.add(request.user)
 
-            messages.success(request, "Your horse has been submitted for admin approval")
+            messages.success(
+                request,
+                "Your horse has been submitted for admin approval"
+            )
             return redirect('horses:horse_profile', horse_id=horse.id)
         else:
             print("Form is invalid:")
             print(form.errors)
-            messages.error(request, "There was an error saving your horse. Please check the form")
+            messages.error(
+                request,
+                "There was an error saving your horse. Please check the form"
+            )
     else:
         form = HorseForm()
 
     return render(request, 'horses/add_horse.html', {'form': form})
+
 
 @login_required
 def delete_horse(request, horse_id):
@@ -86,14 +98,17 @@ def delete_horse(request, horse_id):
     messages.success(request, f"{horse_name} has been deleted")
     return redirect('horses:horse_list')
 
+
 def horse_list(request):
     horses = HorseProfile.objects.filter(approved=True)
     return render(request, 'horses/horse_list.html', {'horses': horses})
+
 
 @staff_member_required
 def pending_horses(request):
     horses = HorseProfile.objects.filter(approved=False)
     return render(request, 'horses/pending_horses.html', {'horses': horses})
+
 
 @staff_member_required
 def approve_horse(request, horse_id):

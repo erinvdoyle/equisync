@@ -82,27 +82,6 @@
     color: #4CAF50;
 }
 
-/* .exercise-calendar-container .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-} */
-
-/* .exercise-calendar-container .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    width: 80%;
-    max-width: 500px;
-} */
-
 .exercise-calendar-container .close {
     color: #aaa;
     float: right;
@@ -626,7 +605,7 @@
     background-color: #f1f1f1;
     color: #333;
     border-radius: 4px !important;
-    border: 1px solid 0 0 6px rgba(0, 0, 0, 0.9) !important;
+    border: 1px solid #2c2e3a !important;
 }
 
 .exercise-btn-secondary:hover {
@@ -1002,7 +981,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(175, 124, 135, 0.2); /* Soft rose overlay */
+  background-color: rgba(175, 124, 135, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;

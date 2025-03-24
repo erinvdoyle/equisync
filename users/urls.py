@@ -9,6 +9,8 @@ urlpatterns = [
     path('profile/', view_profile, name='view_profile'),
     path('profile/edit/', edit_profile, name='edit_profile'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('notification/read/<int:notification_id>/', views.mark_notification_as_read, name='mark_notification_as_read'),
+    path(
+        'notification/read/<int:notification_id>/',
+        views.mark_notification_as_read, name='mark_notification_as_read'),
     path('view_profile/', views.view_profile, name='view_profile'),
 ]

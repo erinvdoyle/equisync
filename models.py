@@ -2,45 +2,17 @@
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
+#   * Make sure each ForeignKey and
+# OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines
+# if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but
+# don't rename db_table values or field names.
+
 from django.db import models
 
 
-models.BooleanField()
-    is_active = models.BooleanField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user'
-
-
-class AuthUserGroups(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
-
-
-class AuthUserUserPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
-
-
-class CommunityAd(models.Model):
-    id = models.class AccountEmailaddress(models.Model):
+class AccountEmailaddress(models.Model):
     email = models.CharField(unique=True, max_length=254)
     verified = models.BooleanField()
     primary = models.BooleanField()
@@ -101,11 +73,45 @@ class AuthUser(models.Model):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     email = models.CharField(max_length=254)
-    is_staff = BigAutoField(primary_key=True)
+    is_staff = models.BigAutoField(primary_key=True)
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
+class CommunityAd(models.Model):
+    id = models.BigAutoField(primary_key=True)
     ad_type = models.CharField(max_length=10)
     image = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
     date_posted = models.DateTimeField()
     contact_info = models.CharField(max_length=255)
     approved = models.BooleanField()
@@ -147,7 +153,9 @@ class CommunityComment(models.Model):
 class CommunityReaction(models.Model):
     id = models.BigAutoField(primary_key=True)
     emoji = models.CharField(max_length=2)
-    announcement = models.ForeignKey(CommunityAnnouncement, models.DO_NOTHING)
+    announcement = models.ForeignKey(
+        CommunityAnnouncement, models.DO_NOTHING
+    )
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
     count = models.IntegerField()
 
@@ -163,7 +171,9 @@ class DjangoAdminLog(models.Model):
     object_repr = models.CharField(max_length=200)
     action_flag = models.SmallIntegerField()
     change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    content_type = models.ForeignKey(
+        'DjangoContentType', models.DO_NOTHING, blank=True, null=True
+    )
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
@@ -217,7 +227,9 @@ class ExerciseScheduleExerciseschedule(models.Model):
     notes = models.TextField()
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    created_by = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True)
+    created_by = models.ForeignKey(
+        AuthUser, models.DO_NOTHING, blank=True, null=True
+    )
     horse = models.ForeignKey('HorsesHorseprofile', models.DO_NOTHING)
 
     class Meta:
@@ -229,7 +241,9 @@ class ExerciseScheduleExercisescheduleitem(models.Model):
     id = models.BigAutoField(primary_key=True)
     exercise_type = models.CharField(max_length=50)
     duration = models.IntegerField()
-    schedule = models.ForeignKey(ExerciseScheduleExerciseschedule, models.DO_NOTHING)
+    schedule = models.ForeignKey(
+        ExerciseScheduleExerciseschedule, models.DO_NOTHING
+    )
 
     class Meta:
         managed = False
@@ -238,14 +252,24 @@ class ExerciseScheduleExercisescheduleitem(models.Model):
 
 class FeedingManagementFeedingchart(models.Model):
     id = models.BigAutoField(primary_key=True)
-    breakfast_feed = models.CharField(max_length=200, blank=True, null=True)
-    breakfast_quantity = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    breakfast_feed = models.CharField(
+        max_length=200, blank=True, null=True
+    )
+    breakfast_quantity = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True, null=True
+    )
     lunch_feed = models.CharField(max_length=200, blank=True, null=True)
-    lunch_quantity = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    lunch_quantity = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True, null=True
+    )
     dinner_feed = models.CharField(max_length=200, blank=True, null=True)
-    dinner_quantity = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    dinner_quantity = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True, null=True
+    )
     hay = models.CharField(max_length=200, blank=True, null=True)
-    hay_quantity = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    hay_quantity = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True, null=True
+    )
     supplements = models.CharField(max_length=200, blank=True, null=True)
     medicines = models.CharField(max_length=200, blank=True, null=True)
     notes = models.TextField()
@@ -258,7 +282,9 @@ class FeedingManagementFeedingchart(models.Model):
 
 class FeedingManagementFeedingchartApprovedUsers(models.Model):
     id = models.BigAutoField(primary_key=True)
-    feedingchart = models.ForeignKey(FeedingManagementFeedingchart, models.DO_NOTHING)
+    feedingchart = models.ForeignKey(
+        FeedingManagementFeedingchart, models.DO_NOTHING
+    )
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
@@ -275,8 +301,16 @@ class HorsesHorseprofile(models.Model):
     gender = models.CharField(max_length=10)
     image = models.CharField(max_length=100, blank=True, null=True)
     barn_manager = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    owner = models.ForeignKey(AuthUser, models.DO_NOTHING, related_name='horseshorseprofile_owner_set')
-    rider = models.ForeignKey(AuthUser, models.DO_NOTHING, related_name='horseshorseprofile_rider_set')
+    owner = models.ForeignKey(
+        AuthUser,
+        models.DO_NOTHING,
+        related_name='horseshorseprofile_owner_set'
+    )
+    rider = models.ForeignKey(
+        AuthUser,
+        models.DO_NOTHING,
+        related_name='horseshorseprofile_rider_set'
+    )
 
     class Meta:
         managed = False
@@ -285,7 +319,9 @@ class HorsesHorseprofile(models.Model):
 
 class HorsesHorseprofileStaff(models.Model):
     id = models.BigAutoField(primary_key=True)
-    horseprofile = models.ForeignKey(HorsesHorseprofile, models.DO_NOTHING)
+    horseprofile = models.ForeignKey(
+        HorsesHorseprofile, models.DO_NOTHING
+    )
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
@@ -337,7 +373,9 @@ class SocialaccountSocialapp(models.Model):
 
 class SocialaccountSocialappSites(models.Model):
     id = models.BigAutoField(primary_key=True)
-    socialapp = models.ForeignKey(SocialaccountSocialapp, models.DO_NOTHING)
+    socialapp = models.ForeignKey(
+        SocialaccountSocialapp, models.DO_NOTHING
+    )
     site = models.ForeignKey(DjangoSite, models.DO_NOTHING)
 
     class Meta:
@@ -350,8 +388,13 @@ class SocialaccountSocialtoken(models.Model):
     token = models.TextField()
     token_secret = models.TextField()
     expires_at = models.DateTimeField(blank=True, null=True)
-    account = models.ForeignKey(SocialaccountSocialaccount, models.DO_NOTHING)
-    app = models.ForeignKey(SocialaccountSocialapp, models.DO_NOTHING, blank=True, null=True)
+    account = models.ForeignKey(
+        SocialaccountSocialaccount, models.DO_NOTHING
+    )
+    app = models.ForeignKey(
+        SocialaccountSocialapp, models.DO_NOTHING,
+        blank=True, null=True
+    )
 
     class Meta:
         managed = False
