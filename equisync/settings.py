@@ -38,6 +38,7 @@ SECRET_KEY = (
     '1qa#15s4x'
 )
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -182,15 +183,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dxpbpx72q',
-    'API_KEY': '933612367888562',
-    'API_SECRET': 'I95uXl4d_FOG43HxQQBeY2IY_R4',
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-ssl._create_default_https_context = ssl._create_unverified_context
+# ssl._create_default_https_context = ssl._create_unverified_context
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -206,3 +199,11 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'EquiSync Support <support@equisync.local>'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxpbpx72q',
+    'API_KEY': '933612367888562',
+    'API_SECRET': 'I95uXl4d_FOG43HxQQBeY2IY_R4',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
