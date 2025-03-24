@@ -43,7 +43,7 @@ Due to the validator seemingly taking a dislike to preloaded css via bootstrap, 
 
 4. script.js 
 
-![script.js](/equisync/docs/images/js-scriptjs.png.png)
+![script.js](/equisync/docs/images/js-scriptjs.png)
 
 5. horses.js 
 
@@ -343,9 +343,9 @@ Further testing was done on mobile to confirm all is working as expected.
 | Horse Exercise Schedule |![home](/equisync/docs/images/lh-exercise2.png) | <mark>PASS<mark> |
 | Feeding |![home](/equisync/docs/images/lh-feeding.png) | <mark>PASS<mark> |
 | Feeding Profile |![home](/equisync/docs/images/lh-feeding.png) | <mark>PASS<mark> |
-| Competition |![home](/equisync/docs/images/comps.png) | <mark>PASS<mark> |
-| Competition Details |![home](/equisync/docs/images/comps2.png) | <mark>PASS<mark> |
-| Commmunity |![home](/equisync/docs/images/comm.png) | <mark>PASS<mark> |
+| Competition |![home](/equisync/docs/images/lh-comps.png) | <mark>PASS<mark> |
+| Competition Details |![home](/equisync/docs/images/lh-comps2.png) | <mark>PASS<mark> |
+| Commmunity |![home](/equisync/docs/images/lh-comm.png) | <mark>PASS<mark> |
 
 
 ## Manual Testing
