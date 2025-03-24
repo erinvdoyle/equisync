@@ -327,8 +327,8 @@
 }
 
 .horse-thumbnail {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -341,7 +341,6 @@
 .horse-thumbnail img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 .default-thumbnail {
@@ -408,8 +407,8 @@
 }
 
 .horse-image {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -422,7 +421,6 @@
 .horse-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 .default-horse-icon {
@@ -437,7 +435,7 @@
 .horse-name {
     font-size: 2rem;
     font-weight: bold;
-    color: #77656d;
+    color: #af7c87;
 }
 
 .horse-name-centered {
@@ -510,6 +508,7 @@
 
     .horse-image {
         margin-bottom: 15px;
+        margin-right: 0;
     }
 
     .horse-info-container {

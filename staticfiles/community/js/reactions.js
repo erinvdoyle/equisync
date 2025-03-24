@@ -86,6 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.status === 'added') {
                     btn.classList.add("active");
+                    console.log(`You clicked: ${emoji} for announcement ${announcementId}`);
+                    console.log("Emoji Click Counts:", emojiClickCounts);
+
                 } else if (data.status === 'removed') {
                     btn.classList.remove("active");
                 } else {
