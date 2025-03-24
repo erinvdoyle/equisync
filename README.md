@@ -212,10 +212,107 @@ I used Graphviz to generate the final ERD, which I will discuss in the Models se
 
 </details>
 
-
-
 #### Models
 
+##### ERD Model Overview (EquiSync)
+
+This document provides a high-level summary of each model in the project and how they relate to each other, based on the Entity Relationship Diagram (ERD).
+
+---
+
+######  Core User & Authentication Models
+
+- **User (`auth_user`)**  
+  Django's default user model. Most models like `Ad`, `Announcement`, `HorseProfile`, etc., link to a user to indicate ownership.
+
+- **Group / Permission / User_Groups / User_Permissions**  
+  Built-in Django auth tables used for managing roles, permissions, and group memberships.
+
+---
+
+##### Horse & Care Models
+
+- **HorseProfile**  
+  Core to the system. Represents an individual horse with fields like name, age, breed, etc. Linked to `FeedingChart`, `ExerciseSchedule`, `Appointment`, `EventHorse`, and others.
+
+- **FeedingChart**  
+  Stores structured feeding routines for each `HorseProfile`, including meals, supplements, and medications.
+
+- **ExerciseSchedule**  
+  Linked to a horse, this defines their overall weekly training schedule. Related to `ExerciseScheduleItem`.
+
+- **ExerciseScheduleItem**  
+  Defines daily exercises under an `ExerciseSchedule`, including type and duration.
+
+- **Appointment**  
+  Tracks medical and care appointments for a horse (e.g. vet, farrier).
+
+---
+
+##### Competition & Event Models
+
+- **Event**  
+  Represents a competition, show, or clinic. Connects to participating horses via `EventHorse`.
+
+- **EventHorse**  
+  Intermediate model between `Event` and `HorseProfile`. Stores attendance and results.
+
+---
+
+##### Community & Social Models
+
+- **Ad**  
+  For sale/wanted ads linked to a user. Comments and contact info may be attached.
+
+- **Announcement**  
+  General posts or notices shared with the stable. Includes description, optional image, and reactions.
+
+- **Comment**  
+  Uses Django's `ContentType` framework to support commenting on different models (e.g. `Ad`, `Announcement`).
+
+- **Reaction**  
+  Emoji-based reactions linked to a specific `Announcement` and user.
+
+- **CommunityEvent**  
+  Informal, social, or stable-wide events (e.g., tack sales, BBQs).
+
+---
+
+##### Notifications & Logs
+
+- **Notification**  
+  Alerts linked to a user and optionally a horse or event. Tracks new comments, events, etc.
+
+- **LogEntry**  
+  Django's built-in admin log. Tracks model changes in the admin interface.
+
+---
+
+##### Other Utility Models
+
+- **Profile**  
+  Extends the default User model. Contains extra data such as role, avatar, etc.
+
+- **SavedAd**  
+  Join model allowing users to favorite or save ads for later.
+
+- **Site / SiteSettings / ContentType**  
+  Mostly related to Django's internal systems and the admin interface.
+
+---
+
+##### Relationships Summary
+
+- **User → Many**: `HorseProfile`, `Ad`, `Announcement`, `CommunityEvent`, `Comment`, `Notification`
+- **HorseProfile → Many**: `FeedingChart`, `ExerciseSchedule`, `Appointment`, `EventHorse`, `Notification`
+- **Ad / Announcement**: Support multiple `Comment` and `Reaction`
+- **Event → Many**: `EventHorse`
+- **ExerciseSchedule → Many**: `ExerciseScheduleItem`
+- **Announcement → Many**: `Reaction`
+- **User ↔ SavedAd ↔ Ad**: Users can favorite ads (many-to-many style)
+
+<details>
+  <summary>Planning Stage Discussion of Models</summary>
 1. User  
 The primary account management and authentication system. Contains login information (username, password, email) and connects to the Profile for additional details  
 
@@ -247,7 +344,8 @@ Tracks appointments for a horse, such as vet visits, farrier sessions, or other 
 Stores the exercise schedule for a horse  
 
 11. ShowSchedule  
-Represents the show and competition schedule for a horse, including dates, event locations, and details about participation  
+Represents the show and competition schedule for a horse, including dates, event locations, and details about participation
+</details>
 
 #### Relationships
 
