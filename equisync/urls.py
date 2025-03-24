@@ -16,9 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from community.ads.views import submit_ad, edit_ad
-# from community.announcements.views import submit_announcement, edit_announcement
-# from community.views import community_overview
 from users import views
 from django.conf import settings
 from django.conf.urls.static import static
