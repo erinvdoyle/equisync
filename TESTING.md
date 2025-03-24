@@ -335,7 +335,17 @@ Further testing was done on mobile to confirm all is working as expected.
 
 |Page|Validator|Result|
 | --- | --- | --- |
-| Home Desktop |![home](./assets/testing/lighthouse/home-d.PNG) | <mark>PASS<mark> |
+| Home |![home](/equisync/docs/images/lh-index.png) | <mark>PASS<mark> |
+| Dashboard |![home](/equisync/docs/images/lh-dashboard.png) | <mark>PASS<mark> |
+| Horse List |![home](/equisync/docs/images/lh-horses.png) | <mark>PASS<mark> |
+| Horse Profiles |![home](/equisync/docs/images/lh-horses2.png) | <mark>PASS<mark> |
+| Exercise Schedule |![home](/equisync/docs/images/lh-exercise.png) | <mark>PASS<mark> 
+| Horse Exercise Schedule |![home](/equisync/docs/images/lh-exercise2.png) | <mark>PASS<mark> |
+| Feeding |![home](/equisync/docs/images/lh-feeding.png) | <mark>PASS<mark> |
+| Feeding Profile |![home](/equisync/docs/images/lh-feeding.png) | <mark>PASS<mark> |
+| Competition |![home](/equisync/docs/images/comps.png) | <mark>PASS<mark> |
+| Competition Details |![home](/equisync/docs/images/comps2.png) | <mark>PASS<mark> |
+| Commmunity |![home](/equisync/docs/images/comm.png) | <mark>PASS<mark> |
 
 
 ## Manual Testing
