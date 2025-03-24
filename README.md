@@ -216,7 +216,7 @@ I used Graphviz to generate the final ERD, which I will discuss in the Models se
 
 ##### ERD Model Overview (EquiSync)
 
-This document provides a high-level summary of each model in the project and how they relate to each other, based on the Entity Relationship Diagram (ERD).
+A summary of each model in the project and how they relate to each other, as visualized in the Entity Relationship Diagram (ERD).
 
 ---
 
