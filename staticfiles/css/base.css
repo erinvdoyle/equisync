@@ -109,7 +109,7 @@ h1, h2 {
 }
 
 .navbar-gradient .nav-link {
-    /* color: white !important; */
+    font-weight: 500;
     padding: 10px 15px;
     transition: color 0.3s ease;
 }
@@ -570,7 +570,9 @@ main {
 }
 
 /* --- Error Page Styling ---------------------------------------------------------------------------------------------------------------- */
-#equisync-error-container {
+#equisync-error-container,
+#equisync-error-container-2,
+#equisync-error-container-3 {
     max-width: 700px !important;
     margin: 80px auto !important;
     padding: 40px !important;

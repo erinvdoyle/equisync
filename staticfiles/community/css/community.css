@@ -487,6 +487,27 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     color: #af7c87;
 }
 
+.equisync-placeholder-icon {
+    width: 100%;
+    height: 200px;
+    background-color: #fdecef;
+    color: #af7c87;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ad-card .equisync-placeholder-icon {
+    background-color: #fff4f7;
+  }
+  
+  .announcement-card .equisync-placeholder-icon {
+    background-color: #fdf1f6;
+  }
+  
 /* --- Weekly Events Section ----------------------------------------------------------------------------------------------------------------- */
 .calendar-section {
     background: #fff;
@@ -594,8 +615,29 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     background-color: #905f6e;
     transform: translateY(-2px);
   }
-  
 
+  .toolbar-buttons-an {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+   
+/* --- Emoji Reactions ----------------------------------------------------------------------------------------------------------------------- */
+.emoji-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    padding: 2px;
+    border-radius: 50%;
+  }
+  
+  .emoji-btn:hover {
+    transform: scale(1.2);
+    background-color: #af7c87;
+  }
+  
 /* --- Pagination ----------------------------------------------------------------------------------------------------------------------------- */
 .pagination {
     display: flex;
@@ -842,22 +884,19 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
     }
 }
 
+@media (max-width: 425px) {
+    .post-btn-1 {
+      padding: 6px 10px !important;
+      min-width: auto;
+      font-size: 1.1rem;
+    }
+  }
+
 @media (min-width: 768px) {
-    /* .ads-section .row,
-    .announcements-section .row {
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 15px; 
-    } */
 
     .ad-card, .announcement-card {
         width: 100%;
         max-width: 100%;
-    }
-
-
-    .ad-card img, .announcement-card img  {
-        max-height: 150px;
-        object-fit: cover;
     }
 }
 
@@ -966,10 +1005,6 @@ a:not(.btn):not(.community-btn):not(.cancel-btn):not(.card-btn):not(.delete-btn)
         font-size: 14px; 
         text-align: left;
     }
-
-    /* .category-field {
-        width: 55px;
-    } */
 
     .search-container input,
     .category-field {
