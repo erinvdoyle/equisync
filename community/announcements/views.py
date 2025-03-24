@@ -18,6 +18,10 @@ def submit_announcement(request):
             announcement = form.save(commit=False)
             announcement.user = request.user
             announcement.save()
+            messages.success(
+                request,
+                "Your announcement has been submitted for approval"
+            )
             return redirect(
                 'community:preview_announcement',
                 announcement_id=announcement.id

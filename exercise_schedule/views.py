@@ -207,6 +207,10 @@ logging.basicConfig(level=logging.DEBUG)
 def horse_exercise_schedule_view(request, horse_id):
     horse = get_object_or_404(HorseProfile, pk=horse_id)
 
+    # Optional: Prevent access to unapproved horses
+    if hasattr(horse, 'approved') and not horse.approved:
+        return HttpResponseForbidden("This horse has not been approved by an admin.")
+
     start_date_str = request.GET.get('start_date')
     end_date_str = request.GET.get('end_date')
     timeframe = request.GET.get('timeframe', 'week')
@@ -222,7 +226,8 @@ def horse_exercise_schedule_view(request, horse_id):
     elif timeframe == 'month':
         start_date = today.replace(day=1)
         end_date = (
-            start_date + timedelta(days=32)).replace(day=1) - timedelta(days=1)
+            start_date + timedelta(days=32)
+        ).replace(day=1) - timedelta(days=1)
     elif timeframe == 'year':
         start_date = today.replace(month=1, day=1)
         end_date = today.replace(month=12, day=31)
@@ -232,6 +237,20 @@ def horse_exercise_schedule_view(request, horse_id):
     else:
         start_date = today - timedelta(days=today.weekday())
         end_date = start_date + timedelta(days=6)
+    
+    current_date = dt.today()
+    start_week = current_date - timedelta(days=current_date.weekday())
+    end_week = start_week + timedelta(days=6)
+    days_of_week = [start_week + timedelta(days=i) for i in range(7)]
+    weekly_schedule_items = {day: [] for day in days_of_week}
+
+    if timeframe == 'day':
+        weekly_schedule_items = {
+            day: ExerciseScheduleItem.objects.filter(
+                schedule__horse=horse,
+                schedule__date=day
+            ) for day in days_of_week
+        }
 
     exercise_data = ExerciseScheduleItem.objects.filter(
         schedule__horse=horse,
@@ -262,7 +281,9 @@ def horse_exercise_schedule_view(request, horse_id):
         average_data = ExerciseScheduleItem.objects.filter(
             schedule__horse=horse,
             schedule__date__range=[start_date, end_date]
-        ).values('exercise_type').annotate(average_minutes=Avg('duration'))
+        ).values('exercise_type').annotate(
+            average_minutes=Avg('duration')
+        )
 
         average_exercise_time = [
             {
@@ -283,23 +304,9 @@ def horse_exercise_schedule_view(request, horse_id):
             )
             for item in average_exercise_time
         )
-
     else:
         average_exercise_time = []
         average_exercise_time_html = ''
-
-        date = dt.today()
-        start_week = date - timedelta(days=date.weekday())
-        end_week = start_week + timedelta(days=6)
-
-        days_of_week = [start_week + timedelta(days=i) for i in range(7)]
-
-        weekly_schedule_items = {
-            day: ExerciseScheduleItem.objects.filter(
-                schedule__horse=horse,
-                schedule__date=day
-            ) for day in days_of_week
-        }
 
     previous_weeks = [
         {
@@ -344,8 +351,8 @@ def horse_exercise_schedule_view(request, horse_id):
         })
 
     return render(
-        request, 'exercise_schedule/horse_exercise_schedule.html', context)
-
+        request, 'exercise_schedule/horse_exercise_schedule.html', context
+    )
 
 @login_required
 def weekly_exercise_schedule(request, horse_id):

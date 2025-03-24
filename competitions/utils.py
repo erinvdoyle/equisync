@@ -2,6 +2,7 @@ from django.utils import timezone
 from competitions.models import Event, EventHorse
 from notifications.models import Notification
 
+
 def create_notifications_for_past_events():
     now = timezone.now()
     past_events = Event.objects.filter(end_time__lt=now)
