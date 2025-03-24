@@ -1,9 +1,11 @@
 # EquiSync
-[Link to deployed site](https://)
+
+![EquiSync Image](./static/images/index-img-1.webp)
+
+[Link to deployed site](https://equisync-d4a4079b524b.herokuapp.com/)
 <hr>
 Introduction to EquiSync project
 
-![EquiSync Image](./static/images/index-img-1.webp)
 
 # Table Of Contents
 
@@ -283,9 +285,6 @@ A summary of each model in the project and how they relate to each other, as vis
 - **Notification**  
   Alerts linked to a user and optionally a horse or event. Tracks new comments, events, etc.
 
-- **LogEntry**  
-  Django's built-in admin log. Tracks model changes in the admin interface.
-
 ---
 
 ##### Other Utility Models
@@ -295,9 +294,6 @@ A summary of each model in the project and how they relate to each other, as vis
 
 - **SavedAd**  
   Join model allowing users to favorite or save ads for later.
-
-- **Site / SiteSettings / ContentType**  
-  Mostly related to Django's internal systems and the admin interface.
 
 ---
 
@@ -309,7 +305,6 @@ A summary of each model in the project and how they relate to each other, as vis
 - **Event → Many**: `EventHorse`
 - **ExerciseSchedule → Many**: `ExerciseScheduleItem`
 - **Announcement → Many**: `Reaction`
-- **User ↔ SavedAd ↔ Ad**: Users can favorite ads (many-to-many style)
 
 <details>
   <summary>Planning Stage Discussion of Models</summary>
@@ -584,5 +579,3 @@ git clone https://github.com/your-username/your-fork-name.git
 [Making Emojis Clickable](https://laracasts.com/discuss/channels/javascript/make-emojis-clickable-and-display-the-click-count?reply=932315)
 [Displaying Number of Comments](https://stackoverflow.com/questions/35941445/how-to-display-number-of-comments-in-django)
 [Implementing Reminder Functionality for Events](https://stackoverflow.com/questions/65561569/implement-reminder-functionality-for-events-in-python-django)
-
-test again
