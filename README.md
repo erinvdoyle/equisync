@@ -192,7 +192,7 @@ A simple Kanban-style board was used via GitHub Projects to track progress. Task
 ## Design
 
 ### Database Schema
-The Entity Relationship Diagram for EquiSync was created with Lucid Charts
+The original Entity Relationship Diagram for EquiSync was created with Lucid Charts
 
 <details>
   <summary>Equisync ERD (click)</summary>
@@ -200,6 +200,19 @@ The Entity Relationship Diagram for EquiSync was created with Lucid Charts
   ![database schema](./assets/readme-images/schema.png)
 
 </details>
+
+I created the ERD above as I planned my project. But by virtue of this being a passion project, and one which I would like to use to help record my own horses' management, my project quickly outgrew the first schema.
+
+I used Graphviz to generate the final ERD, which I will discuss in the Models section, just below this one
+
+<details>
+  <summary>Final Equisync ERD (click)</summary>
+   
+  ![database schema](/equisync/docs/images/erd_diagram.png)
+
+</details>
+
+
 
 #### Models
 

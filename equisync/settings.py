@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'notifications',
     'cloudinary',
     'cloudinary_storage',
+    'django_extensions',
 ]
 
 SITE_ID = 1
