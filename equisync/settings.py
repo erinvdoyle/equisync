@@ -11,18 +11,28 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 import ssl
 import certifi
 import dj_database_url
 from django.contrib.messages import constants as messages
 
-if os.path.isfile('env.py'):
-    import env
-
+from dotenv import load_dotenv
+import os
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+
+load_dotenv()
+
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME', 'dxpbpx72q'),
+    api_key=os.getenv('CLOUDINARY_API_KEY', '933612367888562'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET', 'I95uXl4d_FOG43HxQQBeY2IY_R4'),
+    secure=True
+)
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -199,11 +209,3 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'EquiSync Support <support@equisync.local>'
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dxpbpx72q',
-    'API_KEY': '933612367888562',
-    'API_SECRET': 'I95uXl4d_FOG43HxQQBeY2IY_R4',
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

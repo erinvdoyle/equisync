@@ -2,8 +2,10 @@ import datetime
 from datetime import datetime, date as dt, timedelta
 import logging
 
+from django.http import HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from django.db.models import IntegerField, Sum, Avg, Q
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -207,9 +209,9 @@ logging.basicConfig(level=logging.DEBUG)
 def horse_exercise_schedule_view(request, horse_id):
     horse = get_object_or_404(HorseProfile, pk=horse_id)
 
-    # Optional: Prevent access to unapproved horses
     if hasattr(horse, 'approved') and not horse.approved:
-        return HttpResponseForbidden("This horse has not been approved by an admin.")
+        return HttpResponseForbidden(
+            "This horse has not been approved by an admin")
 
     start_date_str = request.GET.get('start_date')
     end_date_str = request.GET.get('end_date')
@@ -237,7 +239,7 @@ def horse_exercise_schedule_view(request, horse_id):
     else:
         start_date = today - timedelta(days=today.weekday())
         end_date = start_date + timedelta(days=6)
-    
+
     current_date = dt.today()
     start_week = current_date - timedelta(days=current_date.weekday())
     end_week = start_week + timedelta(days=6)
@@ -353,6 +355,7 @@ def horse_exercise_schedule_view(request, horse_id):
     return render(
         request, 'exercise_schedule/horse_exercise_schedule.html', context
     )
+
 
 @login_required
 def weekly_exercise_schedule(request, horse_id):

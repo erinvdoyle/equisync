@@ -20,11 +20,19 @@ class HorseProfile(models.Model):
         User, on_delete=models.CASCADE, related_name='horse_rider')
     approved = models.BooleanField(default=False)
 
+    most_recent_ride = models.ForeignKey(
+        User, null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='horses_ridden'
+    )
+    last_ridden_at = models.DateTimeField(null=True, blank=True)
+
+    most_recent_care = models.ForeignKey(
+        User, null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='horses_cared_for'
+    )
+    last_cared_for_at = models.DateTimeField(null=True, blank=True)
+
     def __str__(self):
         return f"{self.name} ({self.breed}) - {self.gender} ({self.age})"
-
-    def most_recent_ride(self):
-        return self.rider
-
-    def most_recent_staff(self):
-        return self.staff

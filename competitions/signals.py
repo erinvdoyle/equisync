@@ -21,14 +21,20 @@ def get_approvers():
 @receiver(post_save, sender=Event)
 def notify_admins_of_new_event(sender, instance, created, **kwargs):
     if created and not instance.approved:
-        message = f"New event '{instance.title}' submitted by {instance.created_by.username} — pending approval."
+        message = (
+            f"New event '{instance.title}' submitted by "
+            f"{instance.created_by.username} — pending approval."
+        )
+
         for approver in get_approvers():
             send_notification(approver, message)
+
 
 @receiver(post_save, sender=Event)
 def notify_creator_on_approval(sender, instance, created, **kwargs):
     if not created and instance.approved:
-        if 'approved' in instance.__dict__ and instance.__dict__.get('approved') is False:
+        if 'approved' in instance.__dict__ and instance.__dict__.get(
+                'approved') is False:
             return
         message = f"Your event '{instance.title}' has been approved!"
         send_notification(instance.created_by, message)

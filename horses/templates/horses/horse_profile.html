@@ -48,7 +48,7 @@
                     None Assigned
                 {% endfor %}
             </p>
-            <p><strong>Last Cared For By:</strong> {{ horse.most_recent_staff.name }}</p>
+            <p><strong>Last Cared For By:</strong> {{ horse.most_recent_care.get_full_name|default:horse.most_recent_care.username }}</p>
         </div>
 
         <div class="horse-info-card">
