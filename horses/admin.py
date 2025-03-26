@@ -17,7 +17,8 @@ class HorseProfileAdmin(admin.ModelAdmin):
     form = HorseProfileAdminForm
     raw_id_fields = ('owner', 'barn_manager', 'rider')
     filter_horizontal = ('staff',)
-    list_display = ('name', 'owner', 'approved')
+    list_display = (
+        'name', 'owner', 'most_recent_ride', 'most_recent_care',  'approved')
     list_filter = ('approved',)
 
     actions = ['approve_selected_horses']

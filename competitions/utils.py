@@ -10,8 +10,11 @@ def create_notifications_for_past_events():
     for event in past_events:
         for event_horse in EventHorse.objects.filter(event=event):
             user = event_horse.horse.owner
-            message = f"Please update the results and notes for {event_horse.horse.name} in {event.title}."
-            
+            message = (
+                f"Please update the results and notes for "
+                f"{event_horse.horse.name} in {event.title}."
+            )
+
             notification, created = Notification.objects.get_or_create(
                 user=user,
                 event_horse=event_horse,
