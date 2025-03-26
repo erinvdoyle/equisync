@@ -48,13 +48,25 @@
                     None Assigned
                 {% endfor %}
             </p>
-            <p><strong>Last Cared For By:</strong> {{ horse.most_recent_care.get_full_name|default:horse.most_recent_care.username }}</p>
+            <p><strong>Last Cared For By:</strong>
+                {% if horse.most_recent_care %}
+                    {{ horse.most_recent_care.get_full_name|default:horse.most_recent_care.username }}
+                {% else %}
+                    Not yet recorded
+                {% endif %}
+            </p>           
         </div>
 
         <div class="horse-info-card">
             <h2>Riding & Exercise</h2>
             <p><strong>Primary Rider:</strong> {{ horse.rider.get_full_name|default:horse.rider.username }}</p>
-            <p><strong>Last Ridden By:</strong> {{ horse.most_recent_ride.name }}</p>
+            <p><strong>Last Ridden By:</strong>
+                {% if horse.most_recent_ride %}
+                    {{ horse.most_recent_ride.get_full_name|default:horse.most_recent_ride.username }}
+                {% else %}
+                    Not yet recorded
+                {% endif %}
+            </p>            
             <p><strong>Exercise Schedule:</strong> 
                 {% if has_exercise_schedule %}
                   <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="info-link">View</a>
