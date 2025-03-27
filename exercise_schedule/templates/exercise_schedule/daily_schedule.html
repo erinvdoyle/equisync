@@ -12,6 +12,20 @@
 
     <div class="form-section equisync-form">
         <h2 class="form-title">Add or Update Exercise</h2>
+
+        {% if is_editing %}
+            <div class="form-alert editing">
+                You are editing the schedule for 
+                <strong>{{ schedule_form.initial.horse }}</strong> on 
+                <strong>{{ date|date:"F j, Y" }}</strong>.
+            </div>
+        {% else %}
+            <div class="form-alert creating">
+                You are creating a new schedule
+            </div>
+        {% endif %}
+
+
         <form method="post" id="schedule-form">
             {% csrf_token %}
 
@@ -109,14 +123,31 @@
 
         horseSelect.addEventListener("change", function () {
             const horseId = horseSelect.value;
+            const selectedDate = document.getElementById("id_date")?.value;
+
             if (horseId) {
-                fetch(`{% url 'exercise_schedule:daily_schedule_view' %}?horse_id=${horseId}&date={{ date|date:'Y-m-d' }}`)
+                fetch(`{% url 'exercise_schedule:daily_schedule_view' %}?horse_id=${horseId}&date=${selectedDate}`)
                     .then(response => response.text())
                     .then(html => {
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
                         const newForm = doc.getElementById("schedule-form");
-                        scheduleForm.innerHTML = newForm.innerHTML;
+
+                        if (newForm) {
+                            scheduleForm.innerHTML = newForm.innerHTML;
+
+                            // Re-select the horse in the new dropdown
+                            const restoredHorseSelect = document.getElementById("id_horse");
+                            if (restoredHorseSelect) {
+                                restoredHorseSelect.value = horseId;
+                            }
+
+                            // Also restore the selected date
+                            const restoredDateInput = document.getElementById("id_date");
+                            if (restoredDateInput && selectedDate) {
+                                restoredDateInput.value = selectedDate;
+                            }
+                        }
                     })
                     .catch(error => {
                         console.error("Error fetching schedule details:", error);
@@ -125,4 +156,6 @@
         });
     });
 </script>
+
+
 {% endblock %}

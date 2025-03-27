@@ -29,6 +29,7 @@ class ExerciseScheduleItemForm(forms.ModelForm):
         widgets = {
             'exercise_type': forms.Select(choices=EXERCISE_CHOICES),
             'duration': forms.NumberInput(attrs={'min': 1}),
+            'time_category': forms.HiddenInput(),
         }
 
 

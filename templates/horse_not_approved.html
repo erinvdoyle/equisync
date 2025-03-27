@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5 py-5">
+  <div class="equisync-card rose-shadow p-5">
+    <h1 class="text-danger mb-3">Access Denied</h1>
+    <p class="lead">This horse has not yet been approved by a barn manager</p>
+    <p>Please wait for approval or contact your barn manager if this was unexpected</p>
+    <a href="javascript:history.back()" class="btn equisync-btn-intro mt-4">Go Back</a>
+  </div>
+</div>
+{% endblock %}

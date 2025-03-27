@@ -39,13 +39,15 @@ def daily_schedule_view(request, date=None, horse_id=None):
 
     schedule_form = ExerciseScheduleForm(initial={'date': date})
     schedule_form.fields['horse'].queryset = user_horses
-    item_forms = [ExerciseScheduleItemForm(prefix=str(i)) for i in range(3)]
+    item_forms = [ExerciseScheduleItemForm(prefix=str(
+        i)) for i in range(3)]
 
     if request.method == 'POST':
         schedule_form = ExerciseScheduleForm(request.POST)
         item_forms = [
-            ExerciseScheduleItemForm(request.POST, prefix=str(
-                i)) for i in range(3)]
+            ExerciseScheduleItemForm(request.POST, prefix=str(i))
+            for i in range(3)
+        ]
 
         if schedule_form.is_valid() and all(
                 form.is_valid() for form in item_forms):
@@ -54,30 +56,37 @@ def daily_schedule_view(request, date=None, horse_id=None):
 
             existing_schedule = ExerciseSchedule.objects.filter(
                 horse=schedule.horse,
-                date=date
+                date=schedule.date
             ).first()
 
             if existing_schedule:
                 schedule.id = existing_schedule.id
                 schedule.save(
                     update_fields=[
-                        'horse', 'date', 'notes', 'created_by', 'updated_at'])
+                        'horse', 'date', 'notes', 'created_by', 'updated_at'
+                    ]
+                )
                 ExerciseScheduleItem.objects.filter(
                     schedule=existing_schedule).delete()
             else:
                 schedule.save()
 
             for form in item_forms:
-                if form.cleaned_data[
-                        'exercise_type'] and form.cleaned_data['duration']:
+                if form.cleaned_data.get(
+                        'exercise_type') and form.cleaned_data.get('duration'):
                     item = form.save(commit=False)
                     item.schedule = schedule
                     item.save()
 
             return redirect(
                 'exercise_schedule:daily_schedule_view_date',
-                date=date.strftime("%Y-%m-%d")
+                date=schedule.date.strftime("%Y-%m-%d")
             )
+        else:
+            print("Form validation failed:")
+            print("Schedule form errors:", schedule_form.errors)
+            for form in item_forms:
+                print(f"Item form {form.prefix} errors:", form.errors)
 
     selected_horse_id = request.GET.get('horse_id')
     existing_schedule = None
@@ -90,11 +99,13 @@ def daily_schedule_view(request, date=None, horse_id=None):
 
         if existing_schedule:
             schedule_form = ExerciseScheduleForm(instance=existing_schedule)
-            item_forms = [
-                ExerciseScheduleItemForm(instance=item, prefix=str(i))
-                for i, item in enumerate(
-                    existing_schedule.schedule_items.all())
-            ]
+        schedule_form.fields['horse'].queryset = user_horses
+        item_forms = [
+            ExerciseScheduleItemForm(instance=item, prefix=str(i))
+            for i, item in enumerate(existing_schedule.schedule_items.all())
+        ]
+
+    is_editing = existing_schedule is not None
 
     context = {
         'schedules': queryset,
@@ -103,8 +114,10 @@ def daily_schedule_view(request, date=None, horse_id=None):
         'item_forms': item_forms,
         'user_horses': user_horses,
         'existing_schedule': existing_schedule,
+        'is_editing': is_editing,
     }
-    return render(request, 'exercise_schedule/daily_schedule.html', context)
+    return render(
+        request, 'exercise_schedule/daily_schedule.html', context)
 
 
 @login_required
@@ -148,7 +161,7 @@ def weekly_schedule_view(request, selected_date=None):
             appointments = Appointment.objects.filter(horse=horse, date=day)
 
             weekly_schedule[horse][day] = {
-                'schedules': schedules if schedules.exists() else None,
+                'schedules': list(schedules) if schedules.exists() else None,
                 'appointments': list(appointments)
             }
 
@@ -210,8 +223,11 @@ def horse_exercise_schedule_view(request, horse_id):
     horse = get_object_or_404(HorseProfile, pk=horse_id)
 
     if hasattr(horse, 'approved') and not horse.approved:
-        return HttpResponseForbidden(
-            "This horse has not been approved by an admin")
+        return render(
+            request,
+            "./horse_not_approved.html",
+            status=403
+            )
 
     start_date_str = request.GET.get('start_date')
     end_date_str = request.GET.get('end_date')
