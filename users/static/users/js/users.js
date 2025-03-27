@@ -150,10 +150,10 @@ function markNotificationAsRead(button, type) {
 }
 
 function updateNavbarNotificationBadge() {
-    const unreadCount = document.querySelectorAll('.notification-bell').length;
     const badge = document.querySelector('.navbar-nav .badge');
     if (badge) {
-        badge.textContent = unreadCount > 0 ? unreadCount : "";
-        badge.style.display = unreadCount > 0 ? "block" : "none";
+        const count = parseInt(badge.textContent) || 0;
+        badge.style.display = count > 0 ? "inline-block" : "none";
     }
 }
+
