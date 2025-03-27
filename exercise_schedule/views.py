@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import IntegerField, Sum, Avg, Q
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.timezone import now
 from .models import ExerciseSchedule, ExerciseScheduleItem, Appointment
 
 from horses.models import HorseProfile
@@ -71,12 +72,26 @@ def daily_schedule_view(request, date=None, horse_id=None):
             else:
                 schedule.save()
 
+            CARE_TYPES = ['walker', 'lunge', 'hand_walk', 'graze',
+                          'turnout', 'groundwork', 'other']
+
             for form in item_forms:
                 if form.cleaned_data.get(
                         'exercise_type') and form.cleaned_data.get('duration'):
                     item = form.save(commit=False)
                     item.schedule = schedule
                     item.save()
+
+                    exercise_type = item.exercise_type
+
+                    if item.exercise_type == 'ride':
+                        schedule.horse.most_recent_ride = request.user
+                        schedule.horse.last_ridden_at = now()
+                    if exercise_type in CARE_TYPES:
+                        schedule.horse.most_recent_care = request.user
+                        schedule.horse.last_cared_for_at = now()
+
+                    schedule.horse.save()
 
             return redirect(
                 'exercise_schedule:daily_schedule_view_date',
