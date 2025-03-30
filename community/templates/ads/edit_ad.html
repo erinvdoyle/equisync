@@ -3,34 +3,6 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
-    <script>
-        function populateForm(selectElement) {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-
-            if (selectedOption.value) {
-                document.getElementById("id_description").value = selectedOption.getAttribute("data-description");
-                document.getElementById("id_contact_info").value = selectedOption.getAttribute("data-contact_info");
-                document.getElementById("id_category").value = selectedOption.getAttribute("data-category");
-                document.getElementById("id_ad_type").value = selectedOption.getAttribute("data-ad_type");
-                document.getElementById("id_price").value = selectedOption.getAttribute("data-price");
-
-                // Show and update delete button action dynamically
-                const deleteButton = document.getElementById("delete-ad-btn");
-                deleteButton.style.display = "inline-block";
-                deleteButton.setAttribute("data-ad-id", selectedOption.value);
-            } else {
-                document.getElementById("edit-form").reset();
-                document.getElementById("delete-ad-btn").style.display = "none";
-            }
-        }
-
-        function confirmDelete() {
-            const adId = document.getElementById("delete-ad-btn").getAttribute("data-ad-id");
-            if (adId && confirm("Are you sure you want to delete this ad?")) {
-                window.location.href = `/community/ads/delete/${adId}/`;
-            }
-        }
-    </script>
 {% endblock %}
 
 {% block content %}

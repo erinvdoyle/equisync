@@ -100,14 +100,14 @@ def add_horse(request):
                 ).exists()
 
                 if not already_notified:
+                    display_name = request.user.get_full_name(
+                        ) or request.user.username
                     Notification.objects.create(
                         user=approver,
                         message=(
-                            f"{request.user.get_full_name() "
-                            f"or request.user.username} "
-                            f"added a new horse '{horse.name}' "
-                            f"that is awaiting approval. "
-                            f"Please set their feeding chart"
+                            f"{display_name} added a new horse '{horse.name}' "
+                            "that is awaiting approval. Please set their "
+                            "feeding chart."
                         )
                     )
 
@@ -162,9 +162,9 @@ def approve_horse(request, horse_id):
         send_notification(
             horse.owner,
             f"Your horse '{horse.name}' has been approved by admin")
-        print(f"📨 Notification sent to {horse.owner.username}")
+        print(f"Notification sent to {horse.owner.username}")
     else:
-        print(f"🔁 Horse {horse.name} was already approved")
+        print(f"Horse {horse.name} was already approved")
 
     messages.success(request, f"{horse.name} has been approved")
     return redirect('horses:pending_horses')

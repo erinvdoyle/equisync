@@ -3,24 +3,6 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'community/css/community.css' %}">
-    <script>
-        function populateAnnouncementForm(selectElement) {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-
-            if (selectedOption.value) {
-                document.getElementById("id_description").value = selectedOption.getAttribute("data-description");
-                document.getElementById("id_contact_info").value = selectedOption.getAttribute("data-contact_info");
-                document.getElementById("announcement-id-hidden").value = selectedOption.value;
-
-                const deleteForm = document.getElementById("delete-form");
-                deleteForm.action = `/community/announcements/delete/${selectedOption.value}/`;
-                deleteForm.style.display = "inline-block";
-            } else {
-                document.getElementById("edit-form").reset();
-                document.getElementById("delete-form").style.display = "none";
-            }
-        }
-    </script>
 {% endblock %}
 
 {% block content %}
