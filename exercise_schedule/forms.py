@@ -7,6 +7,7 @@ from .models import (
     EXERCISE_CHOICES
 )
 
+
 class ExerciseScheduleForm(forms.ModelForm):
     date = forms.DateField(
         widget=forms.DateInput(attrs={
