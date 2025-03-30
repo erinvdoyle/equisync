@@ -9,16 +9,6 @@
 {% block content %}
 <div class="form-container">
 
-    {% if messages %}
-    <div class="message-container messages-container">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} fade-message text-center">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-
     <h1 class="form-title">Add a New Horse</h1>
 
     <form method="POST" enctype="multipart/form-data">

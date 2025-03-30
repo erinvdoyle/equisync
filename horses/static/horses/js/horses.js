@@ -8,30 +8,28 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Fade out messages
-    const messages = document.querySelectorAll(".fade-message");
-    messages.forEach((msg) => {
-        setTimeout(() => {
-            msg.style.transition = "opacity 0.8s ease";
-            msg.style.opacity = "0";
-            setTimeout(() => msg.remove(), 800);
-        }, 3000);
-    });
-
     // Delete horse button
     const deleteBtn = document.querySelector(".delete-horse");
     if (deleteBtn) {
         deleteBtn.addEventListener("click", function () {
-            let horseId = this.getAttribute("data-horse-id");
-            let confirmDelete = confirm("Are you sure you want to remove this horse?");
-            if (confirmDelete) {
+            const horseId = this.getAttribute("data-horse-id");
+            const csrfToken = this.getAttribute("data-csrf-token");
+
+            if (!horseId) {
+                alert("Horse ID missing.");
+                return;
+            }
+
+            if (confirm("Are you sure you want to remove this horse?")) {
                 fetch(`/horses/delete/${horseId}/`, {
                     method: "POST",
-                    headers: { "X-CSRFToken": getCSRFToken() }
+                    headers: {
+                        "X-CSRFToken": csrfToken,
+                        "Content-Type": "application/json"
+                    }
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
+                .then(response => {
+                    if (response.ok) {
                         alert("Horse removed successfully.");
                         window.location.href = "/horses/";
                     } else {
@@ -42,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
+    
     // Image preview
     const imageInput = document.getElementById("imageUpload");
     const imagePreview = document.getElementById("horseImagePreview");

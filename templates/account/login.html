@@ -12,16 +12,6 @@
         </div>
     {% endif %}
 
-    {% if messages %}
-        <div id="message-container">
-            {% for message in messages %}
-                <div class="alert alert-info text-center fade-out">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-
     <form method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">

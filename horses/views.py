@@ -16,6 +16,7 @@ from competitions.models import EventHorse
 from notifications.utils import send_notification
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.http import JsonResponse
 
 
 @login_required
@@ -127,10 +128,15 @@ def add_horse(request):
 @login_required
 def delete_horse(request, horse_id):
     horse = get_object_or_404(HorseProfile, id=horse_id)
-    horse_name = horse.name
-    horse.delete()
-    messages.success(request, f"{horse_name} has been deleted")
-    return redirect('horses:horse_list')
+    
+    if request.method == "POST":
+        horse_name = horse.name
+        horse.delete()
+        messages.success(request, f"{horse_name} has been deleted")
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse(
+            {'success': False, 'error': 'Invalid request'}, status=400)
 
 
 def horse_list(request):

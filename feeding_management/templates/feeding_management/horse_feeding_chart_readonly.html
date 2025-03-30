@@ -7,16 +7,6 @@
 {% block content %}
 <div class="feeding-container">
     
-    {% if messages %}
-    <div class="message-container messages-container">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} fade-message text-center">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-
     <h1 class="feeding-title">Feeding Chart for {{ horse.name }}</h1>
 
     <div class="feeding-card">

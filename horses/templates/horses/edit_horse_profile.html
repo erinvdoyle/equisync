@@ -7,16 +7,7 @@
 
 {% block content %}
 <div class="form-container">
-    {% if messages %}
-    <div class="message-container messages-container">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} fade-message text-center">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-
+   
     <h1 class="form-title">Edit Horse</h1>
 
     <form method="POST" enctype="multipart/form-data" action="/horses/edit/{{ horse.id }}/">
@@ -73,9 +64,13 @@
         <div class="form-actions">
             <button type="submit" class="btn-primary">Save Changes</button>
             <a href="{% url 'horses:horse_list' %}" class="btn-secondary">Cancel</a>
-            <button type="button" class="btn-danger delete-horse" data-horse-id="{{ horse.id }}">Remove Horse</button>
+            <button type="button"
+                    class="btn-danger delete-horse"
+                    data-horse-id="{{ horse.id }}"
+                    data-csrf-token="{{ csrf_token }}">
+                Remove Horse
+            </button>
         </div>
-    </form>
-</div>
+        
 
 {% endblock %}    

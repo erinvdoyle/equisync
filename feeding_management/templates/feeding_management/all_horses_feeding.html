@@ -13,19 +13,6 @@
         <span>Click a horse's name to view or update their feeding plan</span>
     </div>
     
-    
-
-
-    {% if messages %}
-    <div class="message-container messages-container">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} fade-message text-center">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-
     {% if user.is_staff and pending_charts %}
         <div class="text-end mb-3">
             <a href="{% url 'feeding_management:pending_feeding_approvals' %}" class="btn btn-warning">

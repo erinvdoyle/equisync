@@ -12,15 +12,6 @@
   <h2 class="lato-header">{{ profile.user.username }}'s Profile</h2>
   <p class="header-subtext">Here's the info you’ve shared with EquiSync</p>
 
-  {% if messages %}
-    <div class="messages-container">
-      {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} text-center fade-message">
-          {{ message }}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
 
   <ul class="profile-details">
     <li><strong>Role:</strong> {{ profile.get_role_display }}</li>

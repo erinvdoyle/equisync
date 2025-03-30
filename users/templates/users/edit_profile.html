@@ -12,15 +12,6 @@
   <h2 class="lato-header">Edit Profile</h2>
   <p class="header-subtext">Add your contact details and any notes you'd like to share</p>
 
-  {% if messages %}
-    <div class="messages-container">
-      {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} text-center fade-message">
-          {{ message }}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
 
   <form method="post">
     {% csrf_token %}

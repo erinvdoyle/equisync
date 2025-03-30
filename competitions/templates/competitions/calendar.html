@@ -14,16 +14,6 @@
     </div>
 </div>
 
-{% if messages %}
-  <div class="messages-container">
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} fade-message">
-        {{ message }}
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
-
 {% if view_type == 'month' %}
     <h3 class="calendar-header">
         <span></span>
