@@ -125,70 +125,10 @@
             <div id="exercise-modal-details" class="main-ex-modal-body"></div>
         </div>
     </div>
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const modalOverlay = document.getElementById("exerciseModal");
-        const modalClose = document.querySelector(".main-ex-modal-close");
-        const modalTitle = document.querySelector(".modal-title");
-        const modalDetails = document.getElementById("exercise-modal-details");
-
-        function openModalWithSchedule(scheduleId, horseName, date) {
-            modalTitle.textContent = `${horseName}'s Schedule, ${date}`;
-            modalDetails.innerHTML = 'Loading...';
-
-            fetch(`/exercise_schedule/details/${scheduleId}/`)
-                .then(response => response.text())
-                .then(html => {
-                    modalDetails.innerHTML = html;
-                    modalOverlay.style.display = "flex";
-                })
-                .catch(error => {
-                    console.error("Error fetching exercise details:", error);
-                });
-        }
-
-        function openModalWithAppointment(horseName, date) {
-            modalTitle.textContent = `${horseName}'s Appointments, ${date}`;
-            modalDetails.innerHTML = 'Loading...';
-
-            fetch(`/exercise_schedule/appointments/${horseName}/${date}/`)
-                .then(response => response.text())
-                .then(html => {
-                    modalDetails.innerHTML = html;
-                    modalOverlay.style.display = "flex";
-                })
-                .catch(error => {
-                    console.error("Error fetching appointment details:", error);
-                });
-        }
-
-        modalClose.addEventListener("click", () => {
-            modalOverlay.style.display = "none";
-        });
-
-        window.addEventListener("click", event => {
-            if (event.target === modalOverlay) {
-                modalOverlay.style.display = "none";
-            }
-        });
-
-        document.querySelectorAll(".details-link").forEach(link => {
-            link.addEventListener("click", function () {
-                const scheduleId = this.getAttribute("data-schedule-id");
-                const horseName = this.getAttribute("data-horse-name");
-                const date = this.getAttribute("data-date");
-
-                if (scheduleId) {
-                    openModalWithSchedule(scheduleId, horseName, date);
-                } else {
-                    openModalWithAppointment(horseName, date);
-                }
-            });
-        });
-    });
-    </script>
 </div>
+
+<script src="{% static 'exercise_schedule/js/exercise_schedule.js' %}"></script> 
+
 {% endblock %}
 
 

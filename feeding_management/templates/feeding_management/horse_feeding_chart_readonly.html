@@ -49,18 +49,7 @@
     </div>    
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const messages = document.querySelectorAll(".fade-message");
-  
-      messages.forEach((msg) => {
-        setTimeout(() => {
-          msg.style.opacity = "0";
-        }, 3000);
-      });
-    });
-  </script>
-  
+<script src="{% static 'feeding_management/js/feeding_management.js' %}"></script>
 
 {% endblock %}
 

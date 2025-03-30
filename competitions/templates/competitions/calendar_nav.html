@@ -75,20 +75,7 @@
     </form>
 </div>
 
-<script>
-    function toggleSearch() {
-        let searchOverlay = document.querySelector('.search-overlay');
-        searchOverlay.classList.toggle('active');
-
-        if (searchOverlay.classList.contains('active')) {
-            searchOverlay.querySelector('input').focus();
-        }
-    }
-
-    function closeSearch() {
-        document.querySelector('.search-overlay').classList.remove('active');
-    }
-</script>
+<script src="{% static 'competitions/js/competitions.js' %}"></script>
 
 {% endblock %}
 

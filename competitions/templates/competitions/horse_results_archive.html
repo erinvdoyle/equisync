@@ -102,9 +102,10 @@
     <canvas id="performanceChart" width="400" height="200"></canvas>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+<script src="{% static 'competitions/js/competitions.js' %}"></script>
+
+<!-- 
     document.addEventListener("DOMContentLoaded", function () {
         let resultsList = document.getElementById("resultsList");
         let sortSelect = document.getElementById("sortResults");
@@ -273,6 +274,6 @@
 
         updateChart("all", "all");
     });
-</script>
+</script> -->
 
 {% endblock %}
