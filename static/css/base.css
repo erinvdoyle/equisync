@@ -163,7 +163,69 @@ h1, h2 {
     transition: transform 0.3s ease;
   }
   
+
+ /* --- Success Messages ----------------------------------------------------------------------------------------------------------------- */ 
+
+ .custom-message-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
   
+  .custom-alert {
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 0 10px rgba(255, 182, 193, 0.3); /* soft rose */
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1s ease, transform 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .alert-success {
+    background-color: #f0fff5;
+    border-left: 5px solid #6dbf7c;
+    color: #3d7a57;
+  }
+  
+  .alert-info {
+    background-color: #f0f8ff;
+    border-left: 5px solid #6fb4de;
+    color: #3c6e8f;
+  }
+  
+  .alert-warning {
+    background-color: #fffaf0;
+    border-left: 5px solid #f4c873;
+    color: #7b591f;
+  }
+  
+  .alert-error,
+  .alert-danger {
+    background-color: #fff5f7;
+    border-left: 5px solid #f79ea2;
+    color: #a43a4a;
+  }
+    
+  .close-btn {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .close-btn:hover {
+    color: #444;
+  }
+  
+
 /* --- Footer Styles ---------------------------------------------------------------------------------------------------------------------- */
 /* --- Footer design credit: https://codepen.io/mkmllr/details/YmVeEP ---*/
 

@@ -147,6 +147,17 @@
 
     <main class="flex-shrink-0 main-bg">
 
+        {% if messages %}
+        <div class="custom-message-container">
+            {% for message in messages %}
+            <div class="custom-alert alert-{{ message.tags }} fade-message">
+                <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+                {{ message|safe }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         {% block content %}
         <!-- Content Goes here -->
         {% endblock content %}
