@@ -6,7 +6,7 @@
     <ul class="noti-list" id="notifications-list">
         {% for notification in notifications %}
             <li id="notification-{{ notification.id }}" class="noti-list-item {% if not notification.is_read %}unread{% endif %}">
-                <span>{{ notification.message }}</span>
+                <span>{{ notification.message|safe }} </span>
                 <button class="noti-btn-outline mark-read-btn" onclick="markAsRead(this)" data-notification-id="{{ notification.id }}">
                     <i class="fas fa-check"></i> Mark as Read
                 </button>

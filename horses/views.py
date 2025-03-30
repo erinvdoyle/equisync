@@ -13,6 +13,9 @@ import cloudinary
 from feeding_management.models import FeedingChart
 from exercise_schedule.models import ExerciseSchedule
 from competitions.models import EventHorse
+from notifications.utils import send_notification
+from django.contrib.auth import get_user_model
+from django.db.models import Q
 
 
 @login_required
@@ -21,7 +24,8 @@ def horse_profile(request, horse_id):
     profiles = Profile.objects.filter(user=horse.owner)
 
     has_feeding_chart = FeedingChart.objects.filter(horse=horse).exists()
-    has_exercise_schedule = ExerciseSchedule.objects.filter(horse=horse).exists()
+    has_exercise_schedule = ExerciseSchedule.objects.filter(
+        horse=horse).exists()
     has_competition_results = EventHorse.objects.filter(horse=horse).exists()
 
     context = {
@@ -58,11 +62,13 @@ def edit_horse_profile(request, horse_id):
     )
 
 
+User = get_user_model()
+
+
 @login_required
 def add_horse(request):
     if request.method == 'POST':
         form = HorseForm(request.POST, request.FILES)
-
         if form.is_valid():
             horse = form.save(commit=False)
             horse.owner = request.user
@@ -74,15 +80,43 @@ def add_horse(request):
 
             messages.success(
                 request,
-                "Your horse has been submitted for admin approval"
+                f"Your horse has been submitted for admin approval. "
+                f"You will receive notification once your barn manager has "
+                f"approved and set your horse's feeding chart"
             )
+
+            approvers = User.objects.filter(
+                Q(is_staff=True) | Q(profile__role="Barn Manager")
+            ).distinct()
+
+            for approver in approvers:
+
+                already_notified = Notification.objects.filter(
+                    user=approver,
+                    is_read=False
+                ).filter(
+                    Q(message__icontains=horse.name) & Q(
+                        message__icontains="awaiting approval")
+                ).exists()
+
+                if not already_notified:
+                    Notification.objects.create(
+                        user=approver,
+                        message=(
+                            f"{request.user.get_full_name() "
+                            f"or request.user.username} "
+                            f"added a new horse '{horse.name}' "
+                            f"that is awaiting approval. "
+                            f"Please set their feeding chart"
+                        )
+                    )
+
             return redirect('horses:horse_profile', horse_id=horse.id)
         else:
-            print("Form is invalid:")
-            print(form.errors)
             messages.error(
                 request,
-                "There was an error saving your horse. Please check the form"
+                "There was an error saving your horse. Please " +
+                "check the form below."
             )
     else:
         form = HorseForm()
@@ -113,13 +147,24 @@ def pending_horses(request):
 @staff_member_required
 def approve_horse(request, horse_id):
     horse = get_object_or_404(HorseProfile, id=horse_id)
-    horse.approved = True
-    horse.save()
 
-    Notification.objects.create(
-        user=horse.owner,
-        message=f"Your horse '{horse.name}' has been approved by admin"
-    )
+    if not horse.approved:
+        horse.approved = True
+        horse.save()
+        print(f"Approved: {horse.name} (ID {horse.id})")
+
+        if not FeedingChart.objects.filter(horse=horse).exists():
+            FeedingChart.objects.create(horse=horse)
+            print(f"Feeding chart created for {horse.name}")
+        else:
+            print(f"Feeding chart already exists for {horse.name}")
+
+        send_notification(
+            horse.owner,
+            f"Your horse '{horse.name}' has been approved by admin")
+        print(f"📨 Notification sent to {horse.owner.username}")
+    else:
+        print(f"🔁 Horse {horse.name} was already approved")
 
     messages.success(request, f"{horse.name} has been approved")
     return redirect('horses:pending_horses')

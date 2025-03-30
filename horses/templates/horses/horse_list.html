@@ -40,6 +40,13 @@
                         {% endif %}
                     </div>
                     <h2 class="horse-name">{{ horse.name }}</h2>
+
+                    {% if not horse.approved %}
+                    <div class="alert alert-warning text-center mt-2 mb-2 py-1 px-2">
+                        <small><strong>{{ horse.name }}</strong> is pending admin approval.</small>
+                    </div>
+                    {% endif %}
+
                 </a>
 
                 <!-- Horse Details -->

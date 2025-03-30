@@ -71,7 +71,7 @@
                 {% if has_exercise_schedule %}
                   <a href="{% url 'exercise_schedule:horse_exercise_schedule' horse.id %}" class="info-link">View</a>
                 {% else %}
-                  <a href="{% url 'exercise_schedule:weekly_schedule_view' %}?from=horse_profile" class="info-link">Register your horse</a>
+                  <a href="{% url 'exercise_schedule:weekly_schedule_view' %}?from=horse_profile" class="info-link">Add Exercise</a>
                 {% endif %}
               </p>              
         </div>
@@ -82,7 +82,7 @@
                 {% if horse.feeding_chart %}
                     <a href="{% url 'feeding_management:horse_feeding_chart_readonly' horse.id %}" class="info-link">View</a>
                 {% else %}
-                    <a href="{% url 'feeding_management:all_horses_feeding' %}?from=horse_profile" class="info-link">Register your horse</a>
+                    <a href="{% url 'feeding_management:all_horses_feeding' %}?from=horse_profile" class="info-link">Add Feeding Chart</a>
                 {% endif %}
             </p>
         </div>
@@ -93,7 +93,7 @@
                 {% if horse.eventhorse_set.exists %}
                     <a href="{% url 'competitions:horse_results_archive' horse.id %}" class="info-link">View</a>
                 {% else %}
-                    <a href="{% url 'competitions:calendar_view' %}?from=horse_profile" class="info-link">Register your horse</a>
+                    <a href="{% url 'competitions:calendar_view' %}?from=horse_profile" class="info-link">Add or Join an Event</a>
                 {% endif %}
             </p>
         </div>

@@ -1,16 +1,61 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <style>
+    .pending-approvals-title {
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .rose-shadow-box {
+      box-shadow: 0 4px 20px rgba(255, 192, 203, 0.4);
+      border-radius: 16px;
+      padding: 1rem;
+      background-color: #fff;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .list-group-item.custom-approval {
+      background-color: #fff5f7;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      padding: 1rem;
+    }
+
+    .list-group-item.custom-approval strong {
+      font-weight: 600;
+    }
+
+    .horse-name-emoji {
+      font-size: 1.2rem;
+      margin-right: 6px;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
 <div class="container my-4">
-    <h2>Pending Feeding Plan Approvals</h2>
+    <h2 class="pending-approvals-title">Pending Feeding Plan Approvals</h2>
 
     {% if pending_charts %}
-        <ul class="list-group">
+        <ul class="list-group rose-shadow-box">
             {% for chart in pending_charts %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item custom-approval d-flex justify-content-between align-items-center">
                     <div>
+                        <span class="horse-name-emoji">🐴</span>
                         <strong>{{ chart.horse.name }}</strong> —
-                        submitted by {{ chart.last_updated_by.username|default:"Unknown" }}
-
+                        submitted by 
+                        {% if chart.last_updated_by %}
+                            {{ chart.last_updated_by.get_full_name|default:chart.last_updated_by.username }}
+                        {% else %}
+                            {{ chart.horse.owner.get_full_name|default:chart.horse.owner.username }}
+                        {% endif %}
                     </div>
                     <div>
                         <a href="{% url 'feeding_management:horse_feeding_chart' chart.horse.id %}" class="btn btn-primary btn-sm">Review</a>
@@ -19,8 +64,9 @@
             {% endfor %}
         </ul>
     {% else %}
-        <p>No pending approvals at the moment.</p>
+        <p class="text-center">No pending approvals at the moment.</p>
     {% endif %}
 </div>
 {% endblock %}
+
 
