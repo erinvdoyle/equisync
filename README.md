@@ -460,6 +460,9 @@ EquiSync uses the **[Lato](https://fonts.google.com/specimen/Lato)** font for al
 ## Use of AI
 
 ### Troubleshooting, errors, and bugs
+To protect sensitive information, the .env file was accidentally committed when I replaced env.py with it. The commit history has since been rewritten using Git's filter-branch tool to permanently remove the .env file from all previous commits. The .env file is now correctly listed in .gitignore and safely excluded from version control going forward. I used ChatGpt to guide me through this process
+
+
 
 ### Events Calendar Section
 
