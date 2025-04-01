@@ -6,14 +6,15 @@
 <hr>
 EquiSync is a full-stack web platform designed to help equestrian facilities manage horse care, communication, and scheduling — all in one place. Built with Django, it supports horse profiles, feeding and exercise plans, appointments, competition tracking, a mini online marketplace and announcement board, and user roles (owners, barn managers, and staff). With notifications, responsive design, and admin tools, EquiSync streamlines stable operations and keeps every member of the team connected
 
-## EquiSync Features Preview
+## Features Preview
 EquiSync provides streamlined tools for managing an equestrian facility, ensuring the right people have access to the right information — along with real-time notifications, responsive design, and an intuitive interface
 
 ### Key Features
 - Horse profile creation & approval workflow
+- User dashboard with centralized information
 - Feeding chart planner with staff alerts
-- Exercise scheduling and time tracking
-- Appointment & competition management
+- Exercise & appointment scheduling and time tracking
+- Competition management
 - Custom notification system
 - Role-based permissions
 - Mobile-friendly UI
@@ -434,9 +435,30 @@ The UI for this project was planned with Balsamiq Wireframes
 
 ### Color Scheme
 
+EquiSync uses a clean, modern visual identity designed to feel calm, professional, and accessible for a wide range of users in the equestrian space.
+
+I employed a color palette with a soft, muted scheme inspired by natural tones and stable life, with rose-tinted accents to create warmth and hierarchy
+
+| Purpose              | Color Name        | Hex Code    | Preview |
+|----------------------|-------------------|-------------|---------|
+| Primary Accent       | Rose Pink         | `#EFBCCF` | ![#EFBCCF]() |
+| Secondary Highlight  | Blush Coral       | `#FADADD` | ![#FADADD]() |
+| Neutral Background   | Light Cream       | `#FFF8F2` | ![#FFF8F2]() |
+| Text Color           | Charcoal Gray     | `#333333` | ![#333333]() |
+| Soft Divider/Shadow  | Dusty Taupe       | `#D7C6BF` | ![#D7C6BF]() |
+
+
 ### Typography
 
+EquiSync uses the **[Lato](https://fonts.google.com/specimen/Lato)** font for all primary headings. This friendly, open sans-serif typeface provides excellent readability across all screen sizes
 
+```css
+font-family: 'Lato', sans-serif;
+```
+
+**Example:**
+
+> ### Welcome to EquiSync
 
 ## Use of AI
 
