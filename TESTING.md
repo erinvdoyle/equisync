@@ -15,7 +15,7 @@ Go back to [README.md](/README.md)
 ## Code Validation
 ### HTML
 
-All html was checked for commented out code. Unfortunately my w3 schools validation check returned issues with my django tags, which I was not anticipating and did not have the time to rewrite within my entire codebase:
+All html was checked for commented out code. Unfortunately my w3 schools validation check returned issues with the django tags, which I was not anticipating and did not have the time to rewrite within my entire codebase:
 
 
 ![html-validator](/equisync/docs/images/valid-html.png)
@@ -24,7 +24,7 @@ All html was checked for commented out code. Unfortunately my w3 schools validat
 ### CSS
 Test Results CSS  <mark>PASS<mark> 
 
-Due to the validator seemingly taking a dislike to preloaded css via bootstrap, I was unable to run the site without having multiple errors outside of my code. However, I passed each of my app's css files through with no errors. This was my first tango with separating css into dedicated files for each app and the organization of these files and my classes would have improved with more time
+Due to the validator seemingly taking a dislike to preloaded css via bootstrap, I was unable to run the site without having multiple errors outside of my code. However, I passed each of my app's css files through with no errors to my own code. This was my first tango with separating css into dedicated files for each app and the organization of these files and my classes would have improved with more time. I have made an effort to clean up some of the abandanoned and unused css, but there is still work to be done.
 
 ![css-validator](/equisync/docs/images/valid-css.png)
 
@@ -298,13 +298,12 @@ Due to the validator seemingly taking a dislike to preloaded css via bootstrap, 
 ![views](/equisync/docs/images/u-pep-8.png)
 
 ## Responsiveness
-During development each page was tested using dev tools in Google Chrome. The strategy involved ensuring that every page would adapt to various screen sizes beyond a width of 320px, as opposed to relying on fixed device-specific widths.
-Further testing was done on mobile to confirm all is working as expected.
+During development each page was tested using dev tools in Google Chrome. All pages were tested primarily for each screen size between 320px and 1420px, with a consideration of larger desktops as well
 
 |Device|Screen Size|Pass/Fail|Comment|
 | --- | --- | --- | ---|
-| Iphone 12 | 320x480 | PASS | All sections are displayed correctly. All features work|
-| Iphone 13 Pro | 390x844 | PASS | All sections are displayed correctly. All features work|
+| Iphone 12 | 390x844 | PASS | All sections display correctly. All features work|
+| Iphone 13 Pro | 390x844 | PASS | All sections display correctly. All features work|
 
 
 
@@ -325,11 +324,10 @@ Further testing was done on mobile to confirm all is working as expected.
 
 ## Browser Compatibility
 
-
 |Browser|Result|Pass/Fail|Notes|
 | --- | --- | --- | ---|
-| Google Chrome | All pages, load as expected. All features work as expected | PASS | --- |
-| Edge | All pages, load as expected. All features work as expected | PASS | During initial testing there was an issue with the hero image on Edge. The reason was that the browser does not support avif files. The file was converted to webp and tested again.  |
+| Google Chrome | All pages load as expected. All features work as expected | PASS |
+| Edge | All pages, load as expected. All features work as expected | PASS |
 
 ## Lighthouse
 
@@ -357,42 +355,42 @@ Further testing was done on mobile to confirm all is working as expected.
 
 
 ## User Story Testing
-| User Story | Result |
-| --- | --- | --- |
-| As a developer I want to organize my project with milestones and a Kanban board of issues |  | Pass |
-| As a developer I want to create user stories for different user roles |  | Pass  |
-| As a developer I want to design a database schema for my project |  | Pass  |
-| As a developer I want to create wireframes for the application |  | Pass |
-| As a developer I want to create a README file with documentation |  | Pass |
-| As a developer I want to set up a Django project |  | Pass |
-| As a developer I want to create and configure a database |  | Pass |
-| As a developer I want to deploy the app early and often |  | Pass |
-| As a site user I want to register an account |  |  Pass |
-| As a site user I want to log in and log out of my account |  | Pass |
-| As a site user I want to have a profile created after registration |  | Pass |
-| As a visitor I want to learn about the stable, its owner, and its horses |  | Pass |
-| As a visitor I want to view the calendar of upcoming horseshows |  | Pass |
-| As a visitor I want to view the stable's previous events and search by name or date |  | Pass  |
-| As a visitor I want to view the stable community page |  | Pass |
-| As a visitor I want a responsive site design across all devices |  | Pass  |
-| As the Barn Manager I want full access while others have role-based access |  | Pass  |
-| As the Barn Manager I want a simple data collection system for horse care |  |  Pass |
-| As the Barn Manager I want to view each horse's exercise schedule in detail and overviews |  | Pass |
-| As the Barn Manager I want approval rights over community posts |  | Pass |
-| As the Barn Manager I want each horse to have a stored profile |  | Pass |
-| As the Barn Manager I want a show schedule for all horses and individuals |  | Pass  |
-| As the Barn Manager I want a calendar for show schedules |  | Pass |
-| As the Barn Manager I want horse schedules manageable by all roles |  | Pass  |
-| As the Barn Manager I want to see the full week's schedule for all horses |  | Pass |
-| As the Barn Manager I want feeding schedules stored and visible to all |  | Pass |
-| As the Barn Manager I want to update and group feeding schedules |  | Pass |
-| As an owner I want a community page to view and create posts |  | Pass |
-| As an owner I want clear displays of my horse's routines and schedules |  | Pass  |
-| As an owner I want to receive schedule updates by email or sms |  | Pass |
-| As an owner I want weekly/monthly calendar views for competitions |  | Pass |
-| As a rider I want to track performance and stay consistent with horse routines |  | Pass |
-| As a rider I want to interact and trade on the community page |  | Pass |
-| As a staff member I want shared storage of routines to avoid confusion |  | Pass |
-| As a staff member I want a record of my care activities |  | Pass  |
-| As a staff member I want to engage and trade on the community page |  | Pass |
 
+| User Story | Result |
+| --- | --- |
+| As a developer I want to organize my project with milestones and a Kanban board of issues | Pass |
+| As a developer I want to create user stories for different user roles | Pass |
+| As a developer I want to design a database schema for my project | Pass |
+| As a developer I want to create wireframes for the application | Pass |
+| As a developer I want to create a README file with documentation | Pass |
+| As a developer I want to set up a Django project | Pass |
+| As a developer I want to create and configure a database | Pass |
+| As a developer I want to deploy the app early and often | Pass |
+| As a site user I want to register an account | Pass |
+| As a site user I want to log in and log out of my account | Pass |
+| As a site user I want to have a profile created after registration | Pass |
+| As a visitor I want to learn about the stable, its owner, and its horses | Pass |
+| As a visitor I want to view the calendar of upcoming horseshows | Pass |
+| As a visitor I want to view the stable's previous events and search by name or date | Pass |
+| As a visitor I want to view the stable community page | Pass |
+| As a visitor I want a responsive site design across all devices | Pass |
+| As the Barn Manager I want full access while others have role-based access | Pass |
+| As the Barn Manager I want a simple data collection system for horse care | Pass |
+| As the Barn Manager I want to view each horse's exercise schedule in detail and overviews | Pass |
+| As the Barn Manager I want approval rights over community posts | Pass |
+| As the Barn Manager I want each horse to have a stored profile | Pass |
+| As the Barn Manager I want a show schedule for all horses and individuals | Pass |
+| As the Barn Manager I want a calendar for show schedules | Pass |
+| As the Barn Manager I want horse schedules manageable by all roles | Pass |
+| As the Barn Manager I want to see the full week's schedule for all horses | Pass |
+| As the Barn Manager I want feeding schedules stored and visible to all | Pass |
+| As the Barn Manager I want to update and group feeding schedules | Pass |
+| As an owner I want a community page to view and create posts | Pass |
+| As an owner I want clear displays of my horse's routines and schedules | Pass |
+| As an owner I want to receive schedule updates by email or sms | Pass |
+| As an owner I want weekly/monthly calendar views for competitions | Pass |
+| As a rider I want to track performance and stay consistent with horse routines | Pass |
+| As a rider I want to interact and trade on the community page | Pass |
+| As a staff member I want shared storage of routines to avoid confusion | Pass |
+| As a staff member I want a record of my care activities | Pass |
+| As a staff member I want to engage and trade on the community page | Pass |

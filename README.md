@@ -4,7 +4,7 @@
 
 [Link to deployed site](https://equisync-d4a4079b524b.herokuapp.com/)
 <hr>
-EquiSync is a full-stack web platform designed to help equestrian facilities manage horse care, communication, and scheduling — all in one place. Built with Django, it supports horse profiles, feeding and exercise plans, appointments, competition tracking, a mini online marketplace and announcement board, and user roles (owners, barn managers, and staff). With notifications, responsive design, and admin tools, EquiSync streamlines stable operations and keeps every member of the team connected
+EquiSync is a full-stack web platform designed to help equestrian facilities manage horse care, communication, and scheduling, all in one place. Built with Django, it supports horse profiles, feeding and exercise plans, appointments, competition tracking, a mini online marketplace and announcement board, and user roles (owners, barn managers, and staff). With notifications, responsive design, and admin tools, EquiSync streamlines stable operations and keeps every member of the team connected
 
 ## Features Preview
 EquiSync provides streamlined tools for managing an equestrian facility, ensuring the right people have access to the right information — along with real-time notifications, responsive design, and an intuitive interface
@@ -146,7 +146,7 @@ The primary goals of EquiSync:
 6. Most Importantly, Prioritize Horse Welfare and Performance
 
 ### Scope
-EquiSync is a horse stable management system designed to streamline communication and daily operations for barn managers, staff, riders, and horse owners. This application integrates key functionalities like scheduling, horse profile management, feeding guidelines, and a community page for announcements, events, and sales. 
+EquiSync is a horse stable management system designed to simplify communication and daily operations for barn managers, staff, riders, and horse owners. This application integrates key functionalities like scheduling, horse profile management, feeding guidelines, and a community page for announcements, events, and sales. 
 
 The scope of this project includes:
 
@@ -193,7 +193,7 @@ Whenever possible, commits were linked to their corresponding user stories for c
 
 #### ✅ MoSCoW Prioritization  
 To keep development focused and efficient, the MoSCoW method was used to prioritize features. This technique sorts requirements into four buckets:  
-**Must have**, **Should have**, **Could have**, and **Won’t have** helping ensure the most essential functionality made it into the final product  
+**Must have**, **Should have**, **Could have**, and **Won’t have**, helping ensure the most essential functionality made it into the final product  
 <br>
 ![MoSCoW](equisync/docs/images/agile-issues.png)
 
@@ -215,7 +215,7 @@ The original Entity Relationship Diagram for EquiSync was created with Lucid Cha
 
 </details>
 
-I created the ERD above as I planned my project. But by virtue of this being a passion project, and one which I would like to use to help record my own horses' management, my project quickly outgrew the first schema.
+I created the ERD above as I planned my project. But by virtue of this being a serious passion project ( and one which I would like to use to help record my own horses' management), EquiSync quickly outgrew the first schema.
 
 I used Graphviz to generate the final ERD, which I will discuss in the Models section, just below this one
 
@@ -462,11 +462,15 @@ EquiSync uses the **[Lato](https://fonts.google.com/specimen/Lato)** font for al
 ### Troubleshooting, errors, and bugs
 To protect sensitive information, the .env file was accidentally committed when I replaced env.py with it. The commit history has since been rewritten using Git's filter-branch tool to permanently remove the .env file from all previous commits. The .env file is now correctly listed in .gitignore and safely excluded from version control going forward. I used ChatGpt to guide me through this process
 
-
-
 ### Events Calendar Section
 
 ## Future Features
+
+### Email and SMS Notifications
+The most exciting future feature planned for EquiSync is a notification and record sharing system via email and text messages. The ability to send a a horse's recent routine or competition results to a veterinarian, or a weekly round up of a horse's exercise and appointments to its owner would make the app truly indespensible to many equine professionals.
+
+### Google Maps Integration
+Integrating a maps system to give competition and appointment venue addresses and directions would save clients the extra step of having to go outside of the app for their mapping needs
 
 ## Testing
 
