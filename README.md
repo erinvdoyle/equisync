@@ -453,16 +453,60 @@ I employed a color palette with a soft, muted scheme inspired by natural tones a
 
 EquiSync uses the **[Lato](https://fonts.google.com/specimen/Lato)** font for all primary headings. This friendly, open sans-serif typeface provides excellent readability across all screen sizes
 
-```html
-<h1 style="font-family: 'Lato', sans-serif; color: #333333;">Welcome to EquiSync</h1>
-```
-
 ## Use of AI
 
 ### Troubleshooting, errors, and bugs
 To protect sensitive information, the .env file was accidentally committed when I replaced env.py with it. The commit history has since been rewritten using Git's filter-branch tool to permanently remove the .env file from all previous commits. The .env file is now correctly listed in .gitignore and safely excluded from version control going forward. I used ChatGpt to guide me through this process
 
 ### Events Calendar Section
+
+## Features
+
+### Landing Page
+
+- The landing page consists of two main bootstrap features: A modal and a carousel. The modal introduces the user to EquiSync with a brief rundown of its purpose and features
+
+![Intro Modal](./equisync/docs/images/ss-landing1.png)
+
+- Once the user closes the modal, the carousel is revealed. This contains four slides with images of different sections of the EquiSync app with explanatory text beneath
+
+![Carousel](./equisync/docs/images/ss-landing2.png)
+
+- The navigation bar contains an SVG EquiSync logo and, for the unregistered or logged out user, links to sign up for the application or to log into it.
+
+![Visitor Navbar](./equisync/docs/images/ss-navbar.png)
+
+Once the user is logged in, the navbar contains links to all of EquiSync's feature pages as well as a user icon with separate navigation to the user profile, notifications, and logout. 
+
+![Register](./equisync/docs/images/ss-register.png)
+
+![Log in](./equisync/docs/images/ss-login.png)
+
+![User Navbar](./equisync/docs/images/ss-navbar2.png)
+
+![User Icon](./equisync/docs/images/ss-navbar3.png)
+
+- The navbar links switch to a burger menu with dropdown navigation on mobile devices
+
+![Mobile Navbar](./equisync/docs/images/ss-navbar4.png)
+
+![Mobile Navbar Dropdown](./equisync/docs/images/ss-navbar5.png)
+
+![Logout](./equisync/docs/images/ss-landing2.png)
+
+- The footer contains a link to my github page in lieu of contact details
+
+![Footer](./equisync/docs/images/ss-footer.png)
+
+### User Dashboard
+- Users get validation from many of the apps features throughout the site via success messages, such as this one, for successfully logging in
+
+![Success Messages](./equisync/docs/images/ss-login-success.png)
+
+- Once the user logs in, they are redirected to their user dashboard
+
+![User Dashboard](./equisync/docs/images/ss-landing2.png)
+
 
 ## Future Features
 
