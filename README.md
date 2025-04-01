@@ -4,8 +4,19 @@
 
 [Link to deployed site](https://equisync-d4a4079b524b.herokuapp.com/)
 <hr>
-Introduction to EquiSync project
+EquiSync is a full-stack web platform designed to help equestrian facilities manage horse care, communication, and scheduling — all in one place. Built with Django, it supports horse profiles, feeding and exercise plans, appointments, competition tracking, a mini online marketplace and announcement board, and user roles (owners, barn managers, and staff). With notifications, responsive design, and admin tools, EquiSync streamlines stable operations and keeps every member of the team connected
 
+## EquiSync Features Preview
+EquiSync provides streamlined tools for managing an equestrian facility, ensuring the right people have access to the right information — along with real-time notifications, responsive design, and an intuitive interface
+
+### Key Features
+- Horse profile creation & approval workflow
+- Feeding chart planner with staff alerts
+- Exercise scheduling and time tracking
+- Appointment & competition management
+- Custom notification system
+- Role-based permissions
+- Mobile-friendly UI
 
 # Table Of Contents
 

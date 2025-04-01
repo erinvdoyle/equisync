@@ -8,7 +8,7 @@
             <li id="notification-{{ notification.id }}" class="noti-list-item {% if not notification.is_read %}unread{% endif %}">
                 <span>{{ notification.message|safe }} </span>
                 <button class="noti-btn-outline mark-read-btn" onclick="markAsRead(this)" data-notification-id="{{ notification.id }}">
-                    <i class="fas fa-check"></i> Mark as Read
+                    <i class="fas fa-check"></i> Mark Read
                 </button>
             </li>
         {% empty %}
