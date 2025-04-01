@@ -439,26 +439,23 @@ EquiSync uses a clean, modern visual identity designed to feel calm, professiona
 
 I employed a color palette with a soft, muted scheme inspired by natural tones and stable life, with rose-tinted accents to create warmth and hierarchy
 
-| Purpose              | Color Name        | Hex Code    | Preview |
-|----------------------|-------------------|-------------|---------|
-| Primary Accent       | Rose Pink         | `#EFBCCF` | ![#EFBCCF]() |
-| Secondary Highlight  | Blush Coral       | `#FADADD` | ![#FADADD]() |
-| Neutral Background   | Light Cream       | `#FFF8F2` | ![#FFF8F2]() |
-| Text Color           | Charcoal Gray     | `#333333` | ![#333333]() |
-| Soft Divider/Shadow  | Dusty Taupe       | `#D7C6BF` | ![#D7C6BF]() |
+| Purpose         | Hex Code                                                                 |
+|----------------|--------------------------------------------------------------------------|
+| Primary        | <span style="background-color:#4A90E2; padding: 2px 6px; border-radius: 4px; color: white;">#4A90E2</span> |
+| Secondary      | <span style="background-color:#50E3C2; padding: 2px 6px; border-radius: 4px; color: black;">#50E3C2</span> |
+| Accent         | <span style="background-color:#F5A623; padding: 2px 6px; border-radius: 4px; color: black;">#F5A623</span> |
+| Background     | <span style="background-color:#F9F9F9; padding: 2px 6px; border-radius: 4px; color: black;">#F9F9F9</span> |
+| Text (Dark)    | <span style="background-color:#333333; padding: 2px 6px; border-radius: 4px; color: white;">#333333</span> |
 
+---
 
 ### Typography
 
 EquiSync uses the **[Lato](https://fonts.google.com/specimen/Lato)** font for all primary headings. This friendly, open sans-serif typeface provides excellent readability across all screen sizes
 
-```css
-font-family: 'Lato', sans-serif;
+```html
+<h1 style="font-family: 'Lato', sans-serif; color: #333333;">Welcome to EquiSync</h1>
 ```
-
-**Example:**
-
-> ### Welcome to EquiSync
 
 ## Use of AI
 
