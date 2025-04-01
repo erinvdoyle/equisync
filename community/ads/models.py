@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 
 class Ad(models.Model):
@@ -26,11 +27,7 @@ class Ad(models.Model):
         choices=CATEGORY_CHOICES,
         default="Other"
     )
-    image = models.ImageField(
-        upload_to='ads/images',
-        blank=True,
-        null=True
-    )
+    image = CloudinaryField('image', blank=True, null=True)
     description = models.TextField()
     price = models.DecimalField(
         max_digits=10,
