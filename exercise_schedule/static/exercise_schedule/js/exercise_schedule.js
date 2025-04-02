@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    //  Chart.js Setup
+    // Chart.js Setup
 
     if (document.getElementById("exerciseChart")) {
       const ctx = document.getElementById("exerciseChart").getContext("2d");
@@ -249,10 +249,11 @@ document.addEventListener("DOMContentLoaded", function () {
  
     const addExerciseBtn = document.getElementById("add-exercise-button");
     if (addExerciseBtn) {
-      addExerciseBtn.addEventListener("click", () => {
-        window.location.href = "/exercise_schedule/daily_schedule/";
-      });
+    addExerciseBtn.addEventListener("click", () => {
+        window.location.href = "/exercise_schedule/daily/";
+    });
     }
+
   
     const addAppointmentBtn = document.getElementById("add-appointment-button");
     if (addAppointmentBtn) {
