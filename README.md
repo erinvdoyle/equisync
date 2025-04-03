@@ -592,7 +592,17 @@ Integrating a maps system to give competition and appointment venue addresses an
 
 Please see my testing documentation [here.](./TESTING.md)
 
-## Bugs
+## Issues & Bugs
+
+### Inline Scripts vs External JS files
+
+A huge lesson learned that I will never repeat again was to create a multi-app project with one JavaScript file and one CSS file. I eventually began to include certain scripts in the templates as my script.js file bloated. When I decided to create external JavaScript files for each app toward project completion, I left myself with what felt like a mammoth task. In the end, I moved JavaScript related to rendering my Canva charts for the Horse Results Archive and Horse Exercise Schedule back into the templates due to time constraints and broken charts.
+
+### CSS Confusion
+Aside from initially struggling to override Bootstrap styles and figuring out how to have both Bootstrap and custom CSS, I created a lot of additional hassle for myself by making a styles.css file of over 2000 lines. There was a truly frustrating period where I updated the styles.css file in my staticfiles folder by accident (to little/no effect) which led to a lot of unneccesary custom css before I realized my mistake. Moving app-specific CSS to external CSS files was thankfully less problematic than moving the JavaScript. However, on submission, there is still quite a lot of unused CSS that needs to be cleaned up-- another issue I will not repeat in future projects
+
+### Secondary Account Madness
+
 
 ## Languages & Technology
 
