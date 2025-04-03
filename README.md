@@ -503,19 +503,28 @@ Once the user is logged in, the navbar contains links to all of EquiSync's featu
 
 ![Success Messages](./equisync/docs/images/ss-login-success.png)
 
-- Once the user logs into EquiSync, they are redirected to their user dashboard
+- Once the user logs into EquiSync, they are redirected to their user dashboard. The dashboard features a sidebar with links that help the user easily navigate to the dashboard section of their choosing. This sidebar retracts on screen sizes below 769px.
 
 ![User Dashboard](./equisync/docs/images/ss-dash1.png)
 
+- Noticfications can be accesed through the user profile icon
+
 ![Notifications](./equisync/docs/images/ss-dash2.png)
 
+- Notifications also appear in the user dashboard, right next to any schedules appointments for the user's horse(S)
+
 ![Notifications and Appointments](./equisync/docs/images/ss-dash3.png)
+
+- All relevant informatin for feeding, exercise, competition results, and the user's own community interactions are includen in the various dashboard sections, with clickable section headers as well as buttons for easy navigation
 
 ![Feeding and Exercise Schedule](./equisync/docs/images/ss-dash4.png)
 
 ![Events, Results, Community](./equisync/docs/images/ss-dash5.png)
 
 ### Horses
+
+- A list of all the stable's horses can be found on the Horses profile page. The user may add a horse, which requires admin approval. Both the admin and the user receive notifications when a user creates a horse and when an admin approves it. 
+
 ![Horse Profile List](./equisync/docs/images/ss-horses.png)
 
 ![Adding a Horse](./equisync/docs/images/ss-horses2.png)
@@ -530,6 +539,8 @@ Once the user is logged in, the navbar contains links to all of EquiSync's featu
 
 
 ### Exercise
+
+- The weekly exercise schedule is a calendar view that displays all horses' exercise and appointments for the week. Approved staff/horse owners can add, edit, and delete exercise appointments, which can be viewed in greater detail by clicking the green icon to reveal a modal. Clicking a horse's name leads to an individual horse exercise page which contains a detailed exercise breakdown with chart and individual, archived weekly exercise calendar
 
 ![Weekly Exercise Schedule](./equisync/docs/images/ss-exercise1.png)
 
@@ -548,6 +559,8 @@ Once the user is logged in, the navbar contains links to all of EquiSync's featu
 ![Individual Weekly Exercise](./equisync/docs/images/ss-exercise8.png)
 
 ### Competitions
+
+All of the stable's scheduled competitions appear on this page. A user can add or edit an event (subject to admnin approval), favorite an event for easy dashboard access, and add their horses and class information to any scheduled event. The user can also update their horse's event results once the event has been completed. The horse's results are archived in a horse results archive with a chart of performance trends.
 
 ![Competition Schedule](./equisync/docs/images/ss-comp1.png)
 
@@ -577,6 +590,10 @@ Once the user is logged in, the navbar contains links to all of EquiSync's featu
 
 ### Community
 
+- The community page serves as a mini marketplace of ads, announcements, and weekly events. CRUD is used in each section so that the user can post, edit, and remove their own ads, announcements, and events. Admin has the final say on what appears for all to see.
+
+- The ads section features a search bar and filter tool so that users can easily find the type of ad they wish to view
+
 ![Community Ads](./equisync/docs/images/ss-comm1.png)
 
 ![Ad Modal](./equisync/docs/images/ss-comm2.png)
@@ -591,11 +608,15 @@ Once the user is logged in, the navbar contains links to all of EquiSync's featu
 
 ![Ad Comments](./equisync/docs/images/ss-comm7.png)
 
+- The announcement section features collapsible cards to show and hide full announcement details
+
 ![Announcements Section](./equisync/docs/images/ss-comm8.png)
 
 ![Submit Announcement](./equisync/docs/images/ss-comm9.png)
 
 ![Announcement Preview](./equisync/docs/images/ss-comm10.png)
+
+- The announcement section features emoji as well as comments so that users can interact with others' announcements
 
 ![Announcement Emoji](./equisync/docs/images/ss-comm11.png)
 
@@ -790,3 +811,8 @@ git clone https://github.com/your-username/your-fork-name.git
 [Making Emojis Clickable](https://laracasts.com/discuss/channels/javascript/make-emojis-clickable-and-display-the-click-count?reply=932315)
 [Displaying Number of Comments](https://stackoverflow.com/questions/35941445/how-to-display-number-of-comments-in-django)
 [Implementing Reminder Functionality for Events](https://stackoverflow.com/questions/65561569/implement-reminder-functionality-for-events-in-python-django)
+
+
+### Acknowledgements
+
+Many thanks to my mentor, Precious; my cohort facilitator Kay Welfacree, who went above and beyond checking in on me during my multiple issues (shingles and a concussion!) during development; My husband, Taylor, and the stars of the show, my horses!
