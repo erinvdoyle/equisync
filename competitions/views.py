@@ -28,7 +28,7 @@ def calendar_view(request, year=None, month=None):
             horse__in=user_horses
         ).exists()
         if not has_event_results:
-            messages.success(request, "Register your horse here.")
+            messages.success(request, "Register your horse here")
 
     today = timezone.now().date()
     year = int(year) if year else today.year
@@ -356,7 +356,7 @@ def events_json(request):
 
 
 @login_required
-def edit_event_horse(request, event_horse_id):
+def edit_event_horse(request, event_horse_id, source=None):
     event_horse = get_object_or_404(EventHorse, id=event_horse_id)
 
     if request.method == 'POST':

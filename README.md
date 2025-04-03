@@ -499,14 +499,42 @@ Once the user is logged in, the navbar contains links to all of EquiSync's featu
 ![Footer](./equisync/docs/images/ss-footer.png)
 
 ### User Dashboard
-- Users get validation from many of the apps features throughout the site via success messages, such as this one, for successfully logging in
+- After submitting a form or post, users get validation from many of the apps' features throughout the site via success messages, such as this one, for successfully logging in
 
 ![Success Messages](./equisync/docs/images/ss-login-success.png)
 
-- Once the user logs in, they are redirected to their user dashboard
+- Once the user logs into EquiSync, they are redirected to their user dashboard
 
-![User Dashboard](./equisync/docs/images/ss-landing2.png)
+![User Dashboard](./equisync/docs/images/ss-dash1.png)
 
+![Notifications](./equisync/docs/images/ss-dash2.png)
+
+![Notifications and Appointments](./equisync/docs/images/ss-dash3.png)
+
+![Feeding and Exercise Schedule](./equisync/docs/images/ss-dash4.png)
+
+![Events, Results, Community](./equisync/docs/images/ss-dash5.png)
+
+### Horses
+
+
+### Exercise
+
+![Weekly Exercise Schedule](./equisync/docs/images/ss-exercise1.png)
+
+![Daily Exercise](./equisync/docs/images/ss-exercise2.png)
+
+![Exercise Modal](./equisync/docs/images/ss-exercise3.png)
+
+![Appointment Modal](./equisync/docs/images/ss-exercise4.png)
+
+![Adding Exercise](./equisync/docs/images/ss-exercise5.png)
+
+![Adding Appointments](./equisync/docs/images/ss-exercise6.png)
+
+![Exercise Breakdown](./equisync/docs/images/ss-exercise7.png)
+
+![Individual Weekly Exercise](./equisync/docs/images/ss-exercise8.png)
 
 ## Future Features
 
