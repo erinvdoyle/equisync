@@ -618,13 +618,25 @@ Please see my testing documentation [here.](./TESTING.md)
 
 ## Issues & Bugs
 
+### Clicking the create user button from the horse profile amin
+
+I attempted to create a user while in the horse profile admin and completely broke the database structure. I used AI after several days attempting to solve the error myself, and even Perplexity.ai described it as "migration hell." I eventually dropped tables through the db shell, forced migrations, and solved the issue with the help of AI
+
 ![Bug](./equisync/docs/images/pp4bug.png)
 
 ![Bug](./equisync/docs/images/pp4bug1a.png)
 
+### More AI intervention
+
+I quickly realized that using AI for errors I didn't understand or couldn't find solutions to on Stack Overflow was not always helpful:
+
 ![Bug](./equisync/docs/images/pp4bug2.png)
 
 ![Bug](./equisync/docs/images/pp4bug2a.png)
+
+### Cloudinary
+
+The biggest final hurdle I encountered was with cloudinary appearing to work on some apps but not on others. I again turned to AI which led to nothing but issues, trying to alter my settings.py and add a new certificate. Eventually I resolved the problem by updating my Ad model Image Field to a Cloudinary Field and returning the Horses app image settings to the prior, working urls.
 
 ![Bug](./equisync/docs/images/pp4bug3.png)
 
@@ -638,8 +650,7 @@ Aside from initially struggling to override Bootstrap styles and figuring out ho
 
 ### Test Account Madness
 
-
-
+Many hours were spent working in vain testing user notifications across the site before I realized that I was using a user account I had created rather than my own admin account, which was of the level required to create and approve the features for notification
 
 ## Languages & Technology
 
