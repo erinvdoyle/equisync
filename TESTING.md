@@ -305,23 +305,6 @@ During development each page was tested using dev tools in Google Chrome. All pa
 | Iphone 12 | 390x844 | PASS | All sections display correctly. All features work|
 | Iphone 13 Pro | 390x844 | PASS | All sections display correctly. All features work|
 
-
-
-### iPhone 13 Pro
-<details><summary>Home</summary><img src="./assets/testing/responsiveness/Home.jpg"> </details>
-<details><summary>Listings</summary> <img src="./assets/testing/responsiveness/Listings.jpg"></details>
-<details><summary>Single Listing</summary><img src="./assets/testing/responsiveness/single-listing-page.jpg"></details>
-<details><summary>Gallery</summary><img src="./assets/testing/responsiveness/gallery.jpg"></details>
-<details><summary>Create Listing</summary><img src="./assets/testing/responsiveness/Create-listing.jpg"></details>
-<details><summary>My Profile</summary><img src="./assets/testing/responsiveness/my-profile.jpg"></details>
-<details><summary>My Favourites</summary><img src="./assets/testing/responsiveness/my-favourites.jpg"></details>
-<details><summary>My Listings</summary><img src="./assets/testing/responsiveness/my-listings.jpg"></details>
-<details><summary>Remove Favourite</summary><img src="./assets/testing/responsiveness/remove-fav-conf.jpg"></details>
-<details><summary>500 Page</summary><img src="./assets/testing/responsiveness/500-page.jpg"></details>
-<details><summary>Log In</summary><img src="./assets/testing/responsiveness/Sign-in.jpg"></details>
-<details><summary>Sign Up</summary><img src="./assets/testing/responsiveness/Sign-up.jpg"></details>
-
-
 ## Browser Compatibility
 
 |Browser|Result|Pass/Fail|Notes|
@@ -390,7 +373,7 @@ During development each page was tested using dev tools in Google Chrome. All pa
 
 ---
 
-### ✅ Exercise
+### ✅ Feeding
 
 | Section            | Test Action                                                            | Expected Result                                                                 | Pass/Fail |
 |--------------------|------------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------|
@@ -426,7 +409,15 @@ During development each page was tested using dev tools in Google Chrome. All pa
 | Post/Edit Events       | Post or edit event to display on calendar                          | Forms work and changes reflected                                                | PASS      |
 | Delete Events          | Delete own events                                                   | Button works for user’s own content                                             | PASS      |
 
+### ✅ Exercise
 
+| Section                  | Test Action                                                                 | Expected Result                                                                 | Pass/Fail |
+|--------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------|
+| Exercise Calendar        | User can select a week using the dropdown                                  | The correct week displays on the calendar                                       | PASS      |
+| Adding Exercise          | User can update their horse's exercise schedule                            | Clicking "Add Exercise" opens the form and it submits correctly                 | PASS      |
+| Adding Appointments      | User can update their horse's appointment schedule                         | Clicking "Add Appointment" opens the correct, working form                      | PASS      |
+| Calendar Modals          | User clicks green icon to view horse's daily schedule                      | Modal opens showing exercise and appointments for that day                     | PASS      |
+| Individual Horse Exercise| User clicks horse's name to view individual chart                          | Page loads changeable chart and exercise data for selected horse               | PASS      |
 
 ## User Story Testing
 
