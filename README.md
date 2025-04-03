@@ -516,6 +516,17 @@ Once the user is logged in, the navbar contains links to all of EquiSync's featu
 ![Events, Results, Community](./equisync/docs/images/ss-dash5.png)
 
 ### Horses
+![Horse Profile List](./equisync/docs/images/ss-horses.png)
+
+![Adding a Horse](./equisync/docs/images/ss-horses2.png)
+
+![Profile Form](./equisync/docs/images/ss-horses3.png)
+
+![Pending Approval](./equisync/docs/images/ss-horses4.png)
+
+![Admin Notification](./equisync/docs/images/ss-horses5.png)
+
+![Current Profile](./equisync/docs/images/ss-horses6.png)
 
 
 ### Exercise
@@ -535,6 +546,39 @@ Once the user is logged in, the navbar contains links to all of EquiSync's featu
 ![Exercise Breakdown](./equisync/docs/images/ss-exercise7.png)
 
 ![Individual Weekly Exercise](./equisync/docs/images/ss-exercise8.png)
+
+### Competitions
+
+![Competition Schedule](./equisync/docs/images/ss-comp1.png)
+
+![Weekly View](./equisync/docs/images/ss-comp2.png)
+
+![Daily View](./equisync/docs/images/ss-comp3.png)
+
+![Competition Details](./equisync/docs/images/ss-comp4.png)
+
+![Favoriting Events](./equisync/docs/images/ss-comp5.png)
+
+![Favorited Events in Dash](./equisync/docs/images/ss-comp6.png)
+
+![Adding a Horse to an Event](./equisync/docs/images/ss-comp7.png)
+
+![Editing an Event](./equisync/docs/images/ss-comp8.png)
+
+![Deleting an Event](./equisync/docs/images/ss-comp9.png)
+
+![Updating a Horse's Results](./equisync/docs/images/ss-comp10.png)
+
+![Competition Results Archive](./equisync/docs/images/ss-comp11.png)
+
+![Performance Archive](./equisync/docs/images/ss-comp12.png)
+
+![Perfomance Metrics](./equisync/docs/images/ss-comp13.png)
+
+### Community
+
+![Deleting an Event](./equisync/docs/images/ss-comp9.png)
+
 
 ## Future Features
 
