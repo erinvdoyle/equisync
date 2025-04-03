@@ -50,7 +50,7 @@ SECRET_KEY = (
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'equisync-d4a4079b524b.herokuapp.com',
