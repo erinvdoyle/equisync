@@ -347,11 +347,85 @@ During development each page was tested using dev tools in Google Chrome. All pa
 
 
 ## Manual Testing
-- Home Page 
 
-|Section|Test Action|Expected Result|Pass/Fail|Comments|
-| ---| ---| ---| ---| ---|
-|Navbar|Click on logo in Navbar|Redirect to Home |Pass|
+### ✅ Landing Page
+
+| Section     | Test Action                                                                 | Expected Result                                                                 | Pass/Fail |
+|-------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------|
+| Intro Modal | Reload landing page, click enter, click X                                   | Modal displays correctly and closes on push of either button                    | PASS      |
+| Carousel    | Slides display and change slowly, navigation arrows and indicator buttons work | Carousel changes and navigation works                                           | PASS      |
+| Register    | Register a new account                                                      | User is able to register account                                                | PASS      |
+| Register    | Register an account with an already used User name                          | User is directed to enter a different user name                                 | PASS      |
+| Login       | Log into site and see updated user navbar                                   | Navbar displays login, redirects to dashboard, updates navbar links            | PASS      |
+| Logout      | Log out user                                                                | User is successfully logged out                                                 | PASS      |
+
+---
+
+### ✅ User Dashboard
+
+| Section               | Test Action                                                       | Expected Result                                                                 | Pass/Fail |
+|-----------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------|
+| Sidebar               | Navigate to section via sidebar links                             | Page advances to chosen section                                                 | PASS      |
+| Sidebar               | User's name is displayed at top                                   | User name displays on top                                                       | PASS      |
+| Sidebar               | Retracts at screen sizes < 769px                                  | Sidebar retracts to navbar                                                      | PASS      |
+| Your Horses           | Registered horses display                                         | User's horses appear in container                                               | PASS      |
+| Your Horses           | User with no horses invited to create profile                     | Link to register a horse appears                                                | PASS      |
+| Notifications         | Notifications display with update options                         | Relevant notifications display with buttons                                     | PASS      |
+| Appointments          | Scheduled appointments should display                             | Appointments display                                                            | PASS      |
+| Feeding Schedule      | Horse feeding chart should link                                   | Registered horse feeding charts display                                         | PASS      |
+| Exercise Schedule     | All registered exercise should display                            | Horse exercise schedules display correctly                                      | PASS      |
+| Favorited Events      | Favorited events should display                                   | Events display in order                                                         | PASS      |
+| Competition Results   | Horse's results should display + edit buttons                     | Results show from newest to oldest with edit/add buttons                        | PASS      |
+| Ads & Announcements   | Created ads and announcements should list                         | User's content is listed in dashboard                                           | PASS      |
+
+---
+
+### ✅ Horses
+
+| Section         | Test Action                                                              | Expected Result                                                                 | Pass/Fail |
+|-----------------|---------------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------|
+| Profile List    | All horse profiles should be listed with clickable names                | Profiles are listed and links lead to correct pages                             | PASS      |
+| Add Horse       | User can add horse profile                                               | Horse form works, admin receives approval notification                          | PASS      |
+| Horse Profile   | Profile should link to relevant sections or prompt to register horse     | Links and messages appear as intended                                           | PASS      |
+
+---
+
+### ✅ Exercise
+
+| Section            | Test Action                                                            | Expected Result                                                                 | Pass/Fail |
+|--------------------|------------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------|
+| Feeding Overview   | Table loads all feeding plans with profile links                       | Feeding plans load and links work                                               | PASS      |
+| Feeding Profile    | User may view/edit their horse's feeding plan                          | Feeding plan editable and viewable                                              | PASS      |
+
+---
+
+### ✅ Competitions
+
+| Section            | Test Action                                                            | Expected Result                                                                 | Pass/Fail |
+|--------------------|------------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------|
+| Calendar           | Viewable by month, week, or day                                        | Radio buttons toggle calendar view                                              | PASS      |
+| Favoriting Events  | User may favorite a competition                                        | Favorite added and shown on dashboard                                           | PASS      |
+| Events             | Add, edit, and view events                                             | Events managed through interface                                                | PASS      |
+| Event Details      | Open details when clicked                                              | Details page loads                                                              | PASS      |
+| Adding a Horse     | Add a horse and class details to event                                 | Form opens and saves data                                                       | PASS      |
+| Horse Results      | Update results for horse                                               | Form works and updates display                                                  | PASS      |
+
+---
+
+### ✅ Community
+
+| Section               | Test Action                                                         | Expected Result                                                                 | Pass/Fail |
+|------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------|
+| Sales Ads              | Ads display with pagination/comments                               | Pagination and comments render correctly                                        | PASS      |
+| Ad Modals              | Click "View Details" to open ad modal                              | Modal opens and displays correct ad data                                        | PASS      |
+| Post/Edit Ads          | User can post and edit ads                                          | Ads saved and shown in dashboard                                                | PASS      |
+| Announcements Expand   | Click "Read More" to expand announcement                           | Collapsible content displays/retracts                                           | PASS      |
+| Post/Edit Announcements| Post and edit forms work as intended                               | Form submits correctly and content updates                                      | PASS      |
+| Announcement Emojis    | Emojis show active state and update Most Reacted                   | Background turns purple, console logs clicks, top emoji updates                 | PASS      |
+| This Week’s Events     | Use dropdown or buttons to navigate weekly events                  | Weekly calendar updates accordingly                                             | PASS      |
+| Post/Edit Events       | Post or edit event to display on calendar                          | Forms work and changes reflected                                                | PASS      |
+| Delete Events          | Delete own events                                                   | Button works for user’s own content                                             | PASS      |
+
 
 
 ## User Story Testing
