@@ -639,6 +639,11 @@ Please see my testing documentation [here.](./TESTING.md)
 
 ## Issues & Bugs
 
+### Security Fix
+
+The SECRET_KEY and other sensitive config values were previously exposed in the project. These have been removed from the codebase and moved to a `.env` file (excluded from version control). All environment variables are securely managed using the `python-dotenv` package and are set in Heroku Config Vars for deployment
+
+
 ### Clicking the create user button from the horse profile amin
 
 I attempted to create a user while in the horse profile admin and completely broke the database structure. I used AI after several days attempting to solve the error myself, and even Perplexity.ai described it as "migration hell." I eventually dropped tables through the db shell, forced migrations, and solved the issue with the help of AI
